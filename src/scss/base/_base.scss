@@ -54,14 +54,13 @@ button:focus-visible {
 }
 
 h1 {
-  color: $reddy;
+  color: $accent;
 }
 
 .container {
   max-width: 1280px;
   margin: 0 auto;
 }
-
 
 // Homepage styles
 
@@ -71,6 +70,52 @@ h1 {
 
 .header-menu__inner {
   display: flex;
-  align-items:center;
+  align-items: center;
   justify-content: space-between;
+}
+
+// App styles
+
+.app-header {
+  margin-top: 20px;
+}
+
+.app-header__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-header__logo {
+}
+.app-header__search {
+  max-width: 500px;
+  position: relative;
+}
+.app-header__search-input {
+  height: 40px;
+  width: 500px;
+  border: 1px solid;
+  border-radius: 5px;
+}
+.app-header__search-btn {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  height: 30px;
+  padding-top: 1px;
+}
+
+.app-main {
+  margin-top: 50px;
+}
+.app-main__title {
+}
+.app-main__categories {
+  display: flex;
+  justify-content: center;
+  justify-content: space-between;
+}
+.app-main__category {
+  margin-top: 20px;
 }

@@ -137,7 +137,7 @@ button:focus-visible {
 }
 
 h1 {
-  color: rgb(231, 0, 0);
+  color: rgb(187, 168, 0);
 }
 
 .container {
@@ -153,6 +153,50 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.app-header {
+  margin-top: 20px;
+}
+
+.app-header__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-header__search {
+  max-width: 500px;
+  position: relative;
+}
+
+.app-header__search-input {
+  height: 40px;
+  width: 500px;
+  border: 1px solid;
+  border-radius: 5px;
+}
+
+.app-header__search-btn {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  height: 30px;
+  padding-top: 1px;
+}
+
+.app-main {
+  margin-top: 50px;
+}
+
+.app-main__categories {
+  display: flex;
+  justify-content: center;
+  justify-content: space-between;
+}
+
+.app-main__category {
+  margin-top: 20px;
 }
 
 /*# sourceMappingURL=index.css.map */
