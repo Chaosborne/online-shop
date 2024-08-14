@@ -2,12 +2,8 @@ import './scss/App.scss';
 
 
 function App() {
-  const categoryFiller = (
-    <svg width='244' height='200'><rect x="0" y="0" width='244' height='200' fill="#808080"/></svg>
-  )
-  const productFiller = (
-    <svg width='249' height='320'><rect x="0" y="0" width='249' height='320' fill="#808080"/></svg>
-  )
+  const categoryFiller = (<div style={{width: 244, height: 200, backgroundColor: '#808080'}} />)
+  const productFiller = (<div style={{width: 249, height: 320, backgroundColor: '#808080'}} />)
 
   const searchSubmitHandler = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
@@ -34,7 +30,7 @@ function App() {
       </header>
 
       <main className="app-main">
-        
+
         <section className="categories">
           <div className="container">
             <h2 className="categories__title">Категории</h2>
