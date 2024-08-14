@@ -23,7 +23,7 @@ function App() {
           <div className="app-header__inner">
             <div className="app-header__logo">App header logo</div>
             <form className="app-header__search" onSubmit={searchSubmitHandler}>
-              <input className="app-header__search-input" type="text" />
+              <input id='app-header__search-input' className="app-header__search-input" type="text" />
               <button className="app-header__search-btn" type="submit">
                 lens img to be here
               </button>
