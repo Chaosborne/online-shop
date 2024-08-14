@@ -22,9 +22,13 @@ function App() {
                 lens img to be here
               </button>
             </form>
-            <a href="#" className="app-header__login">Войти</a>
-            <a href="#" className="app-header__favourites">Избранное</a>
-            <a href="#" className="app-header__cart">Корзина</a>
+            <nav className='app-nav'>
+              <ul className='app-menu'>
+                <li><a className="app-menu__login" href="#">Войти</a></li>
+                <li><a className="app-menu__favourites" href="#">Избранное</a></li>
+                <li><a className="app-menu__cart" href="#">Корзина</a></li>
+              </ul>
+            </nav>
           </div>
         </div>
       </header>

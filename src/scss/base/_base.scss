@@ -28,6 +28,7 @@ a:hover {
 
 body {
   min-height: 100vh;
+  padding: 0 25px;
 }
 
 h1 {
@@ -105,6 +106,15 @@ h1 {
   height: 30px;
   padding-top: 1px;
 }
+
+.app-nav {}
+.app-menu {
+  display: flex;
+  gap: 30px;
+}
+.app-menu__login {}
+.app-menu__favourites {}
+.app-menu__cart {}
 
 .app-main {
   margin-top: 50px;
