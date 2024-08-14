@@ -1,8 +1,15 @@
 import './scss/App.scss';
 
-
 function App() {
   const categoryFiller = (<div style={{width: 244, height: 200, backgroundColor: '#808080'}} />)
+  
+  const toggleProductsView = () => {
+    const productsList = document.querySelector('.products');
+    productsList && (
+      productsList.classList.toggle('products-tiles'),
+      productsList.classList.toggle('products-lines')
+      );
+  }
   
   const searchSubmitHandler = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
@@ -47,7 +54,7 @@ function App() {
           <div className="container">
             <div className="store__controls">
               <div className="price-sort">Price sort</div>
-              <div className="list-tile-toggler">List-tile toggler</div>
+              <div className="list-tile-toggler" onClick={toggleProductsView}>Toggle list/tile</div>
             </div>
             <aside className="filter-and-products">
               <div className="filter">
@@ -75,14 +82,7 @@ function App() {
                   </div>
                 </form>
               </div>
-              {/* <div className="products-tiles">
-                <div className="card"></div>
-                <div className="card"></div>
-                <div className="card"></div>
-                <div className="card"></div>
-                <div className="card"></div>
-              </div> */}
-              <div className="products-lines">
+              <div className="products products-tiles">
                 <div className="card"></div>
                 <div className="card"></div>
                 <div className="card"></div>
