@@ -107,14 +107,14 @@ h1 {
   padding-top: 1px;
 }
 
-.app-nav {}
+// .app-nav {}
 .app-menu {
   display: flex;
   gap: 30px;
 }
-.app-menu__login {}
-.app-menu__favourites {}
-.app-menu__cart {}
+// .app-menu__login {}
+// .app-menu__favourites {}
+// .app-menu__cart {}
 
 .app-main {
   margin-top: 50px;
@@ -154,14 +154,32 @@ h1 {
   margin-top: 5px;
   display: flex;
   gap: 10px ;
-}
-.filter__select a {
-  display: block;
+
+  a {
+    display: block;
+  }
 }
 
-.products {
+.products-tiles {
   display: grid;
   grid-template-columns: 249px  249px 249px 249px;
   justify-content: end;
   gap: 15px;
+
+  .card {
+    width: 249px;
+    height: 320px;
+    background-color: #808080;
+  }
+}
+
+.products-lines {
+  width: 80%;
+
+  .card {
+    width: 100%;
+    height: 150px;
+    background-color: #808080;
+    margin-top: 10px;
+  }
 }

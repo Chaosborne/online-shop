@@ -3,8 +3,7 @@ import './scss/App.scss';
 
 function App() {
   const categoryFiller = (<div style={{width: 244, height: 200, backgroundColor: '#808080'}} />)
-  const productFiller = (<div style={{width: 249, height: 320, backgroundColor: '#808080'}} />)
-
+  
   const searchSubmitHandler = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     console.log('searchSubmitHandler works')
@@ -76,8 +75,19 @@ function App() {
                   </div>
                 </form>
               </div>
-              <div className="products">
-                {productFiller}{productFiller}{productFiller}{productFiller}{productFiller}
+              {/* <div className="products-tiles">
+                <div className="card"></div>
+                <div className="card"></div>
+                <div className="card"></div>
+                <div className="card"></div>
+                <div className="card"></div>
+              </div> */}
+              <div className="products-lines">
+                <div className="card"></div>
+                <div className="card"></div>
+                <div className="card"></div>
+                <div className="card"></div>
+                <div className="card"></div>
               </div>
             </aside>
           </div>
