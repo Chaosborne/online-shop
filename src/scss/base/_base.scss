@@ -139,8 +139,10 @@ h1 {
   justify-content: end;
   gap: 30px;
 }
-// .price-sort {}
-// .list-tile-toggler {}
+
+.price-sort, .list-tile-toggler {
+  cursor: pointer;
+}
 .filter-and-products {
   display: flex;
   justify-content: space-between;
