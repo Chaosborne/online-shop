@@ -1,13 +1,9 @@
 import styles from './ProductsSection.module.scss';
+import { useState } from 'react';
 
 const ProductSection = () => {
-    const toggleProductsView = () => {
-        const productsList = document.querySelector('.products');
-        productsList && (
-          productsList.classList.toggle('products-tiles'),
-          productsList.classList.toggle('products-lines')
-          );
-      };
+    const [isTilesView, setIsTilesView] = useState(true);
+    const toggleProductsView = () => setIsTilesView(!isTilesView);
 
     return (
         <section className={styles['product-section']}>
@@ -42,7 +38,7 @@ const ProductSection = () => {
                     </div>
                     </form>
                 </div>
-                <div className={`${styles.products} ${styles['products-tiles']}`}>
+                <div className={`${styles.products} ${isTilesView ? styles['products-tiles'] : styles['products-lines']}`}>
                     <div className={styles.card}></div>
                     <div className={styles.card}></div>
                     <div className={styles.card}></div>
