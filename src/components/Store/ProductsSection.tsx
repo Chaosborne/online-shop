@@ -38,7 +38,7 @@ const ProductSection = () => {
                     </div>
                     </form>
                 </div>
-                <div className={`${isTilesView ? styles['products-tiles'] : styles['products-lines']}`}>
+                <div className={`${styles.products} ${isTilesView ? styles['products-tiles'] : styles['products-lines']}`}>
                     <div className={styles.card}></div>
                     <div className={styles.card}></div>
                     <div className={styles.card}></div>
