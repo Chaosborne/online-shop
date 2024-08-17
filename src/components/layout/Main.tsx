@@ -1,7 +1,7 @@
 import styles from "./Main.module.scss";
+import Categories from "../Categories/Categories";
 
 const Main = () => {
-    const categoryFiller = (<div style={{width: 244, height: 200, backgroundColor: '#808080'}} />);
 
     const toggleProductsView = () => {
         const productsList = document.querySelector('.products');
@@ -13,14 +13,7 @@ const Main = () => {
 
       return (
         <main className={styles[`app-main`]}>
-            <section className="categories">
-            <div className="container">
-                <h2 className="categories__title">Категории</h2>
-                <div className="categories__items">
-                {categoryFiller}{categoryFiller}{categoryFiller}{categoryFiller}{categoryFiller}
-                </div>
-            </div>
-            </section>
+            <Categories />
 
             <section className="store">
             <div className="container">
