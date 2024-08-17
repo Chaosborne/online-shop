@@ -156,41 +156,6 @@ h1 {
   justify-content: space-between;
 }
 
-.app-header {
-  margin-top: 20px;
-}
-
-.app-header__inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.app-header__search {
-  max-width: 500px;
-  position: relative;
-}
-
-.app-header__search-input {
-  height: 40px;
-  width: 500px;
-  border: 1px solid;
-  border-radius: 5px;
-}
-
-.app-header__search-btn {
-  position: absolute;
-  right: 5px;
-  top: 5px;
-  height: 30px;
-  padding-top: 1px;
-}
-
-.app-menu {
-  display: flex;
-  gap: 30px;
-}
-
 .app-main {
   margin-top: 50px;
 }

@@ -1,4 +1,5 @@
 import './scss/App.scss';
+import Header from './components/layout/Header'
 
 function App() {
   const categoryFiller = (<div style={{width: 244, height: 200, backgroundColor: '#808080'}} />)
@@ -10,36 +11,14 @@ function App() {
       productsList.classList.toggle('products-lines')
       );
   }
-  
-  const searchSubmitHandler = (e: { preventDefault: () => void; }) => {
-    e.preventDefault();
-    console.log('searchSubmitHandler works')
-  }
 
   return (
     <>
-      <header className="app-header">
-        <div className="container">
-          <div className="app-header__inner">
-            <div className="app-header__logo">App header logo</div>
-            <form className="app-header__search" onSubmit={searchSubmitHandler}>
-              <input id='app-header__search-input' className="app-header__search-input" type="text" />
-              <button className="app-header__search-btn" type="submit">
-                lens img to be here
-              </button>
-            </form>
-            <nav className='app-nav'>
-              <ul className='app-menu'>
-                <li><a className="app-menu__login" href="#">Войти</a></li>
-                <li><a className="app-menu__favourites" href="#">Избранное</a></li>
-                <li><a className="app-menu__cart" href="#">Корзина</a></li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
+      
 
       <main className="app-main">
+
+        {<Header />}
 
         <section className="categories">
           <div className="container">
