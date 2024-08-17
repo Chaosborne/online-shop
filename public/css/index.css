@@ -156,10 +156,6 @@ h1 {
   justify-content: space-between;
 }
 
-.app-main {
-  margin-top: 50px;
-}
-
 .categories__items {
   display: flex;
   justify-content: center;
