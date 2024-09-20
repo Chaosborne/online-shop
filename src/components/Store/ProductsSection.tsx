@@ -1,6 +1,7 @@
 import styles from './ProductsSection.module.scss';
 import { useState } from 'react';
 
+// ---- to be moved to backend ----
 const PRODUCTS = [
   {
     id: 'item1',
@@ -8,7 +9,7 @@ const PRODUCTS = [
     itemImg: 'img',
     itemName: 'Название',
     itemDescription: 'Описание',
-    itemPrice: 'Цена',
+    itemPrice: 100,
   },
   {
     id: 'item2',
@@ -16,7 +17,7 @@ const PRODUCTS = [
     itemImg: 'img 2',
     itemName: 'Название 2',
     itemDescription: 'Описание 2',
-    itemPrice: 'Цена 2',
+    itemPrice: 200,
   },
   {
     id: 'item3',
@@ -24,7 +25,7 @@ const PRODUCTS = [
     itemImg: 'img 3',
     itemName: 'Название 3',
     itemDescription: 'Описание 3',
-    itemPrice: 'Цена 3',
+    itemPrice: 300,
   },
   {
     id: 'item4',
@@ -32,9 +33,10 @@ const PRODUCTS = [
     itemImg: 'img 4',
     itemName: 'Название 4',
     itemDescription: 'Описание 4',
-    itemPrice: 'Цена 4',
+    itemPrice: 400,
   },
 ];
+// ---- end of to be moved to backend ----
 
 const productsList = PRODUCTS.map(item => {
   return (
