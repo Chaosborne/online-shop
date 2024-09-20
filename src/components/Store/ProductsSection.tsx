@@ -38,26 +38,31 @@ const PRODUCTS = [
 ];
 // ---- end of to be moved to backend ----
 
-const productsList = PRODUCTS.map(item => {
-  return (
-    <div className={styles.card} key={item.id}>
-      <div>{item.itemImg}</div>
-      <div>{item.itemName}</div>
-      <div>{item.itemDescription}</div>
-      <div>{item.itemPrice}</div>
-    </div>
-  );
-});
-
 const ProductSection = () => {
   const [isTilesView, setIsTilesView] = useState(true);
   const toggleProductsView = () => setIsTilesView(!isTilesView);
+
+  const [isAscending, setIsAscending] = useState(true);
+  const togglePriceSort = () => setIsAscending(!isAscending);
+
+  const productsList = PRODUCTS.sort((a, b) => (isAscending ? a.itemPrice - b.itemPrice : b.itemPrice - a.itemPrice)).map(item => {
+    return (
+      <div className={styles.card} key={item.id}>
+        <div>{item.itemImg}</div>
+        <div>{item.itemName}</div>
+        <div>{item.itemDescription}</div>
+        <div>{item.itemPrice}</div>
+      </div>
+    );
+  });
 
   return (
     <section className={styles['product-section']}>
       <div className="container">
         <div className={styles.store__controls}>
-          <div className={styles['price-sort']}>Price sort</div>
+          <div className={styles['price-sort']} onClick={togglePriceSort}>
+            Price sort
+          </div>
           <div className={styles['list-tile-toggler']} onClick={toggleProductsView}>
             Toggle list/tile
           </div>
