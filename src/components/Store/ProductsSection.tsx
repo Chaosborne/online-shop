@@ -73,23 +73,23 @@ const ProductSection = () => {
             <form className={styles.filter__form} action="">
               <div className={styles.filter__select}>
                 <input type="checkbox" name="apple" id="apple" />
-                <a href="#">Apple</a>
+                <label htmlFor="apple">Apple</label>
               </div>
               <div className={styles.filter__select}>
                 <input type="checkbox" name="samsung" id="samsung" />
-                <a href="#">Samsung</a>
+                <label htmlFor="samsung">Samsung</label>
               </div>
               <div className={styles.filter__select}>
                 <input type="checkbox" name="xiaomi" id="xiaomi" />
-                <a href="#">Xiaomi</a>
+                <label htmlFor="xiaomi">Xiaomi</label>
               </div>
               <div className={styles.filter__select}>
                 <input type="checkbox" name="realme" id="realme" />
-                <a href="#">Realme</a>
+                <label htmlFor="realme">Realme</label>
               </div>
               <div className={styles.filter__select}>
                 <input type="checkbox" name="oppo" id="oppo" />
-                <a href="#">Oppo</a>
+                <label htmlFor="oppo">Oppo</label>
               </div>
             </form>
           </div>
