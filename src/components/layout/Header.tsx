@@ -1,6 +1,13 @@
 import styles from './Header.module.scss';
 
 const Header = () => {
+  // this will produce dropdown suggestions
+  const searchSuggestionsHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    const searchInput = e.currentTarget.value.replace(/[^a-zA-Zа-яА-Я0-9\s]/g, '');
+    console.log(searchInput);
+  }
+
+  // this will return the search result
   const searchSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -8,8 +15,7 @@ const Header = () => {
     const searchQuery = searchInput.value.replace(/[^a-zA-Zа-яА-Я0-9\s]/g, '');
 
     console.log(searchQuery);
-};
-
+  };
 
   return (
     <header className={styles['app-header']}>
@@ -17,7 +23,7 @@ const Header = () => {
         <div className={styles['app-header__inner']}>
           <div className={styles['app-header__logo']}>App header logo</div>
           <form className={styles['app-header__search']} onSubmit={searchSubmitHandler}>
-            <input id="app-header__search-input" className={styles['app-header__search-input']} type="text" />
+            <input id="app-header__search-input" className={styles['app-header__search-input']} type="text" onInput={searchSuggestionsHandler} />
             <button className={styles['app-header__search-btn']} type="submit">
               lens img to be here
             </button>
