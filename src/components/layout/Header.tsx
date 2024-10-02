@@ -2,7 +2,7 @@ import styles from './Header.module.scss';
 
 const Header = () => {
   // this will produce dropdown suggestions
-  const searchSuggestionsHandler = (e: React.FormEvent<HTMLFormElement>) => {
+  const searchSuggestionsHandler = (e: React.FormEvent<HTMLInputElement>) => {
     const searchInput = e.currentTarget.value.replace(/[^a-zA-Zа-яА-Я0-9\s]/g, '');
     console.log(searchInput);
   }
