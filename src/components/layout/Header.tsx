@@ -5,7 +5,7 @@ const Header = () => {
     e.preventDefault();
 
     const searchInput = e.currentTarget.querySelector('#app-header__search-input') as HTMLInputElement;
-    const searchQuery = searchInput.value;
+    const searchQuery = searchInput.value.replace(/[^a-zA-Zа-яА-Я0-9\s]/g, '');
 
     console.log(searchQuery);
 };
