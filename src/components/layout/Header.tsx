@@ -1,10 +1,15 @@
 import styles from './Header.module.scss';
 
 const Header = () => {
-  const searchSubmitHandler = (e: { preventDefault: () => void }) => {
+  const searchSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('searchSubmitHandler works');
-  };
+
+    const searchInput = e.currentTarget.querySelector('#app-header__search-input') as HTMLInputElement;
+    const searchQuery = searchInput.value;
+
+    console.log(searchQuery);
+};
+
 
   return (
     <header className={styles['app-header']}>
