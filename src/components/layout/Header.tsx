@@ -1,11 +1,14 @@
 import styles from './Header.module.scss';
 
-const Header = () => {
+const Header = ({ products }: { products: { id: string; itemCategoty: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number }[] }) => {
+  console.log(products);
+
   // this will produce dropdown suggestions
   const searchSuggestionsHandler = (e: React.FormEvent<HTMLInputElement>) => {
     const searchInput = e.currentTarget.value.replace(/[^a-zA-Zа-яА-Я0-9\s]/g, '');
+
     console.log(searchInput);
-  }
+  };
 
   // this will return the search result
   const searchSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
