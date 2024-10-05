@@ -1,7 +1,7 @@
 import styles from './Header.module.scss';
 
 const Header = ({ products }: { products: { id: string; itemCategoty: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number }[] }) => {
-  console.log(products);
+  console.dir(products);
 
   // this will produce dropdown suggestions
   const searchSuggestionsHandler = (e: React.FormEvent<HTMLInputElement>) => {
