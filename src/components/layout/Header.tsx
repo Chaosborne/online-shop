@@ -13,10 +13,11 @@ const Header = ({ products }: { products: { id: string; itemCategoty: string; it
       return;
     }
 
-    const filteredItems = products.filter(product => product.itemName.includes(searchInput) || product.itemBrand.includes(searchInput));
+    searchInput === '' && setMatchingItems([]);
+
+    const filteredItems = products.filter(product => product.itemName.toLowerCase().includes(searchInput.toLowerCase()) || product.itemBrand.toLowerCase().includes(searchInput.toLowerCase()));
 
     setMatchingItems(filteredItems.map(item => `${item.itemBrand} ${item.itemName}`));
-    console.log(matchingItems);
   };
 
   // this will return the search result
@@ -37,7 +38,7 @@ const Header = ({ products }: { products: { id: string; itemCategoty: string; it
           <form className={styles['app-header__search']} onSubmit={searchSubmitHandler}>
             <input id="app-header__search-input" className={styles['app-header__search-input']} type="text" onInput={searchSuggestionsHandler} />
             {matchingItems.length > 0 && (
-              <ul className={styles['suggestions-list']}>
+              <ul className={styles['search__suggestions-list']}>
                 {matchingItems.map((item, index) => (
                   <li key={index} className={styles['suggestions-item']}>
                     {item}
