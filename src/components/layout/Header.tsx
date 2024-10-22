@@ -6,7 +6,13 @@ const Header = ({ products }: { products: { id: string; itemCategoty: string; it
 
   // this will produce dropdown suggestions
   const searchSuggestionsHandler = (e: React.FormEvent<HTMLInputElement>) => {
-    const searchInput = e.currentTarget.value.replace(/[^a-zA-Zа-яА-Я0-9\s]/g, '');
+    const searchInput = e.currentTarget.value.replace(/[^a-zA-Zа-яА-Я0-9\s]/g, '').trim();
+
+    if (searchInput === '') {
+      setMatchingItems([]);
+      return;
+    }
+
     const filteredItems = products.filter(product => product.itemName.includes(searchInput) || product.itemBrand.includes(searchInput));
 
     setMatchingItems(filteredItems.map(item => `${item.itemBrand} ${item.itemName}`));
@@ -18,7 +24,7 @@ const Header = ({ products }: { products: { id: string; itemCategoty: string; it
     e.preventDefault();
 
     const searchInput = e.currentTarget.querySelector('#app-header__search-input') as HTMLInputElement;
-    const searchQuery = searchInput.value.replace(/[^a-zA-Zа-яА-Я0-9\s]/g, '');
+    const searchQuery = searchInput.value.replace(/[^a-zA-Zа-яА-Я0-9\s]/g, '').trim();
 
     console.log(searchQuery);
   };
@@ -30,6 +36,15 @@ const Header = ({ products }: { products: { id: string; itemCategoty: string; it
           <div className={styles['app-header__logo']}>App header logo</div>
           <form className={styles['app-header__search']} onSubmit={searchSubmitHandler}>
             <input id="app-header__search-input" className={styles['app-header__search-input']} type="text" onInput={searchSuggestionsHandler} />
+            {matchingItems.length > 0 && (
+              <ul className={styles['suggestions-list']}>
+                {matchingItems.map((item, index) => (
+                  <li key={index} className={styles['suggestions-item']}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            )}
             <button className={styles['app-header__search-btn']} type="submit">
               lens img to be here
             </button>
