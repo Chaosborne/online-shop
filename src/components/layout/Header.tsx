@@ -1,13 +1,16 @@
 import styles from './Header.module.scss';
+import { useState } from 'react';
 
 const Header = ({ products }: { products: { id: string; itemCategoty: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number }[] }) => {
-  console.dir(products);
+  const [matchingItems, setMatchingItems] = useState<string[]>([]);
 
   // this will produce dropdown suggestions
   const searchSuggestionsHandler = (e: React.FormEvent<HTMLInputElement>) => {
     const searchInput = e.currentTarget.value.replace(/[^a-zA-Zа-яА-Я0-9\s]/g, '');
+    const filteredItems = products.filter(product => product.itemName.includes(searchInput) || product.itemBrand.includes(searchInput));
 
-    console.log(searchInput);
+    setMatchingItems(filteredItems.map(item => `${item.itemBrand} ${item.itemName}`));
+    console.log(matchingItems);
   };
 
   // this will return the search result
