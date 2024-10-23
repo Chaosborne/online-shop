@@ -2,6 +2,7 @@ import styles from './Header.module.scss';
 import { useState } from 'react';
 
 const Header = ({ products }: { products: { id: string; itemCategoty: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number }[] }) => {
+  // matchingItems are strings made of filteredItems to display in suggestions
   const [matchingItems, setMatchingItems] = useState<string[]>([]);
 
   // this will produce dropdown suggestions
@@ -15,9 +16,11 @@ const Header = ({ products }: { products: { id: string; itemCategoty: string; it
 
     searchInput === '' && setMatchingItems([]);
 
+    // filteredItems are objects
     const filteredItems = products.filter(product => product.itemName.toLowerCase().includes(searchInput.toLowerCase()) || product.itemBrand.toLowerCase().includes(searchInput.toLowerCase()));
 
     setMatchingItems(filteredItems.map(item => `${item.itemBrand} ${item.itemName}`));
+    console.log(filteredItems);
   };
 
   // this will return the search result
@@ -30,6 +33,11 @@ const Header = ({ products }: { products: { id: string; itemCategoty: string; it
     console.log(searchQuery);
   };
 
+  const suggestionItemClickHandler = (e: React.MouseEvent<HTMLLIElement>) => {
+    const target = e.target as HTMLElement;
+    console.log(target.id);
+  };
+
   return (
     <header className={styles['app-header']}>
       <div className="container">
@@ -40,7 +48,7 @@ const Header = ({ products }: { products: { id: string; itemCategoty: string; it
             {matchingItems.length > 0 && (
               <ul className={styles['search__suggestions-list']}>
                 {matchingItems.map((item, index) => (
-                  <li key={index} className={styles['suggestions-item']}>
+                  <li key={index} className={styles['suggestions-item']} onClick={suggestionItemClickHandler}>
                     {item}
                   </li>
                 ))}
