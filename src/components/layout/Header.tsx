@@ -30,7 +30,7 @@ const Header = ({ products }: { products: { id: string; itemCategoty: string; it
 
   const suggestionItemClickHandler = (e: React.MouseEvent<HTMLLIElement>) => {
     const target = e.target as HTMLElement;
-    console.log(target);
+    console.log(target.id);
   };
 
   return (
@@ -43,7 +43,7 @@ const Header = ({ products }: { products: { id: string; itemCategoty: string; it
             {matchingItems.length > 0 && (
               <ul className={styles['search__suggestions-list']}>
                 {matchingItems.map((item, index) => (
-                  <li key={index} className={styles['suggestions-item']} onClick={suggestionItemClickHandler}>
+                  <li key={index} id={item.id} className={styles['suggestions-item']} onClick={suggestionItemClickHandler}>
                     {`${item.itemBrand} ${item.itemName}`}
                   </li>
                 ))}
