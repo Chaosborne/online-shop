@@ -1,8 +1,21 @@
 import styles from './Header.module.scss';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 const Header = ({ products }: { products: { id: string; itemCategoty: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number }[] }) => {
   const [matchingItems, setMatchingItems] = useState<{ id: string; itemCategoty: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number }[]>([]);
+  const suggestionsListRef = useRef<HTMLUListElement>(null);
+
+  // hide dropdown suggestions when click outside them
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (suggestionsListRef.current && !suggestionsListRef.current.contains(e.target as Node)) {
+        setMatchingItems([]);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   // this will produce dropdown suggestions
   const searchSuggestionsHandler = (e: React.FormEvent<HTMLInputElement>) => {
@@ -41,7 +54,7 @@ const Header = ({ products }: { products: { id: string; itemCategoty: string; it
           <form className={styles['app-header__search']} onSubmit={searchSubmitHandler}>
             <input id="app-header__search-input" className={styles['app-header__search-input']} type="text" onInput={searchSuggestionsHandler} />
             {matchingItems.length > 0 && (
-              <ul className={styles['search__suggestions-list']}>
+              <ul className={styles['search__suggestions-list']} ref={suggestionsListRef}>
                 {matchingItems.map((item, index) => (
                   <li key={index} id={item.id} className={styles['suggestions-item']} onClick={suggestionItemClickHandler}>
                     {`${item.itemBrand} ${item.itemName}`}
