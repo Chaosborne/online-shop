@@ -1,7 +1,6 @@
 import './scss/App.scss';
 import Header from './components/layout/Header';
 import Main from './components/layout/Main';
-import ProductCardModal from './components/Store/ProductCardModal';
 
 // ---- to be moved to backend ----
 const PRODUCTS = [
