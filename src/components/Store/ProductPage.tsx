@@ -22,10 +22,13 @@ const ProductPage: React.FC<ProductPageProps> = ({ products }) => {
     return <p>Товар не найден</p>;
   }
 
-  const [itemBrand, ...itemNameParts] = productSlug.split('-');
-  const itemName = itemNameParts.join(' ');
+  const product = products.find(product => {
+    const brandSlug = product.itemBrand.toLowerCase().replace(/\s+/g, '-');
+    const nameSlug = product.itemName.toLowerCase().replace(/\s+/g, '-');
+    const combinedSlug = `${brandSlug}-${nameSlug}`;
 
-  const product = products.find(p => p.itemBrand.toLowerCase() === itemBrand.toLowerCase() && p.itemName.toLowerCase() === itemName.toLowerCase());
+    return combinedSlug === productSlug;
+  });
 
   if (!product) {
     return <p>Товар не найден</p>;
