@@ -1,6 +1,8 @@
 import './scss/App.scss';
 import Header from './components/layout/Header';
 import Main from './components/layout/Main';
+import ProductPage from './components/Store/ProductPage';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // ---- to be moved to backend ----
 const PRODUCTS = [
@@ -45,10 +47,13 @@ const PRODUCTS = [
 
 function App() {
   return (
-    <>
+    <Router>
       <Header products={PRODUCTS} />
-      <Main products={PRODUCTS} />
-    </>
+      <Routes>
+        <Route path="/" element={<Main products={PRODUCTS} />} />
+        <Route path="/product/:productId" element={<ProductPage products={PRODUCTS} />} />
+      </Routes>
+    </Router>
   );
 }
 
