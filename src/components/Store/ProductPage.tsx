@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './ProductPage.module.scss';
 import { useParams } from 'react-router-dom';
 
 interface Product {
@@ -35,11 +36,13 @@ const ProductPage: React.FC<ProductPageProps> = ({ products }) => {
   }
 
   return (
-    <div>
-      <h1>{product.itemBrand + ' ' + product.itemName}</h1>
-      <p>{product.itemDescription}</p>
-      <p>Цена: ${product.itemPrice}</p>
-      <img src={product.itemImg} alt={product.itemName} />
+    <div className="container">
+      <div className={styles[`product-card`]}>
+        <h1 className={styles['product__header']}>{product.itemBrand + ' ' + product.itemName}</h1>
+        <p>{product.itemDescription}</p>
+        <p>Цена: ${product.itemPrice}</p>
+        <img src={product.itemImg} alt={product.itemName} />
+      </div>
     </div>
   );
 };
