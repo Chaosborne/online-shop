@@ -19,8 +19,8 @@ const PRODUCTS = [
     id: 'item2',
     itemCategoty: 'someCategory',
     itemImg: 'img 2',
-    itemBrand: 'Apple',
-    itemName: 'iPad Air',
+    itemBrand: 'Hewlett Packard',
+    itemName: 'LJ 1020',
     itemDescription: 'Описание 2',
     itemPrice: 200,
   },
@@ -51,7 +51,7 @@ function App() {
       <Header products={PRODUCTS} />
       <Routes>
         <Route path="/" element={<Main products={PRODUCTS} />} />
-        <Route path="/product/:productId" element={<ProductPage products={PRODUCTS} />} />
+        <Route path="/product/:productSlug" element={<ProductPage products={PRODUCTS} />} />
       </Routes>
     </Router>
   );
