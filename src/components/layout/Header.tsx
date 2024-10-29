@@ -74,9 +74,9 @@ const Header = ({ products }: { products: { id: string; itemCategoty: string; it
           <nav className={styles['app-nav']}>
             <ul className={styles['app-menu']}>
               <li>
-                <a className={styles['app-menu__login']} href="#">
+                <Link className={styles['app-menu__login']} to={'/my/UserProfile'}>
                   Войти
-                </a>
+                </Link>
               </li>
               <li>
                 <a className={styles['app-menu__favourites']} href="#">

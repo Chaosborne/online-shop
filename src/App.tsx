@@ -1,7 +1,8 @@
 import './scss/App.scss';
 import Header from './components/layout/Header';
-import Main from './components/layout/Main';
+import MainPage from './components/layout/MainPage';
 import ProductPage from './components/Store/ProductPage';
+import UserProfile from './components/UserAccount/UserProfile';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // ---- to be moved to backend ----
@@ -50,8 +51,9 @@ function App() {
     <Router>
       <Header products={PRODUCTS} />
       <Routes>
-        <Route path="/" element={<Main products={PRODUCTS} />} />
+        <Route path="/" element={<MainPage products={PRODUCTS} />} />
         <Route path="/product/:productSlug" element={<ProductPage products={PRODUCTS} />} />
+        <Route path="/my/UserProfile" element={<UserProfile />} />
       </Routes>
     </Router>
   );

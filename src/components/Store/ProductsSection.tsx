@@ -38,7 +38,7 @@ const ProductSection = ({ products }: { products: { id: string; itemCategoty: st
   });
 
   return (
-    <section className={styles['product-section']}>
+    <section className={styles['products-section']}>
       <div className="container">
         <div className={styles.store__controls}>
           <div className={styles['price-sort']} onClick={togglePriceSort}>
