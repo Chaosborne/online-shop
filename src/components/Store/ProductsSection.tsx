@@ -21,7 +21,7 @@ const ProductSection = ({ products }: { products: { id: string; itemCategoty: st
   };
 
   const filteredProducts = products.filter(product => (selectedBrands.length > 0 ? selectedBrands.includes(product.itemBrand.toLowerCase()) : true)).sort((a, b) => (isAscending ? a.itemPrice - b.itemPrice : b.itemPrice - a.itemPrice));
-
+  
   const productsList = filteredProducts.map(item => {
     const productSlug = `${item.itemBrand}-${item.itemName}`.replace(/\s+/g, '-').toLowerCase();
 

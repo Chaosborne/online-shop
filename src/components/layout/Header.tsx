@@ -1,5 +1,6 @@
 import styles from './Header.module.scss';
 import { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = ({ products }: { products: { id: string; itemCategoty: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number }[] }) => {
   const [matchingItems, setMatchingItems] = useState<{ id: string; itemCategoty: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number }[]>([]);
@@ -41,11 +42,6 @@ const Header = ({ products }: { products: { id: string; itemCategoty: string; it
     console.log(searchQuery);
   };
 
-  const suggestionItemClickHandler = (e: React.MouseEvent<HTMLLIElement>) => {
-    const target = e.target as HTMLElement;
-    console.log(target.id);
-  };
-
   return (
     <header className={styles['app-header']}>
       <div className="container">
@@ -55,11 +51,14 @@ const Header = ({ products }: { products: { id: string; itemCategoty: string; it
             <input id="app-header__search-input" className={styles['app-header__search-input']} type="text" onInput={searchSuggestionsHandler} />
             {matchingItems.length > 0 && (
               <ul className={styles['search__suggestions-list']} ref={suggestionsListRef}>
-                {matchingItems.map((item, index) => (
-                  <li key={index} id={item.id} className={styles['suggestions-item']} onClick={suggestionItemClickHandler}>
-                    {`${item.itemBrand} ${item.itemName}`}
-                  </li>
-                ))}
+                {matchingItems.map((item) => {
+                  const productSlug = `${item.itemBrand}-${item.itemName}`.replace(/\s+/g, '-').toLowerCase();
+                  return (
+                    <li key={item.id} id={item.id}>
+                      <Link className={styles['suggestions-li__link']} to={`/product/${productSlug}`}>{`${item.itemBrand} ${item.itemName}`}</Link>
+                    </li>
+                  );
+                })}
               </ul>
             )}
             <button className={styles['app-header__search-btn']} type="submit">
