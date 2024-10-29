@@ -18,6 +18,9 @@ const Header = ({ products }: { products: { id: string; itemCategoty: string; it
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  // hide dropdown suggestions when any suggested product clicked
+  const hideWhenClick = () => setMatchingItems([]);
+
   // this will produce dropdown suggestions
   const searchSuggestionsHandler = (e: React.FormEvent<HTMLInputElement>) => {
     const searchInput = e.currentTarget.value.replace(/[^a-zA-Zа-яА-Я0-9\s]/g, '').trim();
@@ -46,15 +49,17 @@ const Header = ({ products }: { products: { id: string; itemCategoty: string; it
     <header className={styles['app-header']}>
       <div className="container">
         <div className={styles['app-header__inner']}>
-          <div className={styles['app-header__logo']}><a href='http://localhost:5173/'>App header logo</a></div>
+          <div className={styles['app-header__logo']}>
+            <a href="http://localhost:5173/">App header logo</a>
+          </div>
           <form className={styles['app-header__search']} onSubmit={searchSubmitHandler}>
             <input id="app-header__search-input" className={styles['app-header__search-input']} type="text" onInput={searchSuggestionsHandler} />
             {matchingItems.length > 0 && (
               <ul className={styles['search__suggestions-list']} ref={suggestionsListRef}>
-                {matchingItems.map((item) => {
+                {matchingItems.map(item => {
                   const productSlug = `${item.itemBrand}-${item.itemName}`.replace(/\s+/g, '-').toLowerCase();
                   return (
-                    <li key={item.id} id={item.id}>
+                    <li key={item.id} id={item.id} onClick={hideWhenClick}>
                       <Link className={styles['suggestions-li__link']} to={`/product/${productSlug}`}>{`${item.itemBrand} ${item.itemName}`}</Link>
                     </li>
                   );
