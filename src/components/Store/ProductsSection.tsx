@@ -1,5 +1,6 @@
 import styles from './ProductsSection.module.scss';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const ProductSection = ({ products }: { products: { id: string; itemCategoty: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number }[] }) => {
   const [isTilesView, setIsTilesView] = useState(true);
@@ -22,14 +23,16 @@ const ProductSection = ({ products }: { products: { id: string; itemCategoty: st
   const filteredProducts = products.filter(product => (selectedBrands.length > 0 ? selectedBrands.includes(product.itemBrand.toLowerCase()) : true)).sort((a, b) => (isAscending ? a.itemPrice - b.itemPrice : b.itemPrice - a.itemPrice));
 
   const productsList = filteredProducts.map(item => {
+    const productSlug = `${item.itemBrand}-${item.itemName}`.replace(/\s+/g, '-').toLowerCase();
+
     return (
-      <div className={styles.card} key={item.id}>
+      <Link to={`/product/${productSlug}`} className={styles.card} key={item.id}>
         <div>{item.itemImg}</div>
         <div>{item.itemName}</div>
         <div>{item.itemBrand}</div>
         <div>{item.itemDescription}</div>
         <div>{item.itemPrice}</div>
-      </div>
+      </Link>
     );
   });
 

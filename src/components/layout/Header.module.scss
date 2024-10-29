@@ -3,32 +3,44 @@
 }
 
 .app-header__inner {
-display: flex;
-justify-content: space-between;
-align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-// .app-header__logo {}
+// .app-header__logo {} // Left for further design layout
 .app-header__search {
-max-width: 500px;
-position: relative;
+    max-width: 500px;
+    position: relative;
 }
 .app-header__search-input {
-height: 40px;
-width: 500px;
-border: 1px solid;
-border-radius: 5px;
+    height: 40px;
+    width: 500px;
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 0 10px;
 }
 .app-header__search-btn {
-position: absolute;
-right: 5px;
-top: 5px;
-height: 30px;
-padding-top: 4px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    height: 30px;
+    padding-top: 4px;
+}
+.search__suggestions-list {
+    position: absolute;
+    width: 100%;
+    border-radius: 0 0 10px 10px;
+    background-color: rgb(75, 75, 75);
+    padding: 10px 10px;
+}
+.search__suggestions-list li {
+    line-height: 2em;
+    cursor: pointer;
 }
 // .app-nav {}
 .app-menu {
-display: flex;
-gap: 30px;
+    display: flex;
+    gap: 30px;
 }
 // .app-menu__login {}
 // .app-menu__favourites {}
