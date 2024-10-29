@@ -46,7 +46,7 @@ const Header = ({ products }: { products: { id: string; itemCategoty: string; it
     <header className={styles['app-header']}>
       <div className="container">
         <div className={styles['app-header__inner']}>
-          <div className={styles['app-header__logo']}>App header logo</div>
+          <div className={styles['app-header__logo']}><a href='http://localhost:5173/'>App header logo</a></div>
           <form className={styles['app-header__search']} onSubmit={searchSubmitHandler}>
             <input id="app-header__search-input" className={styles['app-header__search-input']} type="text" onInput={searchSuggestionsHandler} />
             {matchingItems.length > 0 && (
