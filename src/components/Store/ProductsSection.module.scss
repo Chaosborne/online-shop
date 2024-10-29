@@ -1,3 +1,5 @@
+@use '../../scss/base/vars' as *;
+
 .product-section {
   margin-top: 60px;
 }
@@ -48,6 +50,7 @@
     background-color: #808080;
     padding: 10px;
   }
+
 }
 
 .products-lines {
@@ -60,5 +63,14 @@
     &:not(:first-child) {
       margin-top: 10px;
     }
+  }
+}
+
+.products-tiles, .products-lines {
+  .card {
+    color: $text;
+  }
+  .card:hover {
+    color: $text_hover;
   }
 }
