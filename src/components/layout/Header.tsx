@@ -1,6 +1,7 @@
 import styles from './Header.module.scss';
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import generateProductSlug from '../Store/generateProductSlug';
 
 const Header = ({ products }: { products: { id: string; itemCategoty: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number }[] }) => {
   const [matchingItems, setMatchingItems] = useState<{ id: string; itemCategoty: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number }[]>([]);
@@ -57,7 +58,7 @@ const Header = ({ products }: { products: { id: string; itemCategoty: string; it
             {matchingItems.length > 0 && (
               <ul className={styles['search__suggestions-list']} ref={suggestionsListRef}>
                 {matchingItems.map(item => {
-                  const productSlug = `${item.itemBrand}-${item.itemName}`.replace(/\s+/g, '-').toLowerCase();
+                  const productSlug = generateProductSlug(item.itemBrand, item.itemName);
                   return (
                     <li key={item.id} id={item.id} onClick={hideWhenClick}>
                       <Link className={styles['suggestions-li__link']} to={`/product/${productSlug}`}>{`${item.itemBrand} ${item.itemName}`}</Link>
