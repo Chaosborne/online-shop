@@ -3,8 +3,8 @@ import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import generateProductSlug from '../Store/generateProductSlug';
 
-const Header = ({ products }: { products: { id: string; itemCategoty: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number }[] }) => {
-  const [matchingItems, setMatchingItems] = useState<{ id: string; itemCategoty: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number }[]>([]);
+const Header = ({ products }: { products: { id: string; itemCategoty: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number; itemQuantity: number }[] }) => {
+  const [matchingItems, setMatchingItems] = useState<{ id: string; itemCategoty: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number; itemQuantity: number }[]>([]);
   const suggestionsListRef = useRef<HTMLUListElement>(null);
 
   // hide dropdown suggestions when click outside them

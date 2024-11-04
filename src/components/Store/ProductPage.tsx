@@ -10,6 +10,7 @@ interface Product {
   itemName: string;
   itemDescription: string;
   itemPrice: number;
+  itemQuantity: number;
 }
 
 interface ProductPageProps {
@@ -43,13 +44,28 @@ const ProductPage: React.FC<ProductPageProps> = ({ products }) => {
     itemImg: string;
     itemName: string;
     itemPrice: number;
+    itemQuantity: number;
   }
 
+  const cartProducts: CartProduct[] = JSON.parse(localStorage.getItem('cart') || '[]') as CartProduct[];
+
   const productAddToCartHandler = () => {
-    const cartProducts: CartProduct[] = JSON.parse(localStorage.getItem('cart') || '[]') as CartProduct[];
-    cartProducts.push(product);
+    const productExists = cartProducts.find(p => {
+      return p.id === product.id;
+    });
+    console.log('productExists: ', productExists);
+
+    if (!productExists) cartProducts.push(product);
+
+    // const incrementedCartProducts = cartProducts.map(prod => {
+    //   prod.itemQuantity++;
+
+    //   // if (prod.id === product.id) {
+    //   //   prod.itemQuantity++;
+    //   // } else cartProducts.push(product);
+    // });
+
     localStorage.setItem('cart', JSON.stringify(cartProducts));
-    console.log(localStorage.cart);
   };
 
   return (

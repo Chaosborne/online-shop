@@ -15,6 +15,7 @@ const PRODUCTS = [
     itemName: 'iPhone 16',
     itemDescription: 'Описание',
     itemPrice: 100,
+    itemQuantity: 1,
   },
   {
     id: 'item2',
@@ -24,6 +25,7 @@ const PRODUCTS = [
     itemName: 'LJ 1020',
     itemDescription: 'Описание 2',
     itemPrice: 200,
+    itemQuantity: 1,
   },
   {
     id: 'item3',
@@ -33,6 +35,7 @@ const PRODUCTS = [
     itemName: 'Galaxy M',
     itemDescription: 'Описание 3',
     itemPrice: 300,
+    itemQuantity: 1,
   },
   {
     id: 'item4',
@@ -42,6 +45,7 @@ const PRODUCTS = [
     itemName: 'GT 6',
     itemDescription: 'Описание 4',
     itemPrice: 400,
+    itemQuantity: 1,
   },
 ];
 // ---- end of to be moved to backend ----
