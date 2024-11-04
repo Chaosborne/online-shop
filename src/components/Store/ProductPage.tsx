@@ -36,26 +36,18 @@ const ProductPage: React.FC<ProductPageProps> = ({ products }) => {
     return <p>Товар не найден</p>;
   }
 
-  interface CartProduct {
-    id: string;
-    itemBrand: string;
-    itemCategoty: string;
-    itemDescription: string;
-    itemImg: string;
-    itemName: string;
-    itemPrice: number;
-    itemQuantity: number;
-  }
-
-  const cartProducts: CartProduct[] = JSON.parse(localStorage.getItem('cart') || '[]') as CartProduct[];
-
   const productAddToCartHandler = () => {
-    const productExists = cartProducts.find(p => {
-      return p.id === product.id;
-    });
-    console.log('productExists: ', productExists);
+    const cartProducts: Product[] = JSON.parse(localStorage.getItem('cart') || '[]') as Product[];
 
-    if (!productExists) cartProducts.push(product);
+    const existingProductIndex = cartProducts.findIndex(p => p.id === product.id);
+
+    if (existingProductIndex !== -1) {
+      cartProducts[existingProductIndex].itemQuantity += 1;
+    } else {
+      cartProducts.push({ ...product, itemQuantity: 1 });
+    }
+
+    console.log(cartProducts);
 
     localStorage.setItem('cart', JSON.stringify(cartProducts));
   };
