@@ -57,14 +57,6 @@ const ProductPage: React.FC<ProductPageProps> = ({ products }) => {
 
     if (!productExists) cartProducts.push(product);
 
-    // const incrementedCartProducts = cartProducts.map(prod => {
-    //   prod.itemQuantity++;
-
-    //   // if (prod.id === product.id) {
-    //   //   prod.itemQuantity++;
-    //   // } else cartProducts.push(product);
-    // });
-
     localStorage.setItem('cart', JSON.stringify(cartProducts));
   };
 
