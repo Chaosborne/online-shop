@@ -46,6 +46,12 @@ const Header = ({ products }: { products: { id: string; itemCategoty: string; it
     console.log(searchQuery);
   };
 
+  const localStorageAndConsoleClearHandler = () => {
+    localStorage.clear();
+    console.clear();
+    console.log(localStorage);
+  };
+
   return (
     <header className={styles['app-header']}>
       <div className="container">
@@ -73,6 +79,9 @@ const Header = ({ products }: { products: { id: string; itemCategoty: string; it
           </form>
           <nav className={styles['app-nav']}>
             <ul className={styles['app-menu']}>
+              <li>
+                <button onClick={localStorageAndConsoleClearHandler}>Clear LS & C</button>
+              </li>
               <li>
                 <Link className={styles['app-menu__login']} to={'/my/UserProfile'}>
                   Войти

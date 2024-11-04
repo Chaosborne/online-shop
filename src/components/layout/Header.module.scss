@@ -43,8 +43,36 @@
 // .app-nav {}
 .app-menu {
     display: flex;
+    align-items: center;
     gap: 30px;
 }
+.app-menu {
+    button {
+      position: relative; 
+      border: none;
+      
+      &::before {
+        content: '';
+        position: absolute; 
+        top: -5px;
+        left: -5px;
+        right: -5px;
+        bottom: -5px;
+        border-radius: 10px;
+        background: repeating-linear-gradient(
+          45deg,
+          rgb(187, 168, 0),
+          rgb(187, 168, 0) 10px,
+          transparent 10px,
+          transparent 20px
+        );
+        z-index: -1;
+      }
+    }
+  }
+  
+  
+
 // .app-menu__login {}
 // .app-menu__favourites {}
 // .app-menu__cart {}

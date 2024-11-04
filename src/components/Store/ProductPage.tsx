@@ -35,13 +35,31 @@ const ProductPage: React.FC<ProductPageProps> = ({ products }) => {
     return <p>Товар не найден</p>;
   }
 
+  interface CartProduct {
+    id: string;
+    itemBrand: string;
+    itemCategoty: string;
+    itemDescription: string;
+    itemImg: string;
+    itemName: string;
+    itemPrice: number;
+  }
+
+  const productAddToCartHandler = () => {
+    const cartProducts: CartProduct[] = JSON.parse(localStorage.getItem('cart') || '[]') as CartProduct[];
+    cartProducts.push(product);
+    localStorage.setItem('cart', JSON.stringify(cartProducts));
+    console.log(localStorage.cart);
+  };
+
   return (
     <main className={`main ${styles[`product-card`]}`}>
       <div className="container">
         <h1 className={styles['product__header']}>{product.itemBrand + ' ' + product.itemName}</h1>
+        <img src={product.itemImg} alt={product.itemName} />
         <p>{product.itemDescription}</p>
         <p>Цена: ${product.itemPrice}</p>
-        <img src={product.itemImg} alt={product.itemName} />
+        <button onClick={productAddToCartHandler}>Добавить в корзину</button>
       </div>
     </main>
   );
