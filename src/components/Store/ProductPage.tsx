@@ -47,8 +47,6 @@ const ProductPage: React.FC<ProductPageProps> = ({ products }) => {
       cartProducts.push({ ...product, itemQuantity: 1 });
     }
 
-    console.log(cartProducts);
-
     localStorage.setItem('cart', JSON.stringify(cartProducts));
   };
 
