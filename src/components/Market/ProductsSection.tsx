@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import generateProductSlug from './generateProductSlug';
 
-const ProductSection = ({ products }: { products: { id: string; itemCategoty: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number }[] }) => {
+const ProductSection = ({ products }: { products: { id: string; itemCategory: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number }[] }) => {
   const [isTilesView, setIsTilesView] = useState(true);
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [isAscending, setIsAscending] = useState(true);

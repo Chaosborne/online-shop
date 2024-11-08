@@ -1,10 +1,10 @@
 // import styles from './MainPage.module.scss';
 import Categories from '../Categories/Categories';
-import ProductsSection from '../Store/ProductsSection';
+import ProductsSection from '../Market/ProductsSection';
 
-const MainPage = ({ products }: { products: { id: string; itemCategoty: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number }[] }) => {
+const MainPage = ({ products }: { products: { id: string; itemCategory: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number }[] }) => {
   return (
-    <main className='main'>
+    <main className="main">
       <Categories />
       <ProductsSection products={products} />
     </main>

@@ -1,16 +1,20 @@
 import React from 'react';
-import styles from './ProductPage.module.scss';
 import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { addItemToCart, removeItemFromCart } from '../../store/slices/cartSlice';
+import { RootState, AppDispatch } from '../../store/store';
+import styles from './ProductPage.module.scss';
 
 interface Product {
   id: string;
-  itemCategoty: string;
+  itemCategory: string;
   itemImg: string;
   itemBrand: string;
   itemName: string;
   itemDescription: string;
   itemPrice: number;
   itemQuantity: number;
+  totalPrice: number;
 }
 
 interface ProductPageProps {
@@ -18,11 +22,12 @@ interface ProductPageProps {
 }
 
 const ProductPage: React.FC<ProductPageProps> = ({ products }) => {
-  const { productSlug } = useParams<{ productSlug: string }>();
+  // Get dispatcher and cart data from redux
+  const dispatch = useDispatch<AppDispatch>();
+  const cart = useSelector((state: RootState) => state.cart);
 
-  if (!productSlug) {
-    return <p>Товар не найден</p>;
-  }
+  // Check if product exists
+  const { productSlug } = useParams<{ productSlug: string }>();
 
   const product = products.find(product => {
     const brandSlug = product.itemBrand.toLowerCase().replace(/\s+/g, '-');
@@ -36,18 +41,11 @@ const ProductPage: React.FC<ProductPageProps> = ({ products }) => {
     return <p>Товар не найден</p>;
   }
 
-  const productAddToCartHandler = () => {
-    const cartProducts: Product[] = JSON.parse(localStorage.getItem('cart') || '[]') as Product[];
-
-    const existingProductIndex = cartProducts.findIndex(p => p.id === product.id);
-
-    if (existingProductIndex !== -1) {
-      cartProducts[existingProductIndex].itemQuantity += 1;
-    } else {
-      cartProducts.push({ ...product, itemQuantity: 1 });
-    }
-
-    localStorage.setItem('cart', JSON.stringify(cartProducts));
+  const addToCartHandler = () => {
+    dispatch(addItemToCart(product));
+  };
+  const removeFromCartHandler = () => {
+    dispatch(removeItemFromCart(product.id));
   };
 
   return (
@@ -57,7 +55,11 @@ const ProductPage: React.FC<ProductPageProps> = ({ products }) => {
         <img src={product.itemImg} alt={product.itemName} />
         <p>{product.itemDescription}</p>
         <p>Цена: ${product.itemPrice}</p>
-        <button onClick={productAddToCartHandler}>Добавить в корзину</button>
+        <button onClick={addToCartHandler}>Добавить в корзину</button>
+        <button onClick={removeFromCartHandler}>Удалить из корзины</button>
+        <h2>В корзине:</h2>
+        <p>Количество товаров: {cart.totalQuantity}</p>
+        <p>Общая сумма: {cart.totalPrice}</p>
       </div>
     </main>
   );

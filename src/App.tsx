@@ -1,7 +1,7 @@
 import './scss/App.scss';
 import Header from './components/layout/Header';
 import MainPage from './components/layout/MainPage';
-import ProductPage from './components/Store/ProductPage';
+import ProductPage from './components/Market/ProductPage';
 import UserProfile from './components/UserAccount/UserProfile';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 const PRODUCTS = [
   {
     id: 'item1',
-    itemCategoty: 'someCategory',
+    itemCategory: 'someCategory',
     itemImg: 'img',
     itemBrand: 'Apple',
     itemName: 'iPhone 16',
@@ -19,7 +19,7 @@ const PRODUCTS = [
   },
   {
     id: 'item2',
-    itemCategoty: 'someCategory',
+    itemCategory: 'someCategory',
     itemImg: 'img 2',
     itemBrand: 'Hewlett Packard',
     itemName: 'LJ 1020',
@@ -29,7 +29,7 @@ const PRODUCTS = [
   },
   {
     id: 'item3',
-    itemCategoty: 'someCategory',
+    itemCategory: 'someCategory',
     itemImg: 'img 3',
     itemBrand: 'Samsung',
     itemName: 'Galaxy M',
@@ -39,7 +39,7 @@ const PRODUCTS = [
   },
   {
     id: 'item4',
-    itemCategoty: 'someCategory',
+    itemCategory: 'someCategory',
     itemImg: 'img 4',
     itemBrand: 'Realme',
     itemName: 'GT 6',

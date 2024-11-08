@@ -1,10 +1,12 @@
 import styles from './Header.module.scss';
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import generateProductSlug from '../Store/generateProductSlug';
+import generateProductSlug from '../Market/generateProductSlug';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 
-const Header = ({ products }: { products: { id: string; itemCategoty: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number; itemQuantity: number }[] }) => {
-  const [matchingItems, setMatchingItems] = useState<{ id: string; itemCategoty: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number; itemQuantity: number }[]>([]);
+const Header = ({ products }: { products: { id: string; itemCategory: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number; itemQuantity: number }[] }) => {
+  const [matchingItems, setMatchingItems] = useState<{ id: string; itemCategory: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number; itemQuantity: number }[]>([]);
   const suggestionsListRef = useRef<HTMLUListElement>(null);
 
   // hide dropdown suggestions when click outside them
@@ -46,11 +48,15 @@ const Header = ({ products }: { products: { id: string; itemCategoty: string; it
     console.log(searchQuery);
   };
 
+  // Clear localStorage and console. Console log result
   const localStorageAndConsoleClearHandler = () => {
     localStorage.clear();
     console.clear();
     console.log(localStorage);
   };
+
+  // Get cart data from Redux
+  const cart = useSelector((state: RootState) => state.cart);
 
   return (
     <header className={styles['app-header']}>
@@ -94,7 +100,7 @@ const Header = ({ products }: { products: { id: string; itemCategoty: string; it
               </li>
               <li>
                 <a className={styles['app-menu__cart']} href="#">
-                  Корзина
+                  Корзина <span>{cart.totalQuantity}</span>
                 </a>
               </li>
             </ul>
