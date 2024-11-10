@@ -11,12 +11,7 @@ const Header = ({ products }: { products: { id: string; itemCategory: string; it
   const suggestionsListRef = useRef<HTMLUListElement>(null);
 
   const dispatch = useDispatch();
-  const searchQuery = useSelector((state: RootState) => state.search.searchQuery);
   const cart = useSelector((state: RootState) => state.cart);
-
-  useEffect(() => {
-    console.log('Текущее значение searchQuery:', searchQuery);
-  }, [searchQuery]);
 
   // hide dropdown suggestions when click outside them
   useEffect(() => {

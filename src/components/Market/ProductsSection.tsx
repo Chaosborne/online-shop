@@ -1,9 +1,20 @@
 import styles from './ProductsSection.module.scss';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import generateProductSlug from './generateProductSlug';
 
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
+
 const ProductSection = ({ products }: { products: { id: string; itemCategory: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number }[] }) => {
+  //// searchQuery
+  const searchQuery = useSelector((state: RootState) => state.search.searchQuery);
+
+  useEffect(() => {
+    console.log('Current searchQuery value in ProductsSection.txs: ', searchQuery);
+  }, [searchQuery]);
+  //// /searchQuery
+
   const [isTilesView, setIsTilesView] = useState(true);
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [isAscending, setIsAscending] = useState(true);
