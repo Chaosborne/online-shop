@@ -2,12 +2,23 @@ import styles from './Header.module.scss';
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import generateProductSlug from '../Market/generateProductSlug';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
+import { setSearchQuery } from '../../store/slices/searchSlice';
 
 const Header = ({ products }: { products: { id: string; itemCategory: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number; itemQuantity: number }[] }) => {
   const [matchingItems, setMatchingItems] = useState<{ id: string; itemCategory: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number; itemQuantity: number }[]>([]);
   const suggestionsListRef = useRef<HTMLUListElement>(null);
+
+  // Get dispatcher for setSearchQuery
+  const dispatch = useDispatch();
+
+  // Get searchQuery from state
+  const searchQuery = useSelector((state: RootState) => state.search.searchQuery);
+
+  useEffect(() => {
+    console.log('Текущее значение searchQuery:', searchQuery);
+  }, [searchQuery]);
 
   // hide dropdown suggestions when click outside them
   useEffect(() => {
@@ -45,7 +56,8 @@ const Header = ({ products }: { products: { id: string; itemCategory: string; it
     const searchInput = e.currentTarget.querySelector('#app-header__search-input') as HTMLInputElement;
     const searchQuery = searchInput.value.replace(/[^a-zA-Zа-яА-Я0-9\s]/g, '').trim();
 
-    console.log(searchQuery);
+    // Отсюда можно отправить searchQuery в store
+    dispatch(setSearchQuery(searchQuery));
   };
 
   // Clear localStorage and console. Console log result
