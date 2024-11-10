@@ -7,12 +7,8 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 
 const ProductSection = ({ products }: { products: { id: string; itemCategory: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number }[] }) => {
-  //// searchQuery
   const searchQuery = useSelector((state: RootState) => state.search.searchQuery);
-
-  //// /searchQuery
   const searchInput = searchQuery.replace(/[^a-zA-Zа-яА-Я0-9\s]/g, '').trim();
-  // Дальше наверное надо отменять чеки по брендам и обнулять сортировку товаров и другие параметры. М. б. для этого просто обновить страницу с новой выдачей по searchQuery
 
   const [isTilesView, setIsTilesView] = useState(true);
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
@@ -31,7 +27,7 @@ const ProductSection = ({ products }: { products: { id: string; itemCategory: st
     }
   };
 
-  // если searchQuery === '' то логика выдачи по умолчанию
+  // condition searchInput === ''
   let productsListElement;
 
   if (searchInput === '') {
