@@ -1,5 +1,5 @@
 import styles from './ProductsSection.module.scss';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import generateProductSlug from './generateProductSlug';
 
@@ -10,10 +10,9 @@ const ProductSection = ({ products }: { products: { id: string; itemCategory: st
   //// searchQuery
   const searchQuery = useSelector((state: RootState) => state.search.searchQuery);
 
-  useEffect(() => {
-    console.log('Current searchQuery value in ProductsSection: ', searchQuery);
-  }, [searchQuery]);
   //// /searchQuery
+  const searchInput = searchQuery.replace(/[^a-zA-Zа-яА-Я0-9\s]/g, '').trim();
+  // Дальше наверное надо отменять чеки по брендам и обнулять сортировку товаров и другие параметры. М. б. для этого просто обновить страницу с новой выдачей по searchQuery
 
   const [isTilesView, setIsTilesView] = useState(true);
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
@@ -32,21 +31,52 @@ const ProductSection = ({ products }: { products: { id: string; itemCategory: st
     }
   };
 
-  const filteredProducts = products.filter(product => (selectedBrands.length > 0 ? selectedBrands.includes(product.itemBrand.toLowerCase()) : true)).sort((a, b) => (isAscending ? a.itemPrice - b.itemPrice : b.itemPrice - a.itemPrice));
+  // если searchQuery === '' то логика выдачи по умолчанию
+  let productsListElement;
 
-  const productsList = filteredProducts.map(item => {
-    const productSlug = generateProductSlug(item.itemBrand, item.itemName);
+  if (searchInput === '') {
+    const filteredProducts = products.filter(product => (selectedBrands.length > 0 ? selectedBrands.includes(product.itemBrand.toLowerCase()) : true)).sort((a, b) => (isAscending ? a.itemPrice - b.itemPrice : b.itemPrice - a.itemPrice));
 
-    return (
-      <Link to={`/product/${productSlug}`} className={styles.card} key={item.id}>
-        <div>{item.itemImg}</div>
-        <div>{item.itemName}</div>
-        <div>{item.itemBrand}</div>
-        <div>{item.itemDescription}</div>
-        <div>{item.itemPrice}</div>
-      </Link>
-    );
-  });
+    const productsList = filteredProducts.map(item => {
+      const productSlug = generateProductSlug(item.itemBrand, item.itemName);
+
+      return (
+        <Link to={`/product/${productSlug}`} className={styles.card} key={item.id}>
+          <div>{item.itemImg}</div>
+          <div>{item.itemName}</div>
+          <div>{item.itemBrand}</div>
+          <div>{item.itemDescription}</div>
+          <div>{item.itemPrice}</div>
+        </Link>
+      );
+    });
+
+    productsListElement = <div className={`${styles.products} ${isTilesView ? styles['products-tiles'] : styles['products-lines']}`}>{productsList}</div>;
+  } else {
+    const searchFilteredProducts = products.filter(product => {
+      return product.itemBrand.toLowerCase().includes(searchInput.toLowerCase()) || product.itemName.toLowerCase().includes(searchInput.toLowerCase());
+    });
+    console.log(searchInput);
+    console.log(searchFilteredProducts);
+
+    const filteredProducts = searchFilteredProducts.filter(product => (selectedBrands.length > 0 ? selectedBrands.includes(product.itemBrand.toLowerCase()) : true)).sort((a, b) => (isAscending ? a.itemPrice - b.itemPrice : b.itemPrice - a.itemPrice));
+
+    const productsList = filteredProducts.map(item => {
+      const productSlug = generateProductSlug(item.itemBrand, item.itemName);
+
+      return (
+        <Link to={`/product/${productSlug}`} className={styles.card} key={item.id}>
+          <div>{item.itemImg}</div>
+          <div>{item.itemName}</div>
+          <div>{item.itemBrand}</div>
+          <div>{item.itemDescription}</div>
+          <div>{item.itemPrice}</div>
+        </Link>
+      );
+    });
+
+    productsListElement = <div className={`${styles.products} ${isTilesView ? styles['products-tiles'] : styles['products-lines']}`}>{productsList}</div>;
+  }
 
   return (
     <section className={styles['products-section']}>
@@ -85,7 +115,7 @@ const ProductSection = ({ products }: { products: { id: string; itemCategory: st
               </div>
             </form>
           </div>
-          <div className={`${styles.products} ${isTilesView ? styles['products-tiles'] : styles['products-lines']}`}>{productsList}</div>
+          {productsListElement}
         </aside>
       </div>
     </section>
