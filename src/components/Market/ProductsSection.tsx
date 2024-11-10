@@ -27,50 +27,33 @@ const ProductSection = ({ products }: { products: { id: string; itemCategory: st
     }
   };
 
-  // condition searchInput
-  let productsListElement;
+  // Filter products under searchInput condition
+  let filteredProducts;
 
-  if (!searchInput) {
-    const filteredProducts = products.filter(product => (selectedBrands.length > 0 ? selectedBrands.includes(product.itemBrand.toLowerCase()) : true)).sort((a, b) => (isAscending ? a.itemPrice - b.itemPrice : b.itemPrice - a.itemPrice));
-
-    const productsList = filteredProducts.map(item => {
-      const productSlug = generateProductSlug(item.itemBrand, item.itemName);
-
-      return (
-        <Link to={`/product/${productSlug}`} className={styles.card} key={item.id}>
-          <div>{item.itemImg}</div>
-          <div>{item.itemName}</div>
-          <div>{item.itemBrand}</div>
-          <div>{item.itemDescription}</div>
-          <div>{item.itemPrice}</div>
-        </Link>
-      );
-    });
-
-    productsListElement = <div className={`${styles.products} ${isTilesView ? styles['products-tiles'] : styles['products-lines']}`}>{productsList}</div>;
-  } else {
+  if (searchInput) {
     const searchFilteredProducts = products.filter(product => {
       return product.itemBrand.toLowerCase().includes(searchInput.toLowerCase()) || product.itemName.toLowerCase().includes(searchInput.toLowerCase());
     });
 
-    const filteredProducts = searchFilteredProducts.filter(product => (selectedBrands.length > 0 ? selectedBrands.includes(product.itemBrand.toLowerCase()) : true)).sort((a, b) => (isAscending ? a.itemPrice - b.itemPrice : b.itemPrice - a.itemPrice));
-
-    const productsList = filteredProducts.map(item => {
-      const productSlug = generateProductSlug(item.itemBrand, item.itemName);
-
-      return (
-        <Link to={`/product/${productSlug}`} className={styles.card} key={item.id}>
-          <div>{item.itemImg}</div>
-          <div>{item.itemName}</div>
-          <div>{item.itemBrand}</div>
-          <div>{item.itemDescription}</div>
-          <div>{item.itemPrice}</div>
-        </Link>
-      );
-    });
-
-    productsListElement = <div className={`${styles.products} ${isTilesView ? styles['products-tiles'] : styles['products-lines']}`}>{productsList}</div>;
+    filteredProducts = searchFilteredProducts.filter(product => (selectedBrands.length > 0 ? selectedBrands.includes(product.itemBrand.toLowerCase()) : true)).sort((a, b) => (isAscending ? a.itemPrice - b.itemPrice : b.itemPrice - a.itemPrice));
+  } else {
+    filteredProducts = products.filter(product => (selectedBrands.length > 0 ? selectedBrands.includes(product.itemBrand.toLowerCase()) : true)).sort((a, b) => (isAscending ? a.itemPrice - b.itemPrice : b.itemPrice - a.itemPrice));
   }
+
+  const productsList = filteredProducts.map(item => {
+    const productSlug = generateProductSlug(item.itemBrand, item.itemName);
+    return (
+      <Link to={`/product/${productSlug}`} className={styles.card} key={item.id}>
+        <div>{item.itemImg}</div>
+        <div>{item.itemName}</div>
+        <div>{item.itemBrand}</div>
+        <div>{item.itemDescription}</div>
+        <div>{item.itemPrice}</div>
+      </Link>
+    );
+  });
+
+  const productsListElement = <div className={`${styles.products} ${isTilesView ? styles['products-tiles'] : styles['products-lines']}`}>{productsList}</div>;
 
   return (
     <section className={styles['products-section']}>
