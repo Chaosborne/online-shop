@@ -11,7 +11,7 @@ const ProductSection = ({ products }: { products: { id: string; itemCategory: st
   const searchQuery = useSelector((state: RootState) => state.search.searchQuery);
 
   useEffect(() => {
-    console.log('Current searchQuery value in ProductsSection.txs: ', searchQuery);
+    console.log('Current searchQuery value in ProductsSection: ', searchQuery);
   }, [searchQuery]);
   //// /searchQuery
 
