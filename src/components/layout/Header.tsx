@@ -10,11 +10,9 @@ const Header = ({ products }: { products: { id: string; itemCategory: string; it
   const [matchingItems, setMatchingItems] = useState<{ id: string; itemCategory: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number; itemQuantity: number }[]>([]);
   const suggestionsListRef = useRef<HTMLUListElement>(null);
 
-  // Get dispatcher for setSearchQuery
   const dispatch = useDispatch();
-
-  // Get searchQuery from state
   const searchQuery = useSelector((state: RootState) => state.search.searchQuery);
+  const cart = useSelector((state: RootState) => state.cart);
 
   useEffect(() => {
     console.log('Текущее значение searchQuery:', searchQuery);
@@ -67,8 +65,18 @@ const Header = ({ products }: { products: { id: string; itemCategory: string; it
     console.log(localStorage);
   };
 
-  // Get cart data from Redux
-  const cart = useSelector((state: RootState) => state.cart);
+  const matchingItemsElement = matchingItems.length > 0 && (
+    <ul className={styles['search__suggestions-list']} ref={suggestionsListRef}>
+      {matchingItems.map(item => {
+        const productSlug = generateProductSlug(item.itemBrand, item.itemName);
+        return (
+          <li key={item.id} id={item.id} onClick={hideWhenClick}>
+            <Link className={styles['suggestions-li__link']} to={`/product/${productSlug}`}>{`${item.itemBrand} ${item.itemName}`}</Link>
+          </li>
+        );
+      })}
+    </ul>
+  );
 
   return (
     <header className={styles['app-header']}>
@@ -79,18 +87,7 @@ const Header = ({ products }: { products: { id: string; itemCategory: string; it
           </div>
           <form className={styles['app-header__search']} onSubmit={searchSubmitHandler}>
             <input id="app-header__search-input" className={styles['app-header__search-input']} type="text" onInput={searchSuggestionsHandler} />
-            {matchingItems.length > 0 && (
-              <ul className={styles['search__suggestions-list']} ref={suggestionsListRef}>
-                {matchingItems.map(item => {
-                  const productSlug = generateProductSlug(item.itemBrand, item.itemName);
-                  return (
-                    <li key={item.id} id={item.id} onClick={hideWhenClick}>
-                      <Link className={styles['suggestions-li__link']} to={`/product/${productSlug}`}>{`${item.itemBrand} ${item.itemName}`}</Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            )}
+            {matchingItemsElement}
             <button className={styles['app-header__search-btn']} type="submit">
               lens img to be here
             </button>
