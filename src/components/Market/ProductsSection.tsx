@@ -52,8 +52,6 @@ const ProductSection = ({ products }: { products: { id: string; itemCategory: st
     const searchFilteredProducts = products.filter(product => {
       return product.itemBrand.toLowerCase().includes(searchInput.toLowerCase()) || product.itemName.toLowerCase().includes(searchInput.toLowerCase());
     });
-    console.log(searchInput);
-    console.log(searchFilteredProducts);
 
     const filteredProducts = searchFilteredProducts.filter(product => (selectedBrands.length > 0 ? selectedBrands.includes(product.itemBrand.toLowerCase()) : true)).sort((a, b) => (isAscending ? a.itemPrice - b.itemPrice : b.itemPrice - a.itemPrice));
 
