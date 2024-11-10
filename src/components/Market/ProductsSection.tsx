@@ -27,10 +27,10 @@ const ProductSection = ({ products }: { products: { id: string; itemCategory: st
     }
   };
 
-  // condition searchInput === ''
+  // condition searchInput
   let productsListElement;
 
-  if (searchInput === '') {
+  if (!searchInput) {
     const filteredProducts = products.filter(product => (selectedBrands.length > 0 ? selectedBrands.includes(product.itemBrand.toLowerCase()) : true)).sort((a, b) => (isAscending ? a.itemPrice - b.itemPrice : b.itemPrice - a.itemPrice));
 
     const productsList = filteredProducts.map(item => {
