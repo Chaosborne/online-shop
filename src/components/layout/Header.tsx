@@ -47,14 +47,13 @@ const Header = ({ products }: { products: { id: string; itemCategory: string; it
     setMatchingItems(products.filter(product => product.itemName.toLowerCase().includes(searchInput.toLowerCase()) || product.itemBrand.toLowerCase().includes(searchInput.toLowerCase())));
   };
 
-  // this will return the search result
+  // send Search query to store
   const searchSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const searchInput = e.currentTarget.querySelector('#app-header__search-input') as HTMLInputElement;
     const searchQuery = searchInput.value.replace(/[^a-zA-Zа-яА-Я0-9\s]/g, '').trim();
 
-    // Отсюда можно отправить searchQuery в store
     dispatch(setSearchQuery(searchQuery));
   };
 
