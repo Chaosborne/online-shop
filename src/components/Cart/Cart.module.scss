@@ -1,0 +1,23 @@
+.cart {
+    max-width: 600px;
+}
+.cart__items{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+// .cart__item-name{}
+// .cart__item-price{}
+// .cart__item-quantity{}
+// .cart__sum{}
+
+.cart__total-price {
+    margin-top: 30px;
+    display: flex;
+    justify-content: end;
+}
+
+.flex {
+    display: flex;
+    gap: 20px;
+}

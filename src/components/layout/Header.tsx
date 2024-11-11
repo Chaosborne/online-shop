@@ -102,9 +102,9 @@ const Header = ({ products }: { products: { id: string; itemCategory: string; it
                 </a>
               </li>
               <li>
-                <a className={styles['app-menu__cart']} href="#">
+                <Link className={styles['app-menu__cart']} to={'/my/Cart'}>
                   Корзина <span>{cart.totalQuantity}</span>
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>

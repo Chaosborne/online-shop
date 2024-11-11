@@ -3,6 +3,7 @@ import Header from './components/layout/Header';
 import MainPage from './components/layout/MainPage';
 import ProductPage from './components/Market/ProductPage';
 import UserProfile from './components/UserAccount/UserProfile';
+import Cart from './components/Cart/Cart';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // ---- to be moved to backend ----
@@ -16,6 +17,7 @@ const PRODUCTS = [
     itemDescription: 'Описание',
     itemPrice: 100,
     itemQuantity: 1,
+    totalPrice: 0,
   },
   {
     id: 'item2',
@@ -26,6 +28,7 @@ const PRODUCTS = [
     itemDescription: 'Описание 2',
     itemPrice: 200,
     itemQuantity: 1,
+    totalPrice: 0,
   },
   {
     id: 'item3',
@@ -36,6 +39,7 @@ const PRODUCTS = [
     itemDescription: 'Описание 3',
     itemPrice: 300,
     itemQuantity: 1,
+    totalPrice: 0,
   },
   {
     id: 'item4',
@@ -46,6 +50,7 @@ const PRODUCTS = [
     itemDescription: 'Описание 4',
     itemPrice: 400,
     itemQuantity: 1,
+    totalPrice: 0,
   },
 ];
 // ---- end of to be moved to backend ----
@@ -58,6 +63,7 @@ function App() {
         <Route path="/" element={<MainPage products={PRODUCTS} />} />
         <Route path="/product/:productSlug" element={<ProductPage products={PRODUCTS} />} />
         <Route path="/my/UserProfile" element={<UserProfile />} />
+        <Route path="/my/Cart" element={<Cart />} />
       </Routes>
     </Router>
   );

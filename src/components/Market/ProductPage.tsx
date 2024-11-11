@@ -49,7 +49,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ products }) => {
   };
 
   return (
-    <main className={`main ${styles[`product-card`]}`}>
+    <main className={`${styles[`product-card`]}`}>
       <div className="container">
         <h1 className={styles['product__header']}>{product.itemBrand + ' ' + product.itemName}</h1>
         <img src={product.itemImg} alt={product.itemName} />
