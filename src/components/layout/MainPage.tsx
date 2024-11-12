@@ -2,7 +2,7 @@
 import Categories from '../Categories/Categories';
 import ProductsSection from '../Market/ProductsSection';
 
-const MainPage = ({ products }: { products: { id: string; itemCategory: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number }[] }) => {
+const MainPage = ({ products }: { products: { id: string; itemCategory: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number; itemTotalPrice: number }[] }) => {
   return (
     <main className="main">
       <Categories />
