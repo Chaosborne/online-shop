@@ -17,7 +17,7 @@ const Cart = () => {
           <div>+</div>
           <div>-</div>
         </div>
-        <div className={styles.cart__sum}>{item.totalPrice}</div>
+        <div className={styles.cart__sum}>{item.itemTotalPrice}</div>
       </div>
     );
   });

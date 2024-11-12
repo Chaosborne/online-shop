@@ -6,7 +6,7 @@ import generateProductSlug from './generateProductSlug';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 
-const ProductSection = ({ products }: { products: { id: string; itemCategory: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number }[] }) => {
+const ProductSection = ({ products }: { products: { id: string; itemCategory: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number; itemTotalPrice: number }[] }) => {
   const searchQuery = useSelector((state: RootState) => state.search.searchQuery);
   const searchInput = searchQuery.replace(/[^a-zA-Zа-яА-Я0-9\s]/g, '').trim();
 

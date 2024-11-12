@@ -17,7 +17,7 @@ const PRODUCTS = [
     itemDescription: 'Описание',
     itemPrice: 100,
     itemQuantity: 1,
-    totalPrice: 0,
+    itemTotalPrice: 0,
   },
   {
     id: 'item2',
@@ -28,7 +28,7 @@ const PRODUCTS = [
     itemDescription: 'Описание 2',
     itemPrice: 200,
     itemQuantity: 1,
-    totalPrice: 0,
+    itemTotalPrice: 0,
   },
   {
     id: 'item3',
@@ -39,7 +39,7 @@ const PRODUCTS = [
     itemDescription: 'Описание 3',
     itemPrice: 300,
     itemQuantity: 1,
-    totalPrice: 0,
+    itemTotalPrice: 0,
   },
   {
     id: 'item4',
@@ -50,7 +50,7 @@ const PRODUCTS = [
     itemDescription: 'Описание 4',
     itemPrice: 400,
     itemQuantity: 1,
-    totalPrice: 0,
+    itemTotalPrice: 0,
   },
 ];
 // ---- end of to be moved to backend ----

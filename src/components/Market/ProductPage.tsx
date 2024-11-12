@@ -14,7 +14,7 @@ interface Product {
   itemDescription: string;
   itemPrice: number;
   itemQuantity: number;
-  totalPrice: number;
+  itemTotalPrice: number;
 }
 
 interface ProductPageProps {

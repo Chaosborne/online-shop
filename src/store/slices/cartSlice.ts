@@ -9,7 +9,7 @@ export interface CartItem {
   itemDescription: string;
   itemPrice: number;
   itemQuantity: number;
-  totalPrice: number;
+  itemTotalPrice: number;
 }
 
 export interface CartState {
@@ -35,18 +35,16 @@ const cartSlice = createSlice({
 
       if (existingItem) {
         existingItem.itemQuantity++;
-        existingItem.totalPrice += newItem.itemPrice;
+        existingItem.itemTotalPrice += newItem.itemPrice;
+        //
+        //
+        console.log('existingItem.itemTotalPrice: ', existingItem.itemTotalPrice);
+        //
+        //
       } else {
         state.items.push({
-          id: newItem.id,
-          itemCategory: newItem.itemCategory,
-          itemImg: newItem.itemImg,
-          itemBrand: newItem.itemBrand,
-          itemName: newItem.itemName,
-          itemDescription: newItem.itemDescription,
-          itemPrice: newItem.itemPrice,
-          itemQuantity: newItem.itemQuantity,
-          totalPrice: newItem.totalPrice,
+          ...newItem,
+          itemTotalPrice: newItem.itemPrice * newItem.itemQuantity, // Устанавливаем правильную общую цену с самого начала
         });
       }
       state.totalQuantity++;
@@ -61,7 +59,7 @@ const cartSlice = createSlice({
           state.items = state.items.filter(item => item.id !== id);
         } else {
           existingItem.itemQuantity--;
-          existingItem.totalPrice -= existingItem.itemPrice;
+          existingItem.itemTotalPrice -= existingItem.itemPrice;
         }
         state.totalQuantity--;
         state.totalPrice -= existingItem.itemPrice;
