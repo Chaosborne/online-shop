@@ -4,6 +4,7 @@
 .cart__items{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-top: 40px;
 }
 // .cart__item-name{}
@@ -23,5 +24,6 @@
 
 .flex {
     display: flex;
+    align-items: center;
     gap: 20px;
 }
