@@ -7,30 +7,32 @@ const Cart = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state: RootState) => state.cart);
 
-  const CartItems = cart.items.map(item => {
+  const cartItems = cart.items.map(item => {
     return (
       <div className={styles.cart__items} key={item.id}>
         <div className={styles['cart__item-name']}>{item.itemName}</div>
         <div className={styles[`cart__item-price`]}>{item.itemPrice}</div>
-        <div className={`${styles.flex} ${styles[`cart__item-quantity`]}`}>
+        <div className={styles[`cart__item-quantity`]}>
           <div className={styles[`cart__item-quantity`]}>{item.itemQuantity}</div>
-          <button onClick={() => dispatch(addItemToCart(item))}>+</button>
           <button onClick={() => dispatch(removeItemFromCart(item.id))}>-</button>
+          <button onClick={() => dispatch(addItemToCart(item))}>+</button>
         </div>
         <div className={styles.cart__sum}>{item.itemTotalPrice}</div>
       </div>
     );
   });
 
+  const CartItemsElement = cartItems.length > 0 ? cartItems : <p className={styles[`cart-empty-msg`]}>Корзина пуста</p>;
+
   return (
     <main className="main">
       <div className="container">
         <h1>Корзина</h1>
         <div className={styles.cart}>
-          {CartItems}
+          {CartItemsElement}
           <div className={styles[`cart__total-price`]}>
-            <p>Количество товаров: {cart.totalQuantity}</p>
-            <p>Общая сумма: {cart.totalPrice}</p>
+            {cartItems.length > 0 && <p>Количество товаров: {cart.totalQuantity}</p>}
+            {cartItems.length > 0 && <p>Общая сумма: {cart.totalPrice}</p>}
           </div>
         </div>
       </div>
