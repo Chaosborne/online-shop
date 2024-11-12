@@ -1,8 +1,8 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addItemToCart, removeItemFromCart } from '../../store/slices/cartSlice';
-import { RootState, AppDispatch } from '../../store/store';
+import { AppDispatch } from '../../store/store';
 import styles from './ProductPage.module.scss';
 
 interface Product {
@@ -24,7 +24,6 @@ interface ProductPageProps {
 const ProductPage: React.FC<ProductPageProps> = ({ products }) => {
   // Get dispatcher and cart data from redux
   const dispatch = useDispatch<AppDispatch>();
-  const cart = useSelector((state: RootState) => state.cart);
 
   // Check if product exists
   const { productSlug } = useParams<{ productSlug: string }>();
@@ -58,8 +57,6 @@ const ProductPage: React.FC<ProductPageProps> = ({ products }) => {
         <button onClick={addToCartHandler}>Добавить в корзину</button>
         <button onClick={removeFromCartHandler}>Удалить из корзины</button>
         <h2>В корзине:</h2>
-        <p>Количество товаров: {cart.totalQuantity}</p>
-        <p>Общая сумма: {cart.totalPrice}</p>
       </div>
     </main>
   );
