@@ -8,7 +8,7 @@ const HomePage = () => {
         <div className="container">
           <div className={styles['header-menu__inner']}>
             <h1>Это главная страница</h1>
-            <Link to={'/shop'}>Перейти в магазин</Link>
+            <Link to="/shop">Перейти в магазин</Link>
           </div>
         </div>
       </div>

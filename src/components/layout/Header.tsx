@@ -76,9 +76,10 @@ const Header = ({ products }: { products: { id: string; itemCategory: string; it
     <header className={styles['app-header']}>
       <div className="container">
         <div className={styles['app-header__inner']}>
-          <div className={styles['app-header__logo']}>
-            <Link to="/">App header logo Link</Link>
-          </div>
+          <Link className={styles['app-header__logo']} to="/">
+            Logo
+          </Link>
+          <Link to="/shop">Магазин</Link>
           <form className={styles['app-header__search']} onSubmit={searchSubmitHandler}>
             <input id="app-header__search-input" className={styles['app-header__search-input']} type="text" onInput={searchSuggestionsHandler} />
             {matchingItemsElement}
