@@ -1,6 +1,6 @@
 // import styles from './ShopPage.module.scss';
 import Categories from '../Categories/Categories';
-import ProductsSection from '../Market/ProductsSection';
+import ProductsSection from './ProductsSection';
 
 const ShopPage = ({ products }: { products: { id: string; itemCategory: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number; itemTotalPrice: number }[] }) => {
   return (

@@ -1,11 +1,12 @@
 import './scss/App.scss';
 import HomePage from './components/Homepage/HomePage';
 import Header from './components/layout/Header';
-import ShopPage from './components/layout/ShopPage';
-import ProductPage from './components/Market/ProductPage';
-import UserProfile from './components/UserAccount/UserProfile';
+import ShopPage from './components/Shop/ShopPage';
+import ProductPage from './components/Shop/ProductPage';
+import UserProfile from './components/UserProfile/UserProfile';
 import Cart from './components/Cart/Cart';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import Favourites from './components/Shop/Favourites';
 
 // ---- to be moved to backend ----
 const PRODUCTS = [
@@ -76,6 +77,7 @@ const AppContent = () => {
         <Route path="/shop" element={<ShopPage products={PRODUCTS} />} />
         <Route path="shop/product/:productSlug" element={<ProductPage products={PRODUCTS} />} />
         <Route path="shop/my/UserProfile" element={<UserProfile />} />
+        <Route path="shop/my/Favourites" element={<Favourites />} />
         <Route path="shop/my/Cart" element={<Cart />} />
       </Routes>
     </>

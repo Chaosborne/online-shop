@@ -1,7 +1,7 @@
 import styles from './Header.module.scss';
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import generateProductSlug from '../Market/generateProductSlug';
+import generateProductSlug from '../Shop/generateProductSlug';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { setSearchQuery } from '../../store/slices/searchSlice';
@@ -98,9 +98,9 @@ const Header = ({ products }: { products: { id: string; itemCategory: string; it
                 </Link>
               </li>
               <li>
-                <a className={styles['app-menu__favourites']} href="#">
+                <Link className={styles['app-menu__favourites']} to="shop/my/Favourites">
                   Избранное
-                </a>
+                </Link>
               </li>
               <li>
                 <Link className={styles['app-menu__cart']} to="/shop/my/Cart">
