@@ -93,7 +93,7 @@ const Header = ({ products }: { products: { id: string; itemCategory: string; it
                 <button onClick={localStorageAndConsoleClearHandler}>Clear LS & C</button>
               </li>
               <li>
-                <Link className={styles['app-menu__login']} to={'/shop/my/UserProfile'}>
+                <Link className={styles['app-menu__login']} to="/shop/my/UserProfile">
                   Войти
                 </Link>
               </li>
@@ -103,7 +103,7 @@ const Header = ({ products }: { products: { id: string; itemCategory: string; it
                 </a>
               </li>
               <li>
-                <Link className={styles['app-menu__cart']} to={'/shop/my/Cart'}>
+                <Link className={styles['app-menu__cart']} to="/shop/my/Cart">
                   Корзина <span>{cart.totalQuantity}</span>
                 </Link>
               </li>

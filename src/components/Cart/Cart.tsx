@@ -2,15 +2,20 @@ import styles from './Cart.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { addItemToCart, removeItemFromCart } from '../../store/slices/cartSlice';
+import { Link } from 'react-router-dom';
+import generateProductSlug from '../Market/generateProductSlug';
 
 const Cart = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state: RootState) => state.cart);
 
   const cartItems = cart.items.map(item => {
+    const productSlug = generateProductSlug(item.itemBrand, item.itemName);
     return (
       <div className={styles.cart__items} key={item.id}>
-        <div className={styles['cart__item-name']}>{item.itemName}</div>
+        <Link className={styles['cart__item-name']} to={`/shop/product/${productSlug}`}>
+          {item.itemName}
+        </Link>
         <div className={styles[`cart__item-price`]}>{item.itemPrice}</div>
         <div className={styles[`cart__item-quantity`]}>
           <div className={styles[`cart__item-quantity`]}>{item.itemQuantity}</div>
