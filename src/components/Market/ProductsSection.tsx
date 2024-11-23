@@ -43,7 +43,7 @@ const ProductSection = ({ products }: { products: { id: string; itemCategory: st
   const productsList = filteredProducts.map(item => {
     const productSlug = generateProductSlug(item.itemBrand, item.itemName);
     return (
-      <Link to={`/product/${productSlug}`} className={styles.card} key={item.id}>
+      <Link to={`/shop/product/${productSlug}`} className={styles.card} key={item.id}>
         <div>{item.itemImg}</div>
         <div>{item.itemName}</div>
         <div>{item.itemBrand}</div>

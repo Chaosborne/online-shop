@@ -74,9 +74,9 @@ const AppContent = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/shop" element={<ShopPage products={PRODUCTS} />} />
-        <Route path="/product/:productSlug" element={<ProductPage products={PRODUCTS} />} />
-        <Route path="/my/UserProfile" element={<UserProfile />} />
-        <Route path="/my/Cart" element={<Cart />} />
+        <Route path="shop/product/:productSlug" element={<ProductPage products={PRODUCTS} />} />
+        <Route path="shop/my/UserProfile" element={<UserProfile />} />
+        <Route path="shop/my/Cart" element={<Cart />} />
       </Routes>
     </>
   );
