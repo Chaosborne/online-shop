@@ -65,7 +65,7 @@ const Header = ({ products }: { products: { id: string; itemCategory: string; it
         const productSlug = generateProductSlug(item.itemBrand, item.itemName);
         return (
           <li key={item.id} id={item.id} onClick={hideWhenClick}>
-            <Link className={styles['suggestions-li__link']} to={`/product/${productSlug}`}>{`${item.itemBrand} ${item.itemName}`}</Link>
+            <Link className={styles['suggestions-li__link']} to={`shop/product/${productSlug}`}>{`${item.itemBrand} ${item.itemName}`}</Link>
           </li>
         );
       })}

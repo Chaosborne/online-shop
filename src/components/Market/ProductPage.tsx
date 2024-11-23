@@ -1,8 +1,10 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addItemToCart, removeItemFromCart } from '../../store/slices/cartSlice';
-import { AppDispatch } from '../../store/store';
+import { AppDispatch, RootState } from '../../store/store';
+import { getItemQuantity } from '../../store/slices/cartSlice';
+
 import styles from './ProductPage.module.scss';
 
 interface Product {
@@ -36,6 +38,16 @@ const ProductPage: React.FC<ProductPageProps> = ({ products }) => {
     return combinedSlug === productSlug;
   });
 
+  // Get actual item quantity from Cart
+  const itemId = product?.id;
+  const itemQuantityInCart = useSelector((state: RootState) => {
+    if (itemId) {
+      return getItemQuantity(state.cart, itemId);
+    }
+    return 0;
+  });
+  //
+
   if (!product) {
     return <p>Товар не найден</p>;
   }
@@ -56,7 +68,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ products }) => {
         <p>Цена: ${product.itemPrice}</p>
         <button onClick={addToCartHandler}>Добавить в корзину</button>
         <button onClick={removeFromCartHandler}>Удалить из корзины</button>
-        <h2>В корзине:</h2>
+        <h2>В корзине: {itemQuantityInCart}</h2>
       </div>
     </main>
   );
