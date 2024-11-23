@@ -77,7 +77,8 @@ const Header = ({ products }: { products: { id: string; itemCategory: string; it
       <div className="container">
         <div className={styles['app-header__inner']}>
           <div className={styles['app-header__logo']}>
-            <a href="http://localhost:5173/">App header logo</a>
+            <Link to="/">App header logo Link</Link>
+            {/* <a href="http://localhost:5173/">App header logo</a> */}
           </div>
           <form className={styles['app-header__search']} onSubmit={searchSubmitHandler}>
             <input id="app-header__search-input" className={styles['app-header__search-input']} type="text" onInput={searchSuggestionsHandler} />
