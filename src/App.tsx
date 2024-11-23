@@ -1,10 +1,11 @@
 import './scss/App.scss';
+import HomePage from './components/Homepage/HomePage';
 import Header from './components/layout/Header';
-import MainPage from './components/layout/MainPage';
+import ShopPage from './components/layout/ShopPage';
 import ProductPage from './components/Market/ProductPage';
 import UserProfile from './components/UserAccount/UserProfile';
 import Cart from './components/Cart/Cart';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 
 // ---- to be moved to backend ----
 const PRODUCTS = [
@@ -58,15 +59,27 @@ const PRODUCTS = [
 function App() {
   return (
     <Router>
-      <Header products={PRODUCTS} />
+      <AppContent />
+    </Router>
+  );
+}
+
+const AppContent = () => {
+  const location = useLocation();
+  const showHeader = location.pathname != '/';
+
+  return (
+    <>
+      {showHeader && <Header products={PRODUCTS} />}
       <Routes>
-        <Route path="/" element={<MainPage products={PRODUCTS} />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/shop" element={<ShopPage products={PRODUCTS} />} />
         <Route path="/product/:productSlug" element={<ProductPage products={PRODUCTS} />} />
         <Route path="/my/UserProfile" element={<UserProfile />} />
         <Route path="/my/Cart" element={<Cart />} />
       </Routes>
-    </Router>
+    </>
   );
-}
+};
 
 export default App;
