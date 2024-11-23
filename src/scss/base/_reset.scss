@@ -1,6 +1,5 @@
 // _reset.scss - название с _ говорит о том, что он будет частью другого файла (main.scss), и будет скомпилирован не отдельно, а как часть main.scss
 
-/* Reset styles  */
 * {
   padding: 0px;
   margin: 0px;
@@ -13,8 +12,6 @@
   box-sizing: border-box;
 }
 
-/* Links */
-
 a,
 a:link,
 a:visited {
@@ -24,8 +21,6 @@ a:visited {
 a:hover {
   text-decoration: none;
 }
-
-/* Common */
 
 aside,
 nav,
