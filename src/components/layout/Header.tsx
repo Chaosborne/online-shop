@@ -80,7 +80,7 @@ const Header = ({ products }: { products: { id: string; itemCategory: string; it
 
   return (
     <header className={styles['app-header']}>
-      {isLoginModalOpen && <LoginModalPortal onClose={closeLoginModal} />}
+      {isLoginModalOpen && <LoginModalPortal onClose={closeLoginModal} modalType="login" />}
       <div className="container">
         <div className={styles['app-header__inner']}>
           <Link className={styles['app-header__logo']} to="/">
