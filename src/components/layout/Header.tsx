@@ -1,10 +1,11 @@
 import styles from './Header.module.scss';
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import generateProductSlug from '../Shop/generateProductSlug';
 import { useDispatch, useSelector } from 'react-redux';
+import generateProductSlug from '../Shop/generateProductSlug';
 import { RootState } from '../../store/store';
 import { setSearchQuery } from '../../store/slices/searchSlice';
+import RegisterModalPortal from '../UserProfile/RegisterModal';
 
 const Header = ({ products }: { products: { id: string; itemCategory: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number; itemQuantity: number }[] }) => {
   const [matchingItems, setMatchingItems] = useState<{ id: string; itemCategory: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number; itemQuantity: number }[]>([]);
@@ -72,8 +73,14 @@ const Header = ({ products }: { products: { id: string; itemCategory: string; it
     </ul>
   );
 
+  // Login modal
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const openLoginModal = () => setIsLoginModalOpen(true);
+  const closeLoginModal = () => setIsLoginModalOpen(false);
+
   return (
     <header className={styles['app-header']}>
+      {isLoginModalOpen && <RegisterModalPortal onClose={closeLoginModal} />}
       <div className="container">
         <div className={styles['app-header__inner']}>
           <Link className={styles['app-header__logo']} to="/">
@@ -92,10 +99,8 @@ const Header = ({ products }: { products: { id: string; itemCategory: string; it
               <li>
                 <button onClick={localStorageAndConsoleClearHandler}>Clear LS & C</button>
               </li>
-              <li>
-                <Link className={styles['app-menu__login']} to="/shop/my/UserProfile">
-                  Войти
-                </Link>
+              <li className={styles['app-menu__login']} onClick={openLoginModal}>
+                Войти
               </li>
               <li>
                 <Link className={styles['app-menu__favourites']} to="shop/my/Favourites">

@@ -36,6 +36,15 @@ body {
 h1 {
   font-size: 2em;
   line-height: 1.1;
+  color: $accent;
+
+}
+
+input {
+  border: 2px solid #303030;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
 }
 
 button {
@@ -54,10 +63,6 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: none;
-}
-
-h1 {
-  color: $accent;
 }
 
 .container {
