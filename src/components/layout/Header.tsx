@@ -73,14 +73,14 @@ const Header = ({ products }: { products: { id: string; itemCategory: string; it
     </ul>
   );
 
-  // Login modal
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const openLoginModal = () => setIsLoginModalOpen(true);
-  const closeLoginModal = () => setIsLoginModalOpen(false);
+  // Register modal
+  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+  const openRegisterModal = () => setIsRegisterModalOpen(true);
+  const closeRegisterModal = () => setIsRegisterModalOpen(false);
 
   return (
     <header className={styles['app-header']}>
-      {isLoginModalOpen && <RegisterModalPortal onClose={closeLoginModal} />}
+      {isRegisterModalOpen && <RegisterModalPortal onClose={closeRegisterModal} />}
       <div className="container">
         <div className={styles['app-header__inner']}>
           <Link className={styles['app-header__logo']} to="/">
@@ -99,7 +99,7 @@ const Header = ({ products }: { products: { id: string; itemCategory: string; it
               <li>
                 <button onClick={localStorageAndConsoleClearHandler}>Clear LS & C</button>
               </li>
-              <li className={styles['app-menu__login']} onClick={openLoginModal}>
+              <li className={styles['app-menu__login']} onClick={openRegisterModal}>
                 Войти
               </li>
               <li>
