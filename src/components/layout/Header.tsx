@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import generateProductSlug from '../Shop/generateProductSlug';
 import { RootState } from '../../store/store';
 import { setSearchQuery } from '../../store/slices/searchSlice';
-import RegisterModalPortal from '../UserProfile/RegisterModal';
+import LoginModalPortal from '../UserProfile/LoginModal';
 
 const Header = ({ products }: { products: { id: string; itemCategory: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number; itemQuantity: number }[] }) => {
   const [matchingItems, setMatchingItems] = useState<{ id: string; itemCategory: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number; itemQuantity: number }[]>([]);
@@ -73,14 +73,14 @@ const Header = ({ products }: { products: { id: string; itemCategory: string; it
     </ul>
   );
 
-  // Register modal
-  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
-  const openRegisterModal = () => setIsRegisterModalOpen(true);
-  const closeRegisterModal = () => setIsRegisterModalOpen(false);
+  // Login modal
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const openLoginModal = () => setIsLoginModalOpen(true);
+  const closeLoginModal = () => setIsLoginModalOpen(false);
 
   return (
     <header className={styles['app-header']}>
-      {isRegisterModalOpen && <RegisterModalPortal onClose={closeRegisterModal} />}
+      {isLoginModalOpen && <LoginModalPortal onClose={closeLoginModal} />}
       <div className="container">
         <div className={styles['app-header__inner']}>
           <Link className={styles['app-header__logo']} to="/">
@@ -99,7 +99,7 @@ const Header = ({ products }: { products: { id: string; itemCategory: string; it
               <li>
                 <button onClick={localStorageAndConsoleClearHandler}>Clear LS & C</button>
               </li>
-              <li className={styles['app-menu__login']} onClick={openRegisterModal}>
+              <li className={styles['app-menu__login']} onClick={openLoginModal}>
                 Войти
               </li>
               <li>
