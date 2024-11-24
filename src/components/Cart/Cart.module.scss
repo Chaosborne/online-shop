@@ -1,6 +1,10 @@
 .cart {
     max-width: 600px;
 }
+.cart-top {
+    display: flex;
+    justify-content: space-between;
+}
 .cart__items{
     display: flex;
     justify-content: space-between;
