@@ -1,7 +1,7 @@
-import styles from './HomePage.module.scss';
+import styles from './Home.module.scss';
 import { Link } from 'react-router-dom';
 
-const HomePage = () => {
+const Home = () => {
   return (
     <header>
       <div className={styles['header-menu']}>
@@ -16,4 +16,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default Home;

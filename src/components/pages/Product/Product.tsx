@@ -1,36 +1,20 @@
-import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItemToCart, removeItemFromCart } from '../../store/slices/cartSlice';
-import { AppDispatch, RootState } from '../../store/store';
-import { getItemQuantity } from '../../store/slices/cartSlice';
+import { addItemToCart, removeItemFromCart } from '../../../store/slices/cartSlice';
+import { AppDispatch, RootState } from '../../../store/store';
+import { getItemQuantity } from '../../../store/slices/cartSlice';
 
-import styles from './ProductPage.module.scss';
+import styles from './Product.module.scss';
+import { productsMockData } from '../../../constants/mocks/products';
 
-interface Product {
-  id: string;
-  itemCategory: string;
-  itemImg: string;
-  itemBrand: string;
-  itemName: string;
-  itemDescription: string;
-  itemPrice: number;
-  itemQuantity: number;
-  itemTotalPrice: number;
-}
-
-interface ProductPageProps {
-  products: Product[];
-}
-
-const ProductPage: React.FC<ProductPageProps> = ({ products }) => {
+const Product = () => {
   // Get dispatcher and cart data from redux
   const dispatch = useDispatch<AppDispatch>();
 
   // Check if product exists
   const { productSlug } = useParams<{ productSlug: string }>();
 
-  const product = products.find(product => {
+  const product = productsMockData.find((product) => {
     const brandSlug = product.itemBrand.toLowerCase().replace(/\s+/g, '-');
     const nameSlug = product.itemName.toLowerCase().replace(/\s+/g, '-');
     const combinedSlug = `${brandSlug}-${nameSlug}`;
@@ -74,4 +58,4 @@ const ProductPage: React.FC<ProductPageProps> = ({ products }) => {
   );
 };
 
-export default ProductPage;
+export default Product;

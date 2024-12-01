@@ -1,6 +1,6 @@
-// import styles from './Favourites.module.scss';
+// import styles from './Favorites.module.scss';
 
-const Favourites = () => {
+const Favorites = () => {
   return (
     <main className="main">
       <div className="container">
@@ -10,4 +10,4 @@ const Favourites = () => {
   );
 };
 
-export default Favourites;
+export default Favorites;

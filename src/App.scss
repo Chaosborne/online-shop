@@ -1,7 +1,7 @@
 // Mixins
-// @use './mixins';
+// @import './mixins';
 
 // Base styles
-@use './assets/scss/reset.scss';
-@use './assets/scss/vars.scss';
-@use './assets/scss/base.scss';
+@import 'assets/scss/reset';
+@import 'assets/scss/vars';
+@import 'assets/scss/base';

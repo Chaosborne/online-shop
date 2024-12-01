@@ -1,10 +1,10 @@
 import styles from './Cart.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
-import { addItemToCart, removeItemFromCart } from '../../store/slices/cartSlice';
+import { RootState } from '../../../store/store';
+import { addItemToCart, removeItemFromCart } from '../../../store/slices/cartSlice';
 import { Link } from 'react-router-dom';
-import generateProductSlug from '../Shop/generateProductSlug';
-import { clearCart } from '../../store/slices/cartSlice';
+import generateProductSlug from '../../../helpers/generateProductSlug';
+import { clearCart } from '../../../store/slices/cartSlice';
 
 const Cart = () => {
   const dispatch = useDispatch();

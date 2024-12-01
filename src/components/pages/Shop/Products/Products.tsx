@@ -1,12 +1,13 @@
-import styles from './ProductsSection.module.scss';
+import styles from './Products.module.scss';
+
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import generateProductSlug from './generateProductSlug';
-
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
+import { Link } from 'react-router-dom';
+import { RootState } from '../../../../store/store';
+import generateProductSlug from '../../../../helpers/generateProductSlug';
+import { productsMockData } from '../../../../constants/mocks/products';
 
-const ProductSection = ({ products }: { products: { id: string; itemCategory: string; itemImg: string; itemBrand: string; itemName: string; itemDescription: string; itemPrice: number; itemTotalPrice: number }[] }) => {
+const Products = () => {
   const searchQuery = useSelector((state: RootState) => state.search.searchQuery);
   const searchInput = searchQuery.replace(/[^a-zA-Zа-яА-Я0-9\s]/g, '').trim();
 
@@ -21,9 +22,11 @@ const ProductSection = ({ products }: { products: { id: string; itemCategory: st
     const { name, checked } = e.target;
 
     if (checked) {
-      setSelectedBrands(prevSelectedBrands => [...prevSelectedBrands, name]);
+      setSelectedBrands((prevSelectedBrands) => [...prevSelectedBrands, name]);
     } else {
-      setSelectedBrands(prevSelectedBrands => prevSelectedBrands.filter(brand => brand !== name));
+      setSelectedBrands((prevSelectedBrands) =>
+        prevSelectedBrands.filter((brand) => brand !== name),
+      );
     }
   };
 
@@ -31,16 +34,27 @@ const ProductSection = ({ products }: { products: { id: string; itemCategory: st
   let filteredProducts;
 
   if (searchInput) {
-    const searchFilteredProducts = products.filter(product => {
-      return product.itemBrand.toLowerCase().includes(searchInput.toLowerCase()) || product.itemName.toLowerCase().includes(searchInput.toLowerCase());
+    const searchFilteredProducts = productsMockData.filter((product) => {
+      return (
+        product.itemBrand.toLowerCase().includes(searchInput.toLowerCase()) ||
+        product.itemName.toLowerCase().includes(searchInput.toLowerCase())
+      );
     });
 
-    filteredProducts = searchFilteredProducts.filter(product => (selectedBrands.length > 0 ? selectedBrands.includes(product.itemBrand.toLowerCase()) : true)).sort((a, b) => (isAscending ? a.itemPrice - b.itemPrice : b.itemPrice - a.itemPrice));
+    filteredProducts = searchFilteredProducts
+      .filter((product) =>
+        selectedBrands.length > 0 ? selectedBrands.includes(product.itemBrand.toLowerCase()) : true,
+      )
+      .sort((a, b) => (isAscending ? a.itemPrice - b.itemPrice : b.itemPrice - a.itemPrice));
   } else {
-    filteredProducts = products.filter(product => (selectedBrands.length > 0 ? selectedBrands.includes(product.itemBrand.toLowerCase()) : true)).sort((a, b) => (isAscending ? a.itemPrice - b.itemPrice : b.itemPrice - a.itemPrice));
+    filteredProducts = productsMockData
+      .filter((product) =>
+        selectedBrands.length > 0 ? selectedBrands.includes(product.itemBrand.toLowerCase()) : true,
+      )
+      .sort((a, b) => (isAscending ? a.itemPrice - b.itemPrice : b.itemPrice - a.itemPrice));
   }
 
-  const productsList = filteredProducts.map(item => {
+  const productsList = filteredProducts.map((item) => {
     const productSlug = generateProductSlug(item.itemBrand, item.itemName);
     return (
       <Link to={`/shop/product/${productSlug}`} className={styles.card} key={item.id}>
@@ -53,7 +67,13 @@ const ProductSection = ({ products }: { products: { id: string; itemCategory: st
     );
   });
 
-  const productsListElement = <div className={`${styles.products} ${isTilesView ? styles['products-tiles'] : styles['products-lines']}`}>{productsList}</div>;
+  const productsListElement = (
+    <div
+      className={`${styles.products} ${isTilesView ? styles['products-tiles'] : styles['products-lines']}`}
+    >
+      {productsList}
+    </div>
+  );
 
   return (
     <section className={styles['products-section']}>
@@ -71,19 +91,39 @@ const ProductSection = ({ products }: { products: { id: string; itemCategory: st
             <div className={styles.filter__title}>Filter</div>
             <form className={styles.filter__form} action="">
               <div className={styles.filter__select}>
-                <input type="checkbox" name="apple" id="apple" onChange={handleBrandCheckboxChange} />
+                <input
+                  type="checkbox"
+                  name="apple"
+                  id="apple"
+                  onChange={handleBrandCheckboxChange}
+                />
                 <label htmlFor="apple">Apple</label>
               </div>
               <div className={styles.filter__select}>
-                <input type="checkbox" name="samsung" id="samsung" onChange={handleBrandCheckboxChange} />
+                <input
+                  type="checkbox"
+                  name="samsung"
+                  id="samsung"
+                  onChange={handleBrandCheckboxChange}
+                />
                 <label htmlFor="samsung">Samsung</label>
               </div>
               <div className={styles.filter__select}>
-                <input type="checkbox" name="xiaomi" id="xiaomi" onChange={handleBrandCheckboxChange} />
+                <input
+                  type="checkbox"
+                  name="xiaomi"
+                  id="xiaomi"
+                  onChange={handleBrandCheckboxChange}
+                />
                 <label htmlFor="xiaomi">Xiaomi</label>
               </div>
               <div className={styles.filter__select}>
-                <input type="checkbox" name="realme" id="realme" onChange={handleBrandCheckboxChange} />
+                <input
+                  type="checkbox"
+                  name="realme"
+                  id="realme"
+                  onChange={handleBrandCheckboxChange}
+                />
                 <label htmlFor="realme">Realme</label>
               </div>
               <div className={styles.filter__select}>
@@ -99,4 +139,4 @@ const ProductSection = ({ products }: { products: { id: string; itemCategory: st
   );
 };
 
-export default ProductSection;
+export default Products;

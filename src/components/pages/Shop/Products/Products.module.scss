@@ -1,4 +1,4 @@
-@use '../../assets/scss/vars' as *;
+@use '../../../../assets/scss/vars' as *;
 
 .products-section {
   margin-top: 60px;
@@ -70,6 +70,7 @@
   .card {
     color: $text;
   }
+
   .card:hover {
     color: $text_hover;
   }
