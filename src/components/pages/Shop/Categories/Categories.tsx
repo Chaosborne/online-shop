@@ -1,13 +1,13 @@
-import styles from './Categories.module.scss';
+import s from './Categories.module.scss';
 
 const Categories = () => {
   const categoryFiller = <div style={{ width: 244, height: 200, backgroundColor: '#808080' }} />;
 
   return (
-    <section className={styles.categories}>
+    <section className={s.CategoriesSection}>
       <div className="container">
-        <h2 className={styles.categories__title}>Категории</h2>
-        <div className={styles.categories__items}>
+        <h2 className={s.Title}>Категории</h2>
+        <div className={s.Items}>
           {categoryFiller}
           {categoryFiller}
           {categoryFiller}

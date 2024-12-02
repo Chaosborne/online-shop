@@ -4,7 +4,7 @@ import { addItemToCart, removeItemFromCart } from '../../../store/slices/cartSli
 import { AppDispatch, RootState } from '../../../store/store';
 import { getItemQuantity } from '../../../store/slices/cartSlice';
 
-import styles from './Product.module.scss';
+import s from './Product.module.scss';
 import { productsMockData } from '../../../constants/mocks/products';
 
 const Product = () => {
@@ -44,9 +44,9 @@ const Product = () => {
   };
 
   return (
-    <main className={`${styles[`product-card`]}`}>
+    <main className={s.Card}>
       <div className="container">
-        <h1 className={styles['product__header']}>{product.itemBrand + ' ' + product.itemName}</h1>
+        <h1 className={s.Title}>{product.itemBrand + ' ' + product.itemName}</h1>
         <img src={product.itemImg} alt={product.itemName} />
         <p>{product.itemDescription}</p>
         <p>Цена: ${product.itemPrice}</p>

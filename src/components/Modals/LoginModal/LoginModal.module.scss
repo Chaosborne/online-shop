@@ -1,4 +1,4 @@
-.modal-login__overlay {
+.Overlay {
   position: absolute;
   text-align: center;
   left: 0;
@@ -8,7 +8,7 @@
   background-color: rgba($color: #000000, $alpha: 0.5);
   backdrop-filter: blur(10px);
 }
-.modal-login__content {
+.Content {
   max-width: 320px;
   border-radius: 8px;
   background-color: rgb(99, 99, 99);
@@ -22,17 +22,17 @@
     transform 0.3s ease-out,
     opacity 0.3s ease-out;
 }
-.modal-login__content.show {
+.Show {
   top: 50%;
   transform: translate(-50%, -50%);
   opacity: 1;
 }
 
-.modal-login__content h3 {
+.Content h3 {
   margin-bottom: 20px;
   font-size: 22px;
 }
-.modal-login__close-btn {
+.CloseBtn {
   cursor: pointer;
   position: absolute;
   right: 50px;
@@ -43,18 +43,18 @@
     fill: grey;
   }
 }
-.modal-login__close-btn:hover {
+.CloseBtn:hover {
   svg {
     fill: white;
   }
 }
 
-.modal__login-form input::placeholder {
+.LoginForm input::placeholder {
   color: #fff;
 }
-.modal-login__if-registered {
+.IfRegistered {
   margin-top: 30px;
 }
-.modal-login__register-btn {
+.RegisterBtn {
   margin-top: 30px;
 }

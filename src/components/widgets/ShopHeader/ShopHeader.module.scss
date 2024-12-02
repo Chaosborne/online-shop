@@ -1,48 +1,48 @@
-.app-header {
+.ShopHeader {
   margin-top: 20px;
   position: relative;
 }
-.app-header__inner {
+.ShopHeaderInner {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-// .app-header__logo {} // Left for further design layouts
-.app-header__search {
+// .Logo {} // Left for further design layouts
+.Search {
   max-width: 500px;
   position: relative;
 }
-.app-header__search-input {
+.SearchInput {
   height: 40px;
   width: 500px;
   border: 1px solid;
   border-radius: 5px;
   padding: 0 10px;
 }
-.app-header__search-btn {
+.SearchBtn {
   position: absolute;
   right: 5px;
   top: 5px;
   height: 30px;
   padding-top: 4px;
 }
-.search__suggestions-list {
+.SearchSuggestionsList {
   position: absolute;
   width: 100%;
   border-radius: 0 0 10px 10px;
   background-color: rgb(75, 75, 75);
   padding: 10px 10px;
 }
-.search__suggestions-list li {
+.SearchSuggestionsList li {
   line-height: 2em;
   cursor: pointer;
 }
-.suggestions-li__link {
+.SearchSuggestionsLink {
   width: 100%;
 }
-// .app-nav {}
+// .AppNav {}
 
-.app-menu {
+.AppMenu {
   display: flex;
   align-items: center;
   gap: 30px;
@@ -75,6 +75,6 @@
   }
 }
 
-// .app-menu__login {}
-// .app-menu__favourites {}
-// .app-menu__cart {}
+// .Login {}
+// .Favourites {}
+// .Cart {}

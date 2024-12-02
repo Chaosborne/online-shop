@@ -1,4 +1,4 @@
-import styles from './Products.module.scss';
+import s from './Products.module.scss';
 
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -44,7 +44,7 @@ const Products = () => {
   const productsList = filteredProducts.map(item => {
     const productSlug = generateProductSlug(item.itemBrand, item.itemName);
     return (
-      <Link to={`/shop/product/${productSlug}`} className={styles.card} key={item.id}>
+      <Link to={`/shop/product/${productSlug}`} className={s.Card} key={item.id}>
         <div>{item.itemImg}</div>
         <div>{item.itemName}</div>
         <div>{item.itemBrand}</div>
@@ -54,40 +54,40 @@ const Products = () => {
     );
   });
 
-  const productsListElement = <div className={`${styles.products} ${isTilesView ? styles['products-tiles'] : styles['products-lines']}`}>{productsList}</div>;
+  const productsListElement = <div className={`${s.Products} ${isTilesView ? s.Tiles : s.Lines}`}>{productsList}</div>;
 
   return (
-    <section className={styles['products-section']}>
+    <section className={s.ProductsSection}>
       <div className="container">
-        <div className={styles.store__controls}>
-          <div className={styles['price-sort']} onClick={togglePriceSort}>
+        <div className={s.StoreControls}>
+          <div className={s.PriceSort} onClick={togglePriceSort}>
             Price sort
           </div>
-          <div className={styles['list-tile-toggler']} onClick={toggleProductsView}>
+          <div className={s.ListTileToggler} onClick={toggleProductsView}>
             Toggle list/tile
           </div>
         </div>
-        <aside className={styles['filter-and-products']}>
-          <div className={styles.filter}>
-            <div className={styles.filter__title}>Filter</div>
-            <form className={styles.filter__form} action="">
-              <div className={styles.filter__select}>
+        <aside className={s.FilterAndProducts}>
+          <div className={s.Filter}>
+            <div className={s.FilterTitle}>Filter</div>
+            <form className={s.FilterForm} action="">
+              <div className={s.FilterSelect}>
                 <input type="checkbox" name="apple" id="apple" onChange={handleBrandCheckboxChange} />
                 <label htmlFor="apple">Apple</label>
               </div>
-              <div className={styles.filter__select}>
+              <div className={s.FilterSelect}>
                 <input type="checkbox" name="samsung" id="samsung" onChange={handleBrandCheckboxChange} />
                 <label htmlFor="samsung">Samsung</label>
               </div>
-              <div className={styles.filter__select}>
+              <div className={s.FilterSelect}>
                 <input type="checkbox" name="xiaomi" id="xiaomi" onChange={handleBrandCheckboxChange} />
                 <label htmlFor="xiaomi">Xiaomi</label>
               </div>
-              <div className={styles.filter__select}>
+              <div className={s.FilterSelect}>
                 <input type="checkbox" name="realme" id="realme" onChange={handleBrandCheckboxChange} />
                 <label htmlFor="realme">Realme</label>
               </div>
-              <div className={styles.filter__select}>
+              <div className={s.FilterSelect}>
                 <input type="checkbox" name="oppo" id="oppo" onChange={handleBrandCheckboxChange} />
                 <label htmlFor="oppo">Oppo</label>
               </div>

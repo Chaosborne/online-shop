@@ -1,26 +1,26 @@
-.cart {
+.Cart {
   max-width: 600px;
 }
-.cart-top {
+.CartTop {
   display: flex;
   justify-content: space-between;
 }
-.cart__items {
+.CartItems {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: 40px;
 }
-// .cart__item-name{}
-// .cart__item-price{}
-.cart__item-quantity {
+// .ItemName{}
+// .ItemPrice{}
+.ItemQuantity {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-// .cart__sum{}
+// .CartSum{}
 
-.cart__total-price {
+.TotalPrice {
   margin-top: 30px;
   display: flex;
   justify-content: end;
@@ -30,6 +30,6 @@
   }
 }
 
-.cart-empty-msg {
+.CartEmptyMsg {
   margin-top: 30px;
 }

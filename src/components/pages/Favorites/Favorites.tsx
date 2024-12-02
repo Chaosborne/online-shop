@@ -1,4 +1,4 @@
-// import styles from './Favorites.module.scss';
+// import s from './Favorites.module.scss';
 
 const Favorites = () => {
   return (

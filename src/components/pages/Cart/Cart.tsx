@@ -1,4 +1,4 @@
-import styles from './Cart.module.scss';
+import s from './Cart.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
 import { addItemToCart, removeItemFromCart } from '../../../store/slices/cartSlice';
@@ -13,35 +13,35 @@ const Cart = () => {
   const cartItems = cart.items.map(item => {
     const productSlug = generateProductSlug(item.itemBrand, item.itemName);
     return (
-      <div className={styles.cart__items} key={item.id}>
-        <Link className={styles['cart__item-name']} to={`/shop/product/${productSlug}`}>
+      <div className={s.CartItems} key={item.id}>
+        <Link className={s.ItemName} to={`/shop/product/${productSlug}`}>
           {item.itemName}
         </Link>
-        <div className={styles[`cart__item-price`]}>{item.itemPrice}</div>
-        <div className={styles[`cart__item-quantity`]}>
-          <div className={styles[`cart__item-quantity`]}>{item.itemQuantity}</div>
+        <div className={s.ItemPrice}>{item.itemPrice}</div>
+        <div className={s.ItemQuantity}>
+          <div>{item.itemQuantity}</div>
           <button onClick={() => dispatch(removeItemFromCart(item.id))}>-</button>
           <button onClick={() => dispatch(addItemToCart(item))}>+</button>
         </div>
-        <div className={styles.cart__sum}>{item.itemTotalPrice}</div>
+        <div className={s.CartSum}>{item.itemTotalPrice}</div>
       </div>
     );
   });
 
-  const CartItemsElement = cartItems.length > 0 ? cartItems : <p className={styles[`cart-empty-msg`]}>Корзина пуста</p>;
+  const CartItemsElement = cartItems.length > 0 ? cartItems : <p className={s.CartEmptyMsg}>Корзина пуста</p>;
 
   const clearTheCart = () => dispatch(clearCart());
 
   return (
     <main className="main">
       <div className="container">
-        <div className={styles[`cart-top`]}>
+        <div className={s.CartTop}>
           <h1>Корзина</h1>
           <button onClick={clearTheCart}>Очистить корзину</button>
         </div>
-        <div className={styles.cart}>
+        <div className={s.Cart}>
           {CartItemsElement}
-          <div className={styles[`cart__total-price`]}>
+          <div className={s.TotalPrice}>
             {cartItems.length > 0 && <p>Количество товаров: {cart.totalQuantity}</p>}
             {cartItems.length > 0 && <p>Общая сумма: {cart.totalPrice}</p>}
           </div>

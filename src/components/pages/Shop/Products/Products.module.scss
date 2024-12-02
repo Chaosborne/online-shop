@@ -1,30 +1,30 @@
 @use '../../../../assets/scss/vars' as *;
 
-.products-section {
+.ProductsSection {
   margin-top: 60px;
 }
 
-.store__controls {
+.StoreControls {
   display: flex;
   justify-content: end;
   gap: 30px;
 }
 
-.price-sort,
-.list-tile-toggler {
+.PriceSort,
+.ListTileToggler {
   cursor: pointer;
 }
 
-.filter-and-products {
+.FilterAndProducts {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
 }
 
-// .filter {}
-// .filter__title {}
-// .filter__form {}
-.filter__select {
+// .Filter {}
+// .FilterTitle {}
+// .FilterForm {}
+.FilterSelect {
   margin-top: 5px;
   display: flex;
   gap: 10px;
@@ -34,17 +34,17 @@
   }
 }
 
-.products {
+.Products {
   width: 81%;
   max-width: 1500px;
 }
 
-.products-tiles {
+.Tiles {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
 
-  .card {
+  .Card {
     width: 100%;
     height: 320px;
     background-color: #808080;
@@ -52,8 +52,8 @@
   }
 }
 
-.products-lines {
-  .card {
+.Lines {
+  .Card {
     width: 100%;
     height: 150px;
     background-color: #808080;
@@ -65,13 +65,13 @@
   }
 }
 
-.products-tiles,
-.products-lines {
-  .card {
+.Tiles,
+.Lines {
+  .Card {
     color: $text;
   }
 
-  .card:hover {
+  .Card:hover {
     color: $text_hover;
   }
 }

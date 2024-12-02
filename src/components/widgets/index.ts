@@ -1,1 +1,1 @@
-export { default as Header } from './Header/Header';
+export { default as ShopHeader } from './ShopHeader/ShopHeader';

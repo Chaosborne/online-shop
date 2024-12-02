@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Header } from '../../widgets';
+import { ShopHeader } from '../../widgets';
 
 type DefaultLayoutProps = {
   children: ReactNode;
@@ -12,7 +12,7 @@ export default function DefaultLayout({ children }: DefaultLayoutProps) {
 
   return (
     <>
-      {showHeader && <Header />}
+      {showHeader && <ShopHeader />}
       {children}
     </>
   );

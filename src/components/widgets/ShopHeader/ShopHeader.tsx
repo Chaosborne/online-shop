@@ -1,4 +1,4 @@
-import styles from './Header.module.scss';
+import s from './ShopHeader.module.scss';
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,7 +8,7 @@ import { setSearchQuery } from '../../../store/slices/searchSlice';
 import { ModalPortal as LoginModalPortal } from '../../Modals';
 import { IProduct, productsMockData } from '../../../constants/mocks/products';
 
-const Header = () => {
+const ShopHeader = () => {
   const [matchingItems, setMatchingItems] = useState<IProduct[]>([]);
   const suggestionsListRef = useRef<HTMLUListElement>(null);
 
@@ -62,12 +62,12 @@ const Header = () => {
   };
 
   const matchingItemsElement = matchingItems.length > 0 && (
-    <ul className={styles['search__suggestions-list']} ref={suggestionsListRef}>
+    <ul className={s.SearchSuggestionsList} ref={suggestionsListRef}>
       {matchingItems.map(item => {
         const productSlug = generateProductSlug(item.itemBrand, item.itemName);
         return (
           <li key={item.id} id={item.id} onClick={hideWhenClick}>
-            <Link className={styles['suggestions-li__link']} to={`shop/product/${productSlug}`}>{`${item.itemBrand} ${item.itemName}`}</Link>
+            <Link className={s.SearchSuggestionsLink} to={`shop/product/${productSlug}`}>{`${item.itemBrand} ${item.itemName}`}</Link>
           </li>
         );
       })}
@@ -80,36 +80,36 @@ const Header = () => {
   const closeLoginModal = () => setIsLoginModalOpen(false);
 
   return (
-    <header className={styles['app-header']}>
+    <header className={s.ShopHeader}>
       {isLoginModalOpen && <LoginModalPortal onClose={closeLoginModal} modalType="login" />}
       <div className="container">
-        <div className={styles['app-header__inner']}>
-          <Link className={styles['app-header__logo']} to="/">
+        <div className={s.ShopHeaderInner}>
+          <Link className={s.Logo} to="/">
             Logo
           </Link>
           <Link to="/shop">Магазин</Link>
-          <form className={styles['app-header__search']} onSubmit={searchSubmitHandler}>
-            <input id="app-header__search-input" className={styles['app-header__search-input']} type="text" onInput={searchSuggestionsHandler} />
+          <form className={s.Search} onSubmit={searchSubmitHandler}>
+            <input id="app-header__search-input" className={s.SearchInput} type="text" onInput={searchSuggestionsHandler} />
             {matchingItemsElement}
-            <button className={styles['app-header__search-btn']} type="submit">
+            <button className={s.SearchBtn} type="submit">
               lens img to be here
             </button>
           </form>
-          <nav className={styles['app-nav']}>
-            <ul className={styles['app-menu']}>
+          <nav className={s.AppNav}>
+            <ul className={s.AppMenu}>
               <li>
                 <button onClick={localStorageAndConsoleClearHandler}>Clear LS & C</button>
               </li>
-              <li className={styles['app-menu__login']} onClick={openLoginModal}>
+              <li className={s.Login} onClick={openLoginModal}>
                 Войти
               </li>
               <li>
-                <Link className={styles['app-menu__favourites']} to="shop/my/Favorites">
+                <Link className={s.Favourites} to="shop/my/Favorites">
                   Избранное
                 </Link>
               </li>
               <li>
-                <Link className={styles['app-menu__cart']} to="/shop/my/Cart">
+                <Link className={s.Cart} to="/shop/my/Cart">
                   Корзина <span>{cart.totalQuantity}</span>
                 </Link>
               </li>
@@ -121,4 +121,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default ShopHeader;

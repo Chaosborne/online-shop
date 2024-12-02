@@ -1,17 +1,20 @@
-.product__header {
+.Title {
   margin-bottom: 20px;
 }
-.product-card {
+
+.Card {
   margin-top: 60px;
-}
-.product-card h1,
-.product-card h2,
-.product-card p,
-.product-card a,
-.product-card img,
-.product-card button {
-  margin-top: 20px;
-}
-.product-card button {
-  margin-right: 20px;
+
+  h1,
+  h2,
+  p,
+  a,
+  img,
+  button {
+    margin-top: 20px;
+  }
+
+  button {
+    margin-right: 20px;
+  }
 }

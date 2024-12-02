@@ -1,12 +1,12 @@
-import styles from './Home.module.scss';
+import s from './Home.module.scss';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
     <header>
-      <div className={styles['header-menu']}>
+      <div className={s.Menu}>
         <div className="container">
-          <div className={styles['header-menu__inner']}>
+          <div className={s.MenuInner}>
             <h1>Это главная страница</h1>
             <Link to="/shop">Перейти в магазин</Link>
           </div>

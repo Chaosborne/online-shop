@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import styles from './LoginModal.module.scss';
+import s from './LoginModal.module.scss';
 
 const closeImg = (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="50px" height="50px">
@@ -32,21 +32,21 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
 
   const loginModal = (
     <>
-      <div className={styles['modal-login__overlay']}>
-        <div className={`${styles['modal-login__content']} ${isVisible ? styles['show'] : ''}`}>
+      <div className={s.Overlay}>
+        <div className={`${s.Content} ${isVisible ? s.Show : ''}`}>
           <h3>Войдите</h3>
-          <form action="" className={styles['modal__login-form']}>
+          <form action="" className={s.LoginForm}>
             <input type="text" placeholder="Email" />
             <input type="text" placeholder="Пароль" />
             <button onClick={onLogin}>Войти</button>
           </form>
-          <div className={styles['modal-login__if-registered']}>или</div>
-          <button className={styles['modal-login__register-btn']} onClick={handleSwitchToRegister}>
+          <div className={s.IfRegistered}>или</div>
+          <button className={s.RegisterBtn} onClick={handleSwitchToRegister}>
             Зарегистрируйтесь
           </button>
         </div>
       </div>
-      <div className={styles['modal-login__close-btn']} onClick={onClose}>
+      <div className={s.CloseBtn} onClick={onClose}>
         {closeImg}
       </div>
     </>
@@ -54,10 +54,10 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
 
   const registerModal = (
     <>
-      <div className={styles['modal-login__overlay']}>
-        <div className={`${styles['modal-login__content']} ${isVisible ? styles['show'] : ''}`}>
+      <div className={s.Overlay}>
+        <div className={`${s.Content} ${isVisible ? s.Show : ''}`}>
           <h3>Зарегистрируйтесь</h3>
-          <form action="" className={styles['modal__login-form']}>
+          <form action="" className={s.LoginForm}>
             <input type="text" placeholder="Ваше имя" />
             <input type="text" placeholder="Email" />
             <input type="text" placeholder="Пароль" />
@@ -65,7 +65,7 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
           </form>
         </div>
       </div>
-      <div className={styles['modal-login__close-btn']} onClick={onClose}>
+      <div className={s.CloseBtn} onClick={onClose}>
         {closeImg}
       </div>
     </>
