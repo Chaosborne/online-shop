@@ -10,6 +10,14 @@ export default defineConfig({
   server: {
     open: true,
   },
+  // switched manually to modern SCSS complier because Vite in this version uses the old one by default
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: 'modern-compiler',
+      },
+    },
+  },
 });
 
 // https://vitejs.dev/config/
