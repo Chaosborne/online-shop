@@ -1,35 +1,35 @@
 .cart {
-    max-width: 600px;
+  max-width: 600px;
 }
 .cart-top {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
-.cart__items{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 40px;
+.cart__items {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
 }
 // .cart__item-name{}
 // .cart__item-price{}
-.cart__item-quantity{
-    display: flex;
-    align-items: center;    
-    gap: 10px;
+.cart__item-quantity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 // .cart__sum{}
 
 .cart__total-price {
-    margin-top: 30px;
-    display: flex;
-    justify-content: end;
-    
-    p:nth-child(2) {
-        margin-left: 50px;
-    }
+  margin-top: 30px;
+  display: flex;
+  justify-content: end;
+
+  p:nth-child(2) {
+    margin-left: 50px;
+  }
 }
 
 .cart-empty-msg {
-    margin-top: 30px;
+  margin-top: 30px;
 }

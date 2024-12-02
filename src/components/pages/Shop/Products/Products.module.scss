@@ -50,7 +50,6 @@
     background-color: #808080;
     padding: 10px;
   }
-
 }
 
 .products-lines {
@@ -66,7 +65,8 @@
   }
 }
 
-.products-tiles, .products-lines {
+.products-tiles,
+.products-lines {
   .card {
     color: $text;
   }

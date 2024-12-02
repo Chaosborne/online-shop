@@ -22,11 +22,9 @@ const Products = () => {
     const { name, checked } = e.target;
 
     if (checked) {
-      setSelectedBrands((prevSelectedBrands) => [...prevSelectedBrands, name]);
+      setSelectedBrands(prevSelectedBrands => [...prevSelectedBrands, name]);
     } else {
-      setSelectedBrands((prevSelectedBrands) =>
-        prevSelectedBrands.filter((brand) => brand !== name),
-      );
+      setSelectedBrands(prevSelectedBrands => prevSelectedBrands.filter(brand => brand !== name));
     }
   };
 
@@ -34,27 +32,16 @@ const Products = () => {
   let filteredProducts;
 
   if (searchInput) {
-    const searchFilteredProducts = productsMockData.filter((product) => {
-      return (
-        product.itemBrand.toLowerCase().includes(searchInput.toLowerCase()) ||
-        product.itemName.toLowerCase().includes(searchInput.toLowerCase())
-      );
+    const searchFilteredProducts = productsMockData.filter(product => {
+      return product.itemBrand.toLowerCase().includes(searchInput.toLowerCase()) || product.itemName.toLowerCase().includes(searchInput.toLowerCase());
     });
 
-    filteredProducts = searchFilteredProducts
-      .filter((product) =>
-        selectedBrands.length > 0 ? selectedBrands.includes(product.itemBrand.toLowerCase()) : true,
-      )
-      .sort((a, b) => (isAscending ? a.itemPrice - b.itemPrice : b.itemPrice - a.itemPrice));
+    filteredProducts = searchFilteredProducts.filter(product => (selectedBrands.length > 0 ? selectedBrands.includes(product.itemBrand.toLowerCase()) : true)).sort((a, b) => (isAscending ? a.itemPrice - b.itemPrice : b.itemPrice - a.itemPrice));
   } else {
-    filteredProducts = productsMockData
-      .filter((product) =>
-        selectedBrands.length > 0 ? selectedBrands.includes(product.itemBrand.toLowerCase()) : true,
-      )
-      .sort((a, b) => (isAscending ? a.itemPrice - b.itemPrice : b.itemPrice - a.itemPrice));
+    filteredProducts = productsMockData.filter(product => (selectedBrands.length > 0 ? selectedBrands.includes(product.itemBrand.toLowerCase()) : true)).sort((a, b) => (isAscending ? a.itemPrice - b.itemPrice : b.itemPrice - a.itemPrice));
   }
 
-  const productsList = filteredProducts.map((item) => {
+  const productsList = filteredProducts.map(item => {
     const productSlug = generateProductSlug(item.itemBrand, item.itemName);
     return (
       <Link to={`/shop/product/${productSlug}`} className={styles.card} key={item.id}>
@@ -67,13 +54,7 @@ const Products = () => {
     );
   });
 
-  const productsListElement = (
-    <div
-      className={`${styles.products} ${isTilesView ? styles['products-tiles'] : styles['products-lines']}`}
-    >
-      {productsList}
-    </div>
-  );
+  const productsListElement = <div className={`${styles.products} ${isTilesView ? styles['products-tiles'] : styles['products-lines']}`}>{productsList}</div>;
 
   return (
     <section className={styles['products-section']}>
@@ -91,39 +72,19 @@ const Products = () => {
             <div className={styles.filter__title}>Filter</div>
             <form className={styles.filter__form} action="">
               <div className={styles.filter__select}>
-                <input
-                  type="checkbox"
-                  name="apple"
-                  id="apple"
-                  onChange={handleBrandCheckboxChange}
-                />
+                <input type="checkbox" name="apple" id="apple" onChange={handleBrandCheckboxChange} />
                 <label htmlFor="apple">Apple</label>
               </div>
               <div className={styles.filter__select}>
-                <input
-                  type="checkbox"
-                  name="samsung"
-                  id="samsung"
-                  onChange={handleBrandCheckboxChange}
-                />
+                <input type="checkbox" name="samsung" id="samsung" onChange={handleBrandCheckboxChange} />
                 <label htmlFor="samsung">Samsung</label>
               </div>
               <div className={styles.filter__select}>
-                <input
-                  type="checkbox"
-                  name="xiaomi"
-                  id="xiaomi"
-                  onChange={handleBrandCheckboxChange}
-                />
+                <input type="checkbox" name="xiaomi" id="xiaomi" onChange={handleBrandCheckboxChange} />
                 <label htmlFor="xiaomi">Xiaomi</label>
               </div>
               <div className={styles.filter__select}>
-                <input
-                  type="checkbox"
-                  name="realme"
-                  id="realme"
-                  onChange={handleBrandCheckboxChange}
-                />
+                <input type="checkbox" name="realme" id="realme" onChange={handleBrandCheckboxChange} />
                 <label htmlFor="realme">Realme</label>
               </div>
               <div className={styles.filter__select}>

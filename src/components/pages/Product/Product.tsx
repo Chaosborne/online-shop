@@ -14,7 +14,7 @@ const Product = () => {
   // Check if product exists
   const { productSlug } = useParams<{ productSlug: string }>();
 
-  const product = productsMockData.find((product) => {
+  const product = productsMockData.find(product => {
     const brandSlug = product.itemBrand.toLowerCase().replace(/\s+/g, '-');
     const nameSlug = product.itemName.toLowerCase().replace(/\s+/g, '-');
     const combinedSlug = `${brandSlug}-${nameSlug}`;

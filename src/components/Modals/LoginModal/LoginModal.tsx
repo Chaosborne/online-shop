@@ -75,10 +75,7 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
 };
 
 const ModalPortal = ({ onClose, modalType }: ModalPortalProps) => {
-  return ReactDOM.createPortal(
-    <Modal onClose={onClose} modalType={modalType} />,
-    document.getElementById('login-modal-portal') as HTMLElement,
-  );
+  return ReactDOM.createPortal(<Modal onClose={onClose} modalType={modalType} />, document.getElementById('login-modal-portal') as HTMLElement);
 };
 
 export default ModalPortal;

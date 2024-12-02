@@ -41,22 +41,14 @@ const Header = () => {
 
     searchInput === '' && setMatchingItems([]);
 
-    setMatchingItems(
-      productsMockData.filter(
-        (product) =>
-          product.itemName.toLowerCase().includes(searchInput.toLowerCase()) ||
-          product.itemBrand.toLowerCase().includes(searchInput.toLowerCase()),
-      ),
-    );
+    setMatchingItems(productsMockData.filter(product => product.itemName.toLowerCase().includes(searchInput.toLowerCase()) || product.itemBrand.toLowerCase().includes(searchInput.toLowerCase())));
   };
 
   // send Search query to store
   const searchSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const searchInput = e.currentTarget.querySelector(
-      '#app-header__search-input',
-    ) as HTMLInputElement;
+    const searchInput = e.currentTarget.querySelector('#app-header__search-input') as HTMLInputElement;
     const searchQuery = searchInput.value.replace(/[^a-zA-Zа-яА-Я0-9\s]/g, '').trim();
 
     dispatch(setSearchQuery(searchQuery));
@@ -71,14 +63,11 @@ const Header = () => {
 
   const matchingItemsElement = matchingItems.length > 0 && (
     <ul className={styles['search__suggestions-list']} ref={suggestionsListRef}>
-      {matchingItems.map((item) => {
+      {matchingItems.map(item => {
         const productSlug = generateProductSlug(item.itemBrand, item.itemName);
         return (
           <li key={item.id} id={item.id} onClick={hideWhenClick}>
-            <Link
-              className={styles['suggestions-li__link']}
-              to={`shop/product/${productSlug}`}
-            >{`${item.itemBrand} ${item.itemName}`}</Link>
+            <Link className={styles['suggestions-li__link']} to={`shop/product/${productSlug}`}>{`${item.itemBrand} ${item.itemName}`}</Link>
           </li>
         );
       })}
@@ -100,12 +89,7 @@ const Header = () => {
           </Link>
           <Link to="/shop">Магазин</Link>
           <form className={styles['app-header__search']} onSubmit={searchSubmitHandler}>
-            <input
-              id="app-header__search-input"
-              className={styles['app-header__search-input']}
-              type="text"
-              onInput={searchSuggestionsHandler}
-            />
+            <input id="app-header__search-input" className={styles['app-header__search-input']} type="text" onInput={searchSuggestionsHandler} />
             {matchingItemsElement}
             <button className={styles['app-header__search-btn']} type="submit">
               lens img to be here

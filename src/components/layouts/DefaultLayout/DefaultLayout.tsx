@@ -17,4 +17,3 @@ export default function DefaultLayout({ children }: DefaultLayoutProps) {
     </>
   );
 }
-// Обертка над сайтом
