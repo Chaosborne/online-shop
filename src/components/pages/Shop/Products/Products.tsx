@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import s from './Products.module.scss';
 
 import { useState } from 'react';
@@ -54,7 +55,7 @@ const Products = () => {
     );
   });
 
-  const productsListElement = <div className={`${s.Products} ${isTilesView ? s.Tiles : s.Lines}`}>{productsList}</div>;
+  const productsListElement = <div className={clsx(s.Products, isTilesView ? s.Tiles : s.Lines)}>{productsList}</div>;
 
   return (
     <section className={s.ProductsSection}>

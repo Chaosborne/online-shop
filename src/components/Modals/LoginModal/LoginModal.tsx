@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
+import clsx from 'clsx';
 import s from './LoginModal.module.scss';
 
 const closeImg = (
@@ -33,7 +34,7 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
   const loginModal = (
     <>
       <div className={s.Overlay}>
-        <div className={`${s.Content} ${isVisible ? s.Show : ''}`}>
+        <div className={clsx(s.Content, { [s.Show]: isVisible })}>
           <h3>Войдите</h3>
           <form action="" className={s.LoginForm}>
             <input type="text" placeholder="Email" />
@@ -55,7 +56,7 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
   const registerModal = (
     <>
       <div className={s.Overlay}>
-        <div className={`${s.Content} ${isVisible ? s.Show : ''}`}>
+        <div className={clsx(s.Content, { [s.Show]: isVisible })}>
           <h3>Зарегистрируйтесь</h3>
           <form action="" className={s.LoginForm}>
             <input type="text" placeholder="Ваше имя" />
