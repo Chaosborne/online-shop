@@ -46,7 +46,7 @@ const Product = () => {
   return (
     <main className={s.Card}>
       <div className="container">
-        <h1 className={s.Title}>{product.itemBrand + ' ' + product.itemName}</h1>
+        <h1 className={s.Title}>{`${product.itemBrand} ${product.itemName}`}</h1>
         <img src={product.itemImg} alt={product.itemName} />
         <p>{product.itemDescription}</p>
         <p>Цена: ${product.itemPrice}</p>
