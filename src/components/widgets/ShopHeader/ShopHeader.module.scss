@@ -8,6 +8,24 @@
   align-items: center;
 }
 // .Logo {} // Left for further design layouts
+.Search {
+  max-width: 500px;
+  position: relative;
+}
+.SearchInput {
+  height: 40px;
+  width: 500px;
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 0 10px;
+}
+.SearchBtn {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  height: 30px;
+  padding-top: 4px;
+}
 // .AppNav {}
 
 .AppMenu {

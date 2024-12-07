@@ -27,9 +27,6 @@ const ShopHeader = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // hide dropdown suggestions when any suggested product clicked
-  const hideWhenClick = () => setMatchingItems([]);
-
   // this will produce dropdown suggestions
   const searchSuggestionsHandler = (e: React.FormEvent<HTMLInputElement>) => {
     const searchInput = e.currentTarget.value.replace(/[^a-zA-Zа-яА-Я0-9\s]/g, '').trim();
@@ -43,6 +40,9 @@ const ShopHeader = () => {
 
     setMatchingItems(productsMockData.filter(product => product.itemName.toLowerCase().includes(searchInput.toLowerCase()) || product.itemBrand.toLowerCase().includes(searchInput.toLowerCase())));
   };
+
+  // hide dropdown suggestions when any suggested product clicked
+  const hideWhenClick = () => setMatchingItems([]);
 
   // send Search query to store
   const searchSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
