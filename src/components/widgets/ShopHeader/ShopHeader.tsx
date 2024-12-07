@@ -2,11 +2,11 @@ import s from './ShopHeader.module.scss';
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import generateProductSlug from '../../../helpers/generateProductSlug';
 import { RootState } from '../../../store/store';
 import { setSearchQuery } from '../../../store/slices/searchSlice';
 import { ModalPortal as LoginModalPortal } from '../../Modals';
 import { IProduct, productsMockData } from '../../../constants/mocks/products';
+import SearchSuggestions from '../SearchSuggestions/SearchSuggestions';
 
 const ShopHeader = () => {
   const [matchingItems, setMatchingItems] = useState<IProduct[]>([]);
@@ -61,19 +61,6 @@ const ShopHeader = () => {
     console.log(localStorage);
   };
 
-  const matchingItemsElement = matchingItems.length > 0 && (
-    <ul className={s.SearchSuggestionsList} ref={suggestionsListRef}>
-      {matchingItems.map(item => {
-        const productSlug = generateProductSlug(item.itemBrand, item.itemName);
-        return (
-          <li key={item.id} id={item.id} onClick={hideWhenClick}>
-            <Link className={s.SearchSuggestionsLink} to={`shop/product/${productSlug}`}>{`${item.itemBrand} ${item.itemName}`}</Link>
-          </li>
-        );
-      })}
-    </ul>
-  );
-
   // Login modal
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const openLoginModal = () => setIsLoginModalOpen(true);
@@ -90,7 +77,7 @@ const ShopHeader = () => {
           <Link to="/shop">Магазин</Link>
           <form className={s.Search} onSubmit={searchSubmitHandler}>
             <input id="app-header__search-input" className={s.SearchInput} type="text" onInput={searchSuggestionsHandler} />
-            {matchingItemsElement}
+            <SearchSuggestions matchingItems={matchingItems} hideWhenClick={hideWhenClick} suggestionsListRef={suggestionsListRef} />
             <button className={s.SearchBtn} type="submit">
               lens img to be here
             </button>

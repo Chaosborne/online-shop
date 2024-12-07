@@ -1,0 +1,32 @@
+.Search {
+    max-width: 500px;
+    position: relative;
+  }
+  .SearchInput {
+    height: 40px;
+    width: 500px;
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 0 10px;
+  }
+  .SearchBtn {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    height: 30px;
+    padding-top: 4px;
+  }
+  .SearchSuggestionsList {
+    position: absolute;
+    width: 100%;
+    border-radius: 0 0 10px 10px;
+    background-color: rgb(75, 75, 75);
+    padding: 10px 10px;
+  }
+  .SearchSuggestionsList li {
+    line-height: 2em;
+    cursor: pointer;
+  }
+  .SearchSuggestionsLink {
+    width: 100%;
+  }
