@@ -2,7 +2,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { User } from '../types/types';
 
-interface CreateUserResponse {
+export interface CreateUserResponse {
   id: string;
   message: string;
 }
