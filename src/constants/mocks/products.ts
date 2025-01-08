@@ -12,8 +12,8 @@ export interface IProduct {
 
 export const productsMockData: IProduct[] = [
   {
-    id: 'item1',
-    itemCategory: 'someCategory',
+    id: '0',
+    itemCategory: 'смартфон',
     itemImg: 'img',
     itemBrand: 'Apple',
     itemName: 'iPhone 16',
@@ -23,8 +23,8 @@ export const productsMockData: IProduct[] = [
     itemTotalPrice: 0,
   },
   {
-    id: 'item2',
-    itemCategory: 'someCategory',
+    id: '1',
+    itemCategory: 'оргтехника',
     itemImg: 'img 2',
     itemBrand: 'Hewlett Packard',
     itemName: 'LJ 1020',
@@ -34,8 +34,8 @@ export const productsMockData: IProduct[] = [
     itemTotalPrice: 0,
   },
   {
-    id: 'item3',
-    itemCategory: 'someCategory',
+    id: '2',
+    itemCategory: 'смартфон',
     itemImg: 'img 3',
     itemBrand: 'Samsung',
     itemName: 'Galaxy M',
@@ -45,8 +45,8 @@ export const productsMockData: IProduct[] = [
     itemTotalPrice: 0,
   },
   {
-    id: 'item4',
-    itemCategory: 'someCategory',
+    id: '3',
+    itemCategory: 'планшет',
     itemImg: 'img 4',
     itemBrand: 'Realme',
     itemName: 'GT 6',

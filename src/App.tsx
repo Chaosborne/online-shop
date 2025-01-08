@@ -2,7 +2,6 @@ import './App.scss';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { DefaultLayout } from './components/layouts';
 import { routes } from './constants/routes';
-import ApiTestButton from './api/ApiTestButton';
 
 function App() {
   return (
@@ -14,9 +13,6 @@ function App() {
           ))}
         </Routes>
       </DefaultLayout>
-      <div className="container">
-        <ApiTestButton />
-      </div>
     </Router>
   );
 }
