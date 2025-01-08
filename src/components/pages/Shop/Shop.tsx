@@ -1,9 +1,9 @@
 import Categories from './Categories/Categories';
 import Products from './Products/Products';
-import WorkWithFirebase from '../../../api/WorkWithFirebase';
+import GetProductsFromFirebase from '../../../api/GetProductsFromFirebase';
 
 const Shop = () => {
-  WorkWithFirebase();
+  GetProductsFromFirebase();
 
   return (
     <main>
