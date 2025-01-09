@@ -16,12 +16,14 @@ export interface dbProductsState {
   products: IProduct[];
   loading: boolean;
   error: string | null;
+  loaded: boolean; // Новый флаг для отслеживания загрузки
 }
 
 const initialState: dbProductsState = {
   products: [],
   loading: false,
   error: null,
+  loaded: false, // Инициализация флага как false
 };
 
 // Асинхронный thunk для получения данных из Firebase
@@ -41,7 +43,12 @@ export const fetchProductsFromFirebase = createAsyncThunk<IProduct[], void, { re
 const dbProductsSlice = createSlice({
   name: 'dbProducts',
   initialState,
-  reducers: {},
+  reducers: {
+    // Новый редьюсер для обновления флага loaded
+    setLoaded(state, action: PayloadAction<boolean>) {
+      state.loaded = action.payload;
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(fetchProductsFromFirebase.pending, state => {
@@ -51,42 +58,15 @@ const dbProductsSlice = createSlice({
       .addCase(fetchProductsFromFirebase.fulfilled, (state, action: PayloadAction<IProduct[]>) => {
         state.loading = false;
         state.products = action.payload;
+        state.loaded = true;
       })
       .addCase(fetchProductsFromFirebase.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || 'Failed to fetch products';
+        state.loaded = false;
       });
   },
 });
 
+export const { setLoaded } = dbProductsSlice.actions; // Экспорт действия setLoaded
 export default dbProductsSlice.reducer;
-
-// import React, { useEffect } from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
-// import { fetchProductsFromFirebase } from './path-to-your-slice';
-// import { RootState } from './path-to-your-store';
-
-// const ProductsComponent: React.FC = () => {
-//   const dispatch = useDispatch();
-//   const { products, loading, error } = useSelector((state: RootState) => state.dbProducts);
-
-//   useEffect(() => {
-//     dispatch(fetchProductsFromFirebase());
-//   }, [dispatch]);
-
-//   if (loading) return <div>Loading...</div>;
-//   if (error) return <div>Error: {error}</div>;
-
-//   return (
-//     <div>
-//       {products.map((product) => (
-//         <div key={product.id}>
-//           <h3>{product.itemName}</h3>
-//           <p>{product.itemDescription}</p>
-//         </div>
-//       ))}
-//     </div>
-//   );
-// };
-
-// export default ProductsComponent;

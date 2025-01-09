@@ -49,7 +49,9 @@ function App() {
     void dispatch(fetchProductsFromFirebase());
   }, [dispatch]);
   useEffect(() => {
-    console.log('Products state from store:', productsState);
+    if (productsState.products.length > 0) {
+      console.log('Products state from store:', productsState);
+    }
   }, [productsState]);
   ///////////////
 
