@@ -9,26 +9,11 @@ import { useDispatch } from 'react-redux';
 import { fetchProductsFromFirebase } from './store/slices/getDbProductsSlice';
 import { AppDispatch } from './store/store';
 
-////-- For store reading -- imports
-import { RootState } from './store/store';
-import { useSelector } from 'react-redux';
-////--
-
 function App() {
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     void dispatch(fetchProductsFromFirebase());
   }, [dispatch]);
-
-  ////-- For store reading -- processing
-  const productsState = useSelector((state: RootState) => state.dbProducts);
-  useEffect(() => {
-    if (productsState.products.length > 0) {
-      const productsFromStore = productsState.products;
-      console.log('Products from store:', productsFromStore);
-    }
-  }, [productsState]);
-  ////--
   /////////////// End of work with Firebase products and store
 
   /////////////// Ignore React Router v7 Future Flag Warning

@@ -58,7 +58,7 @@ const ShopHeader = () => {
   const localStorageAndConsoleClearHandler = () => {
     localStorage.clear();
     console.clear();
-    console.log(localStorage);
+    console.log(localStorage); // This log is part of the storage and console cleanup functionality. Not to be removed
   };
 
   // Login modal
