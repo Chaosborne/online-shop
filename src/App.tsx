@@ -3,27 +3,32 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { DefaultLayout } from './components/layouts';
 import { routes } from './constants/routes';
 
-/////////////// Work with Firebase products and store
-/////////////// This piece of code to be placed elsewhere to avoid cluttering the App
-import { useDispatch } from 'react-redux';
+/////////////// Read Firebase and write to store // This piece of code to be placed elsewhere to avoid cluttering the App
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { fetchProductsFromFirebase } from './store/slices/getDbProductsSlice';
 import { AppDispatch } from './store/store';
+
+////-- For store reading -- imports
+import { RootState } from './store/store';
 import { useSelector } from 'react-redux';
-import { RootState } from './store/store'; // Путь к типам RootState
+////--
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
-  const productsState = useSelector((state: RootState) => state.dbProducts);
   useEffect(() => {
     void dispatch(fetchProductsFromFirebase());
   }, [dispatch]);
+
+  ////-- For store reading -- processing
+  const productsState = useSelector((state: RootState) => state.dbProducts);
   useEffect(() => {
     if (productsState.products.length > 0) {
       const productsFromStore = productsState.products;
       console.log('Products from store:', productsFromStore);
     }
   }, [productsState]);
+  ////--
   /////////////// End of work with Firebase products and store
 
   /////////////// Ignore React Router v7 Future Flag Warning
