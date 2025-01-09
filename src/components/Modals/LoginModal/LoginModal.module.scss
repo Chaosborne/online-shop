@@ -49,8 +49,13 @@
   }
 }
 
-.LoginForm input::placeholder {
-  color: #fff;
+.LoginForm {
+  input {
+    margin-bottom: 10px;
+  }
+  input::placeholder {
+    color: #fff;
+  }
 }
 .IfRegistered {
   margin-top: 30px;

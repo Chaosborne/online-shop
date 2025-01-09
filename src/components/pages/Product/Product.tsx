@@ -5,19 +5,27 @@ import { AppDispatch, RootState } from '../../../store/store';
 import { getItemQuantity } from '../../../store/slices/cartSlice';
 
 import s from './Product.module.scss';
-import { productsMockData } from '../../../constants/mocks/products';
+// import { productsMockData } from '../../../constants/mocks/products'; // Пока оставляю, источник может быть не окончательный
 
 const Product = () => {
+  // Get products from store (previously got from Firebase)
+  const productsState = useSelector((state: RootState) => state.dbProducts);
+  const productsFromStore = productsState.products || [];
+
   // Get dispatcher and cart data from redux
   const dispatch = useDispatch<AppDispatch>();
 
   // Check if product exists
   const { productSlug } = useParams<{ productSlug: string }>();
 
-  const product = productsMockData.find(product => {
+  // const product = productsMockData.find(product => {
+  const product = productsFromStore.find(product => {
     const brandSlug = product.itemBrand.toLowerCase().replace(/\s+/g, '-');
     const nameSlug = product.itemName.toLowerCase().replace(/\s+/g, '-');
     const combinedSlug = `${brandSlug}-${nameSlug}`;
+
+    console.log('brandSlug: ', productSlug);
+    console.log('combinedSlug: ', combinedSlug);
 
     return combinedSlug === productSlug;
   });

@@ -6,9 +6,13 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { RootState } from '../../../../store/store';
 import generateProductSlug from '../../../../helpers/generateProductSlug';
-import { productsMockData } from '../../../../constants/mocks/products';
 
 const Products = () => {
+  const mockBrands = ['apple', 'samsung', 'xiaomi', 'realme', 'oppo'];
+
+  const productsState = useSelector((state: RootState) => state.dbProducts);
+  const productsFromStore = productsState.products || [];
+
   const searchQuery = useSelector((state: RootState) => state.search.searchQuery);
   const searchInput = searchQuery.replace(/[^a-zA-Zа-яА-Я0-9\s]/g, '').trim();
 
@@ -30,17 +34,15 @@ const Products = () => {
   };
 
   // Filter products under searchInput condition
-  let filteredProducts;
-
-  if (searchInput) {
-    const searchFilteredProducts = productsMockData.filter(product => {
-      return product.itemBrand.toLowerCase().includes(searchInput.toLowerCase()) || product.itemName.toLowerCase().includes(searchInput.toLowerCase());
-    });
-
-    filteredProducts = searchFilteredProducts.filter(product => (selectedBrands.length > 0 ? selectedBrands.includes(product.itemBrand.toLowerCase()) : true)).sort((a, b) => (isAscending ? a.itemPrice - b.itemPrice : b.itemPrice - a.itemPrice));
-  } else {
-    filteredProducts = productsMockData.filter(product => (selectedBrands.length > 0 ? selectedBrands.includes(product.itemBrand.toLowerCase()) : true)).sort((a, b) => (isAscending ? a.itemPrice - b.itemPrice : b.itemPrice - a.itemPrice));
-  }
+  const filteredProducts = productsFromStore
+    .filter(product => {
+      if (searchInput) {
+        return product.itemBrand.toLowerCase().includes(searchInput.toLowerCase()) || product.itemName.toLowerCase().includes(searchInput.toLowerCase());
+      }
+      return true;
+    })
+    .filter(product => (selectedBrands.length > 0 ? selectedBrands.includes(product.itemBrand.toLowerCase()) : true))
+    .sort((a, b) => (isAscending ? a.itemPrice - b.itemPrice : b.itemPrice - a.itemPrice));
 
   const productsList = filteredProducts.map(item => {
     const productSlug = generateProductSlug(item.itemBrand, item.itemName);
@@ -72,26 +74,12 @@ const Products = () => {
           <div className={s.Filter}>
             <div className={s.FilterTitle}>Filter</div>
             <form className={s.FilterForm} action="">
-              <div className={s.FilterSelect}>
-                <input type="checkbox" name="apple" id="apple" onChange={handleBrandCheckboxChange} />
-                <label htmlFor="apple">Apple</label>
-              </div>
-              <div className={s.FilterSelect}>
-                <input type="checkbox" name="samsung" id="samsung" onChange={handleBrandCheckboxChange} />
-                <label htmlFor="samsung">Samsung</label>
-              </div>
-              <div className={s.FilterSelect}>
-                <input type="checkbox" name="xiaomi" id="xiaomi" onChange={handleBrandCheckboxChange} />
-                <label htmlFor="xiaomi">Xiaomi</label>
-              </div>
-              <div className={s.FilterSelect}>
-                <input type="checkbox" name="realme" id="realme" onChange={handleBrandCheckboxChange} />
-                <label htmlFor="realme">Realme</label>
-              </div>
-              <div className={s.FilterSelect}>
-                <input type="checkbox" name="oppo" id="oppo" onChange={handleBrandCheckboxChange} />
-                <label htmlFor="oppo">Oppo</label>
-              </div>
+              {mockBrands.map(brand => (
+                <div className={s.FilterSelect} key={brand}>
+                  <input type="checkbox" name={brand} id={brand} onChange={handleBrandCheckboxChange} />
+                  <label htmlFor={brand}>{brand.charAt(0).toUpperCase() + brand.slice(1)}</label>
+                </div>
+              ))}
             </form>
           </div>
           {productsListElement}
