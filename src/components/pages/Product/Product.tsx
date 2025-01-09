@@ -24,9 +24,6 @@ const Product = () => {
     const nameSlug = product.itemName.toLowerCase().replace(/\s+/g, '-');
     const combinedSlug = `${brandSlug}-${nameSlug}`;
 
-    console.log('brandSlug: ', productSlug);
-    console.log('combinedSlug: ', combinedSlug);
-
     return combinedSlug === productSlug;
   });
 
