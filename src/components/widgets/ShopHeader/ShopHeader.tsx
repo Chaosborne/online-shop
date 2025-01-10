@@ -6,7 +6,7 @@ import { RootState } from '../../../store/store';
 import { setSearchQuery } from '../../../store/slices/searchSlice';
 import { ModalPortal as LoginModalPortal } from '../../Modals';
 // import { IProduct, productsMockData } from '../../../constants/mocks/products';
-import { IProduct } from '../../../constants/mocks/products';
+import { IProduct } from '../../../constants/interfaces/IProduct';
 import SearchSuggestions from '../SearchSuggestions/SearchSuggestions';
 
 const ShopHeader = () => {
