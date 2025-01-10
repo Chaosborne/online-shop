@@ -5,10 +5,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
 import { setSearchQuery } from '../../../store/slices/searchSlice';
 import { ModalPortal as LoginModalPortal } from '../../Modals';
-import { IProduct, productsMockData } from '../../../constants/mocks/products';
+// import { IProduct, productsMockData } from '../../../constants/mocks/products';
+import { IProduct } from '../../../constants/mocks/products';
 import SearchSuggestions from '../SearchSuggestions/SearchSuggestions';
 
 const ShopHeader = () => {
+  // Get products from store (previously got from Firebase)
+  const productsState = useSelector((state: RootState) => state.dbProducts);
+  const productsFromStore = productsState.products || [];
+
   const [matchingItems, setMatchingItems] = useState<IProduct[]>([]);
   const suggestionsListRef = useRef<HTMLUListElement>(null);
 
@@ -38,7 +43,7 @@ const ShopHeader = () => {
 
     searchInput === '' && setMatchingItems([]);
 
-    setMatchingItems(productsMockData.filter(product => product.itemName.toLowerCase().includes(searchInput.toLowerCase()) || product.itemBrand.toLowerCase().includes(searchInput.toLowerCase())));
+    setMatchingItems(productsFromStore.filter(product => product.itemName.toLowerCase().includes(searchInput.toLowerCase()) || product.itemBrand.toLowerCase().includes(searchInput.toLowerCase())));
   };
 
   // hide dropdown suggestions when any suggested product clicked
