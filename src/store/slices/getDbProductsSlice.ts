@@ -5,17 +5,16 @@ export interface dbProductsState {
   products: IProduct[];
   loading: boolean;
   error: string | null;
-  loaded: boolean; // Новый флаг для отслеживания загрузки
+  loaded: boolean;
 }
 
 const initialState: dbProductsState = {
   products: [],
   loading: false,
   error: null,
-  loaded: false, // Инициализация флага как false
+  loaded: false,
 };
 
-// Асинхронный thunk для получения данных из Firebase
 export const fetchProductsFromFirebase = createAsyncThunk<IProduct[], void, { rejectValue: string }>('dbProducts/fetchProductsFromFirebase', async (_, { rejectWithValue }) => {
   try {
     const response = await fetch('https://eco-village-d5d6d-default-rtdb.firebaseio.com/products.json');
@@ -33,7 +32,6 @@ const dbProductsSlice = createSlice({
   name: 'dbProducts',
   initialState,
   reducers: {
-    // Новый редьюсер для обновления флага loaded
     setLoaded(state, action: PayloadAction<boolean>) {
       state.loaded = action.payload;
     },
