@@ -118,7 +118,9 @@ const ShopHeader = () => {
           <nav className={s.AppNav}>
             <ul className={s.AppMenu}>
               <li>
-                <button onClick={localStorageAndConsoleClearHandler}>Clear LS & C</button>
+                <button className={s.clearBtn} onClick={localStorageAndConsoleClearHandler}>
+                  Clear LS & C
+                </button>
               </li>
               <li>
                 {user ? (
