@@ -1,8 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
+import { getAuth } from 'firebase/auth'; // Импорт для работы с Authentication
 import { firebaseApiKey } from './firebaseApiKey';
 
 // Your web app's Firebase configuration
@@ -17,10 +15,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const firebaseApp = initializeApp(firebaseConfig);
+export const firebaseApp = initializeApp(firebaseConfig);
 
-//// помечаем, что переменная используется, но ничего не делаем с ней,
-// чтобы убрать ошибку 'app' is assigned a value but never used,
-// пока не продолжили разработку и не начали использование переменной app
-void firebaseApp; // когда начнем использовать firebaseApp, всю строку удалим
-////
+// Initialize Firebase Authentication and export it
+export const auth = getAuth(firebaseApp);
