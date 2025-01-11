@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import clsx from 'clsx';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'; // Импорт метода регистрации и входа
-import { auth } from '../../../firebase/firebase'; // Импорт auth из firebase.ts
+import { auth } from '../../../firebase/firebase';
 import s from './LoginModal.module.scss';
 
 const closeImg = (
@@ -39,7 +39,6 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
       setError(null); // Сброс ошибки
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       console.log('User registered:', userCredential.user);
-      alert('Регистрация успешна! Вы можете войти.');
       handleSwitchToLogin(); // Переключение на модальное окно входа
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -53,12 +52,11 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
   };
 
   const handleLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault(); // Не забываем предотвратить стандартное поведение формы
+    e.preventDefault();
     try {
       setError(null); // Сброс ошибки
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       console.log('User logged in:', userCredential.user);
-      alert('Вход выполнен успешно!');
       onClose(); // Закрыть модальное окно при успешном входе
     } catch (error: unknown) {
       if (error instanceof Error) {
