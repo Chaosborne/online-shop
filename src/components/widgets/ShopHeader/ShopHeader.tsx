@@ -5,12 +5,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
 import { setSearchQuery } from '../../../store/slices/searchSlice';
 import { ModalPortal as LoginModalPortal } from '../../modals';
-// import { IProduct, productsMockData } from '../../../constants/mocks/products';
 import { IProduct } from '../../../constants/interfaces/IProduct';
 import SearchSuggestions from '../SearchSuggestions/SearchSuggestions';
 
+// Imports for Firebase Authentification
+import { signOut, onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../../../firebase/firebase';
+
+interface User {
+  uid: string;
+  email: string;
+  displayName?: string;
+}
+
 const ShopHeader = () => {
-  // Get products from store (previously got from Firebase)
   const productsState = useSelector((state: RootState) => state.dbProducts);
   const productsFromStore = productsState.products || [];
 
@@ -20,19 +28,46 @@ const ShopHeader = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state: RootState) => state.cart);
 
-  // hide dropdown suggestions when click outside them
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (suggestionsListRef.current && !suggestionsListRef.current.contains(e.target as Node)) {
-        setMatchingItems([]);
-      }
-    };
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [user, setUser] = useState<User | null>(null); // Стейт для отслеживания пользователя
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+  // отслеживаем состояние пользователя
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, firebaseUser => {
+      if (firebaseUser) {
+        // Приводим данные пользователя Firebase к интерфейсу User
+        const user: User = {
+          uid: firebaseUser.uid,
+          email: firebaseUser.email || '',
+          displayName: firebaseUser.displayName || '',
+        };
+        setUser(user); // Устанавливаем пользователя в стейт
+      } else {
+        setUser(null); // Если пользователь не залогинен, очищаем данные
+      }
+    });
+
+    return () => unsubscribe(); // Очистка подписки при размонтировании компонента
   }, []);
 
-  // this will produce dropdown suggestions
+  // Функция выхода из системы
+  const handleLogout = async () => {
+    try {
+      await signOut(auth); // Выход из Firebase
+      setUser(null); // Очистка стейта
+      console.log('User logged out:', user); // Логирование данных пользователя после выхода
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  };
+
+  // Обработчик клика для кнопки "Выйти"
+  const handleLogoutClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    void handleLogout();
+  };
+
+  // Работа со строкой поиска
   const searchSuggestionsHandler = (e: React.FormEvent<HTMLInputElement>) => {
     const searchInput = e.currentTarget.value.replace(/[^a-zA-Zа-яА-Я0-9\s]/g, '').trim();
 
@@ -41,33 +76,26 @@ const ShopHeader = () => {
       return;
     }
 
-    searchInput === '' && setMatchingItems([]);
-
     setMatchingItems(productsFromStore.filter(product => product.itemName.toLowerCase().includes(searchInput.toLowerCase()) || product.itemBrand.toLowerCase().includes(searchInput.toLowerCase())));
   };
 
-  // hide dropdown suggestions when any suggested product clicked
   const hideWhenClick = () => setMatchingItems([]);
 
-  // send Search query to store
   const searchSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     const searchInput = e.currentTarget.querySelector('#app-header__search-input') as HTMLInputElement;
     const searchQuery = searchInput.value.replace(/[^a-zA-Zа-яА-Я0-9\s]/g, '').trim();
-
     dispatch(setSearchQuery(searchQuery));
   };
 
-  // Clear localStorage and console. Console log result
+  // Чистильщик local storage и console
   const localStorageAndConsoleClearHandler = () => {
     localStorage.clear();
     console.clear();
-    console.log(localStorage); // This log is part of the storage and console cleanup functionality. Not to be removed
+    console.log(localStorage);
   };
 
-  // Login modal
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  //
   const openLoginModal = () => setIsLoginModalOpen(true);
   const closeLoginModal = () => setIsLoginModalOpen(false);
 
@@ -92,8 +120,16 @@ const ShopHeader = () => {
               <li>
                 <button onClick={localStorageAndConsoleClearHandler}>Clear LS & C</button>
               </li>
-              <li className={s.Login} onClick={openLoginModal}>
-                Войти
+              <li>
+                {user ? (
+                  <button className={s.Login} onClick={handleLogoutClick}>
+                    Выйти
+                  </button>
+                ) : (
+                  <button className={s.Login} onClick={openLoginModal}>
+                    Войти
+                  </button>
+                )}
               </li>
               <li>
                 <Link className={s.Favourites} to="shop/my/Favorites">
