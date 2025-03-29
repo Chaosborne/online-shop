@@ -10,7 +10,7 @@ import SearchSuggestions from '../SearchSuggestions/SearchSuggestions';
 
 // Imports for Firebase Authentification
 import { signOut, onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../../../firebase/firebase';
+import { auth } from '../../../firebase/firebaseConfig';
 
 interface User {
   uid: string;
