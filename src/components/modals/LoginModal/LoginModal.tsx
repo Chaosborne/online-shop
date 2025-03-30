@@ -54,16 +54,34 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
   const handleLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
-      setError(null); // Сброс ошибки
+      setError(null); // Сброс ошибки перед новой попыткой
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       console.log('User logged in:', userCredential.user);
       onClose(); // Закрыть модальное окно при успешном входе
     } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.error('Login error:', error);
-        setError(error.message); // Устанавливаем ошибку для отображения
+      console.error('Login error:', error);
+
+      if (typeof error === 'object' && error !== null) {
+        const firebaseError = error as { code?: string; message?: string };
+
+        console.log('Firebase error code:', firebaseError.code);
+        console.log('Firebase error message:', firebaseError.message);
+
+        switch (firebaseError.code) {
+          case 'auth/invalid-email':
+            setError('Неверный формат email.');
+            break;
+          case 'auth/invalid-credential': // Объединенный код для неверного логина/пароля
+            setError('Неправильный email или пароль.');
+            break;
+          case 'auth/too-many-requests':
+            setError('Слишком много неудачных попыток входа. Попробуйте позже.');
+            break;
+          default:
+            setError('Ошибка входа. Попробуйте снова.');
+            break;
+        }
       } else {
-        console.error('Unexpected error:', error);
         setError('Произошла непредвиденная ошибка. Попробуйте снова.');
       }
     }
@@ -77,6 +95,7 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
           <form action="" className={s.LoginForm}>
             <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
             <input type="password" placeholder="Пароль" value={password} onChange={e => setPassword(e.target.value)} />
+            {error && <p className={s.Error}>{error}</p>}
             <button
               onClick={e => {
                 e.preventDefault();
