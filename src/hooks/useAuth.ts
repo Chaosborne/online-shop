@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { signOut, onAuthStateChanged } from 'firebase/auth';
+import { signOut, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { FirebaseError } from 'firebase/app';
 import { auth } from '../firebase/firebaseConfig';
 
 interface User {
@@ -10,6 +11,7 @@ interface User {
 
 export const useAuth = () => {
   const [user, setUser] = useState<User | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, firebaseUser => {
@@ -23,17 +25,72 @@ export const useAuth = () => {
         setUser(null);
       }
     });
+
     return () => unsubscribe();
   }, []);
 
-  return user;
-};
+  const handleLogin = async (email: string, password: string) => {
+    try {
+      setError(null);
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      console.log('User logged in:', userCredential.user);
+    } catch (error) {
+      handleFirebaseError(error);
+    }
+  };
 
-export const handleLogout = async () => {
-  try {
-    await signOut(auth);
-    console.log('User logged out');
-  } catch (error) {
-    console.error('Logout error:', error);
-  }
+  const handleRegister = async (email: string, password: string, displayName?: string) => {
+    try {
+      setError(null);
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      if (displayName) {
+        await updateProfile(userCredential.user, { displayName });
+      }
+      console.log('User registered:', userCredential.user);
+    } catch (error) {
+      handleFirebaseError(error);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      console.log('User logged out');
+    } catch (error) {
+      handleFirebaseError(error);
+    }
+  };
+
+  // Обработка ошибок Firebase
+  const handleFirebaseError = (error: unknown) => {
+    if (error instanceof FirebaseError) {
+      console.error('Firebase error:', error.code, error.message);
+
+      switch (error.code) {
+        case 'auth/invalid-email':
+          setError('Неверный формат email.');
+          break;
+        case 'auth/email-already-in-use':
+          setError('Этот email уже зарегистрирован.');
+          break;
+        case 'auth/weak-password':
+          setError('Слишком простой пароль.');
+          break;
+        case 'auth/invalid-credential':
+          setError('Неправильный email или пароль.');
+          break;
+        case 'auth/too-many-requests':
+          setError('Слишком много неудачных попыток входа. Попробуйте позже.');
+          break;
+        default:
+          setError('Ошибка входа. Попробуйте снова.');
+          break;
+      }
+    } else {
+      console.error('Unexpected error:', error);
+      setError('Произошла непредвиденная ошибка. Попробуйте снова.');
+    }
+  };
+
+  return { user, error, handleLogin, handleRegister, handleLogout };
 };

@@ -21,8 +21,7 @@ const ShopHeader = () => {
 
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
-  // Используем хук useAuth
-  const user = useAuth();
+  const { user } = useAuth();
 
   // Работа со строкой поиска
   const searchSuggestionsHandler = (e: React.FormEvent<HTMLInputElement>) => {

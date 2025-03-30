@@ -1,8 +1,8 @@
 import s from './UserProfile.module.scss';
-import { useAuth, handleLogout } from '../../../hooks/useAuth';
+import { useAuth } from '../../../hooks/useAuth';
 
 const UserProfile = () => {
-  const user = useAuth();
+  const { user, handleLogout } = useAuth();
 
   return (
     <main className="main">
