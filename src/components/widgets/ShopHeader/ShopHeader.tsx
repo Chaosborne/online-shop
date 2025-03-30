@@ -1,5 +1,5 @@
 import s from './ShopHeader.module.scss';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
@@ -7,16 +7,7 @@ import { setSearchQuery } from '../../../store/slices/searchSlice';
 import { ModalPortal as LoginModalPortal } from '../../modals';
 import { IProduct } from '../../../constants/interfaces/IProduct';
 import SearchSuggestions from '../SearchSuggestions/SearchSuggestions';
-
-// Imports for Firebase Authentification
-import { signOut, onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../../../firebase/firebaseConfig';
-
-interface User {
-  uid: string;
-  email: string;
-  displayName?: string;
-}
+import { useAuth } from '../../../hooks/useAuth';
 
 const ShopHeader = () => {
   const productsState = useSelector((state: RootState) => state.dbProducts);
@@ -29,43 +20,9 @@ const ShopHeader = () => {
   const cart = useSelector((state: RootState) => state.cart);
 
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [user, setUser] = useState<User | null>(null); // Стейт для отслеживания пользователя
 
-  // отслеживаем состояние пользователя
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, firebaseUser => {
-      if (firebaseUser) {
-        // Приводим данные пользователя Firebase к интерфейсу User
-        const user: User = {
-          uid: firebaseUser.uid,
-          email: firebaseUser.email || '',
-          displayName: firebaseUser.displayName || '',
-        };
-        setUser(user); // Устанавливаем пользователя в стейт
-      } else {
-        setUser(null); // Если пользователь не залогинен, очищаем данные
-      }
-    });
-
-    return () => unsubscribe(); // Очистка подписки при размонтировании компонента
-  }, []);
-
-  // Функция выхода из системы
-  const handleLogout = async () => {
-    try {
-      await signOut(auth); // Выход из Firebase
-      setUser(null); // Очистка стейта
-      console.log('User logged out:', user); // Логирование данных пользователя после выхода
-    } catch (error) {
-      console.error('Logout error:', error);
-    }
-  };
-
-  // Обработчик клика для кнопки "Выйти"
-  const handleLogoutClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    void handleLogout();
-  };
+  // Используем хук useAuth
+  const user = useAuth();
 
   // Работа со строкой поиска
   const searchSuggestionsHandler = (e: React.FormEvent<HTMLInputElement>) => {
@@ -88,14 +45,12 @@ const ShopHeader = () => {
     dispatch(setSearchQuery(searchQuery));
   };
 
-  // Чистильщик local storage и console
   const localStorageAndConsoleClearHandler = () => {
     localStorage.clear();
     console.clear();
     console.log(localStorage);
   };
 
-  //
   const openLoginModal = () => setIsLoginModalOpen(true);
   const closeLoginModal = () => setIsLoginModalOpen(false);
 
@@ -136,8 +91,6 @@ const ShopHeader = () => {
               </li>
               <li>
                 {user ? (
-                  // <button className={s.Login} onClick={handleLogoutClick}>
-                  // Выйти
                   <Link className={s.ToAccount} to="/shop/my/user-profile">
                     Пользователь
                     <br />
@@ -149,6 +102,7 @@ const ShopHeader = () => {
                   </button>
                 )}
               </li>
+
               <li>
                 <button className={s.clearBtn} onClick={localStorageAndConsoleClearHandler}>
                   Clear LS & C
