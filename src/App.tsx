@@ -2,7 +2,7 @@ import './App.scss';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { DefaultLayout } from './components/layouts';
 import { routes } from './constants/routes';
-import { useFetchProducts } from './firebase/useFetchProducts';
+import { useFetchProducts } from './hooks/useFetchProducts';
 
 function App() {
   useFetchProducts();

@@ -1,5 +1,4 @@
 // useFetchProducts controls the launch of the fetchProductsFromFirebase
-// it is a common hook, not only for Firebase
 
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
