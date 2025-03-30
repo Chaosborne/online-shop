@@ -125,20 +125,24 @@ const ShopHeader = () => {
           <nav className={s.AppNav}>
             <ul className={s.AppMenu}>
               <li>
-                <Link className={s.Favourites} to="shop/my/Favorites">
+                <Link className={s.Favourites} to="shop/my/favorites">
                   Избранное
                 </Link>
               </li>
               <li>
-                <Link className={s.Cart} to="/shop/my/Cart">
+                <Link className={s.Cart} to="/shop/my/cart">
                   Корзина <span>{cart.totalQuantity}</span>
                 </Link>
               </li>
               <li>
                 {user ? (
-                  <button className={s.Login} onClick={handleLogoutClick}>
-                    Выйти
-                  </button>
+                  // <button className={s.Login} onClick={handleLogoutClick}>
+                  // Выйти
+                  <Link className={s.ToAccount} to="/shop/my/user-profile">
+                    Пользователь
+                    <br />
+                    {user.email}
+                  </Link>
                 ) : (
                   <button className={s.Login} onClick={openLoginModal}>
                     Войти
