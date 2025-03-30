@@ -1,3 +1,5 @@
+// used for dev while not any DB connected
+
 // export interface IProduct {
 //   id: string;
 //   itemCategory: string;

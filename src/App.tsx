@@ -2,19 +2,10 @@ import './App.scss';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { DefaultLayout } from './components/layouts';
 import { routes } from './constants/routes';
-
-/////////////// Read Firebase and write to store // This piece of code to be placed elsewhere to avoid cluttering the App
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { fetchProductsFromFirebase } from './store/slices/getDbProductsSlice';
-import { AppDispatch } from './store/store';
+import { useFetchProducts } from './firebase/useFetchProducts';
 
 function App() {
-  const dispatch = useDispatch<AppDispatch>();
-  useEffect(() => {
-    void dispatch(fetchProductsFromFirebase());
-  }, [dispatch]);
-  /////////////// End of work with Firebase products and store
+  useFetchProducts();
 
   /////////////// Ignore React Router v7 Future Flag Warning
   const originalWarn = console.warn;
