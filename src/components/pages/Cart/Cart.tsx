@@ -28,7 +28,9 @@ const Cart = () => {
     );
   });
 
-  const CartItemsElement = cartItems.length > 0 ? cartItems : <p className={s.CartEmptyMsg}>Корзина пуста</p>;
+  const hasItemsInCart = cartItems.length > 0;
+
+  const CartItemsElement = hasItemsInCart ? cartItems : <p className={s.CartEmptyMsg}>Корзина пуста</p>;
 
   const clearTheCart = () => dispatch(clearCart());
 
@@ -42,9 +44,11 @@ const Cart = () => {
         <div className={s.Cart}>
           {CartItemsElement}
           <div className={s.TotalPrice}>
-            {cartItems.length > 0 && <p>Количество товаров: {cart.totalQuantity}</p>}
-            {cartItems.length > 0 && <p>Общая сумма: {cart.totalPrice}</p>}
+            {hasItemsInCart && <p>Количество товаров: {cart.totalQuantity}</p>}
+            {hasItemsInCart && <p>Общая сумма: {cart.totalPrice}</p>}
           </div>
+          {hasItemsInCart && <button className={s.BuyBtn}>Оформить заказ</button>}
+          {/* Допилить наверное адрес доставки, передачу данных платежке и ваш заказ оформлен */}
         </div>
       </div>
     </main>
