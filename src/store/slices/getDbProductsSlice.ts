@@ -1,6 +1,10 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { IProduct } from '../../constants/interfaces/IProduct';
 
+// Firestore imports
+// import { collection, getDocs } from 'firebase/firestore';
+// import { db } from '../../firebase/firebaseConfig';
+
 export interface dbProductsState {
   products: IProduct[];
   loading: boolean;
@@ -15,6 +19,7 @@ const initialState: dbProductsState = {
   loaded: false,
 };
 
+// Firebase request (Also change in firebaseConfig)
 export const fetchProductsFromFirebase = createAsyncThunk<IProduct[], void, { rejectValue: string }>('dbProducts/fetchProductsFromFirebase', async (_, { rejectWithValue }) => {
   try {
     const response = await fetch('https://eco-village-d5d6d-default-rtdb.firebaseio.com/products.json');
@@ -27,6 +32,26 @@ export const fetchProductsFromFirebase = createAsyncThunk<IProduct[], void, { re
     return rejectWithValue(error instanceof Error ? error.message : 'Unknown error');
   }
 });
+
+// Firestore request (Also change in firebaseConfig)
+// export const fetchProductsFromFirebase = createAsyncThunk<IProduct[], void, { rejectValue: string }>('dbProducts/fetchProductsFromFirebase', async (_, { rejectWithValue }) => {
+//   try {
+//     const querySnapshot = await getDocs(collection(db, 'products'));
+//     const products: IProduct[] = [];
+
+//     querySnapshot.forEach(doc => {
+//       const data = doc.data();
+//       products.push({
+//         ...data,
+//         id: doc.id,
+//       } as IProduct);
+//     });
+
+//     return products;
+//   } catch (error) {
+//     return rejectWithValue(error instanceof Error ? error.message : 'Unknown error');
+//   }
+// });
 
 const dbProductsSlice = createSlice({
   name: 'dbProducts',

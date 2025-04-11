@@ -1,10 +1,10 @@
 export interface IProduct {
   id: string;
-  itemCategory: string;
-  itemImg: string;
   itemBrand: string;
-  itemName: string;
+  itemCategory: string;
   itemDescription: string;
+  itemImg: string;
+  itemName: string;
   itemPrice: number;
   itemQuantity: number;
   itemTotalPrice: number;

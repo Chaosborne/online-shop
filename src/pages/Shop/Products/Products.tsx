@@ -3,9 +3,8 @@ import s from './Products.module.scss';
 
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { RootState } from '../../../../store/store';
-import generateProductSlug from '../../../../helpers/generateProductSlug';
+import { RootState } from '../../../store/store';
+import ProductCard from '../../../components/ProductCard/ProductCard';
 
 const Products = () => {
   const mockBrands = ['apple', 'samsung', 'xiaomi', 'realme', 'oppo', 'hewlett packard']; // These are intentionally hardcoded to display select behaviour with the absent brands
@@ -45,16 +44,7 @@ const Products = () => {
     .sort((a, b) => (isAscending ? a.itemPrice - b.itemPrice : b.itemPrice - a.itemPrice));
 
   const productsList = filteredProducts.map(item => {
-    const productSlug = generateProductSlug(item.itemBrand, item.itemName);
-    return (
-      <Link to={`/shop/product/${productSlug}`} className={s.Card} key={item.id}>
-        <div>{item.itemImg}</div>
-        <div>{item.itemName}</div>
-        <div>{item.itemBrand}</div>
-        <div>{item.itemDescription}</div>
-        <div>{item.itemPrice}</div>
-      </Link>
-    );
+    return <ProductCard key={item.id} product={item} viewType={isTilesView ? 'tiles' : 'lines'} />;
   });
 
   const productsListElement = <div className={clsx(s.Products, isTilesView ? s.Tiles : s.Lines)}>{productsList}</div>;

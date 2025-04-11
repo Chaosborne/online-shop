@@ -1,10 +1,10 @@
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItemToCart, removeItemFromCart } from '../../../store/slices/cartSlice';
-import { AppDispatch, RootState } from '../../../store/store';
-import { getItemQuantity } from '../../../store/slices/cartSlice';
+import { addItemToCart, removeItemFromCart } from '../../store/slices/cartSlice';
+import { AppDispatch, RootState } from '../../store/store';
+import { getItemQuantity } from '../../store/slices/cartSlice';
 
-import s from './Product.module.scss';
+import s from './ProductPage.module.scss';
 // import { productsMockData } from '../../../constants/mocks/products'; // Пока оставляю, источник может быть не окончательный
 
 const Product = () => {

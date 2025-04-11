@@ -1,0 +1,37 @@
+@use '../../assets/scss/vars' as *;
+
+.ProductCard {
+  width: 100%;
+  background-color: #808080;
+  padding: 10px;
+  color: $text;
+}
+
+.ProductCard a {
+  color: #fff;
+
+  &:hover {
+    color: $text_hover;
+  }
+}
+
+.tiles {
+  width: 250px;
+  height: 320px;
+}
+
+.lines {
+  height: 210px;
+
+  &:not(:first-child) {
+    margin-top: 10px;
+  }
+}
+
+.FavouriteBtn {
+  border: none;
+  margin-top: 10px;
+  padding: 0.3em 0.5em 0.4em;
+  line-height: 1.1em;
+  background-color: #444444;
+}

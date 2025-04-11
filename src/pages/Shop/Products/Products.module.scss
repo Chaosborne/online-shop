@@ -1,4 +1,4 @@
-@use '../../../../assets/scss/vars' as *;
+@use '../../../assets/scss/vars' as *;
 
 .ProductsSection {
   margin-top: 60px;
@@ -21,9 +21,6 @@
   margin-top: 20px;
 }
 
-// .Filter {}
-// .FilterTitle {}
-// .FilterForm {}
 .FilterSelect {
   margin-top: 5px;
   display: flex;
@@ -43,35 +40,10 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
-
-  .Card {
-    width: 100%;
-    height: 320px;
-    background-color: #808080;
-    padding: 10px;
-  }
 }
 
 .Lines {
-  .Card {
-    width: 100%;
-    height: 150px;
-    background-color: #808080;
-    padding: 10px;
-
-    &:not(:first-child) {
-      margin-top: 10px;
-    }
-  }
-}
-
-.Tiles,
-.Lines {
-  .Card {
-    color: $text;
-  }
-
-  .Card:hover {
-    color: $text_hover;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }

@@ -1,6 +1,6 @@
 import { RouteEnum } from './route';
 import { ReactNode } from 'react';
-import { Cart, Favorites, Home, Product, Shop, UserProfile } from '../components/pages';
+import { Cart, Favorites, Home, Product, Shop, UserProfile } from '../pages';
 
 type RoutesProps = {
   path: RouteEnum | string;

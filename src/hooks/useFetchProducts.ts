@@ -1,12 +1,11 @@
 // useFetchProducts controls the launch of the fetchProductsFromFirebase
 
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { fetchProductsFromFirebase } from '../store/slices/getDbProductsSlice';
-import { AppDispatch } from '../store/store';
+import { useAppDispatch } from '../store/hooks';
 
 export const useFetchProducts = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch(); // useAppDispatch - это название нашей обертки из ../store/hooks, которое мы ей там дали
   useEffect(() => {
     void dispatch(fetchProductsFromFirebase());
   }, [dispatch]);
