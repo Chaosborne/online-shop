@@ -2,32 +2,29 @@ import { useState, useEffect } from 'react';
 import { signOut, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { FirebaseError } from 'firebase/app';
 import { auth } from '../firebase/firebaseConfig';
-
-interface User {
-  uid: string;
-  email: string;
-  displayName?: string;
-}
+import { useDispatch } from 'react-redux';
+import { setUser, clearUser } from '../store/slices/authSlice';
 
 export const useAuth = () => {
-  const [user, setUser] = useState<User | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, firebaseUser => {
       if (firebaseUser) {
-        setUser({
+        const userData = {
           uid: firebaseUser.uid,
           email: firebaseUser.email || '',
           displayName: firebaseUser.displayName || '',
-        });
+        };
+        dispatch(setUser(userData));
       } else {
-        setUser(null);
+        dispatch(clearUser());
       }
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [dispatch]);
 
   const handleLogin = async (email: string, password: string) => {
     try {
@@ -92,5 +89,5 @@ export const useAuth = () => {
     }
   };
 
-  return { user, error, handleLogin, handleRegister, handleLogout };
+  return { error, handleLogin, handleRegister, handleLogout };
 };

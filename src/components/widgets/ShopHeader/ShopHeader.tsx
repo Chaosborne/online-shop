@@ -7,7 +7,6 @@ import { setSearchQuery } from '../../../store/slices/searchSlice';
 import { ModalPortal as LoginModalPortal } from '../../modals';
 import { IProduct } from '../../../constants/interfaces/IProduct';
 import SearchSuggestions from '../SearchSuggestions/SearchSuggestions';
-import { useAuth } from '../../../hooks/useAuth';
 
 const ShopHeader = () => {
   const productsState = useSelector((state: RootState) => state.dbProducts);
@@ -21,7 +20,7 @@ const ShopHeader = () => {
 
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
-  const { user } = useAuth();
+  const user = useSelector((state: RootState) => state.auth.user);
 
   // Работа со строкой поиска
   const searchSuggestionsHandler = (e: React.FormEvent<HTMLInputElement>) => {
