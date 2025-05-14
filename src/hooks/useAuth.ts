@@ -2,25 +2,45 @@ import { useState, useEffect } from 'react';
 import { signOut, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { FirebaseError } from 'firebase/app';
 import { auth } from '../firebase/firebaseConfig';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../store/hooks';
+import { User } from 'firebase/auth';
 import { setUser, clearUser } from '../store/slices/authSlice';
+import { loadFavourites } from '../store/slices/favouritesThunk';
+import { clearFavorites } from '../store/slices/favoritesSlice';
 
 export const useAuth = () => {
   const [error, setError] = useState<string | null>(null);
-  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, firebaseUser => {
+    const handleAuthStateChange = async (firebaseUser: User | null) => {
+      setIsLoading(false);
+
       if (firebaseUser) {
         const userData = {
           uid: firebaseUser.uid,
           email: firebaseUser.email || '',
           displayName: firebaseUser.displayName || '',
         };
+
         dispatch(setUser(userData));
+
+        try {
+          const result = await dispatch(loadFavourites()).unwrap();
+          console.log('Избранное загружено:', result);
+        } catch (error) {
+          console.error('Ошибка загрузки избранного:', error);
+          setError('Не удалось загрузить избранное');
+        }
       } else {
         dispatch(clearUser());
+        dispatch(clearFavorites());
       }
+    };
+
+    const unsubscribe = onAuthStateChanged(auth, user => {
+      void handleAuthStateChange(user);
     });
 
     return () => unsubscribe();
@@ -29,9 +49,10 @@ export const useAuth = () => {
   const handleLogin = async (email: string, password: string) => {
     try {
       setError(null);
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      console.log('User logged in:', userCredential.user);
+      setIsLoading(true);
+      await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
+      setIsLoading(false);
       handleFirebaseError(error);
     }
   };
@@ -39,26 +60,27 @@ export const useAuth = () => {
   const handleRegister = async (email: string, password: string, displayName?: string) => {
     try {
       setError(null);
+      setIsLoading(true);
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       if (displayName) {
         await updateProfile(userCredential.user, { displayName });
       }
-      console.log('User registered:', userCredential.user);
     } catch (error) {
+      setIsLoading(false);
       handleFirebaseError(error);
     }
   };
 
   const handleLogout = async () => {
     try {
+      setIsLoading(true);
       await signOut(auth);
-      console.log('User logged out');
     } catch (error) {
+      setIsLoading(false);
       handleFirebaseError(error);
     }
   };
 
-  // Обработка ошибок Firebase
   const handleFirebaseError = (error: unknown) => {
     if (error instanceof FirebaseError) {
       console.error('Firebase error:', error.code, error.message);
@@ -89,5 +111,5 @@ export const useAuth = () => {
     }
   };
 
-  return { error, handleLogin, handleRegister, handleLogout };
+  return { error, isLoading, handleLogin, handleRegister, handleLogout };
 };

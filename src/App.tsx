@@ -3,9 +3,14 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { DefaultLayout } from './components/layouts';
 import { routes } from './constants/routes';
 import { useFetchProducts } from './hooks/useFetchProducts';
+import { useFetchFavourites } from './hooks/useFetchFavourites';
 
 function App() {
+  // Получаем товары
   useFetchProducts();
+
+  // получаем избранное для залогиненного пользователя
+  useFetchFavourites();
 
   /////////////// Ignore React Router v7 Future Flag Warning
   const originalWarn = console.warn;

@@ -1,7 +1,7 @@
 // Firebase (Also change in getDBProductsSlice.ts)
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import { getDatabase } from 'firebase/database'; // ⬅️ добавлено
+import { getDatabase } from 'firebase/database';
 import { firebaseApiKey } from './firebaseApiKey';
 
 const firebaseConfig = {

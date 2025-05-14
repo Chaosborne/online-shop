@@ -1,10 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { IProduct } from '../../constants/interfaces/IProduct';
 
-// Firestore imports
-// import { collection, getDocs } from 'firebase/firestore';
-// import { db } from '../../firebase/firebaseConfig';
-
 export interface dbProductsState {
   products: IProduct[];
   loading: boolean;
@@ -33,26 +29,6 @@ export const fetchProductsFromFirebase = createAsyncThunk<IProduct[], void, { re
   }
 });
 
-// Firestore request (Also change in firebaseConfig)
-// export const fetchProductsFromFirebase = createAsyncThunk<IProduct[], void, { rejectValue: string }>('dbProducts/fetchProductsFromFirebase', async (_, { rejectWithValue }) => {
-//   try {
-//     const querySnapshot = await getDocs(collection(db, 'products'));
-//     const products: IProduct[] = [];
-
-//     querySnapshot.forEach(doc => {
-//       const data = doc.data();
-//       products.push({
-//         ...data,
-//         id: doc.id,
-//       } as IProduct);
-//     });
-
-//     return products;
-//   } catch (error) {
-//     return rejectWithValue(error instanceof Error ? error.message : 'Unknown error');
-//   }
-// });
-
 const dbProductsSlice = createSlice({
   name: 'dbProducts',
   initialState,
@@ -80,5 +56,5 @@ const dbProductsSlice = createSlice({
   },
 });
 
-export const { setLoaded } = dbProductsSlice.actions; // Экспорт действия setLoaded
+export const { setLoaded } = dbProductsSlice.actions;
 export default dbProductsSlice.reducer;

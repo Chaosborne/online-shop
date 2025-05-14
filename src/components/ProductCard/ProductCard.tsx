@@ -28,7 +28,7 @@ const ProductCard = ({ product, viewType }: Props) => {
 
       <div>
         <h3>{itemName}</h3>
-        <button className={s.FavouriteBtn} onClick={() => toggle(Number(id))}>
+        <button className={s.FavouriteBtn} onClick={() => void toggle(Number(id))}>
           {isFavourite(Number(id)) ? '★' : '☆'}
         </button>
       </div>
