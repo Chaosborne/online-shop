@@ -1,7 +1,7 @@
 import styles from './Loader.module.scss';
 
-const Loader = ({ fullScreen = false }: { fullScreen?: boolean }) => (
-  <div className={`${styles.loader} ${fullScreen ? styles.fullScreen : ''}`}>
+const Loader = () => (
+  <div className={`${styles.loader}`}>
     <div className={styles.spinner}></div>
   </div>
 );

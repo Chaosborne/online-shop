@@ -4,13 +4,15 @@ import { DefaultLayout } from './components/layouts';
 import { routes } from './constants/routes';
 import { useFetchProducts } from './hooks/useFetchProducts';
 import { useFetchFavourites } from './hooks/useFetchFavourites';
+import Loader from './components/ui/Loader';
+import { useAppReady } from './hooks/useAppReady';
 
 function App() {
-  // Получаем товары
   useFetchProducts();
 
-  // получаем избранное для залогиненного пользователя
   useFetchFavourites();
+
+  const isAppReady = useAppReady();
 
   /////////////// Ignore React Router v7 Future Flag Warning
   const originalWarn = console.warn;
@@ -25,6 +27,7 @@ function App() {
   return (
     <Router>
       <DefaultLayout>
+        {!isAppReady && <Loader />}
         <Routes>
           {routes.map(({ path, element }, index) => (
             <Route key={index} path={path} element={element} />
