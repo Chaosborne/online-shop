@@ -2,16 +2,18 @@ import './App.scss';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { DefaultLayout } from './components/layouts';
 import { routes } from './constants/routes';
+import { useFetchCategories } from './hooks/usefetchCategories';
 import { useFetchProducts } from './hooks/useFetchProducts';
 import { useFetchFavourites } from './hooks/useFetchFavourites';
 import Loader from './components/ui/Loader';
 import { useAppReady } from './hooks/useAppReady';
 
 function App() {
+  useFetchCategories();
   useFetchProducts();
-
   useFetchFavourites();
 
+  // Check if all the fetches are done
   const isAppReady = useAppReady();
 
   /////////////// Ignore React Router v7 Future Flag Warning
