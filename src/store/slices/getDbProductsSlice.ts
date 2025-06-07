@@ -1,4 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../../firebase/firebaseConfig';
 import { IProduct } from '../../constants/interfaces/IProduct';
 
 export interface dbProductsState {
@@ -15,16 +17,26 @@ const initialState: dbProductsState = {
   loaded: false,
 };
 
-// Firebase request (Also change in firebaseConfig)
+// Новый запрос к Firestore
 export const fetchProductsFromFirebase = createAsyncThunk<IProduct[], void, { rejectValue: string }>('dbProducts/fetchProductsFromFirebase', async (_, { rejectWithValue }) => {
   try {
-    const response = await fetch('https://eco-village-d5d6d-default-rtdb.firebaseio.com/products.json');
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+    const productsRef = collection(db, 'products');
+    const snapshot = await getDocs(productsRef);
+
+    if (snapshot.empty) {
+      console.log('В Firestore нет товаров');
+      return [];
     }
-    const responseData = (await response.json()) as IProduct[];
-    return responseData;
+
+    const products = snapshot.docs.map(doc => ({
+      id: doc.id, // Добавляем ID документа
+      ...doc.data(),
+    })) as IProduct[];
+
+    console.log('Загружены товары из Firestore:', products);
+    return products;
   } catch (error) {
+    console.error('Ошибка загрузки товаров:', error);
     return rejectWithValue(error instanceof Error ? error.message : 'Unknown error');
   }
 });

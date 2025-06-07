@@ -1,16 +1,16 @@
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { toggleFavourite } from '../store/slices/favoritesSlice';
-import { toggleFavouriteInFirebase } from '../store/slices/favouritesThunk'; // Импортируем thunk
-
+import { toggleFavouriteInFirebase } from '../store/slices/favouritesThunk';
 export const useFavourites = () => {
   const dispatch = useAppDispatch();
   const favourites = useAppSelector(state => state.favourites.items);
-  const userId = useAppSelector(state => state.auth.user?.uid); // Добавляем userId
+  const userId = useAppSelector(state => state.auth.user?.uid);
 
   const isFavourite = (id: number) => favourites.includes(id);
 
   const toggle = async (id: number) => {
     if (!userId) {
+      alert('Пользователь не авторизован!');
       console.error('Пользователь не авторизован!');
       return;
     }

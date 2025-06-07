@@ -1,14 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../../store/store';
-import { ref, get, set, remove } from 'firebase/database';
-import { rtdb } from '../../firebase/firebaseConfig';
-
-interface FirebaseFavourites {
-  [key: string]: boolean; // Формат: "0": true, "1": false и т.д.
-}
+import { doc, setDoc, deleteDoc, collection, getDocs } from 'firebase/firestore';
+import { db } from '../../firebase/firebaseConfig';
 
 export const loadFavourites = createAsyncThunk<number[], void, { state: RootState }>('favourites/load', async (_, { getState, rejectWithValue }) => {
-  console.log('Загрузка инициирована из:', new Error().stack?.split('\n')[2]);
   const state = getState();
   const userId = state.auth.user?.uid;
 
@@ -18,21 +13,17 @@ export const loadFavourites = createAsyncThunk<number[], void, { state: RootStat
   }
 
   try {
-    const favRef = ref(rtdb, `favourites/${userId}`);
-    const snapshot = await get(favRef);
+    const itemsRef = collection(db, 'favourites', userId, 'items');
+    const snapshot = await getDocs(itemsRef);
 
-    if (!snapshot.exists()) {
+    if (snapshot.empty) {
       console.log('У пользователя нет избранных товаров');
       return [];
     }
 
-    const favouritesData = snapshot.val() as FirebaseFavourites;
-    // Преобразуем ключи в числа и фильтруем только true значения
-    const favourites = Object.entries(favouritesData)
-      .filter(([, isFavourite]) => isFavourite === true)
-      .map(([productId]) => Number(productId))
-      .filter(id => !isNaN(id)); // Фильтруем только валидные числа
+    const favourites = snapshot.docs.map(doc => Number(doc.id)).filter(id => !isNaN(id));
 
+    console.log('Загружены избранные товары:', favourites);
     return favourites;
   } catch (error) {
     console.error('Ошибка загрузки избранного:', error);
@@ -49,14 +40,14 @@ export const toggleFavouriteInFirebase = createAsyncThunk<number, { productId: n
   }
 
   try {
-    const favRef = ref(rtdb, `favourites/${userId}/${productId}`);
-    console.log('[Favourites Thunk] Отправка запроса в Firebase...');
+    const favRef = doc(db, 'favourites', userId, 'items', productId.toString());
+    console.log('Обновление избранного. Путь:', favRef.path);
 
     if (isFavourite) {
-      await set(favRef, true);
+      await setDoc(favRef, { value: true });
       console.log(`Товар ${productId} добавлен в избранное`);
     } else {
-      await remove(favRef);
+      await deleteDoc(favRef);
       console.log(`Товар ${productId} удален из избранного`);
     }
 

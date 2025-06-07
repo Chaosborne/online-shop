@@ -1,4 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../../firebase/firebaseConfig';
 import { ICategory } from '../../constants/interfaces/ICategory';
 
 export interface dbCategoriesState {
@@ -15,15 +17,22 @@ const initialState: dbCategoriesState = {
   loaded: false,
 };
 
-// Firebase request (Also change in firebaseConfig)
+// Новый запрос к Firestore
 export const fetchCategoriesFromFirebase = createAsyncThunk<ICategory[], void, { rejectValue: string }>('dbCategories/fetchCategoriesFromFirebase', async (_, { rejectWithValue }) => {
   try {
-    const response = await fetch('https://eco-village-d5d6d-default-rtdb.firebaseio.com/categories.json');
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+    const categoriesRef = collection(db, 'categories');
+    const snapshot = await getDocs(categoriesRef);
+
+    if (snapshot.empty) {
+      return [];
     }
-    const responseData = (await response.json()) as ICategory[];
-    return responseData;
+
+    const categories = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data(),
+    })) as ICategory[];
+
+    return categories;
   } catch (error) {
     return rejectWithValue(error instanceof Error ? error.message : 'Unknown error');
   }
