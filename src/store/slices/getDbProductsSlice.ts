@@ -33,7 +33,6 @@ export const fetchProductsFromFirebase = createAsyncThunk<IProduct[], void, { re
       ...doc.data(),
     })) as IProduct[];
 
-    console.log('Загружены товары из Firestore:', products);
     return products;
   } catch (error) {
     console.error('Ошибка загрузки товаров:', error);
