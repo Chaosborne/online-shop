@@ -37,3 +37,5 @@ export const rtdb = getDatabase(firebaseApp);
 
 // export const auth = getAuth(firebaseApp);
 // export const db = getFirestore(firebaseApp);
+
+// Firestore initial branch commit
