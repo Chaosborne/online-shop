@@ -7,7 +7,7 @@ import { RootState } from '../../../store/store';
 import ProductCard from '../../../components/ProductCard/ProductCard';
 
 const Products = () => {
-  const mockBrands = ['apple', 'samsung', 'xiaomi', 'realme', 'oppo', 'hewlett packard']; // These are intentionally hardcoded for using in select to display select behaviour with the absent brands
+  const mockBrands = ['apple', 'samsung', 'xiaomi', 'realme', 'oppo', 'HP']; // These are intentionally hardcoded for using in select to display select behaviour with the absent brands
 
   const productsState = useSelector((state: RootState) => state.dbProducts);
   const productsFromStore = productsState.products || [];
@@ -26,9 +26,9 @@ const Products = () => {
     const { name, checked } = e.target;
 
     if (checked) {
-      setSelectedBrands(prevSelectedBrands => [...prevSelectedBrands, name]);
+      setSelectedBrands(prevSelectedBrands => [...prevSelectedBrands, name.toLowerCase()]);
     } else {
-      setSelectedBrands(prevSelectedBrands => prevSelectedBrands.filter(brand => brand !== name));
+      setSelectedBrands(prevSelectedBrands => prevSelectedBrands.filter(brand => brand !== name.toLowerCase()));
     }
   };
 

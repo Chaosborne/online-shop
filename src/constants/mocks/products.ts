@@ -28,7 +28,7 @@
 //     id: '1',
 //     itemCategory: 'оргтехника',
 //     itemImg: 'img 2',
-//     itemBrand: 'Hewlett Packard',
+//     itemBrand: 'HP',
 //     itemName: 'LJ 1020',
 //     itemDescription: 'Описание 2',
 //     itemPrice: 200,
