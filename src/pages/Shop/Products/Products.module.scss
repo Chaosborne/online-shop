@@ -1,5 +1,9 @@
 @use '../../../assets/scss/vars' as *;
 
+.container {
+  display: flex;
+}
+
 .ProductsSection {
   margin-top: 60px;
 }
@@ -8,6 +12,7 @@
   display: flex;
   justify-content: end;
   gap: 30px;
+  margin-bottom: 20px;
 }
 
 .PriceSort,
@@ -32,7 +37,6 @@
 }
 
 .Products {
-  width: 81%;
   max-width: 1500px;
 }
 
@@ -46,4 +50,49 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.MainContent {
+  display: flex;
+}
+
+.Filter {
+  width: 250px; // Фиксированная ширина для фильтров
+  flex-shrink: 0;
+}
+
+.ProductsContainer {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+// Остальные ваши стили...
+
+.Pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 5px;
+
+  button {
+    padding: 5px 10px;
+    background: #363636;
+    cursor: pointer;
+    border: none;
+
+    &:disabled {
+      opacity: 0.5;
+      // cursor: not-allowed;
+    }
+
+    &.Active {
+      background: #004997;
+      color: white;
+    }
+
+    &:hover:not(:disabled, .Active) {
+      background: #808080;
+    }
+  }
 }
