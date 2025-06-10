@@ -1,38 +1,37 @@
 import clsx from 'clsx';
 import s from './Products.module.scss';
-
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
 import ProductCard from '../../../components/ProductCard/ProductCard';
 
 const Products = () => {
-  const mockBrands = ['apple', 'samsung', 'xiaomi', 'realme', 'oppo', 'HP']; // These are intentionally hardcoded for using in select to display select behaviour with the absent brands
-
+  const mockBrands = ['apple', 'samsung', 'xiaomi', 'realme', 'oppo', 'HP'];
   const productsState = useSelector((state: RootState) => state.dbProducts);
   const productsFromStore = productsState.products || [];
-
   const searchQuery = useSelector((state: RootState) => state.search.searchQuery);
   const searchInput = searchQuery.replace(/[^a-zA-Zа-яА-Я0-9\s]/g, '').trim();
 
   const [isTilesView, setIsTilesView] = useState(true);
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [isAscending, setIsAscending] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 4;
 
   const toggleProductsView = () => setIsTilesView(!isTilesView);
   const togglePriceSort = () => setIsAscending(!isAscending);
 
   const handleBrandCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
-
     if (checked) {
-      setSelectedBrands(prevSelectedBrands => [...prevSelectedBrands, name.toLowerCase()]);
+      setSelectedBrands(prev => [...prev, name.toLowerCase()]);
     } else {
-      setSelectedBrands(prevSelectedBrands => prevSelectedBrands.filter(brand => brand !== name.toLowerCase()));
+      setSelectedBrands(prev => prev.filter(brand => brand !== name.toLowerCase()));
     }
+    setCurrentPage(1); // Сброс на первую страницу при изменении фильтров
   };
 
-  // Filter products under searchInput condition
+  // Фильтрация и сортировка товаров
   const filteredProducts = productsFromStore
     .filter(product => {
       if (searchInput) {
@@ -43,11 +42,35 @@ const Products = () => {
     .filter(product => (selectedBrands.length > 0 ? selectedBrands.includes(product.itemBrand.toLowerCase()) : true))
     .sort((a, b) => (isAscending ? a.itemPrice - b.itemPrice : b.itemPrice - a.itemPrice));
 
-  const productsList = filteredProducts.map(item => {
-    return <ProductCard key={item.id} product={item} viewType={isTilesView ? 'tiles' : 'lines'} />;
-  });
+  // Пагинация
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
+  const productsList = currentProducts.map(item => <ProductCard key={item.id} product={item} viewType={isTilesView ? 'tiles' : 'lines'} />);
 
   const productsListElement = <div className={clsx(s.Products, isTilesView ? s.Tiles : s.Lines)}>{productsList}</div>;
+
+  const paginationElement = (
+    <div className={s.Pagination}>
+      <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>
+        Previous
+      </button>
+
+      {Array.from({ length: totalPages }, (_, i) => i + 1).map(number => (
+        <button key={number} onClick={() => paginate(number)} className={currentPage === number ? s.Active : ''}>
+          {number}
+        </button>
+      ))}
+
+      <button onClick={() => paginate(currentPage + 1)} disabled={currentPage === totalPages}>
+        Next
+      </button>
+    </div>
+  );
 
   return (
     <section className={s.ProductsSection}>
@@ -60,8 +83,9 @@ const Products = () => {
             Toggle list/tile
           </div>
         </div>
-        <aside className={s.FilterAndProducts}>
-          <div className={s.Filter}>
+
+        <div className={s.MainContent}>
+          <aside className={s.Filter}>
             <div className={s.FilterTitle}>Filter</div>
             <form className={s.FilterForm} action="">
               {mockBrands.map(brand => (
@@ -71,9 +95,13 @@ const Products = () => {
                 </div>
               ))}
             </form>
+          </aside>
+
+          <div className={s.ProductsContainer}>
+            {productsListElement}
+            {totalPages > 1 && paginationElement}
           </div>
-          {productsListElement}
-        </aside>
+        </div>
       </div>
     </section>
   );
