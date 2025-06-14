@@ -15,6 +15,25 @@
   justify-content: space-between;
 }
 
+.Nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.NavList {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.HeaderFunctional {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+
 .Search {
   max-width: 500px;
   position: relative;
@@ -38,29 +57,7 @@
   width: 56px;
   background-color: #46a358;
 }
-.Nav {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
-// .ToAccount {
-//   text-align: right;
-// }
-
-.NavList {
-  display: flex;
-  align-items: center;
-  gap: 50px;
-}
-
-.HeaderFunctional {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 30px;
-}
-// .Favourites {}
 .Cart {
   position: relative;
 

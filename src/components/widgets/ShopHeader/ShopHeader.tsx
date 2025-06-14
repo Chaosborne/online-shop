@@ -60,9 +60,7 @@ const ShopHeader = () => {
                 <Link to="/shop">Home</Link>
               </li>
               <li>
-                <Link className={s.Favourites} to="shop/my/favorites">
-                  Favourites
-                </Link>
+                <Link to="shop/my/favorites">Favourites</Link>
               </li>
             </ul>
           </nav>
@@ -89,15 +87,13 @@ const ShopHeader = () => {
             </Link>
 
             {user ? (
-              <Link className={s.ToAccount} to="/shop/my/user-profile">
+              <Link to="/shop/my/user-profile">
                 Пользователь
                 <br />
                 {user.email}
               </Link>
             ) : (
-              <button className={s.Login} onClick={openLoginModal}>
-                Login
-              </button>
+              <button onClick={openLoginModal}>Login</button>
             )}
           </span>
         </div>
