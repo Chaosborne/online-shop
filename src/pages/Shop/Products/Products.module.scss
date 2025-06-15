@@ -1,5 +1,3 @@
-@use '../../../assets/scss/vars' as *;
-
 .container {
   display: flex;
 }
@@ -57,7 +55,7 @@
 }
 
 .Filter {
-  width: 250px; // Фиксированная ширина для фильтров
+  width: 250px;
   flex-shrink: 0;
 }
 
@@ -66,8 +64,6 @@
   display: flex;
   flex-direction: column;
 }
-
-// Остальные ваши стили...
 
 .Pagination {
   display: flex;

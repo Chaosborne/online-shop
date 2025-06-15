@@ -1,23 +1,27 @@
-@use '../../assets/scss/vars' as *;
+@use '../../assets/scss/vars' as vars;
 
 .ProductCard {
   width: 100%;
-  background-color: #808080;
-  padding: 10px;
-  color: $text;
+  color: vars.$text;
 }
 
-.ProductCard a {
-  color: #fff;
+.ProductCard {
+  a {
+    color: vars.$text;
 
-  &:hover {
-    color: $text_hover;
+    &:hover {
+      color: vars.$text_hover;
+    }
+  }
+
+  img {
+    margin-bottom: 15px;
   }
 }
 
 .tiles {
   width: 250px;
-  height: 320px;
+  height: 420px;
 }
 
 .lines {
@@ -28,10 +32,14 @@
   }
 }
 
+.PriceFavourite {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .FavouriteBtn {
-  border: none;
-  margin-top: 10px;
-  padding: 0.3em 0.5em 0.4em;
-  line-height: 1.1em;
-  background-color: #444444;
+  width: 20px;
+  height: auto;
+  font-size: 20px;
 }

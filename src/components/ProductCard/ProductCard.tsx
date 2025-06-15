@@ -12,24 +12,22 @@ interface Props {
 }
 
 const ProductCard = ({ product, viewType }: Props) => {
-  const { id, itemImg, itemName, itemBrand, itemDescription, itemPrice } = product;
+  const { id, images, itemName, itemBrand, itemDescription, itemPrice } = product;
   const { isFavourite, toggle } = useFavourites();
   const productSlug = generateProductSlug(itemBrand, itemName);
 
   return (
     <div className={clsx(s.ProductCard, s[viewType])}>
-      <div>{itemImg}</div>
-      <Link to={`/shop/product/${productSlug}`} key={id}>
-        <div>{itemName}</div>
-      </Link>
-      <div>{itemBrand}</div>
-      <div>{itemDescription}</div>
-      <div>{itemPrice}</div>
+      <img className={s.CardImg} src={`/public/productsImages/${images[0]}`} alt={itemName} />
 
-      <div>
-        <h3>{itemName}</h3>
+      <Link to={`/shop/product/${productSlug}`} key={id}>
+        {itemDescription} {itemBrand} {itemName}
+      </Link>
+
+      <div className={s.PriceFavourite}>
+        <span>{`${itemPrice} ₽`}</span>
         <button className={s.FavouriteBtn} onClick={() => void toggle(Number(id))}>
-          {isFavourite(Number(id)) ? '★' : '☆'}
+          {isFavourite(Number(id)) ? '♥' : '♡'}
         </button>
       </div>
     </div>
