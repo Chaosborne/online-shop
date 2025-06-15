@@ -1,6 +1,6 @@
 import s from './ShopHeader.module.scss';
 import { useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
 import { setSearchQuery } from '../../../store/slices/searchSlice';
@@ -57,10 +57,15 @@ const ShopHeader = () => {
           <nav className={s.Nav}>
             <ul className={s.NavList}>
               <li>
-                <Link to="/shop">Home</Link>
+                <NavLink className={({ isActive }) => (isActive ? s.ActiveLink : s.Link)} end to="shop">
+                  {/* end - для проверки точного совпадения адреса. Иначе shop срабатывает и при активной shop/my/favorites */}
+                  Home
+                </NavLink>
               </li>
               <li>
-                <Link to="shop/my/favorites">Favourites</Link>
+                <NavLink className={({ isActive }) => (isActive ? s.ActiveLink : s.Link)} to="shop/my/favorites">
+                  Favourites
+                </NavLink>
               </li>
             </ul>
           </nav>
@@ -97,6 +102,7 @@ const ShopHeader = () => {
             )}
           </span>
         </div>
+        <hr className={s.HeaderHr} />
       </div>
     </header>
   );
