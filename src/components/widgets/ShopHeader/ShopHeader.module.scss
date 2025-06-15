@@ -1,23 +1,72 @@
 .ShopHeader {
-  margin-top: 20px;
-  position: relative;
+  margin-bottom: 1px;
+
+  a {
+    color: rgb(61, 61, 61);
+    font-family: Cera Pro;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: left;
+  }
 }
 .ShopHeaderInner {
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }
-// .Logo {} // Left for further design layouts
+
+.Nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.NavList {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+
+  li a {
+    position: relative;
+  }
+
+  li a::after {
+    content: '';
+    position: absolute;
+    top: 45px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #46a358;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  li a.ActiveLink::after {
+    opacity: 1;
+    transition: opacity 0.3s;
+  }
+}
+
+.HeaderFunctional {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+
 .Search {
   max-width: 500px;
   position: relative;
 }
 .SearchInput {
   height: 40px;
-  width: 500px;
+  width: 100px;
   border: 1px solid;
   border-radius: 5px;
+  border-color: rgba($color: #46a358, $alpha: 0.5);
   padding: 0 10px;
+  width: 500px;
 }
 .SearchBtn {
   position: absolute;
@@ -28,44 +77,40 @@
   align-items: center;
   justify-content: center;
   width: 56px;
-}
-// .AppNav {}
-
-.ToAccount {
-text-align: right;
+  background-color: #46a358;
+  border-radius: 3px;
 }
 
-.AppMenu {
+.Cart {
+  position: relative;
+
+  img {
+    width: 28px;
+    height: 28px;
+  }
+}
+.CartCount {
+  width: 23px;
+  height: 23px;
   display: flex;
   align-items: center;
-  gap: 30px;
-
-  :nth-child(2) {
-    font-weight: 500;
-    color: #757cff;
-    cursor: pointer;
-
-    &:hover {
-      color: #535bf2;
-    }
-  }
-
-  button {
-    position: relative;
-    border: none;
-  }
-  .clearBtn::before {
-    content: '';
-    position: absolute;
-    top: -5px;
-    left: -5px;
-    right: -5px;
-    bottom: -5px;
-    border-radius: 10px;
-    background: repeating-linear-gradient(45deg, rgb(187, 168, 0), rgb(187, 168, 0) 10px, transparent 10px, transparent 20px);
-    z-index: -1;
-  }
+  justify-content: center;
+  position: absolute;
+  top: -5px;
+  left: 15px;
+  color: #fff;
+  background-color: #46a358;
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 100px;
+  font-family: Cera Pro;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 13px;
 }
 
-// .Favourites {}
-// .Cart {}
+.HeaderHr {
+  width: 100%;
+  height: 1px;
+  background-color: rgba($color: #46a358, $alpha: 0.2);
+  margin-top: 18px;
+}
