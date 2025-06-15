@@ -1,10 +1,10 @@
-import Categories from './Categories/Categories';
+// import Categories from './Categories/Categories';
 import Products from './Products/Products';
 
 const Shop = () => {
   return (
     <main>
-      <Categories />
+      {/* <Categories /> This feature will be implemented later */}
       <Products />
     </main>
   );

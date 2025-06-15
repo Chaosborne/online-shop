@@ -52,7 +52,7 @@ const ShopHeader = () => {
       <div className="container">
         <div className={s.ShopHeaderInner}>
           {/* <Link to="/">На стартовую</Link> */}
-          <img src="../../../src/assets/img/shop-logo.svg" alt="Greenshop" />
+          <img className={s.HeaderLogo} src="../../../src/assets/img/shop-logo.webp" alt="Greenshop" />
 
           <nav className={s.Nav}>
             <ul className={s.NavList}>
