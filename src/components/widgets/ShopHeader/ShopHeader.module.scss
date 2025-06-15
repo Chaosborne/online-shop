@@ -90,10 +90,15 @@
   }
 }
 .CartCount {
+  width: 23px;
+  height: 23px;
+  // text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   top: -5px;
   left: 15px;
-  padding: 3px 6px;
   color: #fff;
   background-color: #46a358;
   border: 2px solid rgb(255, 255, 255);
