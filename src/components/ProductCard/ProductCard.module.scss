@@ -19,9 +19,15 @@
   }
 }
 
+.CardInfo {
+  display: flex;
+  flex-direction: column;
+  height: 97px;
+  justify-content: space-between;
+}
+
 .tiles {
-  width: 250px;
-  height: 420px;
+  width: 230px;
 }
 
 .lines {
@@ -32,10 +38,14 @@
   }
 }
 
-.Price {
+.PriceFavourites {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+}
+
+.Price {
+  color: vars.$accent;
+  font-weight: 700;
 }
 
 .FavouriteBtn {

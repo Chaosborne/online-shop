@@ -13,23 +13,26 @@ interface Props {
 
 const ProductCard = ({ product, viewType }: Props) => {
   const { id, images, itemName, itemBrand, itemDescription, itemPrice } = product;
+
   const { isFavourite, toggle } = useFavourites();
   const productSlug = generateProductSlug(itemBrand, itemName);
 
   return (
     <div className={clsx(s.ProductCard, s[viewType])}>
-      <img className={s.CardImg} src={`/public/productsImages/${images[0]}`} alt={itemName} />
+      <img className={s.CardImg} src={`/productsImages/${images[0]}`} alt={itemName} />
 
-      <Link to={`/shop/product/${productSlug}`} key={id}>
-        {itemDescription} {itemBrand} {itemName}
-      </Link>
+      <div className={s.CardInfo}>
+        <Link to={`/shop/product/${productSlug}`} key={id}>
+          {itemDescription} {itemBrand} {itemName}
+        </Link>
 
-      <div className={s.Price}>
-        <span>{`${itemPrice} ₽`}</span>
+        <div className={s.PriceFavourites}>
+          <span className={s.Price}>{`${itemPrice.toLocaleString('ru-RU')} ₽`}</span>
+          <button className={s.FavouriteBtn} onClick={() => void toggle(Number(id))}>
+            {isFavourite(Number(id)) ? '♥' : '♡'}
+          </button>
+        </div>
       </div>
-      <button className={s.FavouriteBtn} onClick={() => void toggle(Number(id))}>
-        {isFavourite(Number(id)) ? '♥' : '♡'}
-      </button>
     </div>
   );
 };
