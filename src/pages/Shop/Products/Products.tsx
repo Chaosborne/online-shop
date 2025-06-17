@@ -57,7 +57,7 @@ const Products = () => {
   const paginationElement = (
     <div className={s.Pagination}>
       <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>
-        Previous
+        {'<'}
       </button>
 
       {Array.from({ length: totalPages }, (_, i) => i + 1).map(number => (
@@ -67,7 +67,7 @@ const Products = () => {
       ))}
 
       <button onClick={() => paginate(currentPage + 1)} disabled={currentPage === totalPages}>
-        Next
+        {'>'}
       </button>
     </div>
   );
