@@ -56,6 +56,7 @@ const Products = () => {
 
   const paginationElement = (
     <div className={s.Pagination}>
+      <button onClick={() => paginate(1)}>{'<<'}</button>
       <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>
         {'<'}
       </button>
@@ -69,6 +70,7 @@ const Products = () => {
       <button onClick={() => paginate(currentPage + 1)} disabled={currentPage === totalPages}>
         {'>'}
       </button>
+      <button onClick={() => paginate(totalPages)}>{'>>'}</button>
     </div>
   );
 
