@@ -57,7 +57,7 @@ const Products = () => {
   const paginationElement = (
     <div className={s.Pagination}>
       <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>
-        Previous
+        {'<'}
       </button>
 
       {Array.from({ length: totalPages }, (_, i) => i + 1).map(number => (
@@ -67,7 +67,7 @@ const Products = () => {
       ))}
 
       <button onClick={() => paginate(currentPage + 1)} disabled={currentPage === totalPages}>
-        Next
+        {'>'}
       </button>
     </div>
   );
@@ -86,7 +86,7 @@ const Products = () => {
 
         <div className={s.MainContent}>
           <aside className={s.Filter}>
-            <div className={s.FilterTitle}>Filter</div>
+            <div className={s.FilterTitle}>Brands</div>
             <form className={s.FilterForm} action="">
               {mockBrands.map(brand => (
                 <div className={s.FilterSelect} key={brand}>

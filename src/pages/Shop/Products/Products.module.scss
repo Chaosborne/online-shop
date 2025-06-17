@@ -1,4 +1,4 @@
-@use '../../../assets/scss/vars' as *;
+@use '../../../assets/scss/vars' as vars;
 
 .container {
   display: flex;
@@ -12,7 +12,7 @@
   display: flex;
   justify-content: end;
   gap: 30px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .PriceSort,
@@ -43,7 +43,7 @@
 .Tiles {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  gap: 40px;
 }
 
 .Lines {
@@ -57,7 +57,7 @@
 }
 
 .Filter {
-  width: 250px; // Фиксированная ширина для фильтров
+  width: 250px;
   flex-shrink: 0;
 }
 
@@ -67,32 +67,31 @@
   flex-direction: column;
 }
 
-// Остальные ваши стили...
-
 .Pagination {
   display: flex;
-  justify-content: center;
-  margin-top: 20px;
+  justify-content: end;
+  margin-top: 80px;
   gap: 5px;
 
   button {
-    padding: 5px 10px;
-    background: #363636;
     cursor: pointer;
-    border: none;
+    border: 1px solid rgb(229, 229, 229);
+    border-radius: 4px;
+    width: 35px;
+    height: 35px;
 
     &:disabled {
-      opacity: 0.5;
-      // cursor: not-allowed;
+      color: rgb(229, 229, 229);
+      cursor: default;
     }
 
     &.Active {
-      background: #004997;
+      background: vars.$accent;
       color: white;
     }
 
     &:hover:not(:disabled, .Active) {
-      background: #808080;
+      background: #cccccc;
     }
   }
 }
