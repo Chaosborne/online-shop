@@ -43,7 +43,7 @@
 .Tiles {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 40px;
+  gap: 11px;
 }
 
 .Lines {
@@ -57,8 +57,18 @@
 }
 
 .Filter {
-  width: 250px;
+  width: 200px;
+  margin-right: 19px;
   flex-shrink: 0;
+  background-color: #fff;
+  padding: 25px;
+  box-shadow: 0 0 5px 1px #00000013;
+  border-radius: 5px;
+  height: 363px;
+
+  h5 {
+    font-weight: 500;
+  }
 }
 
 .ProductsContainer {

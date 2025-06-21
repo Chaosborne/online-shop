@@ -88,7 +88,7 @@ const Products = () => {
 
         <div className={s.MainContent}>
           <aside className={s.Filter}>
-            <div className={s.FilterTitle}>Brands</div>
+            <h5 className={s.FilterTitle}>Brands</h5>
             <form className={s.FilterForm} action="">
               {mockBrands.map(brand => (
                 <div className={s.FilterSelect} key={brand}>
