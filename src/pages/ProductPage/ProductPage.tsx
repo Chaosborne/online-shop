@@ -8,7 +8,7 @@ import s from './ProductPage.module.scss';
 // import { productsMockData } from '../../../constants/mocks/products'; // Пока оставляю, источник может быть не окончательный
 
 const Product = () => {
-  // Get products from store (previously got from Firebase)
+  // Get products from store (previously got from Firestore)
   const productsState = useSelector((state: RootState) => state.dbProducts);
   const productsFromStore = productsState.products || [];
 
@@ -52,7 +52,7 @@ const Product = () => {
     <main className={s.Card}>
       <div className="container">
         <h1 className={s.Title}>{`${product.itemBrand} ${product.itemName}`}</h1>
-        <img src={product.itemImg} alt={product.itemName} />
+        <img src={`/productsImages/${product.images[0]}`} alt={product.itemName} />
         <p>{product.itemDescription}</p>
         <p>Цена: ${product.itemPrice}</p>
         <button onClick={addToCartHandler}>Добавить в корзину</button>
