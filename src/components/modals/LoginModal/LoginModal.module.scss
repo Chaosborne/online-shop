@@ -1,3 +1,5 @@
+@use '../../../assets/scss/vars.scss' as vars;
+
 .Overlay {
   position: absolute;
   text-align: center;
@@ -9,9 +11,12 @@
   backdrop-filter: blur(10px);
 }
 .Content {
-  width: 350px;
+  color: rgb(61, 61, 61);
+  font-size: 20px;
+  font-weight: 500;
+  width: 500px;
   border-radius: 8px;
-  background-color: rgb(99, 99, 99);
+  background-color: #fff;
   padding: 100px 30px;
   position: absolute;
   left: 50%;
@@ -32,6 +37,15 @@
   margin-bottom: 20px;
   font-size: 22px;
 }
+.EnterBtn {
+  width: 300px;
+  height: 45px;
+  border-radius: 5px;
+  background: vars.$accent;
+  color: rgb(255, 255, 255);
+  font-size: 16px;
+  font-weight: 700;
+}
 .CloseBtn {
   cursor: pointer;
   position: absolute;
@@ -40,31 +54,51 @@
   padding: 30px;
 
   svg {
-    fill: grey;
+    fill: white;
   }
 }
 .CloseBtn:hover {
   svg {
-    fill: white;
+    fill: vars.$accent;
   }
 }
 
 .LoginForm {
+  align-items: center;
   input {
     margin-bottom: 10px;
+    border-radius: 5px;
+    width: 300px;
+    height: 40px;
+    border: 1px solid rgb(234, 234, 234);
   }
   input::placeholder {
-    color: #fff;
+    color: rgb(165, 165, 165);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    text-align: left;
+    transform: translateY(-3px);
   }
 }
 .IfRegistered {
   margin-top: 30px;
 }
 .RegisterBtn {
-  margin-top: 30px;
+  margin-top: 25px;
+  width: 300px;
+  height: 45px;
+  border-radius: 5px;
+  border: 1px solid rgb(151, 151, 151);
+  font-size: 16px;
+  font-weight: 700;
+
+  &:hover  {
+    background-color: rgb(151, 151, 151);
+  }
 }
 
 .Error {
-  color: yellow;
+  color: rgb(0, 0, 0);
   margin-bottom: 10px;
 }

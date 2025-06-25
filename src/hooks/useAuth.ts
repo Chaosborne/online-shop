@@ -28,10 +28,10 @@ export const useAuth = () => {
 
         try {
           const result = await dispatch(loadFavourites()).unwrap();
-          console.log('Избранное загружено:', result);
+          console.log('Favorites loaded:', result);
         } catch (error) {
-          console.error('Ошибка загрузки избранного:', error);
-          setError('Не удалось загрузить избранное');
+          console.error('Error loading favorites:', error);
+          setError('Failed to load favorites');
         }
       } else {
         dispatch(clearUser());
@@ -87,27 +87,27 @@ export const useAuth = () => {
 
       switch (error.code) {
         case 'auth/invalid-email':
-          setError('Неверный формат email.');
+          setError('Invalid email format');
           break;
         case 'auth/email-already-in-use':
-          setError('Этот email уже зарегистрирован.');
+          setError('This email is already registered');
           break;
         case 'auth/weak-password':
-          setError('Слишком простой пароль.');
+          setError('Password is too weak');
           break;
         case 'auth/invalid-credential':
-          setError('Неправильный email или пароль.');
+          setError('Incorrect email or password');
           break;
         case 'auth/too-many-requests':
-          setError('Слишком много неудачных попыток входа. Попробуйте позже.');
+          setError('Too many failed login attempts. Try again later');
           break;
         default:
-          setError('Ошибка входа. Попробуйте снова.');
+          setError('Login error. Try again');
           break;
       }
     } else {
       console.error('Unexpected error:', error);
-      setError('Произошла непредвиденная ошибка. Попробуйте снова.');
+      setError('An unexpected error occurred. Please try again');
     }
   };
 

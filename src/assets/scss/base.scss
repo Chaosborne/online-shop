@@ -43,7 +43,9 @@
 /* Base styles  */
 
 :root {
-  font-family: Cera Pro, sans-serif;
+  font-family:
+    Cera Pro,
+    sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -54,12 +56,12 @@
 }
 
 body {
-  padding: 26px 25px 0;
+  padding: 26px 25px 1000px;
   color: vars.$text;
+  background-color: #f8f8f8;
 }
 
 a {
-  // font-weight: 500;
   text-decoration: inherit;
   display: inline-block;
 }
@@ -81,9 +83,6 @@ input {
 
 button {
   border: none;
-}
-button:hover {
-  border-color: #646cff;
 }
 button:focus,
 button:focus-visible {

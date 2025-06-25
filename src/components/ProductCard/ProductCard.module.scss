@@ -2,6 +2,9 @@
 
 .ProductCard {
   width: 100%;
+  box-shadow: 0 0 3px 1px #42424214;
+  padding: 25px;
+  background-color: #fff;
 }
 
 .ProductCard {
@@ -11,10 +14,6 @@
     &:hover {
       color: vars.$text_hover;
     }
-  }
-
-  img {
-    margin-bottom: 15px;
   }
 }
 
@@ -26,14 +25,33 @@
 }
 
 .tiles {
-  width: 230px;
+  width: 250px;
+
+  img {
+    margin-bottom: 15px;
+  }
 }
 
 .lines {
   height: 210px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  // align-items: start;
 
   &:not(:first-child) {
     margin-top: 10px;
+  }
+
+  img {
+    margin-bottom: 0;
+    width: 160px;
+  }
+
+  .CardInfo {
+    display: flex;
+    flex-direction: row;
+    height: 97px;
+    justify-content: space-between;
   }
 }
 

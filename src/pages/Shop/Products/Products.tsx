@@ -56,7 +56,9 @@ const Products = () => {
 
   const paginationElement = (
     <div className={s.Pagination}>
-      <button onClick={() => paginate(1)}>{'<<'}</button>
+      <button onClick={() => paginate(1)} disabled={currentPage === 1}>
+        {'<<'}
+      </button>
       <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>
         {'<'}
       </button>
@@ -70,7 +72,9 @@ const Products = () => {
       <button onClick={() => paginate(currentPage + 1)} disabled={currentPage === totalPages}>
         {'>'}
       </button>
-      <button onClick={() => paginate(totalPages)}>{'>>'}</button>
+      <button onClick={() => paginate(totalPages)} disabled={currentPage === totalPages}>
+        {'>>'}
+      </button>
     </div>
   );
 
@@ -88,7 +92,7 @@ const Products = () => {
 
         <div className={s.MainContent}>
           <aside className={s.Filter}>
-            <div className={s.FilterTitle}>Brands</div>
+            <h5 className={s.FilterTitle}>Brands</h5>
             <form className={s.FilterForm} action="">
               {mockBrands.map(brand => (
                 <div className={s.FilterSelect} key={brand}>

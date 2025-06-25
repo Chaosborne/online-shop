@@ -44,23 +44,24 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
     <>
       <div className={s.Overlay}>
         <div className={clsx(s.Content, { [s.Show]: isVisible })}>
-          <h3>Войдите</h3>
+          <h3>Login</h3>
           <form className={s.LoginForm}>
             <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
-            <input type="password" placeholder="Пароль" value={password} onChange={e => setPassword(e.target.value)} />
+            <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
             {error && <p className={s.Error}>{error}</p>}
             <button
+              className={s.EnterBtn}
               onClick={e => {
                 e.preventDefault();
                 void handleLogin(email, password);
               }}
             >
-              Войти
+              Login
             </button>
           </form>
-          <div className={s.IfRegistered}>или</div>
+          <div className={s.IfRegistered}>or</div>
           <button className={s.RegisterBtn} onClick={handleSwitchToRegister}>
-            Зарегистрируйтесь
+            Register
           </button>
         </div>
       </div>
@@ -74,19 +75,20 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
     <>
       <div className={s.Overlay}>
         <div className={clsx(s.Content, { [s.Show]: isVisible })}>
-          <h3>Зарегистрируйтесь</h3>
+          <h3>Register</h3>
           <form className={s.LoginForm}>
-            <input type="text" placeholder="Ваше имя" value={name} onChange={e => setName(e.target.value)} />
+            <input type="text" placeholder="Your name" value={name} onChange={e => setName(e.target.value)} />
             <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
-            <input type="password" placeholder="Пароль" value={password} onChange={e => setPassword(e.target.value)} />
+            <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
             {error && <p className={s.Error}>{error}</p>}
             <button
+              className={s.EnterBtn}
               onClick={e => {
                 e.preventDefault();
                 void handleRegister(email, password);
               }}
             >
-              Зарегистрироваться
+              Register
             </button>
           </form>
         </div>
