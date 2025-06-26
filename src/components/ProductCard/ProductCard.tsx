@@ -4,6 +4,9 @@ import { IProduct } from '../../constants/interfaces/IProduct';
 import { useFavourites } from '../../hooks/useFavorites';
 import generateProductSlug from '../../helpers/generateProductSlug';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addItemToCart } from '../../store/slices/cartSlice';
+import { AppDispatch } from '../../store/store';
 
 // Extend IProduct only for this component
 interface Props {
@@ -17,6 +20,12 @@ const ProductCard = ({ product, viewType }: Props) => {
   const { isFavourite, toggle } = useFavourites();
   const productSlug = generateProductSlug(itemBrand, itemName);
 
+  const dispatch = useDispatch<AppDispatch>();
+
+  const addToCartHandler = () => {
+    dispatch(addItemToCart(product));
+  };
+
   return (
     <div className={clsx(s.ProductCard, s[viewType])}>
       <img className={s.CardImg} src={`/productsImages/${images[0]}`} alt={itemName} />
@@ -28,9 +37,14 @@ const ProductCard = ({ product, viewType }: Props) => {
 
         <div className={s.PriceFavourites}>
           <span className={s.Price}>{`${itemPrice.toLocaleString('ru-RU')} ₽`}</span>
-          <button className={s.FavouriteBtn} onClick={() => void toggle(Number(id))}>
-            {isFavourite(Number(id)) ? '♥' : '♡'}
-          </button>
+          <div className={s.ProductcardBtns}>
+            <button className={s.FavouriteBtn} onClick={() => void toggle(Number(id))}>
+              {isFavourite(Number(id)) ? '♥' : '♡'}
+            </button>
+            <button className={s.AddtoCartBtn} onClick={addToCartHandler}>
+              🛒
+            </button>
+          </div>
         </div>
       </div>
     </div>

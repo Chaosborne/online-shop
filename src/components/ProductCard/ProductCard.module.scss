@@ -36,7 +36,6 @@
   height: 210px;
   display: grid;
   grid-template-columns: 1fr 2fr;
-  // align-items: start;
 
   &:not(:first-child) {
     margin-top: 10px;
@@ -53,6 +52,10 @@
     height: 97px;
     justify-content: space-between;
   }
+
+  .ProductcardBtns {
+    justify-content: end;
+  }
 }
 
 .PriceFavourites {
@@ -65,8 +68,16 @@
   font-weight: 700;
 }
 
+.ProductcardBtns {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .FavouriteBtn {
-  width: 20px;
-  height: auto;
   font-size: 20px;
+}
+
+.AddtoCartBtn {
+  font-size: 15px;
 }
