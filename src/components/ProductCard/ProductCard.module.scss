@@ -5,9 +5,7 @@
   box-shadow: 0 0 3px 1px #42424214;
   padding: 25px;
   background-color: #fff;
-}
 
-.ProductCard {
   a {
     color: vars.$text;
 
@@ -20,15 +18,23 @@
 .CardInfo {
   display: flex;
   flex-direction: column;
-  height: 97px;
   justify-content: space-between;
 }
 
 .tiles {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
   width: 250px;
+  padding-bottom: 40px;
 
-  img {
-    margin-bottom: 15px;
+  a {
+    margin-top: 15px;
+  }
+
+  .Price {
+    margin-top: 15px;
   }
 }
 
@@ -42,19 +48,13 @@
   }
 
   img {
-    margin-bottom: 0;
     width: 160px;
   }
 
   .CardInfo {
     display: flex;
     flex-direction: row;
-    height: 97px;
     justify-content: space-between;
-  }
-
-  .ProductcardBtns {
-    justify-content: end;
   }
 }
 
@@ -65,13 +65,17 @@
 
 .Price {
   color: vars.$accent;
+  font-size: 22px;
   font-weight: 700;
+  text-align: right;
 }
 
 .ProductcardBtns {
   display: flex;
   align-items: center;
+  justify-content: end;
   gap: 10px;
+  margin-top: 10px;
 }
 
 .FavouriteBtn {
@@ -79,5 +83,26 @@
 }
 
 .AddtoCartBtn {
-  font-size: 15px;
+  border: 1px solid vars.$accent;
+  border-radius: 5px;
+  padding: 5px 0;
+  width: 60px;
+  background-color: vars.$accent;
+  fill: #fff;
+  fill-opacity: 1;
+  fill-rule: nonzero;
+}
+.AddtoCartBtnIcon {
+  max-width: 20px;
+  width: 20px;
+  height: auto;
+  transform: translateY(2px);
+}
+.Added {
+  background-color: #fff;
+}
+.AddedIcon {
+  fill: vars.$accent;
+  fill-opacity: 1;
+  fill-rule: nonzero;
 }

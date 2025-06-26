@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addItemToCart } from '../../store/slices/cartSlice';
 import { AppDispatch } from '../../store/store';
+import { useState } from 'react';
+import { CartIcon } from '../../assets/img/CartIcon';
 
 // Extend IProduct only for this component
 interface Props {
@@ -22,9 +24,15 @@ const ProductCard = ({ product, viewType }: Props) => {
 
   const dispatch = useDispatch<AppDispatch>();
 
+  const [isAdded, setIsAdded] = useState(false);
+
   const addToCartHandler = () => {
     dispatch(addItemToCart(product));
+    setIsAdded(true);
   };
+
+  const Added = isAdded ? 'Added' : '';
+  const AddedIcon = isAdded ? 'AddedIcon' : '';
 
   return (
     <div className={clsx(s.ProductCard, s[viewType])}>
@@ -41,8 +49,8 @@ const ProductCard = ({ product, viewType }: Props) => {
             <button className={s.FavouriteBtn} onClick={() => void toggle(Number(id))}>
               {isFavourite(Number(id)) ? '♥' : '♡'}
             </button>
-            <button className={s.AddtoCartBtn} onClick={addToCartHandler}>
-              🛒
+            <button className={clsx(s.AddtoCartBtn, s[Added])} onClick={addToCartHandler}>
+              <CartIcon className={clsx(s.AddtoCartBtnIcon, s[AddedIcon])} />
             </button>
           </div>
         </div>
