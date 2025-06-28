@@ -29,9 +29,7 @@ const ProductCard = ({ product, viewType }: Props) => {
     dispatch(addItemToCart(product));
   };
 
-  // Track the state of the product in the cart so that it does not fly off during re-rendering
-  const cartItems = useSelector((state: RootState) => state.cart.items);
-  const cartContainsProduct = cartItems.some(p => p.id === id);
+  const isProductIncart = useSelector((state: RootState) => state.cart.items.some(item => item.id === id));
 
   return (
     <div className={clsx(s.ProductCard, s[viewType])}>
@@ -48,8 +46,8 @@ const ProductCard = ({ product, viewType }: Props) => {
             <button className={s.FavouriteBtn} onClick={() => void toggle(Number(id))}>
               {isFavourite(Number(id)) ? '♥' : '♡'}
             </button>
-            <button className={clsx(s.AddtoCartBtn, s[cartContainsProduct ? 'AddedButton' : ''])} onClick={addToCartHandler}>
-              <CartIcon className={clsx(s.AddtoCartBtnIcon, s[cartContainsProduct ? 'AddedIcon' : ''])} />
+            <button className={clsx(s.AddToCartBtn, isProductIncart && s.AddedButton)} onClick={addToCartHandler}>
+              <CartIcon className={clsx(s.AddToCartBtnIcon, isProductIncart && s.AddedIcon)} />
             </button>
           </div>
         </div>
