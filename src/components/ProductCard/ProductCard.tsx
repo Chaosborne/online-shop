@@ -29,13 +29,9 @@ const ProductCard = ({ product, viewType }: Props) => {
     dispatch(addItemToCart(product));
   };
 
-  // Отслеживаем состояние товара в корзине чтобы не слетал при ререндеринге
-  const cart = useSelector((state: RootState) => state.cart);
-  const cartItemsIds = cart.items.map(item => item.id);
-  const cartContainsCuttentItem = cartItemsIds.includes(id);
-
-  const addedButtonState = cartContainsCuttentItem ? 'AddedButton' : '';
-  const addedIconState = cartContainsCuttentItem ? 'AddedIcon' : '';
+  // Track the state of the product in the cart so that it does not fly off during re-rendering
+  const cartItems = useSelector((state: RootState) => state.cart.items);
+  const cartContainsProduct = cartItems.some(p => p.id === id);
 
   return (
     <div className={clsx(s.ProductCard, s[viewType])}>
@@ -52,8 +48,8 @@ const ProductCard = ({ product, viewType }: Props) => {
             <button className={s.FavouriteBtn} onClick={() => void toggle(Number(id))}>
               {isFavourite(Number(id)) ? '♥' : '♡'}
             </button>
-            <button className={clsx(s.AddtoCartBtn, s[addedButtonState])} onClick={addToCartHandler}>
-              <CartIcon className={clsx(s.AddtoCartBtnIcon, s[addedIconState])} />
+            <button className={clsx(s.AddtoCartBtn, s[cartContainsProduct ? 'AddedButton' : ''])} onClick={addToCartHandler}>
+              <CartIcon className={clsx(s.AddtoCartBtnIcon, s[cartContainsProduct ? 'AddedIcon' : ''])} />
             </button>
           </div>
         </div>
