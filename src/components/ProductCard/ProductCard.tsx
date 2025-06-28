@@ -7,8 +7,9 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addItemToCart } from '../../store/slices/cartSlice';
 import { AppDispatch } from '../../store/store';
-import { useState } from 'react';
 import { CartIcon } from '../../assets/img/CartIcon';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 
 // Extend IProduct only for this component
 interface Props {
@@ -24,15 +25,17 @@ const ProductCard = ({ product, viewType }: Props) => {
 
   const dispatch = useDispatch<AppDispatch>();
 
-  const [isAdded, setIsAdded] = useState(false);
-
   const addToCartHandler = () => {
     dispatch(addItemToCart(product));
-    setIsAdded(true);
   };
 
-  const Added = isAdded ? 'Added' : '';
-  const AddedIcon = isAdded ? 'AddedIcon' : '';
+  // Отслеживаем состояние товара в корзине чтобы не слетал при ререндеринге
+  const cart = useSelector((state: RootState) => state.cart);
+  const cartItemsIds = cart.items.map(item => item.id);
+  const cartContainsCuttentItem = cartItemsIds.includes(id);
+
+  const addedButtonState = cartContainsCuttentItem ? 'AddedButton' : '';
+  const addedIconState = cartContainsCuttentItem ? 'AddedIcon' : '';
 
   return (
     <div className={clsx(s.ProductCard, s[viewType])}>
@@ -49,8 +52,8 @@ const ProductCard = ({ product, viewType }: Props) => {
             <button className={s.FavouriteBtn} onClick={() => void toggle(Number(id))}>
               {isFavourite(Number(id)) ? '♥' : '♡'}
             </button>
-            <button className={clsx(s.AddtoCartBtn, s[Added])} onClick={addToCartHandler}>
-              <CartIcon className={clsx(s.AddtoCartBtnIcon, s[AddedIcon])} />
+            <button className={clsx(s.AddtoCartBtn, s[addedButtonState])} onClick={addToCartHandler}>
+              <CartIcon className={clsx(s.AddtoCartBtnIcon, s[addedIconState])} />
             </button>
           </div>
         </div>
