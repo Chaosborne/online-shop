@@ -1,1 +1,25 @@
-// To be used later
+@use 'vars.scss' as vars;
+
+@mixin mobile {
+  @media (max-width: vars.$mobile) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: vars.$tablet) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media (max-width: vars.$laptop) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (max-width: vars.$desktop) {
+    @content;
+  }
+}
