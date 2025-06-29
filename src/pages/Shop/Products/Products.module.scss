@@ -26,16 +26,6 @@
   margin-top: 20px;
 }
 
-.FilterSelect {
-  margin-top: 5px;
-  display: flex;
-  gap: 10px;
-
-  a {
-    display: block;
-  }
-}
-
 .Products {
   max-width: 1500px;
 }
@@ -54,20 +44,6 @@
 
 .MainContent {
   display: flex;
-}
-
-.Filter {
-  width: 200px;
-  margin-right: 40px;
-  flex-shrink: 0;
-  background-color: #fff;
-  padding: 25px;
-  box-shadow: 0 0 3px 1px #42424214;
-  height: 363px;
-
-  h5 {
-    font-weight: 500;
-  }
 }
 
 .ProductsContainer {
