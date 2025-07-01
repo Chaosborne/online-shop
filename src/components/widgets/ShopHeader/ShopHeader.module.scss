@@ -109,6 +109,10 @@
   width: 56px;
   background-color: vars.$accent;
   border-radius: 3px;
+
+  &:hover {
+    background-color: vars.$accent_hover;
+  }
 }
 
 .LensIcon {
