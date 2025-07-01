@@ -21,7 +21,7 @@ const BurgerMenu: React.FC = () => {
       <button
         className={open ? styles.burgerActive : styles.burger}
         onClick={handleToggle}
-        aria-label="Открыть меню"
+        aria-label="Open menu"
       >
         <span />
         <span />
