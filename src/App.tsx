@@ -4,14 +4,14 @@ import { DefaultLayout } from './components/layouts';
 import { routes } from './constants/routes';
 import { useFetchCategories } from './hooks/usefetchCategories';
 import { useFetchProducts } from './hooks/useFetchProducts';
-import { useFetchFavourites } from './hooks/useFetchFavourites';
+import { useFetchFavorites } from './hooks/useFetchFavorites';
 import Loader from './components/ui/Loader/Loader';
 import { useAppReady } from './hooks/useAppReady';
 
 function App() {
   useFetchCategories();
   useFetchProducts();
-  useFetchFavourites();
+  useFetchFavorites();
 
   // Check if all the fetches are done
   const isAppReady = useAppReady();

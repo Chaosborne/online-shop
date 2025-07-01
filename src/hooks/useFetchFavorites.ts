@@ -1,17 +1,17 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { loadFavourites } from '../store/slices/favouritesThunk';
+import { loadFavorites } from '../store/slices/favoritesThunk';
 
-export const useFetchFavourites = () => {
+export const useFetchFavorites = () => {
   const dispatch = useAppDispatch();
   const userId = useAppSelector(state => state.auth.user?.uid);
-  const status = useAppSelector(state => state.favourites.status);
+  const isLoaded = useAppSelector(state => state.favorites.isLoaded);
 
   useEffect(() => {
-    if (userId && status === 'idle') {
-      dispatch(loadFavourites())
+    if (userId && !isLoaded) {
+      dispatch(loadFavorites())
         .unwrap()
         .catch(err => console.error('Ошибка загрузки:', err));
     }
-  }, [userId, status, dispatch]);
+  }, [userId, isLoaded, dispatch]);
 };

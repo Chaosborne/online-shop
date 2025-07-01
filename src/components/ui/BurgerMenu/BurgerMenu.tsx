@@ -30,7 +30,7 @@ const BurgerMenu: React.FC = () => {
       <nav className={open ? styles.menuOpen : styles.menu}>
         <ul>
           <li><Link to="/shop" onClick={handleClose}>Catalog</Link></li>
-          <li><Link to="/shop/my/favorites" onClick={handleClose}>Favourites</Link></li>
+          <li><Link to="/shop/my/favorites" onClick={handleClose}>Favorites</Link></li>
           <li><Link to="/shop/my/cart" onClick={handleClose}>Cart</Link></li>
           <li>
             {user ? (

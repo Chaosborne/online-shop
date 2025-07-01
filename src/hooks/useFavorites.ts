@@ -1,12 +1,12 @@
 import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { toggleFavourite } from '../store/slices/favoritesSlice';
-import { toggleFavouriteInFirebase } from '../store/slices/favouritesThunk';
-export const useFavourites = () => {
+import { toggleFavorite } from '../store/slices/favoritesSlice';
+import { toggleFavoriteInFirebase } from '../store/slices/favoritesThunk';
+export const useFavorites = () => {
   const dispatch = useAppDispatch();
-  const favourites = useAppSelector(state => state.favourites.items);
+  const favorites = useAppSelector(state => state.favorites.items);
   const userId = useAppSelector(state => state.auth.user?.uid);
 
-  const isFavourite = (id: number) => favourites.includes(id);
+  const isFavorite = (id: number) => favorites.includes(id);
 
   const toggle = async (id: number) => {
     if (!userId) {
@@ -16,22 +16,22 @@ export const useFavourites = () => {
     }
 
     // 1. Обновляем локальное состояние
-    dispatch(toggleFavourite(id));
+    dispatch(toggleFavorite(id));
 
     // 2. Синхронизируем с Firebase
     try {
       await dispatch(
-        toggleFavouriteInFirebase({
+        toggleFavoriteInFirebase({
           productId: id,
-          isFavourite: !isFavourite(id),
+          isFavorite: !isFavorite(id),
         })
       ).unwrap();
     } catch (error) {
       console.error('Error synchronisation with Firebase:', error);
       // Откатываем локальное состояние при ошибке
-      dispatch(toggleFavourite(id));
+      dispatch(toggleFavorite(id));
     }
   };
 
-  return { favourites, isFavourite, toggle };
+  return { favorites, isFavorite, toggle };
 };

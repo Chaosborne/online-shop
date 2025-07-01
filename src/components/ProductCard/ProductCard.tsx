@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import s from './ProductCard.module.scss';
 import { IProduct } from '../../constants/interfaces/IProduct';
-import { useFavourites } from '../../hooks/useFavorites';
+import { useFavorites } from '../../hooks/useFavorites';
 import generateProductSlug from '../../helpers/generateProductSlug';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -20,7 +20,7 @@ interface Props {
 const ProductCard = ({ product, viewType }: Props) => {
   const { id, images, itemName, itemBrand, itemDescription, itemPrice } = product;
 
-  const { isFavourite, toggle } = useFavourites();
+  const { isFavorite, toggle } = useFavorites();
   const productSlug = generateProductSlug(itemBrand, itemName);
 
   const dispatch = useDispatch<AppDispatch>();
@@ -40,11 +40,11 @@ const ProductCard = ({ product, viewType }: Props) => {
           {itemDescription} {itemBrand} {itemName}
         </Link>
 
-        <div className={s.PriceFavourites}>
+        <div className={s.PriceFavorites}>
           <span className={s.Price}>{`${itemPrice.toLocaleString('ru-RU')} ₽`}</span>
           <div className={s.ProductcardBtns}>
-            <button className={s.FavouriteBtn} onClick={() => void toggle(Number(id))}>
-              {isFavourite(Number(id)) ? '♥' : '♡'}
+            <button className={s.FavoriteBtn} onClick={() => void toggle(Number(id))}>
+              {isFavorite(Number(id)) ? '♥' : '♡'}
             </button>
             <button className={clsx(s.AddToCartBtn, isProductIncart && s.AddedButton)} onClick={addToCartHandler}>
               <CartIcon className={clsx(s.AddToCartBtnIcon, isProductIncart && s.AddedIcon)} />

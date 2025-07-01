@@ -3,7 +3,7 @@ import cartReducer, { CartState } from './slices/cartSlice';
 import searchReducer, { SearchState } from './slices/searchSlice';
 import dbProductsReducer, { dbProductsState } from './slices/getDbProductsSlice';
 import dbCategoriesReducer, { dbCategoriesState } from './slices/getDbCategoriesSlice';
-import favouritesReducer, { FavouritesState } from './slices/favoritesSlice';
+import favoritesReducer, { FavoritesState } from './slices/favoritesSlice';
 import authReducer, { AuthState } from './slices/authSlice';
 
 export interface RootState {
@@ -11,7 +11,7 @@ export interface RootState {
   search: SearchState;
   dbProducts: dbProductsState;
   dbCategories: dbCategoriesState;
-  favourites: FavouritesState;
+  favorites: FavoritesState;
   auth: AuthState;
   // Сюда мы собираем в единый кусок все state от наших слайсов
   // Когда мы будем вызывать хук useAppSelector в const favorites = useAppSelector(state => state.favorites.items);, хук уже будет знать про RootState и подтянет его автоматически чтобы типизировать useAppSelector (себя). Поэтому, там мы не будем явно типизировать и прописывать
@@ -26,10 +26,10 @@ export const store = configureStore({
     search: searchReducer,
     dbProducts: dbProductsReducer,
     dbCategories: dbCategoriesReducer,
-    favourites: favouritesReducer,
+    favorites: favoritesReducer,
     auth: authReducer,
     // Здесь favorites — это имя ключа в state, которое мы выбрали сами
-    // favoritesReducer — это редьюсер, экспортированный из favoritesSlice. Имя мы ему тоже придумали сами. А принимает он экспортированный favouritesSlice.reducer
+    // favoritesReducer — это редьюсер, экспортированный из favoritesSlice. Имя мы ему тоже придумали сами. А принимает он экспортированный favoritesSlice.reducer
   },
 });
 

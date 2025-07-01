@@ -5,7 +5,6 @@ import { auth } from '../firebase/firebaseConfig';
 import { useAppDispatch } from '../store/hooks';
 import { User } from 'firebase/auth';
 import { setUser, clearUser } from '../store/slices/authSlice';
-import { loadFavourites } from '../store/slices/favouritesThunk';
 import { clearFavorites } from '../store/slices/favoritesSlice';
 
 export const useAuth = () => {
@@ -25,14 +24,6 @@ export const useAuth = () => {
         };
 
         dispatch(setUser(userData));
-
-        try {
-          const result = await dispatch(loadFavourites()).unwrap();
-          console.log('Favorites loaded:', result);
-        } catch (error) {
-          console.error('Error loading favorites:', error);
-          setError('Failed to load favorites');
-        }
       } else {
         dispatch(clearUser());
         dispatch(clearFavorites());

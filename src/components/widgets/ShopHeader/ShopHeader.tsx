@@ -63,12 +63,12 @@ const ShopHeader = () => {
               <li>
                 <NavLink className={({ isActive }) => (isActive ? s.ActiveLink : s.Link)} end to="shop">
                   {/* end - для проверки точного совпадения адреса. Иначе shop срабатывает и при активной shop/my/favorites */}
-                  Catalog
+                  Каталог
                 </NavLink>
               </li>
               <li>
                 <NavLink className={({ isActive }) => (isActive ? s.ActiveLink : s.Link)} to="shop/my/favorites">
-                  Favourites
+                  Избранное
                 </NavLink>
               </li>
             </ul>
@@ -90,12 +90,14 @@ const ShopHeader = () => {
 
             {user ? (
               <Link className={s.User} to="/shop/my/user-profile">
-                User
+                Пользователь
                 <br />
                 {user.email}
               </Link>
             ) : (
-              <button className={s.User} onClick={openLoginModal}>Login</button>
+              <button className={s.User} onClick={openLoginModal}>
+                Войти
+              </button>
             )}
           </span>
         </div>
