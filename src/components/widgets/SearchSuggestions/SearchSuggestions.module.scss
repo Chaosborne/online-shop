@@ -10,6 +10,10 @@
 .SearchSuggestionsList li {
   line-height: 2em;
   cursor: pointer;
+  
+  &:hover {
+    background-color: #f0f0f0;
+  }
 }
 .SearchSuggestionsLink {
   width: 100%;
