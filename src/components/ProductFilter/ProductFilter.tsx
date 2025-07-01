@@ -1,11 +1,15 @@
 import s from './ProductFilter.module.scss';
+import clsx from 'clsx';
+
 
 interface ProductFilterProps {
   selectedBrands: string[];
   onBrandChange: (brands: string[]) => void;
+  isFilterShow: boolean;
+  toggleFilterShow: () => void;
 }
 
-const ProductFilter = ({ selectedBrands, onBrandChange }: ProductFilterProps) => {
+const ProductFilter = ({ selectedBrands, onBrandChange, isFilterShow, toggleFilterShow }: ProductFilterProps) => {
   const mockBrands = ['apple', 'samsung', 'xiaomi', 'realme', 'oppo', 'HP'];
   // mockBrands contains brand names that don't exist in the database to demonstrate interface behavior with missing names
 
@@ -19,8 +23,8 @@ const ProductFilter = ({ selectedBrands, onBrandChange }: ProductFilterProps) =>
   };
 
   return (
-    <aside className={s.Filter}>
-      <h5 className={s.FilterTitle}>Brands</h5>
+    <aside className={clsx(s.Filter, isFilterShow && s.FilterShow)}>
+      <h5 className={s.FilterTitle}>Бренды</h5>
       <form className={s.FilterForm} action="">
         {mockBrands.map(brand => (
           <div className={s.FilterSelect} key={brand}>
@@ -29,6 +33,9 @@ const ProductFilter = ({ selectedBrands, onBrandChange }: ProductFilterProps) =>
           </div>
         ))}
       </form>
+      <button className={s.FilterClose} onClick={toggleFilterShow}>
+        Ok
+      </button>
     </aside>
   );
 };

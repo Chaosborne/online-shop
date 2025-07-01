@@ -15,6 +15,15 @@
   margin-bottom: 30px;
 }
 
+.FilterToggler {
+  display: none;
+  margin-right: auto;
+
+  @media (max-width: vars.$tablet) {
+    display: block;
+  }
+}
+
 .PriceSort,
 .ListTileToggler {
   cursor: pointer;
@@ -26,14 +35,11 @@
   margin-top: 20px;
 }
 
-.Products {
-  max-width: 1500px;
-}
-
 .Tiles {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: 11px;
+  justify-content: flex-start;
 }
 
 .Lines {
@@ -44,6 +50,10 @@
 
 .MainContent {
   display: flex;
+
+  @media (max-width: vars.$tablet) {
+    position: relative;
+  }
 }
 
 .ProductsContainer {
@@ -78,5 +88,9 @@
     &:hover:not(:disabled, .Active) {
       background: #cccccc;
     }
+  }
+
+  @media (max-width: vars.$tablet) {
+    margin-top: 25px;
   }
 }

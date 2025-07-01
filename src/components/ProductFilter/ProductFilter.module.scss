@@ -1,3 +1,5 @@
+@use '../../assets/scss/vars' as vars;
+
 .Filter {
   width: 200px;
   margin-right: 40px;
@@ -10,11 +12,42 @@
   h5 {
     font-weight: 500;
   }
+
+  @media (max-width: vars.$tablet) {
+    position: absolute;
+    top: 0;
+    left: -500px;
+    transition: left 0.3s ease-in-out;
+    z-index: 100;
+  }
 }
 
-// .FilterTitle {
+.FilterShow {
+  left: 0;
+}
 
-// }
+.FilterClose {
+  background-color: vars.$accent;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+
+  &:hover {
+    background-color: vars.$accent_hover;
+  }
+
+  @media (min-width: vars.$tablet) {
+    display: none;
+  }
+}
+
+.FilterTitle {
+  margin-bottom: 10px;
+}
 
 // .FilterForm {
 

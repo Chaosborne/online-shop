@@ -13,12 +13,20 @@
       color: vars.$text_hover;
     }
   }
+
+  @media (max-width: vars.$tablet) {
+    padding: 20px;
+  }
 }
 
 .CardInfo {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  @media (max-width: vars.$tablet) {
+    flex-direction: row;
+  }
 }
 
 .tiles {
@@ -28,6 +36,10 @@
   justify-content: space-between;
   width: 250px;
   padding-bottom: 40px;
+
+  @media (max-width: 576px) {
+    width: 100%;
+  }
 
   a {
     margin-top: 15px;
@@ -40,9 +52,9 @@
 }
 
 .lines {
-  height: 210px;
   display: grid;
   grid-template-columns: 1fr 2fr;
+  gap: 0 15px;
 
   &:not(:first-child) {
     margin-top: 10px;
@@ -57,6 +69,10 @@
     flex-direction: row;
     justify-content: space-between;
   }
+
+  @media (max-width: vars.$tablet) {
+    gap: 0 15px;
+  }
 }
 
 .PriceFavorites {
@@ -69,6 +85,10 @@
   font-size: 22px;
   font-weight: 700;
   text-align: right;
+
+  @media (max-width: vars.$tablet) {
+    font-size: 18px;
+  }
 }
 
 .ProductcardBtns {

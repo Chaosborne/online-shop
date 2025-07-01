@@ -26,6 +26,10 @@ const Products = () => {
     setCurrentPage(1); // Сброс на первую страницу при изменении фильтров
   };
 
+  // Тоггл бокового фильтра мобильный
+  const [isFilterShow, setIsFilterShow] = useState(false);
+  const toggleFilterShow = () => setIsFilterShow(!isFilterShow);
+
   // Фильтрация и сортировка товаров
   const filteredProducts = productsFromStore
     .filter(product => {
@@ -77,16 +81,19 @@ const Products = () => {
     <section className={s.ProductsSection}>
       <div className="container">
         <div className={s.StoreControls}>
+          <button className={s.FilterToggler} onClick={toggleFilterShow}>
+            Фильтр
+          </button>
           <div className={s.PriceSort} onClick={togglePriceSort}>
-            Price sort
+            По цене
           </div>
           <div className={s.ListTileToggler} onClick={toggleProductsView}>
-            Toggle list/tile
+            Список/Плитка
           </div>
         </div>
 
         <div className={s.MainContent}>
-          <ProductFilter selectedBrands={selectedBrands} onBrandChange={handleBrandChange} />
+          <ProductFilter selectedBrands={selectedBrands} onBrandChange={handleBrandChange} isFilterShow={isFilterShow} toggleFilterShow={toggleFilterShow} />
           <div className={s.ProductsContainer}>
             {productsListElement}
             {totalPages > 1 && paginationElement}
