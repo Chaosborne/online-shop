@@ -1,3 +1,5 @@
+@use '../../../assets/scss/vars.scss' as vars;
+
 .burgerMenuWrapper {
   position: relative;
   z-index: 100;
@@ -69,7 +71,7 @@
         transition: color 0.2s;
 
         &:hover {
-          color: #4caf50;
+          color: vars.$accent;
         }
       }
     }

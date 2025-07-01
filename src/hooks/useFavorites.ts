@@ -10,8 +10,8 @@ export const useFavourites = () => {
 
   const toggle = async (id: number) => {
     if (!userId) {
-      alert('Пользователь не авторизован!');
-      console.error('Пользователь не авторизован!');
+      alert('User in not authorised!');
+      console.error('User in not authorised!');
       return;
     }
 
@@ -27,7 +27,7 @@ export const useFavourites = () => {
         })
       ).unwrap();
     } catch (error) {
-      console.error('Ошибка синхронизации с Firebase:', error);
+      console.error('Error synchronisation with Firebase:', error);
       // Откатываем локальное состояние при ошибке
       dispatch(toggleFavourite(id));
     }

@@ -90,12 +90,12 @@ const ShopHeader = () => {
 
             {user ? (
               <Link className={s.User} to="/shop/my/user-profile">
-                Пользователь
+                User
                 <br />
                 {user.email}
               </Link>
             ) : (
-              <button onClick={openLoginModal}>Login</button>
+              <button className={s.User} onClick={openLoginModal}>Login</button>
             )}
           </span>
         </div>
