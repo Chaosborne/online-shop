@@ -66,6 +66,10 @@
   svg {
     fill: white;
   }
+
+  @include mixins.tablet {
+    right: 0;
+  }
 }
 
 .CloseBtn:hover {
