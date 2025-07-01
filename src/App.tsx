@@ -5,7 +5,7 @@ import { routes } from './constants/routes';
 import { useFetchCategories } from './hooks/usefetchCategories';
 import { useFetchProducts } from './hooks/useFetchProducts';
 import { useFetchFavourites } from './hooks/useFetchFavourites';
-import Loader from './components/ui/Loader';
+import Loader from './components/ui/Loader/Loader';
 import { useAppReady } from './hooks/useAppReady';
 
 function App() {

@@ -9,6 +9,7 @@ import { IProduct } from '../../../constants/interfaces/IProduct';
 import SearchSuggestions from '../SearchSuggestions/SearchSuggestions';
 import { CartIcon } from '../../../assets/img/CartIcon';
 import { LensIcon } from '../../../assets/img/LensIcon';
+import BurgerMenu from '../../ui/BurgerMenu/BurgerMenu';
 
 const ShopHeader = () => {
   const productsState = useSelector((state: RootState) => state.dbProducts);
@@ -53,6 +54,7 @@ const ShopHeader = () => {
       {isLoginModalOpen && <LoginModalPortal onClose={closeLoginModal} modalType="login" />}
       <div className="container">
         <div className={s.ShopHeaderInner}>
+          <BurgerMenu />
           {/* <Link to="/">На стартовую</Link> */}
           <img className={s.HeaderLogo} src="../../../src/assets/img/shop-logo.webp" alt="Greenshop" />
 
@@ -61,7 +63,7 @@ const ShopHeader = () => {
               <li>
                 <NavLink className={({ isActive }) => (isActive ? s.ActiveLink : s.Link)} end to="shop">
                   {/* end - для проверки точного совпадения адреса. Иначе shop срабатывает и при активной shop/my/favorites */}
-                  Home
+                  Catalog
                 </NavLink>
               </li>
               <li>
@@ -87,7 +89,7 @@ const ShopHeader = () => {
             </Link>
 
             {user ? (
-              <Link to="/shop/my/user-profile">
+              <Link className={s.User} to="/shop/my/user-profile">
                 Пользователь
                 <br />
                 {user.email}
