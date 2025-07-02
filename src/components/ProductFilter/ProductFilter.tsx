@@ -1,6 +1,7 @@
 import s from './ProductFilter.module.scss';
 import clsx from 'clsx';
-
+import { RootState } from '../../store/store';
+import { useSelector } from 'react-redux';
 
 interface ProductFilterProps {
   selectedBrands: string[];
@@ -22,14 +23,28 @@ const ProductFilter = ({ selectedBrands, onBrandChange, isFilterShow, toggleFilt
     }
   };
 
+  const productsState = useSelector((state: RootState) => state.dbProducts);
+  const productsFromStore = productsState.products || [];
+
   return (
     <aside className={clsx(s.Filter, isFilterShow && s.FilterShow)}>
       <h5 className={s.FilterTitle}>Бренды</h5>
       <form className={s.FilterForm} action="">
         {mockBrands.map(brand => (
           <div className={s.FilterSelect} key={brand}>
-            <input type="checkbox" name={brand} id={brand} checked={selectedBrands.includes(brand.toLowerCase())} onChange={handleBrandCheckboxChange} />
-            <label htmlFor={brand}>{brand.charAt(0).toUpperCase() + brand.slice(1)}</label>
+            <input
+              type="checkbox"
+              name={brand}
+              id={brand}
+              checked={selectedBrands.includes(brand.toLowerCase())}
+              onChange={handleBrandCheckboxChange}
+            />
+            <label htmlFor={brand}>
+              <span className={s.FilterBrand}> {`${brand.charAt(0).toUpperCase() + brand.slice(1)} `}</span>
+            </label>
+            <span className={s.FilterCount}>
+              {`${productsFromStore.filter(product => product.itemBrand.toLowerCase() === brand.toLowerCase()).length}`}
+            </span>
           </div>
         ))}
       </form>
