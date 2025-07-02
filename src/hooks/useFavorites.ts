@@ -10,8 +10,7 @@ export const useFavorites = () => {
 
   const toggle = async (id: number) => {
     if (!userId) {
-      alert('User in not authorised!');
-      console.error('User in not authorised!');
+      alert('Пользователь не авторизован!');
       return;
     }
 
