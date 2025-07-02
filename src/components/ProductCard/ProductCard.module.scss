@@ -104,6 +104,7 @@
 }
 
 .AddToCartBtn {
+  border: 1px solid vars.$accent;
   border-radius: 5px;
   padding: 5px 0;
   width: 60px;
@@ -126,6 +127,11 @@
 
 .AddedButton {
   background-color: #fff;
+  border: 1px solid vars.$accent;
+
+  &:hover {
+    background-color: #fff;
+  }
 }
 
 .AddedIcon {
