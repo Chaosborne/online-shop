@@ -38,7 +38,16 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
     }
   }, [user, onClose]);
 
-  const handleSwitchToRegister = () => setCurrentModalType('register');
+  const handleSwitchToRegister = () => {
+    setCurrentModalType('register');
+    // Генерируем случайные значения
+    const randomName = `User${Math.floor(Math.random() * 10000)}`;
+    const randomEmail = `user${Math.floor(Math.random() * 10000)}@example.com`;
+    const randomPassword = Math.random().toString(36).slice(-8);
+    setName(randomName);
+    setEmail(randomEmail);
+    setPassword(randomPassword);
+  };
 
   const loginModal = (
     <>
@@ -77,9 +86,9 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
         <div className={clsx(s.Content, { [s.Show]: isVisible })}>
           <h3>Регистрация</h3>
           <form className={s.LoginForm}>
-            <input type="text" placeholder="Имя" value={name} onChange={e => setName(e.target.value)} />
-            <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
-            <input type="password" placeholder="Пароль" value={password} onChange={e => setPassword(e.target.value)} />
+            <input type="text" placeholder="Имя" value={name} readOnly />
+            <input type="email" placeholder="Email" value={email} readOnly />
+            <input type="password" placeholder="Пароль" value={password} readOnly />
             {error && <p className={s.Error}>{error}</p>}
             <button
               className={s.EnterBtn}
