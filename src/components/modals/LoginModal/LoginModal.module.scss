@@ -83,6 +83,7 @@
 }
 
 .LoginForm {
+  margin-top: 20px;
   align-items: center;
 
   input {
@@ -110,11 +111,16 @@
   }
 }
 
+.PasswordInput {
+  letter-spacing: 0.2em;
+}
+
 .IfRegistered {
   margin-top: 30px;
 }
 
-.RegisterBtn {
+.RegisterBtn,
+.FillBtn {
   margin-top: 25px;
   width: 300px;
   height: 45px;
@@ -130,6 +136,13 @@
   @include mixins.tablet {
     width: 250px;
   }
+}
+
+.Disclaimer {
+  font-size: 14px;
+  color: rgb(100, 100, 100);
+  max-width: 300px;
+  margin: 20px auto 0;
 }
 
 .Error {

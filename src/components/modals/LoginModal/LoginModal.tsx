@@ -31,7 +31,6 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
     setIsVisible(true);
   }, []);
 
-  // Закрываем модальное окно при успешном входе
   useEffect(() => {
     if (user) {
       onClose();
@@ -40,14 +39,17 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
 
   const handleSwitchToRegister = () => {
     setCurrentModalType('register');
-    // Генерируем случайные значения
-    const randomName = `User${Math.floor(Math.random() * 10000)}`;
-    const randomEmail = `user${Math.floor(Math.random() * 10000)}@example.com`;
+  };
+
+  const handleFillData = () => {
+    const randomNumber = Math.floor(Math.random() * 10000);
+    const randomName = `User${randomNumber}`;
+    const randomEmail = `user${randomNumber}@example.com`;
     const randomPassword = Math.random().toString(36).slice(-8);
     setName(randomName);
     setEmail(randomEmail);
     setPassword(randomPassword);
-  };
+  }
 
   const loginModal = (
     <>
@@ -85,10 +87,13 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
       <div className={s.Overlay}>
         <div className={clsx(s.Content, { [s.Show]: isVisible })}>
           <h3>Регистрация</h3>
+          <p className={s.Disclaimer}>Этот сайт не обрабатывает реальные персональные данные. Поля закрыты для ввода</p>
+          <p className={s.Disclaimer}>Нажмите Заполнить, чтобы использовать случайно сгенерированные данные</p>
+          <button className={s.FillBtn} onClick={handleFillData}>Заполнить</button>
           <form className={s.LoginForm}>
             <input type="text" placeholder="Имя" value={name} readOnly />
             <input type="email" placeholder="Email" value={email} readOnly />
-            <input type="password" placeholder="Пароль" value={password} readOnly />
+            <input className={password ? s.PasswordInput : undefined} type="password" placeholder="Пароль" value={password} readOnly />
             {error && <p className={s.Error}>{error}</p>}
             <button
               className={s.EnterBtn}
