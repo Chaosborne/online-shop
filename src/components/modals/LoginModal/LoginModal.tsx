@@ -58,7 +58,7 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
           <h3>Войти</h3>
           <form className={s.LoginForm}>
             <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
-            <input type="password" placeholder="Пароль" value={password} onChange={e => setPassword(e.target.value)} />
+            <input className={password ? s.PasswordInput : undefined} type="password" placeholder="Пароль" value={password} onChange={e => setPassword(e.target.value)} />
             {error && <p className={s.Error}>{error}</p>}
             <button
               className={s.EnterBtn}
