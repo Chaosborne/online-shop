@@ -39,6 +39,7 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
 
   const handleSwitchToRegister = () => {
     setCurrentModalType('register');
+    setEmail('');
     clearError();
   };
 
@@ -76,7 +77,7 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
           {hasLastUser ? (
             <p className={s.Disclaimer}>Нажмите Заполнить, чтобы использовать данные, случайно сгенерированные при регистрации</p>
           ) : (
-            <p className={s.Disclaimer}>Нажмите <b>Зарегистрироваться</b>, чтобы создать тестового пользователя</p>
+            <p className={s.Hint}>Нажмите <b>Зарегистрироваться</b>, чтобы создать тестового пользователя</p>
           )}
           <button className={s.FillBtn} onClick={handleFillLastUser}>Заполнить*</button>
           <form className={s.LoginForm}>
@@ -111,7 +112,7 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
       <div className={s.Overlay}>
         <div className={clsx(s.Content, { [s.Show]: isVisible })}>
           <h3>Регистрация</h3>
-          <p className={s.Disclaimer}>Нажмите Заполнить, чтобы использовать случайно сгенерированные данные</p>
+          <p className={s.Hint}>Нажмите Заполнить, чтобы использовать случайно сгенерированные данные</p>
           <button className={s.FillBtn} onClick={handleFillData}>Заполнить*</button>
           <form className={s.LoginForm}>
             <input type="text" placeholder="Имя" value={name} readOnly />
