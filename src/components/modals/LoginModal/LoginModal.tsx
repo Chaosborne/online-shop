@@ -19,7 +19,7 @@ interface ModalPortalProps {
 type ModalType = 'login' | 'register';
 
 const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalType }) => {
-  const { handleLogin, handleRegister, error } = useAuth();
+  const { handleLogin, handleRegister, clearError, error } = useAuth();
   const user = useSelector((state: RootState) => state.auth.user);
   const [isVisible, setIsVisible] = useState(false);
   const [currentModalType, setCurrentModalType] = useState<ModalType>(modalType);
@@ -39,6 +39,7 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
 
   const handleSwitchToRegister = () => {
     setCurrentModalType('register');
+    clearError();
   };
 
   const handleFillData = () => {
@@ -51,14 +52,36 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
     setPassword(randomPassword);
   }
 
+  // Подставляем последние зарегистрированные данные в форму авторизации
+  const handleFillLastUser = () => {
+    const lastUser = localStorage.getItem('lastRegisteredUser');
+    if (lastUser) {
+      const { email, password } = JSON.parse(lastUser);
+      setEmail(email);
+      setPassword(password);
+    } else {
+      setEmail('Сначала зарегистрируйтесь');
+      setPassword('');
+    }
+  };
+
+  // Проверяем, есть ли последний зарегистрированный пользователь в localStorage
+  const hasLastUser = Boolean(localStorage.getItem('lastRegisteredUser'));
+
   const loginModal = (
     <>
       <div className={s.Overlay}>
         <div className={clsx(s.Content, { [s.Show]: isVisible })}>
           <h3>Войти</h3>
+          {hasLastUser ? (
+            <p className={s.Disclaimer}>Нажмите Заполнить, чтобы использовать данные, случайно сгенерированные при регистрации</p>
+          ) : (
+            <p className={s.Disclaimer}>Нажмите <b>Зарегистрироваться</b>, чтобы создать тестового пользователя</p>
+          )}
+          <button className={s.FillBtn} onClick={handleFillLastUser}>Заполнить*</button>
           <form className={s.LoginForm}>
-            <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
-            <input className={password ? s.PasswordInput : undefined} type="password" placeholder="Пароль" value={password} onChange={e => setPassword(e.target.value)} />
+            <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} readOnly />
+            <input className={password ? s.PasswordInput : undefined} type="password" placeholder="Пароль" value={password} onChange={e => setPassword(e.target.value)} readOnly />
             {error && <p className={s.Error}>{error}</p>}
             <button
               className={s.EnterBtn}
@@ -74,6 +97,7 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
           <button className={s.RegisterBtn} onClick={handleSwitchToRegister}>
             Зарегистрироваться
           </button>
+          <p className={s.Disclaimer}><b>*</b>Этот сайт не обрабатывает реальные персональные данные. Поля закрыты для ввода</p>
         </div>
       </div>
       <div className={s.CloseBtn} onClick={onClose}>
@@ -87,9 +111,8 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
       <div className={s.Overlay}>
         <div className={clsx(s.Content, { [s.Show]: isVisible })}>
           <h3>Регистрация</h3>
-          <p className={s.Disclaimer}>Этот сайт не обрабатывает реальные персональные данные. Поля закрыты для ввода</p>
           <p className={s.Disclaimer}>Нажмите Заполнить, чтобы использовать случайно сгенерированные данные</p>
-          <button className={s.FillBtn} onClick={handleFillData}>Заполнить</button>
+          <button className={s.FillBtn} onClick={handleFillData}>Заполнить*</button>
           <form className={s.LoginForm}>
             <input type="text" placeholder="Имя" value={name} readOnly />
             <input type="email" placeholder="Email" value={email} readOnly />
@@ -99,12 +122,16 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
               className={s.EnterBtn}
               onClick={e => {
                 e.preventDefault();
-                void handleRegister(email, password);
+                void handleRegister(email, password).then(() => {
+                  // Сохраняем данные последнего зарегистрированного пользователя в localStorage
+                  localStorage.setItem('lastRegisteredUser', JSON.stringify({ email, password }));
+                });
               }}
             >
               Зарегистрироваться
             </button>
           </form>
+          <p className={s.Disclaimer}><b>*</b>Этот сайт не обрабатывает реальные персональные данные. Поля закрыты для ввода</p>
         </div>
       </div>
       <div className={s.CloseBtn} onClick={onClose}>

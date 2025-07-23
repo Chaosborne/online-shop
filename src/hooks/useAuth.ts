@@ -78,29 +78,31 @@ export const useAuth = () => {
 
       switch (error.code) {
         case 'auth/invalid-email':
-          setError('Invalid email format');
+          setError('Неверный формат email');
           break;
         case 'auth/email-already-in-use':
-          setError('This email is already registered');
+          setError('Этот email уже зарегистрирован');
           break;
         case 'auth/weak-password':
-          setError('Password is too weak');
+          setError('Пароль слишком слабый');
           break;
         case 'auth/invalid-credential':
-          setError('Incorrect email or password');
+          setError('Неверный email или пароль');
           break;
         case 'auth/too-many-requests':
-          setError('Too many failed login attempts. Try again later');
+          setError('Слишком много попыток входа. Попробуйте позже');
           break;
         default:
-          setError('Login error. Try again');
+          setError('Ошибка входа. Попробуйте позже');
           break;
       }
     } else {
       console.error('Unexpected error:', error);
-      setError('An unexpected error occurred. Please try again');
+      setError('Произошла непредвиденная ошибка. Попробуйте позже');
     }
   };
 
-  return { error, isLoading, handleLogin, handleRegister, handleLogout };
+  const clearError = () => setError(null);
+
+  return { error, isLoading, handleLogin, handleRegister, handleLogout, clearError };
 };
