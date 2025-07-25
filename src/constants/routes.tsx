@@ -1,19 +1,9 @@
 import { RouteEnum } from './route';
-import { ReactNode } from 'react';
-import { Cart, Favorites, Home, Product, Shop, UserProfile } from '../pages';
+import { Cart, Favorites, Product, Shop, UserProfile } from '../pages';
 
-type RoutesProps = {
-  path: RouteEnum | string;
-  element: ReactNode;
-}[];
-
-export const routes: RoutesProps = [
+export const routes = [
   {
-    path: RouteEnum.HOME,
-    element: <Home />,
-  },
-  {
-    path: RouteEnum.SHOP,
+    path: '/',
     element: <Shop />,
   },
   {

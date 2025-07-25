@@ -29,12 +29,12 @@ const BurgerMenu: React.FC = () => {
       </button>
       <nav className={open ? styles.menuOpen : styles.menu}>
         <ul>
-          <li><Link to="/shop" onClick={handleClose}>Catalog</Link></li>
-          <li><Link to="/shop/my/favorites" onClick={handleClose}>Favorites</Link></li>
-          <li><Link to="/shop/my/cart" onClick={handleClose}>Cart</Link></li>
+          <li><Link to="/" onClick={handleClose}>Catalog</Link></li>
+          <li><Link to="/my/favorites" onClick={handleClose}>Favorites</Link></li>
+          <li><Link to="/my/cart" onClick={handleClose}>Cart</Link></li>
           <li>
             {user ? (
-              <Link to="/shop/my/user-profile" onClick={handleClose}>
+              <Link to="/my/user-profile" onClick={handleClose}>
                 User<br />{user.email}
               </Link>
             ) : (

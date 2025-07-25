@@ -45,7 +45,7 @@ const ProductCard = ({ product, viewType, isCart = false, onAdd, onRemove, quant
       <img className={s.CardImg} src={`/productsImages/${images[0]}`} alt={itemName} />
 
       <div className={s.CardInfo}>
-        <Link to={`/shop/product/${productSlug}`} key={id}>
+        <Link to={`/product/${productSlug}`} key={id}>
           {itemDescription} {itemBrand} {itemName}
         </Link>
 

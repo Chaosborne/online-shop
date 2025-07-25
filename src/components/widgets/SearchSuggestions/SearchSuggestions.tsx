@@ -19,7 +19,7 @@ const SearchSuggestions: FC<SearchSuggestionsProps> = ({ matchingItems, hideWhen
         const productSlug = generateProductSlug(item.itemBrand, item.itemName);
         return (
           <li key={item.id} id={item.id} onClick={hideWhenClick}>
-            <Link className={s.SearchSuggestionsLink} to={`shop/product/${productSlug}`}>
+            <Link className={s.SearchSuggestionsLink} to={`/product/${productSlug}`}>
               {`${item.itemBrand} ${item.itemName}`}
             </Link>
           </li>
