@@ -97,20 +97,23 @@
   justify-content: space-between;
 }
 
-.Price,
-.CartSum {
+.Price {
   color: vars.$accent;
   font-size: 22px;
   font-weight: 700;
+}
+
+.CardSum {
+  margin-top: 20px;
+}
+
+.Price,
+.CardSum {
   text-align: right;
 
   @media (max-width: vars.$tablet) {
     font-size: 18px;
   }
-}
-
-.CartSum {
-  margin-top: 10px;
 }
 
 .ProductcardBtns {

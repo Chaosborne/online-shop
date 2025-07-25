@@ -72,7 +72,7 @@ const ProductCard = ({ product, viewType, isCart = false, onAdd, onRemove, quant
                   +
                 </button>
               </div>
-              <div className={s.CartSum}>{`${typeof totalPrice === 'number' && totalPrice.toLocaleString('ru-RU')} ₽`}</div>
+              <div className={s.CardSum}>{`${typeof totalPrice === 'number' && totalPrice.toLocaleString('ru-RU')} ₽`}</div>
             </div>
           )}
         </div>
