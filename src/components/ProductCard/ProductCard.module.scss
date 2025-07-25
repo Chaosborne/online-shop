@@ -29,6 +29,22 @@
   }
 }
 
+.CartControls {
+  margin-top: 10px;
+  text-align: right;
+}
+
+.ItemQuantityBtn {
+  height: 30px;
+  width: 30px;
+  background: rgb(236, 236, 236);
+  border-radius: 35px;
+}
+
+.ItemQuantityDigit {
+  margin: 0 10px;
+}
+
 .tiles {
   display: flex;
   flex-direction: column;
@@ -78,9 +94,11 @@
 .PriceFavorites {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
-.Price {
+.Price,
+.CartSum {
   color: vars.$accent;
   font-size: 22px;
   font-weight: 700;
@@ -89,6 +107,10 @@
   @media (max-width: vars.$tablet) {
     font-size: 18px;
   }
+}
+
+.CartSum {
+  margin-top: 10px;
 }
 
 .ProductcardBtns {

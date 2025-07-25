@@ -64,11 +64,15 @@ const ProductCard = ({ product, viewType, isCart = false, onAdd, onRemove, quant
           {isCart && (
             <div className={s.CartControls}>
               <div className={s.ItemQuantity}>
-                <button onClick={onRemove}>-</button>
-                <span>{quantity}</span>
-                <button onClick={onAdd}>+</button>
+                <button className={s.ItemQuantityBtn} onClick={onRemove}>
+                  -
+                </button>
+                <span className={s.ItemQuantityDigit}>{quantity}</span>
+                <button className={s.ItemQuantityBtn} onClick={onAdd}>
+                  +
+                </button>
               </div>
-              <div className={s.CartSum}>{totalPrice}</div>
+              <div className={s.CartSum}>{`${typeof totalPrice === 'number' && totalPrice.toLocaleString('ru-RU')} ₽`}</div>
             </div>
           )}
         </div>
