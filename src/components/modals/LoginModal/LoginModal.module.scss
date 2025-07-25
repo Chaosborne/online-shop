@@ -19,7 +19,7 @@
   width: 500px;
   border-radius: 8px;
   background-color: #fff;
-  padding: 100px 0;
+  padding: 60px 0;
   position: absolute;
   left: 50%;
   top: 100%;
@@ -83,7 +83,7 @@
 }
 
 .LoginForm {
-  margin-top: 20px;
+  margin-top: 10px;
   align-items: center;
 
   input {
@@ -149,4 +149,13 @@
 .Error {
   color: rgb(0, 0, 0);
   margin-bottom: 10px;
+}
+
+.Disclaimer {
+  text-align: justify;
+  font-size: 12px;
+}
+
+.DisclaimerBlock p + p {
+  margin-top: 18px;
 }

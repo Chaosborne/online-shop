@@ -5,6 +5,12 @@ import s from './LoginModal.module.scss';
 import { useAuth } from '../../../hooks/useAuth';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
+
+const disclaimerParagraphs = [
+  'Данный сайт не осуществляет обработку реальных персональных данных. Все поля заполняются случайно сгенерированной информацией в демонстрационных целях и заблокированы для ручного ввода',
+  'В соответствии с Федеральным законом 152 - ФЗ "О персональных данных", сайт не является информационной системой персональных данных (ИСПДн), поскольку не производит сбор, хранение или обработку реальных данных пользователей'
+];
+
 const closeImg = (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="50px" height="50px">
     <path d="M 9.15625 6.3125 L 6.3125 9.15625 L 22.15625 25 L 6.21875 40.96875 L 9.03125 43.78125 L 25 27.84375 L 40.9375 43.78125 L 43.78125 40.9375 L 27.84375 25 L 43.6875 9.15625 L 40.84375 6.3125 L 25 22.15625 Z" />
@@ -75,11 +81,11 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
         <div className={clsx(s.Content, { [s.Show]: isVisible })}>
           <h3>Войти</h3>
           {hasLastUser ? (
-            <p className={s.Disclaimer}>Нажмите Заполнить, чтобы использовать данные, случайно сгенерированные при регистрации</p>
+            <p className={s.Hint}>Нажмите <b>Заполнить</b>, чтобы использовать данные, сгенерированные при регистрации</p>
           ) : (
             <p className={s.Hint}>Нажмите <b>Зарегистрироваться</b>, чтобы создать тестового пользователя</p>
           )}
-          <button className={s.FillBtn} onClick={handleFillLastUser}>Заполнить*</button>
+          <button className={s.FillBtn} onClick={handleFillLastUser}>Заполнить</button>
           <form className={s.LoginForm}>
             <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} readOnly />
             <input className={password ? s.PasswordInput : undefined} type="password" placeholder="Пароль" value={password} onChange={e => setPassword(e.target.value)} readOnly />
@@ -98,7 +104,11 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
           <button className={s.RegisterBtn} onClick={handleSwitchToRegister}>
             Зарегистрироваться
           </button>
-          <p className={s.Disclaimer}><b>*</b>Этот сайт не обрабатывает реальные персональные данные. Поля закрыты для ввода</p>
+          <div className={s.DisclaimerBlock}>
+            {disclaimerParagraphs.map((text, idx) => (
+              <p className={s.Disclaimer} key={idx}>{text}</p>
+            ))}
+          </div>
         </div>
       </div>
       <div className={s.CloseBtn} onClick={onClose}>
@@ -112,8 +122,8 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
       <div className={s.Overlay}>
         <div className={clsx(s.Content, { [s.Show]: isVisible })}>
           <h3>Регистрация</h3>
-          <p className={s.Hint}>Нажмите Заполнить, чтобы использовать случайно сгенерированные данные</p>
-          <button className={s.FillBtn} onClick={handleFillData}>Заполнить*</button>
+          <p className={s.Hint}>Нажмите <b>Заполнить</b>, чтобы использовать случайно сгенерированные данные</p>
+          <button className={s.FillBtn} onClick={handleFillData}>Заполнить</button>
           <form className={s.LoginForm}>
             <input type="text" placeholder="Имя" value={name} readOnly />
             <input type="email" placeholder="Email" value={email} readOnly />
@@ -132,7 +142,11 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
               Зарегистрироваться
             </button>
           </form>
-          <p className={s.Disclaimer}><b>*</b>Этот сайт не обрабатывает реальные персональные данные. Поля закрыты для ввода</p>
+          <div className={s.DisclaimerBlock}>
+            {disclaimerParagraphs.map((text, idx) => (
+              <p className={s.Disclaimer} key={idx}>{text}</p>
+            ))}
+          </div>
         </div>
       </div>
       <div className={s.CloseBtn} onClick={onClose}>

@@ -11,13 +11,22 @@ import { CartIcon } from '../../assets/img/CartIcon';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 
+// ProductCard — базовый компонент карточки товара для каталога и корзины.
+// Если потребуется больше вариантов карточек, общую часть (изображение, название, цена и т.д.)
+// можно вынести в отдельный компонент (например, ProductInfo)
+
 // Extend IProduct only for this component
 interface Props {
   product: IProduct;
   viewType: 'tiles' | 'lines';
+  isCart?: boolean;
+  onAdd?: () => void;
+  onRemove?: () => void;
+  quantity?: number;
+  totalPrice?: number;
 }
 
-const ProductCard = ({ product, viewType }: Props) => {
+const ProductCard = ({ product, viewType, isCart = false, onAdd, onRemove, quantity, totalPrice }: Props) => {
   const { id, images, itemName, itemBrand, itemDescription, itemPrice } = product;
 
   const { isFavorite, toggle } = useFavorites();
@@ -42,14 +51,26 @@ const ProductCard = ({ product, viewType }: Props) => {
 
         <div className={s.PriceFavorites}>
           <span className={s.Price}>{`${itemPrice.toLocaleString('ru-RU')} ₽`}</span>
-          <div className={s.ProductcardBtns}>
-            <button className={s.FavoriteBtn} onClick={() => void toggle(Number(id))}>
-              {isFavorite(Number(id)) ? '♥' : '♡'}
-            </button>
-            <button className={clsx(s.AddToCartBtn, isProductIncart && s.AddedButton)} onClick={addToCartHandler}>
-              <CartIcon className={clsx(s.AddToCartBtnIcon, isProductIncart && s.AddedIcon)} />
-            </button>
-          </div>
+          {!isCart && (
+            <div className={s.ProductcardBtns}>
+              <button className={s.FavoriteBtn} onClick={() => void toggle(Number(id))}>
+                {isFavorite(Number(id)) ? '♥' : '♡'}
+              </button>
+              <button className={clsx(s.AddToCartBtn, isProductIncart && s.AddedButton)} onClick={addToCartHandler}>
+                <CartIcon className={clsx(s.AddToCartBtnIcon, isProductIncart && s.AddedIcon)} />
+              </button>
+            </div>
+          )}
+          {isCart && (
+            <div className={s.CartControls}>
+              <div className={s.ItemQuantity}>
+                <button onClick={onRemove}>-</button>
+                <span>{quantity}</span>
+                <button onClick={onAdd}>+</button>
+              </div>
+              <div className={s.CartSum}>{totalPrice}</div>
+            </div>
+          )}
         </div>
       </div>
     </div>
