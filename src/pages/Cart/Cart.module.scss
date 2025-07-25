@@ -1,15 +1,13 @@
 .Cart {
-  max-width: 600px;
+  margin-top: 40px;
 }
 .CartTop {
   display: flex;
   justify-content: space-between;
 }
-.CartItems {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 40px;
+
+.CartItem {
+  margin-top: 10px;
 }
 // .ItemName{}
 // .ItemPrice{}

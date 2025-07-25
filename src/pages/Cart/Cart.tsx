@@ -12,18 +12,16 @@ const Cart = () => {
 
   const cartItems = cart.items.map(item => {
     return (
-      <div className={s.CartItems} key={item.id}>
-        <div className={s.CartItem}>
-          <ProductCard
-            product={item}
-            viewType="lines"
-            isCart={true}
-            onAdd={() => dispatch(addItemToCart(item))}
-            onRemove={() => dispatch(removeItemFromCart(item.id))}
-            quantity={item.itemQuantity}
-            totalPrice={item.itemTotalPrice}
-          />
-        </div>
+      <div className={s.CartItem} key={item.id}>
+        <ProductCard
+          product={item}
+          viewType="lines"
+          isCart={true}
+          onAdd={() => dispatch(addItemToCart(item))}
+          onRemove={() => dispatch(removeItemFromCart(item.id))}
+          quantity={item.itemQuantity}
+          totalPrice={item.itemTotalPrice}
+        />
       </div>
     );
   });

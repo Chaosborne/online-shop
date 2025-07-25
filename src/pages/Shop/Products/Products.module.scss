@@ -45,7 +45,6 @@
 .Lines {
   display: flex;
   flex-direction: column;
-  gap: 10px;
 }
 
 .MainContent {
@@ -65,7 +64,7 @@
 .Pagination {
   display: flex;
   justify-content: end;
-  margin-top: 80px;
+  margin-top: 30px;
   gap: 5px;
 
   button {
