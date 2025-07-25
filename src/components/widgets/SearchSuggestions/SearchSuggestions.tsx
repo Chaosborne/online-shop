@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import s from './SearchSuggestions.module.scss';
 import generateProductSlug from '../../../helpers/generateProductSlug';
-import { IProduct } from '../../../constants/mocks/products';
+import { IProduct } from '../../../constants/interfaces/IProduct';
 
 type SearchSuggestionsProps = {
   matchingItems: IProduct[];
