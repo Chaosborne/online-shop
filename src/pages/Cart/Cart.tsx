@@ -1,7 +1,7 @@
 import s from './Cart.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
-import { addItemToCart, removeItemFromCart } from '../../store/slices/cartSlice';
+import { addItemToCart, decrementItemInCart, removeItemFromCart } from '../../store/slices/cartSlice';
 import { clearCart } from '../../store/slices/cartSlice';
 import ProductCard from '../../components/ProductCard/ProductCard';
 
@@ -18,7 +18,8 @@ const Cart = () => {
           viewType="lines"
           isCart={true}
           onAdd={() => dispatch(addItemToCart(item))}
-          onRemove={() => dispatch(removeItemFromCart(item.id))}
+          onRemoveOne={() => dispatch(decrementItemInCart(item.id))}
+          onRemoveAll={() => dispatch(removeItemFromCart(item.id))}
           quantity={item.itemQuantity}
           totalPrice={item.itemTotalPrice}
         />

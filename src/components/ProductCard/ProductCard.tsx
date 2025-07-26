@@ -10,6 +10,7 @@ import { AppDispatch } from '../../store/store';
 import { CartIcon } from '../../assets/img/CartIcon';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
+import { BinIcon } from '../../assets/img/BinIcon';
 
 // ProductCard — базовый компонент карточки товара для каталога и корзины.
 // Если потребуется больше вариантов карточек, общую часть (изображение, название, цена и т.д.)
@@ -21,12 +22,13 @@ interface Props {
   viewType: 'tiles' | 'lines';
   isCart?: boolean;
   onAdd?: () => void;
-  onRemove?: () => void;
+  onRemoveOne?: () => void;
+  onRemoveAll?: () => void;
   quantity?: number;
   totalPrice?: number;
 }
 
-const ProductCard = ({ product, viewType, isCart = false, onAdd, onRemove, quantity, totalPrice }: Props) => {
+const ProductCard = ({ product, viewType, isCart = false, onAdd, onRemoveOne, onRemoveAll, quantity, totalPrice }: Props) => {
   const { id, images, itemName, itemBrand, itemDescription, itemPrice } = product;
 
   const { isFavorite, toggle } = useFavorites();
@@ -64,12 +66,15 @@ const ProductCard = ({ product, viewType, isCart = false, onAdd, onRemove, quant
           {isCart && (
             <div className={s.CartControls}>
               <div className={s.ItemQuantity}>
-                <button className={s.ItemQuantityBtn} onClick={onRemove}>
+                <button className={s.ItemQuantityBtn} onClick={onRemoveOne}>
                   -
                 </button>
                 <span className={s.ItemQuantityDigit}>{quantity}</span>
                 <button className={s.ItemQuantityBtn} onClick={onAdd}>
                   +
+                </button>
+                <button className={s.removeItemFromCartBtn} onClick={onRemoveAll}>
+                  <BinIcon />
                 </button>
               </div>
               <div className={s.CardSum}>{`${typeof totalPrice === 'number' && totalPrice.toLocaleString('ru-RU')} ₽`}</div>
