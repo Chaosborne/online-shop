@@ -59,8 +59,10 @@
   transform: translateY(-1px);
 }
 
-.ItemQuantityDigit {
-  margin: 0 10px;
+.ItemQuantityValue {
+  margin: 0 5px;
+  min-width: 20px;
+  text-align: center;
 }
 
 .tiles {

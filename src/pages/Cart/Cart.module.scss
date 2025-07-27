@@ -38,6 +38,18 @@
   }
 }
 
+.TotalCartPriceValue {
+  display: inline-block;
+  min-width: 80px;
+  text-align: right;
+}
+
+.TotalCartQuantityValue {
+  display: inline-block;
+  min-width: 20px;
+  text-align: right;
+}
+
 .BuyBtn {
   float: right;
   margin-top: 50px;

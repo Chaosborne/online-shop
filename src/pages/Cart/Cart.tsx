@@ -43,8 +43,8 @@ const Cart = () => {
         <div className={s.Cart}>
           {CartItemsElement}
           <div className={s.TotalPrice}>
-            {hasCartItems && <p className={s.TotalCartQuantity}>Количество товаров: <span>{cart.totalQuantity}</span></p>}
-            {hasCartItems && <p className={s.TotalCartPrice}>Общая сумма: <span>{cart.totalPrice.toLocaleString('ru-RU')} ₽</span></p>}
+            {hasCartItems && <p className={s.TotalCartQuantity}>Количество товаров: <span className={s.TotalCartQuantityValue}>{cart.totalQuantity}</span></p>}
+            {hasCartItems && <p className={s.TotalCartPrice}>Общая сумма: <span className={s.TotalCartPriceValue}>{cart.totalPrice.toLocaleString('ru-RU')} ₽</span></p>}
           </div>
           {hasCartItems && <button className={s.BuyBtn}>Оформить заказ</button>}
         </div>
