@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addItemToCart, removeItemFromCart } from '../../store/slices/cartSlice';
 import { AppDispatch, RootState } from '../../store/store';
 import { getItemQuantity } from '../../store/slices/cartSlice';
+import generateProductSlug from '../../helpers/generateProductSlug';
 
 import s from './ProductPage.module.scss';
 // import { productsMockData } from '../../../constants/mocks/products'; // Пока оставляю, источник может быть не окончательный
@@ -12,7 +13,6 @@ const Product = () => {
   const productsState = useSelector((state: RootState) => state.dbProducts);
   const productsFromStore = productsState.products || [];
 
-  // Get dispatcher and cart data from redux
   const dispatch = useDispatch<AppDispatch>();
 
   // Check if product exists
@@ -20,11 +20,8 @@ const Product = () => {
 
   // const product = productsMockData.find(product => {
   const product = productsFromStore.find(product => {
-    const brandSlug = product.itemBrand.toLowerCase().replace(/\s+/g, '-');
-    const nameSlug = product.itemName.toLowerCase().replace(/\s+/g, '-');
-    const combinedSlug = `${brandSlug}-${nameSlug}`;
-
-    return combinedSlug === productSlug;
+    const productSlugFromData = generateProductSlug(product.itemBrand, product.itemName);
+    return productSlugFromData === productSlug;
   });
 
   // Get actual item quantity from Cart
