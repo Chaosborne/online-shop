@@ -38,6 +38,8 @@ const Product = () => {
     return <p>Товар не найден</p>;
   }
 
+  console.log(product);
+
   const addToCartHandler = () => {
     dispatch(addItemToCart(product));
   };
@@ -49,12 +51,22 @@ const Product = () => {
     <main className={s.Card}>
       <div className="container">
         <h1 className={s.Title}>{`${product.itemBrand} ${product.itemName}`}</h1>
-        <img src={`/productsImages/${product.images[0]}`} alt={product.itemName} />
-        <p>{product.itemDescription}</p>
-        <p>Цена: ${product.itemPrice}</p>
-        <button onClick={addToCartHandler}>Добавить в корзину</button>
-        <button onClick={removeFromCartHandler}>Удалить из корзины</button>
-        <h2>В корзине: {itemQuantityInCart}</h2>
+        <div className={s.ProductInfo}>
+          <div className={s.GalleryNav}>
+            {product.images.map((image, index) => (
+              <img className={s.GalleryNavImg} key={index} src={`/productsImages/${image}`} alt={product.itemName} />
+            ))}
+          </div>
+          <img className={s.GalleryMainImg} src={`/productsImages/${product.images[0]}`} alt={product.itemName} />
+          <div className={s.ProductDetails}>
+            <p className={s.Description}>{product.itemDescription}</p>
+            <p className={s.Title}>{product.itemBrand} {product.itemName}</p>
+            <p className={s.Price}>Цена: {product.itemPrice.toLocaleString('ru-RU')} ₽</p>
+            <button onClick={addToCartHandler}>Добавить в корзину</button>
+            <button onClick={removeFromCartHandler}>Удалить из корзины</button>
+            <h2>В корзине: {itemQuantityInCart}</h2>
+          </div>
+        </div>
       </div>
     </main>
   );

@@ -52,7 +52,7 @@ const ProductCard = ({ product, viewType, isCart = false, onAdd, onRemoveOne, on
         </Link>
 
         <div className={s.PriceFavorites}>
-          <span className={s.Price}>{`${itemPrice.toLocaleString('ru-RU')} ₽`}</span>
+          <span className={s.Price}>{itemPrice.toLocaleString('ru-RU')} ₽</span>
           {!isCart && (
             <div className={s.ProductcardBtns}>
               <button className={s.FavoriteBtn} onClick={() => void toggle(Number(id))}>
@@ -77,7 +77,7 @@ const ProductCard = ({ product, viewType, isCart = false, onAdd, onRemoveOne, on
                   <BinIcon />
                 </button>
               </div>
-              <div className={s.CardSum}>{`${typeof totalPrice === 'number' && totalPrice.toLocaleString('ru-RU')} ₽`}</div>
+              <div className={s.CardSum}>{typeof totalPrice === 'number' && totalPrice.toLocaleString('ru-RU')} ₽</div>
             </div>
           )}
         </div>
