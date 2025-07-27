@@ -66,11 +66,11 @@ const ProductCard = ({ product, viewType, isCart = false, onAdd, onRemoveOne, on
           {isCart && (
             <div className={s.CartControls}>
               <div className={s.ItemQuantity}>
-                <button className={s.ItemQuantityBtn} onClick={onRemoveOne}>
+                <button className={clsx(s.ItemQuantityBtn, quantity === 1 && s.DisabledBtn)} onClick={onRemoveOne} disabled={quantity === 1}>
                   -
                 </button>
                 <span className={s.ItemQuantityDigit}>{quantity}</span>
-                <button className={s.ItemQuantityBtn} onClick={onAdd}>
+                <button className={clsx(s.ItemQuantityBtn, quantity === 10 && s.DisabledBtn)} onClick={onAdd} disabled={quantity === 10}>
                   +
                 </button>
                 <button className={s.removeItemFromCartBtn} onClick={onRemoveAll}>
