@@ -8,9 +8,13 @@ import { CartIcon } from '../../assets/img/CartIcon';
 import { BinIcon } from '../../assets/img/BinIcon';
 
 import s from './ProductPage.module.scss';
+import { useState } from 'react';
+import clsx from 'clsx';
 // import { productsMockData } from '../../../constants/mocks/products'; // Пока оставляю, источник может быть не окончательный
 
 const Product = () => {
+  const [mainImage, setMainImage] = useState(0);
+  
   // Get products from store (previously got from Firestore)
   const productsState = useSelector((state: RootState) => state.dbProducts);
   const productsFromStore = productsState.products || [];
@@ -46,14 +50,20 @@ const Product = () => {
   return (
     <main className={s.Card}>
       <div className="container">
-        <h1 className={s.Title}>{`${product.itemBrand} ${product.itemName}`}</h1>
+        <h1 className={s.Title}>{clsx(product.itemBrand, product.itemName)}</h1>
         <div className={s.ProductInfo}>
           <div className={s.GalleryNav}>
             {product.images.map((image, index) => (
-              <img className={s.GalleryNavImg} key={index} src={`/productsImages/${image}`} alt={product.itemName} />
+              <img 
+                className={clsx(s.GalleryNavImg, index === mainImage && s.SelectedImage)} 
+                key={index} 
+                src={`/productsImages/${image}`} 
+                alt={product.itemName} 
+                onClick={() => setMainImage(index)} 
+              />
             ))}
           </div>
-          <img className={s.GalleryMainImg} src={`/productsImages/${product.images[0]}`} alt={product.itemName} />
+          <img className={s.GalleryMainImg} src={`/productsImages/${product.images[mainImage]}`} alt={product.itemName} />
           <div className={s.ProductDetails}>
             <h2 className={s.Description}>{product.itemDescription}</h2>
             <h3 className={s.Title}>{product.itemBrand} {product.itemName}</h3>

@@ -41,6 +41,14 @@
   width: 70px;
   height: 70px;
   object-fit: cover;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.SelectedImage {
+  border-color: vars.$accent;
+  border-radius: 5px;
 }
 
 .GalleryMainImg {
