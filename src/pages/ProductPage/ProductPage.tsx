@@ -4,6 +4,8 @@ import { addItemToCart, removeItemFromCart } from '../../store/slices/cartSlice'
 import { AppDispatch, RootState } from '../../store/store';
 import { getItemQuantity } from '../../store/slices/cartSlice';
 import generateProductSlug from '../../helpers/generateProductSlug';
+import { CartIcon } from '../../assets/img/CartIcon';
+import { BinIcon } from '../../assets/img/BinIcon';
 
 import s from './ProductPage.module.scss';
 // import { productsMockData } from '../../../constants/mocks/products'; // Пока оставляю, источник может быть не окончательный
@@ -38,14 +40,8 @@ const Product = () => {
     return <p>Товар не найден</p>;
   }
 
-  console.log(product);
-
-  const addToCartHandler = () => {
-    dispatch(addItemToCart(product));
-  };
-  const removeFromCartHandler = () => {
-    dispatch(removeItemFromCart(product.id));
-  };
+  const addToCartHandler = () => dispatch(addItemToCart(product));
+  const removeFromCartHandler = () => dispatch(removeItemFromCart(product.id));
 
   return (
     <main className={s.Card}>
@@ -59,11 +55,15 @@ const Product = () => {
           </div>
           <img className={s.GalleryMainImg} src={`/productsImages/${product.images[0]}`} alt={product.itemName} />
           <div className={s.ProductDetails}>
-            <p className={s.Description}>{product.itemDescription}</p>
-            <p className={s.Title}>{product.itemBrand} {product.itemName}</p>
+            <h2 className={s.Description}>{product.itemDescription}</h2>
+            <h3 className={s.Title}>{product.itemBrand} {product.itemName}</h3>
             <p className={s.Price}>Цена: {product.itemPrice.toLocaleString('ru-RU')} ₽</p>
-            <button onClick={addToCartHandler}>Добавить в корзину</button>
-            <button onClick={removeFromCartHandler}>Удалить из корзины</button>
+            <button className={s.AddToCartBtn} onClick={addToCartHandler}>
+              <CartIcon className={s.AddToCartBtnIcon} />
+            </button>
+            <button className={s.removeItemFromCartBtn} onClick={removeFromCartHandler}>
+              <BinIcon />
+            </button>
             <h2>В корзине: {itemQuantityInCart}</h2>
           </div>
         </div>
