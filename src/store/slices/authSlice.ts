@@ -10,10 +10,8 @@ interface AuthState {
   error: string | null;
 }
 
-// Тип для данных пользователя
 type UserData = NonNullable<AuthState['user']>;
 
-// Безопасная проверка типа без any
 const isValidUserData = (data: unknown): data is UserData => {
   if (!data || typeof data !== 'object') return false;
 

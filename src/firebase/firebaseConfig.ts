@@ -4,6 +4,8 @@ import { getAuth } from 'firebase/auth';
 import { firebaseApiKey } from './firebaseApiKey';
 import { getFirestore } from 'firebase/firestore';
 
+
+// Eco-village was my initial concept of a site
 const firebaseConfig = {
   apiKey: firebaseApiKey,
   authDomain: 'eco-village-d5d6d.firebaseapp.com',
