@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import { doc, setDoc, deleteDoc, collection, getDocs } from 'firebase/firestore';
 import { db } from '../../firebase/firebaseConfig';
+import { FirebaseError } from 'firebase/app';
 
 export const loadFavorites = createAsyncThunk<number[], void, { state: RootState }>('s/load', async (_, { getState, rejectWithValue }) => {
   const state = getState();
@@ -27,6 +28,15 @@ export const loadFavorites = createAsyncThunk<number[], void, { state: RootState
     return favorites;
   } catch (error) {
     console.error('Favorites load error:', error);
+    
+    // Обработка ошибок Firebase
+    if (error instanceof FirebaseError) {
+      if (error.code === 'permission-denied' || error.message.includes('Missing or insufficient permissions')) {
+        return rejectWithValue('Missing or insufficient permissions');
+      }
+      return rejectWithValue(`Firebase error: ${error.message}`);
+    }
+    
     return rejectWithValue(error instanceof Error ? error.message : 'Неизвестная ошибка');
   }
 });
@@ -53,6 +63,15 @@ export const toggleFavoriteInFirebase = createAsyncThunk<number, { productId: nu
     return productId;
   } catch (error) {
     console.error('Error updating favorites:', error);
+    
+    // Обработка ошибок Firebase
+    if (error instanceof FirebaseError) {
+      if (error.code === 'permission-denied' || error.message.includes('Missing or insufficient permissions')) {
+        return rejectWithValue('Missing or insufficient permissions');
+      }
+      return rejectWithValue(`Firebase error: ${error.message}`);
+    }
+    
     return rejectWithValue(error instanceof Error ? error.message : 'Unknown error');
   }
 });

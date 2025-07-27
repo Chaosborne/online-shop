@@ -17,13 +17,21 @@ export const useAuth = () => {
       setIsLoading(false);
 
       if (firebaseUser) {
-        const userData = {
-          uid: firebaseUser.uid,
-          email: firebaseUser.email || '',
-          displayName: firebaseUser.displayName || '',
-        };
+        // Проверяем, что пользователь действительно существует и имеет права
+        try {
+          const userData = {
+            uid: firebaseUser.uid,
+            email: firebaseUser.email || '',
+            displayName: firebaseUser.displayName || '',
+          };
 
-        dispatch(setUser(userData));
+          dispatch(setUser(userData));
+        } catch (error) {
+          console.error('Error setting user data:', error);
+          // Если есть проблемы с пользователем, очищаем состояние
+          dispatch(clearUser());
+          dispatch(clearFavorites());
+        }
       } else {
         dispatch(clearUser());
         dispatch(clearFavorites());
@@ -91,6 +99,12 @@ export const useAuth = () => {
           break;
         case 'auth/too-many-requests':
           setError('Слишком много попыток входа. Попробуйте позже');
+          break;
+        case 'auth/user-not-found':
+          setError('Пользователь не найден');
+          break;
+        case 'auth/user-disabled':
+          setError('Пользователь заблокирован');
           break;
         default:
           setError('Ошибка входа. Попробуйте позже');
