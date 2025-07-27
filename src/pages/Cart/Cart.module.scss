@@ -3,6 +3,7 @@
 .Cart {
   margin-top: 40px;
 }
+
 .CartTop {
   display: flex;
   justify-content: space-between;
@@ -11,6 +12,7 @@
 .CartItem {
   margin-top: 10px;
 }
+
 // .ItemName{}
 // .ItemPrice{}
 .ItemQuantity {
@@ -18,6 +20,7 @@
   align-items: center;
   gap: 10px;
 }
+
 // .CartSum{}
 
 .TotalPrice {
@@ -61,4 +64,13 @@
 
 .CartEmptyMsg {
   margin-top: 30px;
+}
+
+.CartEmptyLink {
+  margin-top: 10px;
+  color: vars.$accent;
+
+  &:hover {
+    color: vars.$accent-hover;
+  }
 }

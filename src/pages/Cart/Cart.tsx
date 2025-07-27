@@ -4,6 +4,7 @@ import { RootState } from '../../store/store';
 import { addItemToCart, decrementItemInCart, removeItemFromCart } from '../../store/slices/cartSlice';
 import { clearCart } from '../../store/slices/cartSlice';
 import ProductCard from '../../components/ProductCard/ProductCard';
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ const Cart = () => {
 
   const hasCartItems = cartItems.length > 0;
 
-  const CartItemsElement = hasCartItems ? cartItems : <p className={s.CartEmptyMsg}>Корзина пуста</p>;
+  const CartItemsElement = hasCartItems ? cartItems : <div className={s.CartEmptyMsg}><p>Корзина пуста</p><Link className={s.CartEmptyLink} to="/">В каталог</Link></div>;
 
   const clearTheCart = () => dispatch(clearCart());
 
@@ -38,7 +39,7 @@ const Cart = () => {
       <div className="container">
         <div className={s.CartTop}>
           <h1>Корзина</h1>
-          <button onClick={clearTheCart}>Очистить корзину</button>
+          {hasCartItems && <button onClick={clearTheCart}>Очистить корзину</button>}
         </div>
         <div className={s.Cart}>
           {CartItemsElement}
