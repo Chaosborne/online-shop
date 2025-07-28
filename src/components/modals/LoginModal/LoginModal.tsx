@@ -85,13 +85,13 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
           ) : (
             <p className={s.Hint}>Нажмите <b>Зарегистрироваться</b>, чтобы создать тестового пользователя</p>
           )}
-          <button className={s.FillBtn} onClick={handleFillLastUser}>Заполнить</button>
+          <button className={clsx(s.FillBtn, hasLastUser ? undefined : s.Disabled)} onClick={handleFillLastUser}>Заполнить</button>
           <form className={s.LoginForm}>
             <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} readOnly />
             <input className={password ? s.PasswordInput : undefined} type="password" placeholder="Пароль" value={password} onChange={e => setPassword(e.target.value)} readOnly />
             {error && <p className={s.Error}>{error}</p>}
             <button
-              className={s.EnterBtn}
+              className={clsx(s.EnterBtn, hasLastUser ? undefined : s.Disabled)}
               onClick={e => {
                 e.preventDefault();
                 void handleLogin(email, password);
