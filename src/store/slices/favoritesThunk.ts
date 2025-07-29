@@ -17,19 +17,12 @@ export const loadFavorites = createAsyncThunk<number[], void, { state: RootState
     const itemsRef = collection(db, 'favorites', userId, 'items');
     const snapshot = await getDocs(itemsRef);
 
-    if (snapshot.empty) {
-      console.log('User has no favorites');
-      return [];
-    }
-
     const favorites = snapshot.docs.map(doc => Number(doc.id)).filter(id => !isNaN(id));
 
-    console.log('Favorites loaded:', favorites);
     return favorites;
   } catch (error) {
     console.error('Favorites load error:', error);
     
-    // Обработка ошибок Firebase
     if (error instanceof FirebaseError) {
       if (error.code === 'permission-denied' || error.message.includes('Missing or insufficient permissions')) {
         return rejectWithValue('Missing or insufficient permissions');

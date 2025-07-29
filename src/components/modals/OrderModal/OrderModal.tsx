@@ -156,7 +156,7 @@ const OrderModal = ({ onClose }: OrderModalProps) => {
           <div className={s.success}>
             <h2>Заказ успешно оформлен! 🎉</h2>
             <p>Номер заказа: #{Math.random().toString(36).substring(2, 11).toUpperCase()}</p>
-            <p>Мы свяжемся с вами в ближайшее время для подтверждения заказа.</p>
+            <p>Мы свяжемся с вами в ближайшее время для подтверждения заказа</p>
             <button className={s.closeSuccessBtn} onClick={handleCloseSuccess}>
               Закрыть
             </button>
