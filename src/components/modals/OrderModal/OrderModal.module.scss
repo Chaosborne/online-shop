@@ -1,0 +1,214 @@
+@use '../../../assets/scss/vars' as vars;
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  border-radius: 8px;
+  padding: 30px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.closeBtn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+  
+  &:hover {
+    color: #333;
+  }
+}
+
+.title {
+  margin-bottom: 20px;
+  color: vars.$text;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.orderSummary {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 6px;
+  margin-bottom: 25px;
+  
+  h3 {
+    margin-bottom: 10px;
+    color: vars.$text;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  
+  p {
+    margin: 5px 0;
+    color: #666;
+    
+    &:last-child {
+      font-weight: 600;
+      color: vars.$accent;
+      font-size: 18px;
+    }
+  }
+}
+
+.userInfo {
+  background-color: #e3f2fd;
+  border: 1px solid #2196f3;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 20px;
+  
+  .userInfoText {
+    margin: 0;
+    color: #1976d2;
+    font-size: 14px;
+    font-weight: 500;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  
+  label {
+    font-weight: 500;
+    color: vars.$text;
+    font-size: 14px;
+  }
+  
+  input, textarea {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+    
+    &:focus {
+      outline: none;
+      border-color: vars.$accent;
+    }
+    
+    &:required {
+      border-left: 3px solid vars.$accent;
+    }
+  }
+  
+  textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  
+  .readOnlyInput {
+    background-color: #f8f9fa;
+    color: #666;
+    cursor: not-allowed;
+    
+    &:focus {
+      border-color: #ddd;
+    }
+  }
+}
+
+.submitBtn {
+  background-color: vars.$accent;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  
+  &:hover:not(:disabled) {
+    background-color: vars.$accent_hover;
+  }
+  
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+}
+
+.success {
+  text-align: center;
+  padding: 20px;
+  
+  h2 {
+    color: #28a745;
+    margin-bottom: 15px;
+    font-size: 22px;
+  }
+  
+  p {
+    margin: 10px 0;
+    color: #666;
+    
+    &:nth-child(2) {
+      font-weight: 600;
+      color: vars.$accent;
+      font-size: 18px;
+    }
+  }
+  
+  .closeSuccessBtn {
+    background-color: vars.$accent;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.2s ease;
+    
+    &:hover {
+      background-color: vars.$accent_hover;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .modal {
+    padding: 20px;
+    margin: 20px;
+  }
+  
+  .title {
+    font-size: 20px;
+  }
+  
+  .submitBtn {
+    padding: 12px 25px;
+    font-size: 14px;
+  }
+} 

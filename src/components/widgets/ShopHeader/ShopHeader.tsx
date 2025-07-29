@@ -4,7 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
 import { setSearchQuery } from '../../../store/slices/searchSlice';
-import { ModalPortal as LoginModalPortal } from '../../modals';
+import { LoginModalPortal } from '../../modals';
 import { IProduct } from '../../../constants/interfaces/IProduct';
 import SearchSuggestions from '../SearchSuggestions/SearchSuggestions';
 import { CartIcon } from '../../../assets/img/CartIcon';

@@ -3,7 +3,7 @@ import styles from './BurgerMenu.module.scss';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
-import { ModalPortal as LoginModalPortal } from '../../modals';
+import { LoginModalPortal } from '../../modals';
 
 const BurgerMenu: React.FC = () => {
   const [open, setOpen] = useState(false);

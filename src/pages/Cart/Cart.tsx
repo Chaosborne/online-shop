@@ -5,10 +5,13 @@ import { addItemToCart, decrementItemInCart, removeItemFromCart } from '../../st
 import { clearCart } from '../../store/slices/cartSlice';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import { Link } from 'react-router-dom';
+import { OrderModal } from '../../components/modals';
+import { useState } from 'react';
 
 const Cart = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state: RootState) => state.cart);
+  const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
 
 
   const cartItems = cart.items.map(item => {
@@ -33,6 +36,8 @@ const Cart = () => {
   const CartItemsElement = hasCartItems ? cartItems : <div className={s.CartEmptyMsg}><p>Корзина пуста</p><Link className={s.CartEmptyLink} to="/">В каталог</Link></div>;
 
   const clearTheCart = () => dispatch(clearCart());
+  const openOrderModal = () => setIsOrderModalOpen(true);
+  const closeOrderModal = () => setIsOrderModalOpen(false);
 
   return (
     <main className="main">
@@ -47,9 +52,10 @@ const Cart = () => {
             {hasCartItems && <p className={s.TotalCartQuantity}>Количество товаров: <span className={s.TotalCartQuantityValue}>{cart.totalQuantity}</span></p>}
             {hasCartItems && <p className={s.TotalCartPrice}>Общая сумма: <span className={s.TotalCartPriceValue}>{cart.totalPrice.toLocaleString('ru-RU')} ₽</span></p>}
           </div>
-          {hasCartItems && <button className={s.BuyBtn}>Оформить заказ</button>}
+          {hasCartItems && <button className={s.BuyBtn} onClick={openOrderModal}>Оформить заказ</button>}
         </div>
       </div>
+      {isOrderModalOpen && <OrderModal onClose={closeOrderModal} />}
     </main>
   );
 };
