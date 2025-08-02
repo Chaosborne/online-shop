@@ -14,7 +14,7 @@
     }
   }
 
-  @media (max-width: vars.$tablet) {
+  @media (max-width: vars.$mobile) {
     padding: 20px;
   }
 }
@@ -24,7 +24,7 @@
   flex-direction: column;
   justify-content: space-between;
 
-  @media (max-width: vars.$tablet) {
+  @media (max-width: vars.$mobile) {
     flex-direction: row;
   }
 }
@@ -106,7 +106,7 @@
     justify-content: space-between;
   }
 
-  @media (max-width: vars.$tablet) {
+  @media (max-width: vars.$mobile) {
     gap: 0 15px;
   }
 }
@@ -131,7 +131,7 @@
 .CardSum {
   text-align: right;
 
-  @media (max-width: vars.$tablet) {
+  @media (max-width: vars.$mobile) {
     font-size: 18px;
   }
 }
