@@ -57,13 +57,13 @@ const Product = () => {
               <img 
                 className={clsx(s.GalleryNavImg, index === mainImage && s.SelectedImage)} 
                 key={index} 
-                src={`/productsImages/${image}`} 
+                src={`/shop/productsImages/${image}`} 
                 alt={product.itemName} 
                 onClick={() => setMainImage(index)} 
               />
             ))}
           </div>
-          <img className={s.GalleryMainImg} src={`/productsImages/${product.images[mainImage]}`} alt={product.itemName} />
+          <img className={s.GalleryMainImg} src={`/shop/productsImages/${product.images[mainImage]}`} alt={product.itemName} />
           <div className={s.ProductDetails}>
             <h2 className={s.Description}>{product.itemDescription}</h2>
             <h3 className={s.Title}>{product.itemBrand} {product.itemName}</h3>

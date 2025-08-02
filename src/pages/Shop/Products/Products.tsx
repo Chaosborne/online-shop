@@ -9,6 +9,8 @@ import ProductFilter from '../../../components/ProductFilter/ProductFilter';
 const Products = () => {
   const productsState = useSelector((state: RootState) => state.dbProducts);
   const productsFromStore = productsState.products || [];
+  
+
   const searchQuery = useSelector((state: RootState) => state.search.searchQuery);
   const searchInput = searchQuery.replace(/[^a-zA-Zа-яА-Я0-9\s]/g, '').trim();
 

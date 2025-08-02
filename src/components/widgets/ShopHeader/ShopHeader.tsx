@@ -56,7 +56,7 @@ const ShopHeader = () => {
         <div className={s.ShopHeaderInner}>
           <BurgerMenu />
           {/* <Link to="/">На стартовую</Link> */}
-          <img className={s.HeaderLogo} src="../../../src/assets/img/shop-logo.webp" alt="Greenshop" />
+          <img className={s.HeaderLogo} src="/shop/assets/shop-logo.webp" alt="Online Shop"/>
 
           <nav className={s.Nav}>
             <ul className={s.NavList}>

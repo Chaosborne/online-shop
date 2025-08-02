@@ -44,7 +44,7 @@ const ProductCard = ({ product, viewType, isCart = false, onAdd, onRemoveOne, on
 
   return (
     <div className={clsx(s.ProductCard, s[viewType])}>
-      <img className={s.CardImg} src={`/productsImages/${images[0]}`} alt={itemName} />
+                    <img className={s.CardImg} src={`/shop/productsImages/${images[0]}`} alt={itemName} />
 
       <div className={s.CardInfo}>
         <Link to={`/product/${productSlug}`} key={id}>

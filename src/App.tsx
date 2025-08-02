@@ -27,14 +27,17 @@ function App() {
   ///////////////
 
   return (
-    <Router>
+    <Router basename="/shop">
       <DefaultLayout>
-        {!isAppReady && <Loader />}
-        <Routes>
-          {routes.map(({ path, element }, index) => (
-            <Route key={index} path={path} element={element} />
-          ))}
-        </Routes>
+        {!isAppReady ? (
+          <Loader />
+        ) : (
+          <Routes>
+            {routes.map(({ path, element }, index) => {
+              return <Route key={index} path={path} element={element} />;
+            })}
+          </Routes>
+        )}
       </DefaultLayout>
     </Router>
   );
