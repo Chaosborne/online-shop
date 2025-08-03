@@ -9,6 +9,7 @@ import { IProduct } from '../../../constants/interfaces/IProduct';
 import SearchSuggestions from '../SearchSuggestions/SearchSuggestions';
 import { CartIcon } from '../../../assets/img/CartIcon';
 import { LensIcon } from '../../../assets/img/LensIcon';
+import { ShopLogo } from '../../../assets/img/ShopLogo';
 import BurgerMenu from '../../ui/BurgerMenu/BurgerMenu';
 
 const ShopHeader = () => {
@@ -55,9 +56,8 @@ const ShopHeader = () => {
       <div className="container">
         <div className={s.ShopHeaderInner}>
           <BurgerMenu />
-          {/* <Link to="/">На стартовую</Link> */}
-          <img className={s.HeaderLogo} src="/shop/assets/shop-logo.webp" alt="Online Shop"/>
-
+          <ShopLogo className={s.HeaderLogo} />
+          
           <nav className={s.Nav}>
             <ul className={s.NavList}>
               <li>
