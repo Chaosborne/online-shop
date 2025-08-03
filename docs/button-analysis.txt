@@ -1,0 +1,57 @@
+АНАЛИЗ КНОПОК В ПРОЕКТЕ
+
+ГРУППИРОВКА КНОПОК ПО ВИЗУАЛУ И РАЗМЕРАМ:
+
+1. Узкие кнопки с иконками:
+- SearchBtn (поисковая строка)
+- AddToCartBtn (в карточке товара)
+- AddToCartBtn (на странице товара) - две похожие кнопки
+- removeItemFromCartBtn (карточка товара в корзине)
+
+2. Кнопки количества:
+- ItemQuantityBtn (карточка товара в корзине)
+
+3. Основные кнопки действий:
+- BuyBtn (корзина)
+- submitBtn (форма подтверждения заказа) - похожа на BuyBtn, но во всю ширину
+
+4. Кнопки модальных окон:
+- closeSuccessBtn (модальное окно подтверждения успеха заказа)
+
+5. Кнопки форм регистрации и входа:
+- FillBtn, EnterBtn, RegisterBtn - но бывают разных цветов
+
+ДОПОЛНИТЕЛЬНО:
+
+- modal кнопки аналогичны кнопкам form, только немного уже
+- primary кнопки тоже подходили бы в категорию form, но кнопка BuyBtn уже чем кнопки формы регистрации и входа, и её поведение немного другое в плане JS логики
+
+ПРЕДПОЛАГАЕМАЯ СТРУКТУРА КОМПОНЕНТА BUTTON:
+
+interface ButtonProps {
+  children: React.ReactNode;
+  variant?: 'icon' | 'quantity' | 'primary' | 'form' | 'modal';
+  size?: 'small' | 'medium' | 'large';
+  fullWidth?: boolean;
+  color?: 'primary' | 'secondary';
+  disabled?: boolean;
+  onClick?: () => void;
+  className?: string;
+  type?: 'button' | 'submit' | 'reset';
+}
+
+ВАРИАНТЫ КНОПОК:
+1. icon - узкие кнопки с иконками
+2. quantity - кнопки количества
+3. primary - основные кнопки действий
+4. form - кнопки форм
+5. modal - кнопки модальных окон
+
+РАЗМЕРЫ:
+- small: ItemQuantityBtn, removeItemFromCartBtn
+- medium: SearchBtn, AddToCartBtn
+- large: BuyBtn, submitBtn, EnterBtn, RegisterBtn, FillBtn, closeSuccessBtn
+
+ЦВЕТА:
+- primary - основной цвет (EnterBtn)
+- secondary - второстепенный цвет (RegisterBtn, FillBtn) 
