@@ -21,37 +21,137 @@
 5. Кнопки форм регистрации и входа:
 - FillBtn, EnterBtn, RegisterBtn - но бывают разных цветов
 
+6. Кнопки пагинации:
+- Кнопки пагинации в Products
+
+7. Кнопки фильтров:
+- FilterToggler, FilterClose
+
+8. Дополнительные кнопки:
+- LogoutBtn (UserProfile)
+- User (ShopHeader - кнопка входа)
+
 ДОПОЛНИТЕЛЬНО:
 
 - modal кнопки аналогичны кнопкам form, только немного уже
 - primary кнопки тоже подходили бы в категорию form, но кнопка BuyBtn уже чем кнопки формы регистрации и входа, и её поведение немного другое в плане JS логики
+- Некоторые кнопки имеют состояния (disabled, added, active)
+- Кнопки пагинации имеют уникальное поведение с Active состоянием
+- AddToCartBtn имеет состояние "added" когда товар уже в корзине
 
 ПРЕДПОЛАГАЕМАЯ СТРУКТУРА КОМПОНЕНТА BUTTON:
 
 interface ButtonProps {
   children: React.ReactNode;
-  variant?: 'icon' | 'quantity' | 'primary' | 'form' | 'modal';
+  variant?: 'solid' | 'outline' | 'ghost' | 'icon' | 'pagination';
   size?: 'small' | 'medium' | 'large';
-  fullWidth?: boolean;
-  color?: 'primary' | 'secondary';
+  color?: 'primary' | 'secondary' | 'danger' | 'success';
+  state?: 'default' | 'active' | 'disabled' | 'added' | 'loading';
   disabled?: boolean;
+  loading?: boolean;
+  fullWidth?: boolean;
   onClick?: () => void;
   className?: string;
   type?: 'button' | 'submit' | 'reset';
+  'aria-label'?: string;
+  ref?: React.Ref<HTMLButtonElement>;
 }
 
-ВАРИАНТЫ КНОПОК:
-1. icon - узкие кнопки с иконками
-2. quantity - кнопки количества
-3. primary - основные кнопки действий
-4. form - кнопки форм
-5. modal - кнопки модальных окон
+ВАРИАНТЫ КНОПОК (variant):
+1. solid - заполненные кнопки (BuyBtn, EnterBtn, RegisterBtn, submitBtn)
+2. outline - кнопки с рамкой (FillBtn, некоторые кнопки форм)
+3. ghost - прозрачные кнопки (FilterToggler, FilterClose)
+4. icon - кнопки только с иконками (SearchBtn, AddToCartBtn, removeItemFromCartBtn, CloseBtn)
+5. pagination - кнопки пагинации (уникальное поведение с Active состоянием)
 
-РАЗМЕРЫ:
-- small: ItemQuantityBtn, removeItemFromCartBtn
-- medium: SearchBtn, AddToCartBtn
-- large: BuyBtn, submitBtn, EnterBtn, RegisterBtn, FillBtn, closeSuccessBtn
+РАЗМЕРЫ (size):
+- small: ItemQuantityBtn, removeItemFromCartBtn, FavoriteBtn
+- medium: SearchBtn, AddToCartBtn, CloseBtn, FilterToggler, FilterClose
+- large: BuyBtn, submitBtn, EnterBtn, RegisterBtn, FillBtn, closeSuccessBtn, LogoutBtn, User
 
-ЦВЕТА:
-- primary - основной цвет (EnterBtn)
-- secondary - второстепенный цвет (RegisterBtn, FillBtn) 
+ЦВЕТА (color):
+- primary - основной цвет (EnterBtn, BuyBtn)
+- secondary - второстепенный цвет (RegisterBtn, FillBtn)
+- danger - опасные действия (removeItemFromCartBtn, LogoutBtn)
+- success - успешные действия (AddToCartBtn в состоянии added)
+
+СОСТОЯНИЯ (state):
+- default - обычное состояние
+- active - активное состояние (для пагинации, фильтров)
+- disabled - отключенное состояние
+- added - добавлено (для кнопок корзины)
+- loading - загрузка (для асинхронных действий)
+
+ПРИМЕРЫ ИСПОЛЬЗОВАНИЯ:
+
+```tsx
+// Кнопка с иконкой
+<Button variant="icon" size="medium" aria-label="Поиск" type="submit">
+  <SearchIcon />
+</Button>
+
+// Основная кнопка действия
+<Button variant="solid" size="large" color="primary">
+  Купить
+</Button>
+
+// Кнопка количества
+<Button variant="outline" size="small" state="disabled" disabled={quantity >= 10}>
+  +
+</Button>
+
+// Кнопка формы
+<Button variant="solid" size="large" color="primary" loading={isSubmitting}>
+  Войти
+</Button>
+
+// Опасная кнопка
+<Button variant="outline" size="medium" color="danger">
+  Удалить
+</Button>
+
+// Кнопка с полной шириной
+<Button variant="solid" size="large" fullWidth>
+  Оформить заказ
+</Button>
+
+// Кнопка пагинации
+<Button variant="pagination" size="medium" state="active">
+  1
+</Button>
+
+// Кнопка с состоянием "добавлено"
+<Button variant="icon" size="medium" state="added" aria-label="Добавить в корзину">
+  <CartIcon />
+</Button>
+```
+
+МАППИНГ СУЩЕСТВУЮЩИХ КНОПОК:
+
+SOLID (заполненные):
+- BuyBtn → variant="solid", size="large", color="primary"
+- EnterBtn → variant="solid", size="large", color="primary"
+- submitBtn → variant="solid", size="large", color="primary", fullWidth
+- RegisterBtn → variant="solid", size="large", color="secondary"
+
+OUTLINE (с рамкой):
+- FillBtn → variant="outline", size="large", color="secondary"
+- ItemQuantityBtn → variant="outline", size="small", state="disabled" (при quantity === 1)
+
+GHOST (прозрачные):
+- FilterToggler → variant="ghost", size="medium"
+- FilterClose → variant="ghost", size="medium"
+
+ICON (только иконки):
+- SearchBtn → variant="icon", size="medium", type="submit", aria-label="Поиск"
+- AddToCartBtn → variant="icon", size="medium", state="added" (когда товар в корзине)
+- removeItemFromCartBtn → variant="icon", size="small", color="danger"
+- CloseBtn → variant="icon", size="medium"
+- FavoriteBtn → variant="icon", size="small"
+
+PAGINATION (пагинация):
+- Кнопки пагинации → variant="pagination", size="medium", state="active" (для активной страницы)
+
+СПЕЦИАЛЬНЫЕ СЛУЧАИ:
+- LogoutBtn → variant="solid", size="large", color="danger"
+- User (ShopHeader) → это ссылка, не кнопка
