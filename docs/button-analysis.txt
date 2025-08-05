@@ -1,5 +1,13 @@
 АНАЛИЗ КНОПОК В ПРОЕКТЕ
 
+
+|| По итогам анализа я решил не вводить универсальный компонент Button в проекте
+|| ввиду большого разнообразия кнопок и немногочисленного повторения каждого их вида.
+|| Оставить заверстанные <button> в таком маленьком проекте более оправдано.
+|| Универсальный компонент Button с передачей ему множества параметров определенно стоит вводить
+|| в большом проекте с десятками повторяющихся элементов
+
+
 ГРУППИРОВКА КНОПОК ПО ВИЗУАЛУ И РАЗМЕРАМ:
 
 1. Узкие кнопки с иконками:
@@ -43,7 +51,7 @@
 
 interface ButtonProps {
   children: React.ReactNode;
-  variant?: 'solid' | 'outline' | 'ghost' | 'icon' | 'pagination';
+  variant?: 'solid' | 'outline' | 'ghost' | 'icon' | 'pagination' | 'text';
   size?: 'small' | 'medium' | 'large';
   color?: 'primary' | 'secondary' | 'danger' | 'success';
   state?: 'default' | 'active' | 'disabled' | 'added' | 'loading';
