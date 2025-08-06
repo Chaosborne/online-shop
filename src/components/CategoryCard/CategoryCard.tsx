@@ -9,7 +9,7 @@ interface Props {
 const CategoryCard = ({ category }: Props) => {
   return (
     <Link className={s.CategoryItem} to={`/categories/${category.id}`}>
-      {category.name}
+      {category.icon} {category.name}
     </Link>
   );
 };
