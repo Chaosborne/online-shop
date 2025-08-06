@@ -1,14 +1,17 @@
-import s from './Categorycard.module.scss';
+import s from './CategoryCard.module.scss';
 import { ICategory } from '../../constants/interfaces/ICategory';
+import { Link } from 'react-router-dom';
 
-// Extend ICategory only for this component
 interface Props {
-  category?: ICategory;
-  categoryName: string;
+  category: ICategory;
 }
 
-const CategoryCard = ({ categoryName }: Props) => {
-  return <div className={s.CategoryItem}>{categoryName}</div>;
+const CategoryCard = ({ category }: Props) => {
+  return (
+    <Link className={s.CategoryItem} to={`/categories/${category.id}`}>
+      {category.name}
+    </Link>
+  );
 };
 
 export default CategoryCard;

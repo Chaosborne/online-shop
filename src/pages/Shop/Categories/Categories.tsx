@@ -1,4 +1,4 @@
-import s from './Categories.module.scss';
+import s  from './Categories.module.scss';
 
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
@@ -9,7 +9,9 @@ const Categories = () => {
   const categoriesState = useSelector((state: RootState) => state.dbCategories);
   const categoriesFromStore = categoriesState.categories || [];
 
-  const CategoryCardsElement = categoriesFromStore.map(cat => <CategoryCard key={cat.id} categoryName={cat.name}></CategoryCard>);
+  const CategoryCardsElement = categoriesFromStore.map(cat => (
+    <CategoryCard key={cat.id} category={cat} />
+  ));
 
   return (
     <section className={s.CategoriesSection}>

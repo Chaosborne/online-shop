@@ -1,5 +1,5 @@
 import { RouteEnum } from './route';
-import { Cart, Favorites, Product, Shop, UserProfile } from '../pages';
+import { Cart, Favorites, Product, Shop, UserProfile, CategoriesPage } from '../pages';
 
 export const routes = [
   {
@@ -9,6 +9,10 @@ export const routes = [
   {
     path: `${RouteEnum.PRODUCT}/:productSlug`,
     element: <Product />,
+  },
+  {
+    path: `${RouteEnum.CATEGORIES}/:categoryId`,
+    element: <CategoriesPage />,
   },
   {
     path: RouteEnum.PROFILE,
