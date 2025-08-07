@@ -1,6 +1,21 @@
+@use '../../assets/scss/vars' as vars;
+
 .CategoryItem {
+  box-shadow: 0 0 3px 1px #42424214;
+  padding: 25px;
+  background-color: #fff;
   width: 244px;
-  height: 200px;
-  background-color: #808080;
+  height: 100px;
   padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;  
+  transition: all 0.3s ease;
+  color: vars.$text;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 }
