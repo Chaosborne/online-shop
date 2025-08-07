@@ -18,4 +18,22 @@
   &:hover {
     transform: scale(1.05);
   }
+
+  @media (max-width: 830px) {
+    width: 100%;
+    height: 50px;
+    padding: 20px;
+    justify-content: flex-start;
+
+    &:hover {
+      transform: none;
+    }
+  }
+}
+
+.CategoryIcon {
+  width: 25px;
+  height: auto;
+  margin-right: 15px;
+  stroke: vars.$accent;
 }
