@@ -44,7 +44,17 @@ const ProductCard = ({ product, viewType, isCart = false, onAdd, onRemoveOne, on
 
   return (
     <div className={clsx(s.ProductCard, s[viewType])}>
-                    <img className={s.CardImg} src={`/shop/productsImages/${images[0]}`} alt={itemName} />
+      <img
+        className={s.CardImg}
+        src={`/shop/productsImages/${images[0]}`}
+        alt={itemName}
+        loading="lazy"
+        onLoad={(e) => {
+          const img = e.target as HTMLImageElement;
+          img.style.opacity = '1';
+        }}
+        style={{ opacity: 0, transition: 'opacity 0.3s ease-in-out' }}
+      />
 
       <div className={s.CardInfo}>
         <Link to={`/product/${productSlug}`} key={id}>

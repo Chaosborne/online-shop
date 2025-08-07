@@ -77,6 +77,11 @@
     width: 100%;
   }
 
+  .CardImg {
+    width: 200px;
+    height: 200px;
+  }
+
   a {
     margin-top: 15px;
     width: 200px;
@@ -96,8 +101,9 @@
     margin-top: 10px;
   }
 
-  img {
+  .CardImg {
     width: 160px;
+    height: 160px;
   }
 
   .CardInfo {
