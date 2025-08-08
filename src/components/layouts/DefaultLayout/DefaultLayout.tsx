@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { Header } from '../../widgets';
+import { Header, Footer } from '../../widgets';
 
 type DefaultLayoutProps = {
   children: ReactNode;
@@ -10,6 +10,7 @@ export default function DefaultLayout({ children }: DefaultLayoutProps) {
     <>
       <Header />
       {children}
+      <Footer />
     </>
   );
 }

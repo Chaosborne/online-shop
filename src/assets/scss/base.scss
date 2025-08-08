@@ -56,13 +56,9 @@
 }
 
 body {
-  padding: 26px 25px 1000px;
+  padding: 26px 0 0;
   color: vars.$text;
   background-color: #f8f8f8;
-
-  @media (max-width: vars.$tablet) {
-    padding: 15px;
-  }
 }
 
 a {
@@ -95,6 +91,10 @@ button:focus-visible {
 .container {
   max-width: 1280px;
   margin: 0 auto;
+
+  @media (max-width: vars.$desktop) {
+    padding: 0 10px;
+  }
 }
 
 .main {
