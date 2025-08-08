@@ -50,7 +50,7 @@ const Product = () => {
   return (
     <main className={s.Card}>
       <div className="container">
-        <h1 className={s.Title}>{clsx(product.itemBrand, product.itemName)}</h1>
+        <h1 className={clsx(s.Title, s.ProductPageTitle)}>{clsx(product.itemBrand, product.itemName)}</h1>
         <div className={s.ProductInfo}>
           <div className={s.GalleryNav}>
             {product.images.map((image, index) => (
