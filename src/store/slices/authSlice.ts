@@ -24,7 +24,7 @@ const getInitialUser = (): AuthState['user'] => {
   if (typeof window === 'undefined') return null;
 
   try {
-    const savedUser = localStorage.getItem('shopUser');
+    const savedUser = localStorage.getItem('user');
     if (!savedUser) return null;
 
     const parsed: unknown = JSON.parse(savedUser);
@@ -48,12 +48,12 @@ const authSlice = createSlice({
     setUser: (state, action: PayloadAction<AuthState['user']>) => {
       state.user = action.payload;
       if (action.payload) {
-        localStorage.setItem('shopUser', JSON.stringify(action.payload));
+        localStorage.setItem('user', JSON.stringify(action.payload));
       }
     },
     clearUser: state => {
       state.user = null;
-      localStorage.removeItem('shopUser');
+      localStorage.removeItem('user');
     },
   },
 });

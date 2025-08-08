@@ -37,7 +37,7 @@
 
 8. Дополнительные кнопки:
 - LogoutBtn (UserProfile)
-- User (ShopHeader - кнопка входа)
+- User (Header - кнопка входа)
 
 ДОПОЛНИТЕЛЬНО:
 
@@ -162,4 +162,4 @@ PAGINATION (пагинация):
 
 СПЕЦИАЛЬНЫЕ СЛУЧАИ:
 - LogoutBtn → variant="solid", size="large", color="danger"
-- User (ShopHeader) → это ссылка, не кнопка
+- User (Header) → это ссылка, не кнопка

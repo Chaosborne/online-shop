@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { ShopHeader } from '../../widgets';
+import { Header } from '../../widgets';
 
 type DefaultLayoutProps = {
   children: ReactNode;
@@ -8,7 +8,7 @@ type DefaultLayoutProps = {
 export default function DefaultLayout({ children }: DefaultLayoutProps) {
   return (
     <>
-      <ShopHeader />
+      <Header />
       {children}
     </>
   );

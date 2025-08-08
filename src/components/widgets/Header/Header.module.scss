@@ -1,7 +1,7 @@
 @use '../../../../src/assets/scss/vars.scss' as vars;
 @use '../../../../src/assets/scss/mixins.scss' as mixins;
 
-.ShopHeader {
+.Header {
   margin-bottom: 1px;
 
   a {
@@ -13,7 +13,7 @@
   }
 }
 
-.ShopHeaderInner {
+.HeaderInner {
   display: flex;
   justify-content: space-between;
 }

@@ -1,4 +1,4 @@
-import s from './ShopHeader.module.scss';
+import s from './Header.module.scss';
 import { useState, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,10 +9,10 @@ import { IProduct } from '../../../constants/interfaces/IProduct';
 import SearchSuggestions from '../SearchSuggestions/SearchSuggestions';
 import { CartIcon } from '../../../assets/img/CartIcon';
 import { LensIcon } from '../../../assets/img/LensIcon';
-import { ShopLogo } from '../../../assets/img/ShopLogo';
+import { Logo } from '../../../assets/img/Logo';
 import BurgerMenu from '../../ui/BurgerMenu/BurgerMenu';
 
-const ShopHeader = () => {
+const Header = () => {
   const productsState = useSelector((state: RootState) => state.dbProducts);
   const productsFromStore = productsState.products || [];
 
@@ -51,13 +51,13 @@ const ShopHeader = () => {
   const closeLoginModal = () => setIsLoginModalOpen(false);
 
   return (
-    <header className={s.ShopHeader}>
+    <header className={s.Header}>
       {isLoginModalOpen && <LoginModalPortal onClose={closeLoginModal} modalType="login" />}
       <div className="container">
-        <div className={s.ShopHeaderInner}>
+        <div className={s.HeaderInner}>
           <BurgerMenu />
-          <ShopLogo className={s.HeaderLogo} />
-          
+          <Logo className={s.HeaderLogo} />
+
           <nav className={s.Nav}>
             <ul className={s.NavList}>
               <li>
@@ -106,4 +106,4 @@ const ShopHeader = () => {
   );
 };
 
-export default ShopHeader;
+export default Header;

@@ -1,10 +1,10 @@
 import React from 'react';
 
-interface ShopLogoProps {
+interface LogoProps {
 	className?: string;
 }
 
-export const ShopLogo: React.FC<ShopLogoProps> = ({ className }) => {
+export const Logo: React.FC<LogoProps> = ({ className }) => {
 	return (
 		<svg
 			className={className}
