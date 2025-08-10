@@ -78,14 +78,14 @@ const Footer = () => {
               </div>
               <div className={s.ContactItem}>
                 <span className={s.ContactLabel}>Telegram:</span>
-                {/* <a 
-                  href="https://t.me/" 
+                <a 
+                  href="https://t.me/Himmelenbot" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className={s.ContactLink}
                 >
-                  @Chaosborne
-                </a> */}
+                  Oleg
+                </a>
               </div>
             </div>
           </div>
