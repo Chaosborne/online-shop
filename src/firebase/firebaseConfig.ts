@@ -1,19 +1,33 @@
 // Firestore (Also change in getDBProductsSlice.ts)
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import { firebaseApiKey } from './firebaseApiKey';
 import { getFirestore } from 'firebase/firestore';
 
-
-// Eco-village was my initial concept of a site
+// Получаем конфигурацию из переменных окружения
 const firebaseConfig = {
-  apiKey: firebaseApiKey,
-  authDomain: 'eco-village-d5d6d.firebaseapp.com',
-  projectId: 'eco-village-d5d6d',
-  storageBucket: 'eco-village-d5d6d.firebasestorage.app',
-  messagingSenderId: '544483561624',
-  appId: '1:544483561624:web:d67843478bba766e1180ed',
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
+
+// Проверяем, что все необходимые переменные окружения установлены
+const requiredEnvVars = [
+  'VITE_FIREBASE_API_KEY',
+  'VITE_FIREBASE_AUTH_DOMAIN',
+  'VITE_FIREBASE_PROJECT_ID',
+  'VITE_FIREBASE_STORAGE_BUCKET',
+  'VITE_FIREBASE_MESSAGING_SENDER_ID',
+  'VITE_FIREBASE_APP_ID'
+];
+
+requiredEnvVars.forEach(envVar => {
+  if (!import.meta.env[envVar]) {
+    throw new Error(`Переменная окружения ${envVar} не найдена`);
+  }
+});
 
 export const firebaseApp = initializeApp(firebaseConfig);
 export const auth = getAuth(firebaseApp);
