@@ -4,7 +4,7 @@ import { FirebaseError } from 'firebase/app';
 import { auth } from '../firebase/firebaseConfig';
 import { useAppDispatch } from '../store/hooks';
 import { User } from 'firebase/auth';
-import { setUser, clearUser } from '../store/slices/authSlice';
+import { setUser, clearUser, setAuthLoading } from '../store/slices/authSlice';
 import { clearFavorites } from '../store/slices/favoritesSlice';
 
 export const useAuth = () => {
@@ -15,6 +15,7 @@ export const useAuth = () => {
   useEffect(() => {
     const handleAuthStateChange = async (firebaseUser: User | null) => {
       setIsLoading(false);
+      dispatch(setAuthLoading(false)); // Устанавливаем isLoading в false в Redux
 
       if (firebaseUser) {
         // Проверяем, что пользователь действительно существует и имеет права
@@ -49,9 +50,11 @@ export const useAuth = () => {
     try {
       setError(null);
       setIsLoading(true);
+      dispatch(setAuthLoading(true));
       await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
       setIsLoading(false);
+      dispatch(setAuthLoading(false));
       handleFirebaseError(error);
     }
   };
@@ -60,12 +63,14 @@ export const useAuth = () => {
     try {
       setError(null);
       setIsLoading(true);
+      dispatch(setAuthLoading(true));
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       if (displayName) {
         await updateProfile(userCredential.user, { displayName });
       }
     } catch (error) {
       setIsLoading(false);
+      dispatch(setAuthLoading(false));
       handleFirebaseError(error);
     }
   };
@@ -73,9 +78,11 @@ export const useAuth = () => {
   const handleLogout = async () => {
     try {
       setIsLoading(true);
+      dispatch(setAuthLoading(true));
       await signOut(auth);
     } catch (error) {
       setIsLoading(false);
+      dispatch(setAuthLoading(false));
       handleFirebaseError(error);
     }
   };

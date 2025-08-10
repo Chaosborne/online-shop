@@ -5,10 +5,12 @@ import { routes } from './constants/routes';
 import { useFetchCategories } from './hooks/usefetchCategories';
 import { useFetchProducts } from './hooks/useFetchProducts';
 import { useFetchFavorites } from './hooks/useFetchFavorites';
+import { useAuth } from './hooks/useAuth';
 import Loader from './components/ui/Loader/Loader';
 import { useAppReady } from './hooks/useAppReady';
 
 function App() {
+  useAuth(); // Инициализация авторизации
   useFetchCategories();
   useFetchProducts();
   useFetchFavorites();

@@ -6,14 +6,13 @@ export const useAppReady = () => {
   const favorites = useAppSelector(state => state.favorites);
   const auth = useAppSelector(state => state.auth);
 
-  if (!auth.user) {
-    return true;
-  }
+  const isAuthReady = !auth.isLoading;
 
   const isCategoriesReady = categories.loaded && !categories.loading;
   const isProductsReady = products.loaded && !products.loading;
-  const isFavoritesReady = favorites.status === 'succeeded';
-  const isAuthReady = !auth.isLoading;
+  
+  // Для favorites: если пользователь авторизован, ждем загрузки, если нет - считаем готовым
+  const isFavoritesReady = auth.user ? favorites.status === 'succeeded' : true;
 
-  return isCategoriesReady && isProductsReady && isFavoritesReady && isAuthReady;
+  return isAuthReady && isCategoriesReady && isProductsReady && isFavoritesReady;
 };

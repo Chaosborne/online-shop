@@ -37,7 +37,7 @@ const getInitialUser = (): AuthState['user'] => {
 
 const initialState: AuthState = {
   user: getInitialUser(),
-  isLoading: false,
+  isLoading: true, // Начинаем с true, так как нужно проверить состояние авторизации
   error: null,
 };
 
@@ -47,17 +47,22 @@ const authSlice = createSlice({
   reducers: {
     setUser: (state, action: PayloadAction<AuthState['user']>) => {
       state.user = action.payload;
+      state.isLoading = false; // Авторизация завершена
       if (action.payload) {
         localStorage.setItem('user', JSON.stringify(action.payload));
       }
     },
     clearUser: state => {
       state.user = null;
+      state.isLoading = false; // Авторизация завершена
       localStorage.removeItem('user');
+    },
+    setAuthLoading: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = action.payload;
     },
   },
 });
 
-export const { setUser, clearUser } = authSlice.actions;
+export const { setUser, clearUser, setAuthLoading } = authSlice.actions;
 export default authSlice.reducer;
 export type { AuthState };

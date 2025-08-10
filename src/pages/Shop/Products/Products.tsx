@@ -13,7 +13,6 @@ interface ProductsProps {
 const Products = ({ categoryId }: ProductsProps) => {
   const productsState = useSelector((state: RootState) => state.dbProducts);
   const productsFromStore = productsState.products || [];
-  const isLoading = productsState.loading;
   
 
   const searchQuery = useSelector((state: RootState) => state.search.searchQuery);
@@ -65,11 +64,7 @@ const Products = ({ categoryId }: ProductsProps) => {
 
   const productsListElement = (
     <div className={clsx(s.Products, isTilesView ? s.Tiles : s.Lines)}>
-      {isLoading ? (
-        <div className={s.NoProducts}>
-          <p>Загрузка товаров...</p>
-        </div>
-      ) : currentProducts.length > 0 ? (
+      {currentProducts.length > 0 ? (
         productsList
       ) : (
         <div className={s.NoProducts}>
