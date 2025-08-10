@@ -8,6 +8,10 @@
   margin-top: 60px;
 }
 
+.ProductsCount {
+  font-size: 0.9rem;
+}
+
 .StoreControls {
   display: flex;
   justify-content: end;
@@ -45,6 +49,15 @@
 .Lines {
   display: flex;
   flex-direction: column;
+}
+
+.NoProducts {
+  // padding: 2rem;
+  
+  p {
+    margin: 0.5rem 0;
+    // font-size: 1.1rem;
+  }
 }
 
 .MainContent {

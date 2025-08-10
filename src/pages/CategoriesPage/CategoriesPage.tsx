@@ -2,6 +2,7 @@ import s from './CategoriesPage.module.scss';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
+import Products from '../Shop/Products/Products';
 
 const CategoriesPage = () => {
   const { categoryId } = useParams();
@@ -16,7 +17,7 @@ const CategoriesPage = () => {
         <h1>{currentCategory?.name || 'Категория'}</h1>
         <div className={s.CategoriesPage}>
           {currentCategory ? (
-            <p>Товары категории: {currentCategory.name}</p>
+            <Products categoryId={categoryId} />
           ) : (
             <p>Категория не найдена</p>
           )}

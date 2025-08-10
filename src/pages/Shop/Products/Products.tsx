@@ -6,9 +6,14 @@ import { RootState } from '../../../store/store';
 import ProductCard from '../../../components/ProductCard/ProductCard';
 import ProductFilter from '../../../components/ProductFilter/ProductFilter';
 
-const Products = () => {
+interface ProductsProps {
+  categoryId?: string;
+}
+
+const Products = ({ categoryId }: ProductsProps) => {
   const productsState = useSelector((state: RootState) => state.dbProducts);
   const productsFromStore = productsState.products || [];
+  const isLoading = productsState.loading;
   
 
   const searchQuery = useSelector((state: RootState) => state.search.searchQuery);
@@ -32,8 +37,13 @@ const Products = () => {
   const [isFilterShow, setIsFilterShow] = useState(false);
   const toggleFilterShow = () => setIsFilterShow(!isFilterShow);
 
+  // Фильтрация товаров по категории
+  const productsFromCategory = categoryId 
+    ? productsFromStore.filter(product => product.itemCategory === categoryId)
+    : productsFromStore;
+
   // Фильтрация и сортировка товаров
-  const filteredProducts = productsFromStore
+  const filteredProducts = productsFromCategory
     .filter(product => {
       if (searchInput) {
         return product.itemBrand.toLowerCase().includes(searchInput.toLowerCase()) || product.itemName.toLowerCase().includes(searchInput.toLowerCase());
@@ -53,7 +63,21 @@ const Products = () => {
 
   const productsList = currentProducts.map(item => <ProductCard key={item.id} product={item} viewType={isTilesView ? 'tiles' : 'lines'} />);
 
-  const productsListElement = <div className={clsx(s.Products, isTilesView ? s.Tiles : s.Lines)}>{productsList}</div>;
+  const productsListElement = (
+    <div className={clsx(s.Products, isTilesView ? s.Tiles : s.Lines)}>
+      {isLoading ? (
+        <div className={s.NoProducts}>
+          <p>Загрузка товаров...</p>
+        </div>
+      ) : currentProducts.length > 0 ? (
+        productsList
+      ) : (
+        <div className={s.NoProducts}>
+          {categoryId && <p>Товары не найдены</p>}
+        </div>
+      )}
+    </div>
+  );
 
   const paginationElement = (
     <div className={s.Pagination}>
@@ -82,6 +106,11 @@ const Products = () => {
   return (
     <section className={s.ProductsSection}>
       <div className="container">
+        {categoryId && (
+          <p className={s.ProductsCount}>
+            Товаров в категории: {productsFromCategory.length}
+          </p>
+        )}
         <div className={s.StoreControls}>
           <button className={s.FilterToggler} onClick={toggleFilterShow}>
             Фильтр
