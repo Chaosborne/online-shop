@@ -7,6 +7,7 @@ import ProductCard from '../../../components/ProductCard/ProductCard';
 import ProductFilter from '../../../components/ProductFilter/ProductFilter';
 import { TilesIcon } from '../../../assets/img/TilesIcon';
 import { LinesIcon } from '../../../assets/img/LinesIcon';
+import { PriceSortIcon } from '../../../assets/img/PriceSortIcon';
 
 interface ProductsProps {
   categoryId?: string;
@@ -113,7 +114,8 @@ const Products = ({ categoryId }: ProductsProps) => {
             Фильтр
           </button>
           <div className={s.PriceSort} onClick={togglePriceSort}>
-            По цене
+            Цена
+            <PriceSortIcon className={s.PriceSortIcon} isAscending={isAscending} />
           </div>
           <div className={s.ListTileToggler} onClick={toggleProductsView}>
             <div className={clsx(s.SliderBackground, isTilesView ? s.TilesMode : s.LinesMode)}></div>

@@ -33,6 +33,13 @@
   cursor: pointer;
 }
 
+.PriceSort {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
 .ListTileToggler {
   background-color: #f0f0f0;
   border-radius: 50px;
@@ -51,12 +58,17 @@
 
 .TilesIcon,
 .LinesIcon {
-  width: 16px;
-  height: 16px;
-  position: relative;
   z-index: 2;
   transition: color 0.3s ease;
   color: #7c7c7c;
+}
+
+.PriceSortIcon {
+  color: #858585;
+
+  div {
+    background-color: currentColor;
+  }
 }
 
 .SliderBackground {
