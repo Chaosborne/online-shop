@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
 import ProductCard from '../../../components/ProductCard/ProductCard';
 import ProductFilter from '../../../components/ProductFilter/ProductFilter';
+import { TilesIcon } from '../../../assets/img/TilesIcon';
+import { LinesIcon } from '../../../assets/img/LinesIcon';
 
 interface ProductsProps {
   categoryId?: string;
@@ -114,7 +116,9 @@ const Products = ({ categoryId }: ProductsProps) => {
             По цене
           </div>
           <div className={s.ListTileToggler} onClick={toggleProductsView}>
-            Список/Плитка
+            <div className={clsx(s.SliderBackground, isTilesView ? s.TilesMode : s.LinesMode)}></div>
+            <LinesIcon className={clsx(s.LinesIcon, isTilesView ? s.FadeIcon : undefined)} />
+            <TilesIcon className={clsx(s.TilesIcon, isTilesView ? undefined : s.FadeIcon)} />
           </div>
         </div>
 
