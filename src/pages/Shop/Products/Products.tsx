@@ -71,7 +71,7 @@ const Products = ({ categoryId }: ProductsProps) => {
         productsList
       ) : (
         <div className={s.NoProducts}>
-          {categoryId && <p>Товары не найдены</p>}
+          {categoryId && <p>В данной категории товары не найдены</p>}
         </div>
       )}
     </div>

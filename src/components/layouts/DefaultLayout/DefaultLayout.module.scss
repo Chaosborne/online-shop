@@ -1,0 +1,15 @@
+@use '../../../../src/assets/scss/vars.scss' as vars;
+
+.layout {
+  min-height: 100vh; /* fallback для старых браузеров */
+  min-height: 100dvh; /* современные браузеры */
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  margin-top: 50px;
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+} 
