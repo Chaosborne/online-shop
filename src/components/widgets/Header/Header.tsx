@@ -6,7 +6,7 @@ import { RootState } from '../../../store/store';
 import { setSearchQuery } from '../../../store/slices/searchSlice';
 import { LoginModalPortal } from '../../modals';
 import { IProduct } from '../../../constants/interfaces/IProduct';
-import { SearchSuggestions } from '../../widgets';
+import SearchSuggestions from '../../ui/SearchSuggestions/SearchSuggestions';
 import { CartIcon } from '../../../assets/img/CartIcon';
 import { LensIcon } from '../../../assets/img/LensIcon';
 import { Logo } from '../../../assets/img/Logo';

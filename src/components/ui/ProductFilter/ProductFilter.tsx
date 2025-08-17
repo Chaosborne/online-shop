@@ -1,7 +1,8 @@
 import s from './ProductFilter.module.scss';
 import clsx from 'clsx';
-import { RootState } from '../../store/store';
+import { RootState } from '../../../store/store';
 import { useSelector } from 'react-redux';
+import { IProduct } from '../../../constants/interfaces/IProduct';
 
 interface ProductFilterProps {
   selectedBrands: string[];
@@ -43,7 +44,7 @@ const ProductFilter = ({ selectedBrands, onBrandChange, isFilterShow, toggleFilt
               <span className={s.FilterBrand}> {`${brand.charAt(0).toUpperCase() + brand.slice(1)} `}</span>
             </label>
             <span className={s.FilterCount}>
-              {`${productsFromStore.filter(product => product.itemBrand.toLowerCase() === brand.toLowerCase()).length}`}
+              {`${productsFromStore.filter((product: IProduct) => product.itemBrand.toLowerCase() === brand.toLowerCase()).length}`}
             </span>
           </div>
         ))}

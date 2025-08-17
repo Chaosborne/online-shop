@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
 import ProductCard from '../../../components/ProductCard/ProductCard';
-import ProductFilter from '../../../components/ProductFilter/ProductFilter';
+import ProductFilter from '../../../components/ui/ProductFilter/ProductFilter';
 import { TilesIcon } from '../../../assets/img/TilesIcon';
 import { LinesIcon } from '../../../assets/img/LinesIcon';
 import { PriceSortIcon } from '../../../assets/img/PriceSortIcon';
