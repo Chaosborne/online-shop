@@ -5,16 +5,14 @@ import { IProduct } from '../../constants/interfaces/IProduct';
 
 export interface dbProductsState {
   products: IProduct[];
-  loading: boolean;
+  status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
-  loaded: boolean;
 }
 
 const initialState: dbProductsState = {
   products: [],
-  loading: false,
+  status: 'idle',
   error: null,
-  loaded: false,
 };
 
 // Новый запрос к Firestore
@@ -43,29 +41,22 @@ export const fetchProductsFromFirebase = createAsyncThunk<IProduct[], void, { re
 const dbProductsSlice = createSlice({
   name: 'dbProducts',
   initialState,
-  reducers: {
-    setLoaded(state, action: PayloadAction<boolean>) {
-      state.loaded = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: builder => {
     builder
       .addCase(fetchProductsFromFirebase.pending, state => {
-        state.loading = true;
+        state.status = 'loading';
         state.error = null;
       })
       .addCase(fetchProductsFromFirebase.fulfilled, (state, action: PayloadAction<IProduct[]>) => {
-        state.loading = false;
+        state.status = 'succeeded';
         state.products = action.payload;
-        state.loaded = true;
       })
       .addCase(fetchProductsFromFirebase.rejected, (state, action) => {
-        state.loading = false;
+        state.status = 'failed';
         state.error = action.payload || 'Failed to fetch products';
-        state.loaded = false;
       });
   },
 });
 
-export const { setLoaded } = dbProductsSlice.actions;
 export default dbProductsSlice.reducer;

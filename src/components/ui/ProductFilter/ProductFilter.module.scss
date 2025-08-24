@@ -49,14 +49,19 @@
   margin-bottom: 10px;
 }
 
-// .FilterForm {
-
-// }
-
 .FilterSelect {
   margin-top: 5px;
   display: flex;
   gap: 10px;
+  cursor: pointer;
+
+  input {
+    cursor: pointer;
+  }
+
+  label {
+    cursor: pointer;
+  }
 
   a {
     display: block;
@@ -65,4 +70,26 @@
 
 .FilterCount {
   color: vars.$accent;
+}
+
+.FilterSelectInactive {
+  opacity: 0.6;
+  cursor: default;
+
+  input {
+    cursor: default;
+  }
+
+  label {
+    cursor: default;
+  }
+}
+
+.FilterBrandInactive {
+  color: #999;
+  font-style: italic;
+}
+
+.FilterCountInactive {
+  color: #ccc;
 }

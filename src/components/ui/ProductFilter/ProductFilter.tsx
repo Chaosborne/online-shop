@@ -3,6 +3,9 @@ import clsx from 'clsx';
 import { RootState } from '../../../store/store';
 import { useSelector } from 'react-redux';
 import { IProduct } from '../../../constants/interfaces/IProduct';
+import { useMemo } from 'react';
+import { useFetchBrands } from '../../../hooks/useFetchBrands';
+import { Brand } from '../../../store/slices/brandsSlice';
 
 interface ProductFilterProps {
   selectedBrands: string[];
@@ -11,9 +14,52 @@ interface ProductFilterProps {
   toggleFilterShow: () => void;
 }
 
+interface BrandSummary {
+  name: string;
+  count: number;
+  isActive: boolean;
+}
+
 const ProductFilter = ({ selectedBrands, onBrandChange, isFilterShow, toggleFilterShow }: ProductFilterProps) => {
-  const mockBrands = ['apple', 'samsung', 'xiaomi', 'realme', 'oppo', 'HP'];
-  // mockBrands contains brand names that don't exist in the database to demonstrate interface behavior with missing names
+  // Получаем товары из store
+  const productsState = useSelector((state: RootState) => state.dbProducts);
+  const productsFromStore = productsState.products || [];
+
+  // Получаем бренды из Firestore
+  const { brands: brandsFromDB } = useFetchBrands();
+
+  // Функция вычисляет количество товаров для бренда
+  const getBrandCounts = (products: IProduct[]): Record<string, number> => {
+    return products.reduce((accumulator, product) => {
+      const brand = product.itemBrand;
+      accumulator[brand] = (accumulator[brand] || 0) + 1;
+      return accumulator;
+    }, {} as Record<string, number>);
+  };
+
+  // Функция создает саммари бренда
+  const createBrandSummary = (brand: Brand, brandCounts: Record<string, number>): BrandSummary => {
+    const count = brandCounts[brand.brandName] || 0;
+    return {
+      name: brand.brandName,
+      count,
+      isActive: brand.available && count > 0
+    };
+  };
+
+  const sortBrands = (brands: BrandSummary[]): BrandSummary[] => {
+    return brands.sort((a, b) => a.isActive && !b.isActive ? -1 : 1);
+  };
+
+  // Получаем все доступные бренды (активные и неактивные)
+  const allBrands = useMemo(() => {
+    if (brandsFromDB.length === 0) return [];
+
+    const brandCounts = getBrandCounts(productsFromStore);
+    const brandsWithSummary = brandsFromDB.map(brand => createBrandSummary(brand, brandCounts));
+
+    return sortBrands(brandsWithSummary);
+  }, [brandsFromDB, productsFromStore]);
 
   const handleBrandCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
@@ -24,27 +70,31 @@ const ProductFilter = ({ selectedBrands, onBrandChange, isFilterShow, toggleFilt
     }
   };
 
-  const productsState = useSelector((state: RootState) => state.dbProducts);
-  const productsFromStore = productsState.products || [];
+
 
   return (
     <aside className={clsx(s.Filter, isFilterShow && s.FilterShow)}>
       <h5 className={s.FilterTitle}>Бренды</h5>
-      <form className={s.FilterForm} action="">
-        {mockBrands.map(brand => (
-          <div className={s.FilterSelect} key={brand}>
+      <form className={s.FilterForm}>
+        {allBrands.map(brand => (
+          <div className={clsx(s.FilterSelect, !brand.isActive && s.FilterSelectInactive)}
+            key={brand.name}
+          >
             <input
               type="checkbox"
-              name={brand}
-              id={brand}
-              checked={selectedBrands.includes(brand.toLowerCase())}
+              name={brand.name}
+              id={brand.name}
+              checked={selectedBrands.includes(brand.name.toLowerCase())}
               onChange={handleBrandCheckboxChange}
+              disabled={!brand.isActive}
             />
-            <label htmlFor={brand}>
-              <span className={s.FilterBrand}> {`${brand.charAt(0).toUpperCase() + brand.slice(1)} `}</span>
+            <label htmlFor={brand.name}>
+              <span className={clsx(s.FilterBrand, !brand.isActive && s.FilterBrandInactive)}>
+                {brand.name}
+              </span>
             </label>
-            <span className={s.FilterCount}>
-              {`${productsFromStore.filter((product: IProduct) => product.itemBrand.toLowerCase() === brand.toLowerCase()).length}`}
+            <span className={clsx(s.FilterCount, !brand.isActive && s.FilterCountInactive)}>
+              {brand.count}
             </span>
           </div>
         ))}

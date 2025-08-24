@@ -2,11 +2,16 @@
 
 import { useEffect } from 'react';
 import { fetchProductsFromFirebase } from '../store/slices/getDbProductsSlice';
-import { useAppDispatch } from '../store/hooks';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 
 export const useFetchProducts = () => {
-  const dispatch = useAppDispatch(); // useAppDispatch - это название нашей обертки из ../store/hooks, которое мы ей там дали
+  const dispatch = useAppDispatch();
+  const { status } = useAppSelector((state) => state.dbProducts);
+  
   useEffect(() => {
-    void dispatch(fetchProductsFromFirebase());
-  }, [dispatch]);
+    // Загружаем продукты только если они еще не загружены
+    if (status === 'idle') {
+      dispatch(fetchProductsFromFirebase());
+    }
+  }, [dispatch, status]);
 };

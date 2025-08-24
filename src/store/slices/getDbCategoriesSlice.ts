@@ -5,16 +5,14 @@ import { ICategory } from '../../constants/interfaces/ICategory';
 
 export interface dbCategoriesState {
   categories: ICategory[];
-  loading: boolean;
+  status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
-  loaded: boolean;
 }
 
 const initialState: dbCategoriesState = {
   categories: [],
-  loading: false,
+  status: 'idle',
   error: null,
-  loaded: false,
 };
 
 // Новый запрос к Firestore
@@ -41,29 +39,22 @@ export const fetchCategoriesFromFirebase = createAsyncThunk<ICategory[], void, {
 const dbCategoriesSlice = createSlice({
   name: 'dbCategories',
   initialState,
-  reducers: {
-    setLoaded(state, action: PayloadAction<boolean>) {
-      state.loaded = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: builder => {
     builder
       .addCase(fetchCategoriesFromFirebase.pending, state => {
-        state.loading = true;
+        state.status = 'loading';
         state.error = null;
       })
       .addCase(fetchCategoriesFromFirebase.fulfilled, (state, action: PayloadAction<ICategory[]>) => {
-        state.loading = false;
+        state.status = 'succeeded';
         state.categories = action.payload;
-        state.loaded = true;
       })
       .addCase(fetchCategoriesFromFirebase.rejected, (state, action) => {
-        state.loading = false;
+        state.status = 'failed';
         state.error = action.payload || 'Failed to fetch categories';
-        state.loaded = false;
       });
   },
 });
 
-export const { setLoaded } = dbCategoriesSlice.actions;
 export default dbCategoriesSlice.reducer;

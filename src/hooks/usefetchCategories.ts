@@ -2,11 +2,16 @@
 
 import { useEffect } from 'react';
 import { fetchCategoriesFromFirebase } from '../store/slices/getDbCategoriesSlice';
-import { useAppDispatch } from '../store/hooks';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 
 export const useFetchCategories = () => {
-  const dispatch = useAppDispatch(); // useAppDispatch - это название нашей обертки из ../store/hooks, которое мы ей там дали
+  const dispatch = useAppDispatch();
+  const { status } = useAppSelector((state) => state.dbCategories);
+  
   useEffect(() => {
-    void dispatch(fetchCategoriesFromFirebase());
-  }, [dispatch]);
+    // Загружаем категории только если они еще не загружены
+    if (status === 'idle') {
+      dispatch(fetchCategoriesFromFirebase());
+    }
+  }, [dispatch, status]);
 };

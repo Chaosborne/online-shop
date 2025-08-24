@@ -15,10 +15,9 @@ export const useAuth = () => {
   useEffect(() => {
     const handleAuthStateChange = async (firebaseUser: User | null) => {
       setIsLoading(false);
-      dispatch(setAuthLoading(false)); // Устанавливаем isLoading в false в Redux
+      dispatch(setAuthLoading(false));
 
       if (firebaseUser) {
-        // Проверяем, что пользователь действительно существует и имеет права
         try {
           const userData = {
             uid: firebaseUser.uid,
@@ -29,7 +28,6 @@ export const useAuth = () => {
           dispatch(setUser(userData));
         } catch (error) {
           console.error('Error setting user data:', error);
-          // Если есть проблемы с пользователем, очищаем состояние
           dispatch(clearUser());
           dispatch(clearFavorites());
         }

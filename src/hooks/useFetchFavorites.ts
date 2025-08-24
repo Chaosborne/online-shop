@@ -10,6 +10,7 @@ export const useFetchFavorites = () => {
   const dispatch = useAppDispatch();
   const userId = useAppSelector(state => state.auth.user?.uid);
   const isLoaded = useAppSelector(state => state.favorites.isLoaded);
+  const status = useAppSelector(state => state.favorites.status);
   const authLoading = useAppSelector(state => state.auth.isLoading);
 
   useEffect(() => {
@@ -19,7 +20,7 @@ export const useFetchFavorites = () => {
     }
 
     // Если пользователь авторизован и favorites еще не загружены
-    if (userId && !isLoaded) {
+    if (userId && !isLoaded && status !== 'loading') {
       dispatch(loadFavorites())
         .unwrap()
         .catch(err => {
@@ -38,5 +39,5 @@ export const useFetchFavorites = () => {
           }
         });
     }
-  }, [userId, isLoaded, authLoading, dispatch]);
+  }, [userId, isLoaded, status, authLoading, dispatch]);
 };
