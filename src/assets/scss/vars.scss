@@ -3,8 +3,26 @@ $accent_hover: #d65822;
 $text: #616161;
 $text_hover: #9b9b9b;
 
-// breakpoints
+// Основные брейкпоинты
 $desktop: 1440px; // десктопы
 $laptop: 1024px; // ноутбуки/планшеты
 $tablet: 768px; // планшеты/смартфоны
 $mobile: 360px; // маленькие смартфоны от 320px
+
+// Специфичные брейкпоинты для компонентов
+$nav-breakpoint: 1150px; // навигация в header
+$search-breakpoint: 1170px; // поиск в header
+$products-grid-breakpoint: 1170px; // сетка товаров (4→3 колонки)
+$products-tablet-breakpoint: 992px; // сетка товаров (3→2 колонки)
+$products-mobile-breakpoint: 576px; // сетка товаров (2→1 колонка) // и скрываем переключатель list/tiles
+$footer-breakpoint: 992px; // футер (4→2 колонки)
+$footer-mobile-breakpoint: 576px; // футер (2→1 колонка)
+$category-card-breakpoint: 830px; // карточки категорий
+$categories-breakpoint: 800px; // секция категорий
+$product-card-lines-breakpoint: 992px; // вид списка товаров
+$product-card-mobile-breakpoint: 400px; // карточки товаров на мобильном
+$order-modal-breakpoint: 768px; // модальное окно заказа
+
+// Очень маленькие экраны
+$mobile-small: 480px; // очень маленькие смартфоны
+$mobile-tiny: 320px; // минимальный размер

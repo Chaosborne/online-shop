@@ -32,7 +32,7 @@
   align-items: center;
   justify-content: center;
 
-  @media (max-width: 1150px) {
+  @include mixins.nav-breakpoint {
     display: none;
   }
 }

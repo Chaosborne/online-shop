@@ -1,4 +1,5 @@
 @use '../../assets/scss/vars' as vars;
+@use '../../assets/scss/mixins' as mixins;
 
 .CategoryItem {
   box-shadow: 0 0 3px 1px #42424214;
@@ -19,7 +20,7 @@
     transform: scale(1.05);
   }
 
-  @media (max-width: 830px) {
+  @include mixins.category-card-breakpoint {
     width: 100%;
     height: 50px;
     padding: 20px;

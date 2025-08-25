@@ -1,7 +1,7 @@
 @use '../../assets/scss/vars' as vars;
+@use '../../assets/scss/mixins' as mixins;
 
 .ProductCard {
-  width: 100%;
   box-shadow: 0 0 3px 1px #42424214;
   padding: 25px;
   background-color: #fff;
@@ -67,7 +67,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
   padding-bottom: 40px;
 
   .CardImg {
@@ -120,7 +119,7 @@
   }
 
   // Перестройка в 2 строки на планшете
-  @media (max-width: 992px) {
+  @include mixins.product-card-lines-breakpoint {
     grid-template-columns: 140px 1fr; // изображение / контент+мета
     grid-auto-rows: auto;
 
@@ -134,7 +133,7 @@
   }
 
   // Единая колонка ≤400px
-  @media (max-width: 400px) {
+  @include mixins.product-card-mobile-breakpoint {
     grid-template-columns: 1fr;
 
     .CardImg {
@@ -234,7 +233,7 @@
 }
 
 // ≤320px — уменьшаем размеры контента и кнопок
-@media (max-width: 320px) {
+@include mixins.mobile-tiny {
   .ProductCard {
     padding: 16px;
   }

@@ -1,4 +1,5 @@
 @use '../../../assets/scss/vars' as vars;
+@use '../../../assets/scss/mixins' as mixins;
 
 .container {
   display: flex;
@@ -51,7 +52,8 @@
   gap: 22px;
   position: relative;
 
-  @media (max-width: vars.$tablet) {
+  // при одной колонке на телефонах скрываем переключатель
+  @include mixins.products-mobile-breakpoint {
     display: none;
   }
 }
@@ -109,17 +111,17 @@
   align-items: stretch;
 
   // 3 колонки на средних экранах
-  @media (max-width: 1170px) {
+  @include mixins.products-grid-breakpoint {
     grid-template-columns: repeat(3, 1fr);
   }
 
   // 2 колонки на планшете/малых ноутбуках
-  @media (max-width: 992px) {
+  @include mixins.products-tablet-breakpoint {
     grid-template-columns: repeat(2, 1fr);
   }
 
   // 1 колонка на телефонах
-  @media (max-width: 576px) {
+  @include mixins.products-mobile-breakpoint {
     grid-template-columns: 1fr;
   }
 }
@@ -202,7 +204,7 @@
 }
 
 // Мелкие устройства ≤320px — уменьшаем отступы и размеры
-@media (max-width: 320px) {
+@include mixins.mobile-tiny {
   .StoreControls {
     gap: 16px;
   }

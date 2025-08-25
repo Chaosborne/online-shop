@@ -1,4 +1,5 @@
 @use '../../../assets/scss/vars' as vars;
+@use '../../../assets/scss/mixins' as mixins;
 
 .overlay {
   position: fixed;
@@ -199,7 +200,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@include mixins.order-modal-breakpoint {
   .modal {
     padding: 20px;
     margin: 20px;

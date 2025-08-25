@@ -1,5 +1,6 @@
 @use 'vars.scss' as vars;
 
+// Основные брейкпоинты
 @mixin mobile {
   @media (max-width: vars.$mobile) {
     @content;
@@ -20,6 +21,92 @@
 
 @mixin desktop {
   @media (max-width: vars.$desktop) {
+    @content;
+  }
+}
+
+// Специфичные брейкпоинты для компонентов
+@mixin nav-breakpoint {
+  @media (max-width: vars.$nav-breakpoint) {
+    @content;
+  }
+}
+
+@mixin search-breakpoint {
+  @media (max-width: vars.$search-breakpoint) {
+    @content;
+  }
+}
+
+@mixin products-grid-breakpoint {
+  @media (max-width: vars.$products-grid-breakpoint) {
+    @content;
+  }
+}
+
+@mixin products-tablet-breakpoint {
+  @media (max-width: vars.$products-tablet-breakpoint) {
+    @content;
+  }
+}
+
+@mixin products-mobile-breakpoint {
+  @media (max-width: vars.$products-mobile-breakpoint) {
+    @content;
+  }
+}
+
+@mixin footer-breakpoint {
+  @media (max-width: vars.$footer-breakpoint) {
+    @content;
+  }
+}
+
+@mixin footer-mobile-breakpoint {
+  @media (max-width: vars.$footer-mobile-breakpoint) {
+    @content;
+  }
+}
+
+@mixin category-card-breakpoint {
+  @media (max-width: vars.$category-card-breakpoint) {
+    @content;
+  }
+}
+
+@mixin categories-breakpoint {
+  @media (max-width: vars.$categories-breakpoint) {
+    @content;
+  }
+}
+
+@mixin product-card-lines-breakpoint {
+  @media (max-width: vars.$product-card-lines-breakpoint) {
+    @content;
+  }
+}
+
+@mixin product-card-mobile-breakpoint {
+  @media (max-width: vars.$product-card-mobile-breakpoint) {
+    @content;
+  }
+}
+
+@mixin order-modal-breakpoint {
+  @media (max-width: vars.$order-modal-breakpoint) {
+    @content;
+  }
+}
+
+// Очень маленькие экраны
+@mixin mobile-small {
+  @media (max-width: vars.$mobile-small) {
+    @content;
+  }
+}
+
+@mixin mobile-tiny {
+  @media (max-width: vars.$mobile-tiny) {
     @content;
   }
 }
