@@ -61,26 +61,26 @@
   text-align: center;
 }
 
+// Вид сетки (плитка)
 .tiles {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  width: 251px;
+  width: 100%;
   padding-bottom: 40px;
 
-  @media (max-width: 576px) {
-    width: 100%;
-  }
-
   .CardImg {
-    width: 200px;
-    height: 200px;
+    width: 100%;
+    max-width: 220px;
+    height: 220px;
+    object-fit: contain;
   }
 
   a {
     margin-top: 15px;
-    width: 200px;
+    width: 100%;
+    max-width: 220px;
   }
 
   .Price {
@@ -88,10 +88,12 @@
   }
 }
 
+// Вид списка (строки)
 .lines {
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 0 15px;
+  grid-template-columns: 160px 1fr auto; // изображение / контент / мета (кнопки/цена)
+  gap: 0 16px;
+  align-items: center;
 
   &:not(:first-child) {
     margin-top: 10px;
@@ -100,20 +102,53 @@
   .CardImg {
     width: 160px;
     height: 160px;
+    object-fit: contain;
   }
 
   .CardInfo {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
+  }
 
-    @media (max-width: vars.$mobile) {
-      flex-direction: column;
+  .PriceFavorites {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  // Перестройка в 2 строки на планшете
+  @media (max-width: 992px) {
+    grid-template-columns: 140px 1fr; // изображение / контент+мета
+    grid-auto-rows: auto;
+
+    .PriceFavorites {
+      grid-column: 1 / -1;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 8px;
     }
   }
 
-  @media (max-width: vars.$mobile) {
-    gap: 0 15px;
+  // Единая колонка ≤400px
+  @media (max-width: 400px) {
+    grid-template-columns: 1fr;
+
+    .CardImg {
+      width: 100%;
+      max-width: 240px;
+      height: 200px;
+      margin: 0 auto;
+    }
+
+    .PriceFavorites {
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
   }
 }
 
@@ -150,10 +185,17 @@
   margin-top: 10px;
 }
 
+// «В избранное» — без фона и обводки
 .FavoriteBtn {
   font-size: 20px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  line-height: 1;
+  cursor: pointer;
 }
 
+// «В корзину» — с заливкой и обводкой
 .AddToCartBtn {
   border: 1px solid vars.$accent;
   border-radius: 5px;
@@ -189,4 +231,25 @@
   fill: vars.$accent;
   fill-opacity: 1;
   fill-rule: nonzero;
+}
+
+// ≤320px — уменьшаем размеры контента и кнопок
+@media (max-width: 320px) {
+  .ProductCard {
+    padding: 16px;
+  }
+  .Price {
+    font-size: 18px;
+  }
+  .AddToCartBtn {
+    width: 50px;
+    padding: 4px 0;
+  }
+  .AddToCartBtnIcon {
+    max-width: 18px;
+    width: 18px;
+  }
+  .FavoriteBtn {
+    font-size: 18px;
+  }
 }

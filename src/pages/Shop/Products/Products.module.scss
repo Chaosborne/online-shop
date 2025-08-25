@@ -101,16 +101,33 @@
   margin-top: 20px;
 }
 
+// Сетка товаров
 .Tiles {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 11px;
-  justify-content: flex-start;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  align-items: stretch;
+
+  // 3 колонки на средних экранах
+  @media (max-width: 1170px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  // 2 колонки на планшете/малых ноутбуках
+  @media (max-width: 992px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  // 1 колонка на телефонах
+  @media (max-width: 576px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .Lines {
   display: flex;
   flex-direction: column;
+  gap: 12px;
 }
 
 .NoProducts {
@@ -122,9 +139,26 @@
 
 .MainContent {
   display: flex;
+  gap: 20px;
+
+  // Делает aside липким на десктопе
+  & > aside {
+    position: sticky;
+    top: 80px;
+    align-self: flex-start;
+  }
 
   @media (max-width: vars.$tablet) {
     position: relative;
+    flex-direction: column;
+
+    // На планшете/мобиле aside становится статичным
+    & > aside {
+      position: static;
+      top: auto;
+      width: 100%;
+      margin-bottom: 16px;
+    }
   }
 }
 
@@ -164,5 +198,15 @@
 
   @media (max-width: vars.$tablet) {
     margin-top: 25px;
+  }
+}
+
+// Мелкие устройства ≤320px — уменьшаем отступы и размеры
+@media (max-width: 320px) {
+  .StoreControls {
+    gap: 16px;
+  }
+  .Pagination {
+    justify-content: center;
   }
 }

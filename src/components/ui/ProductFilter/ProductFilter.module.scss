@@ -13,12 +13,14 @@
     font-weight: 500;
   }
 
+  // На планшете и ниже — выезжающее меню
   @media (max-width: vars.$tablet) {
     position: absolute;
     top: 0;
     left: -500px;
     transition: left 0.3s ease-in-out;
     z-index: 99;
+    margin-right: 0;
   }
 }
 
@@ -48,6 +50,8 @@
 .FilterTitle {
   margin-bottom: 10px;
 }
+
+.FilterForm {}
 
 .FilterSelect {
   margin-top: 5px;
@@ -92,4 +96,11 @@
 
 .FilterCountInactive {
   color: #ccc;
+}
+
+// ≤320px — уменьшаем внутренние отступы
+@media (max-width: 320px) {
+  .Filter {
+    padding: 16px;
+  }
 }
