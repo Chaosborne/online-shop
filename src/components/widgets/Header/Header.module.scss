@@ -32,7 +32,7 @@
   align-items: center;
   justify-content: center;
 
-  @include mixins.laptop {
+  @media (max-width: 1150px) {
     display: none;
   }
 }
