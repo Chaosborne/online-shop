@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
 import ProductCard from '../../../components/ProductCard/ProductCard';
-import ProductFilter from '../../../components/ui/ProductFilter/ProductFilter';
+import BrandFilter from '../../../components/ui/BrandFilter/BrandFilter';
 import { TilesIcon } from '../../../assets/img/TilesIcon';
 import { LinesIcon } from '../../../assets/img/LinesIcon';
 import { PriceSortIcon } from '../../../assets/img/PriceSortIcon';
@@ -125,7 +125,7 @@ const Products = ({ categoryId }: ProductsProps) => {
         </div>
 
         <div className={s.MainContent}>
-          <ProductFilter selectedBrands={selectedBrands} onBrandChange={handleBrandChange} isFilterShow={isFilterShow} toggleFilterShow={toggleFilterShow} />
+          <BrandFilter selectedBrands={selectedBrands} onBrandChange={handleBrandChange} isFilterShow={isFilterShow} toggleFilterShow={toggleFilterShow} />
           <div className={s.ProductsContainer}>
             {productsListElement}
             {totalPages > 1 && paginationElement}

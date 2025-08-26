@@ -1,4 +1,4 @@
-import s from './ProductFilter.module.scss';
+import s from './BrandFilter.module.scss';
 import clsx from 'clsx';
 import { RootState } from '../../../store/store';
 import { useSelector } from 'react-redux';
@@ -8,7 +8,7 @@ import { useFetchBrands } from '../../../hooks/useFetchBrands';
 import { Brand } from '../../../store/slices/brandsSlice';
 import { useParams } from 'react-router-dom';
 
-interface ProductFilterProps {
+interface BrandFilterProps {
   selectedBrands: string[];
   onBrandChange: (brands: string[]) => void;
   isFilterShow: boolean;
@@ -21,7 +21,7 @@ interface BrandSummary {
   isActive: boolean;
 }
 
-const ProductFilter = ({ selectedBrands, onBrandChange, isFilterShow, toggleFilterShow }: ProductFilterProps) => {
+const BrandFilter = ({ selectedBrands, onBrandChange, isFilterShow, toggleFilterShow }: BrandFilterProps) => {
   // Получаем товары из store
   const productsState = useSelector((state: RootState) => state.dbProducts);
   const productsFromStore = productsState.products || [];
@@ -116,4 +116,4 @@ const ProductFilter = ({ selectedBrands, onBrandChange, isFilterShow, toggleFilt
   );
 };
 
-export default ProductFilter;
+export default BrandFilter;
