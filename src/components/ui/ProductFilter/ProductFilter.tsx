@@ -6,6 +6,7 @@ import { IProduct } from '../../../constants/interfaces/IProduct';
 import { useMemo } from 'react';
 import { useFetchBrands } from '../../../hooks/useFetchBrands';
 import { Brand } from '../../../store/slices/brandsSlice';
+import { useParams } from 'react-router-dom';
 
 interface ProductFilterProps {
   selectedBrands: string[];
@@ -24,6 +25,14 @@ const ProductFilter = ({ selectedBrands, onBrandChange, isFilterShow, toggleFilt
   // Получаем товары из store
   const productsState = useSelector((state: RootState) => state.dbProducts);
   const productsFromStore = productsState.products || [];
+
+  // Получаем текущую категорию из URL
+  const { categoryId } = useParams();
+
+  // Получаем товары из текущей категории или все товары
+  const productsFromCategory = useMemo(() => {
+    return categoryId ? productsFromStore.filter(product => product.itemCategory === categoryId) : productsFromStore;
+  }, [categoryId, productsFromStore]);
 
   // Получаем бренды из Firestore
   const { brands: brandsFromDB } = useFetchBrands();
@@ -55,11 +64,12 @@ const ProductFilter = ({ selectedBrands, onBrandChange, isFilterShow, toggleFilt
   const allBrands = useMemo(() => {
     if (brandsFromDB.length === 0) return [];
 
-    const brandCounts = getBrandCounts(productsFromStore);
+    const brandCounts = getBrandCounts(productsFromCategory);
     const brandsWithSummary = brandsFromDB.map(brand => createBrandSummary(brand, brandCounts));
 
-    return sortBrands(brandsWithSummary);
-  }, [brandsFromDB, productsFromStore]);
+    const visibleBrands = categoryId ? brandsWithSummary.filter(brand => brand.isActive) : brandsWithSummary;
+    return sortBrands(visibleBrands);
+  }, [brandsFromDB, productsFromCategory]);
 
   const handleBrandCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
