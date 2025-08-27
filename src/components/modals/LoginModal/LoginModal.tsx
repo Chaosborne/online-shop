@@ -5,17 +5,12 @@ import s from './LoginModal.module.scss';
 import { useAuth } from '../../../hooks/useAuth';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
+import { CloseBtn } from '../../../assets/img/CloseBtn';
 
 const disclaimerParagraphs = [
   'Данный сайт не осуществляет обработку реальных персональных данных. Все поля заполняются случайно сгенерированной информацией в демонстрационных целях и заблокированы для ручного ввода',
   'В соответствии с Федеральным законом 152 - ФЗ "О персональных данных", сайт не является информационной системой персональных данных (ИСПДн), поскольку не производит сбор, хранение или обработку реальных данных пользователей'
 ];
-
-const closeImg = (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="50px" height="50px">
-    <path d="M 9.15625 6.3125 L 6.3125 9.15625 L 22.15625 25 L 6.21875 40.96875 L 9.03125 43.78125 L 25 27.84375 L 40.9375 43.78125 L 43.78125 40.9375 L 27.84375 25 L 43.6875 9.15625 L 40.84375 6.3125 L 25 22.15625 Z" />
-  </svg>
-);
 
 interface ModalPortalProps {
   onClose: () => void;
@@ -79,7 +74,7 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
     <div className={s.Overlay}>
       <div className={clsx(s.Content, { [s.Show]: isVisible })}>
         <div className={s.CloseBtn} onClick={onClose}>
-          {closeImg}
+          <CloseBtn />
         </div>
         <h3>Войти</h3>
         {hasLastUser ? (
@@ -119,7 +114,7 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
     <div className={s.Overlay}>
       <div className={clsx(s.Content, { [s.Show]: isVisible })}>
         <div className={s.CloseBtn} onClick={onClose}>
-          {closeImg}
+          <CloseBtn />
         </div>
         <h3>Регистрация</h3>
         <p className={s.Hint}>Нажмите <b>Заполнить</b>, чтобы использовать случайно сгенерированные данные</p>
