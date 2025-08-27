@@ -76,83 +76,79 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
   const hasLastUser = Boolean(localStorage.getItem('lastRegisteredUser'));
 
   const loginModal = (
-    <>
-      <div className={s.Overlay}>
-        <div className={clsx(s.Content, { [s.Show]: isVisible })}>
-          <h3>Войти</h3>
-          {hasLastUser ? (
-            <p className={s.Hint}>Нажмите <b>Заполнить</b>, чтобы использовать данные, сгенерированные при регистрации</p>
-          ) : (
-            <p className={s.Hint}>Нажмите <b>Зарегистрироваться</b>, чтобы создать тестового пользователя</p>
-          )}
-          <button className={clsx(s.FillBtn, hasLastUser ? undefined : s.Disabled)} onClick={handleFillLastUser}>Заполнить</button>
-          <form className={s.LoginForm}>
-            <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} readOnly />
-            <input className={password ? s.PasswordInput : undefined} type="password" placeholder="Пароль" value={password} onChange={e => setPassword(e.target.value)} readOnly />
-            {error && <p className={s.Error}>{error}</p>}
-            <button
-              className={clsx(s.EnterBtn, hasLastUser ? undefined : s.Disabled)}
-              onClick={e => {
-                e.preventDefault();
-                void handleLogin(email, password);
-              }}
-            >
-              Войти
-            </button>
-          </form>
-          <div className={s.IfRegistered}>или</div>
-          <button className={s.RegisterBtn} onClick={handleSwitchToRegister}>
-            Зарегистрироваться
+    <div className={s.Overlay}>
+      <div className={clsx(s.Content, { [s.Show]: isVisible })}>
+        <div className={s.CloseBtn} onClick={onClose}>
+          {closeImg}
+        </div>
+        <h3>Войти</h3>
+        {hasLastUser ? (
+          <p className={s.Hint}>Нажмите <b>Заполнить</b>, чтобы использовать данные, сгенерированные при регистрации</p>
+        ) : (
+          <p className={s.Hint}>Нажмите <b>Зарегистрироваться</b>, чтобы создать тестового пользователя</p>
+        )}
+        <button className={clsx(s.FillBtn, hasLastUser ? undefined : s.Disabled)} onClick={handleFillLastUser}>Заполнить</button>
+        <form className={s.LoginForm}>
+          <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} readOnly />
+          <input className={password ? s.PasswordInput : undefined} type="password" placeholder="Пароль" value={password} onChange={e => setPassword(e.target.value)} readOnly />
+          {error && <p className={s.Error}>{error}</p>}
+          <button
+            className={clsx(s.EnterBtn, hasLastUser ? undefined : s.Disabled)}
+            onClick={e => {
+              e.preventDefault();
+              void handleLogin(email, password);
+            }}
+          >
+            Войти
           </button>
-          <div className={s.DisclaimerBlock}>
-            {disclaimerParagraphs.map((text, idx) => (
-              <p className={s.Disclaimer} key={idx}>{text}</p>
-            ))}
-          </div>
+        </form>
+        <div className={s.IfRegistered}>или</div>
+        <button className={s.RegisterBtn} onClick={handleSwitchToRegister}>
+          Зарегистрироваться
+        </button>
+        <div className={s.DisclaimerBlock}>
+          {disclaimerParagraphs.map((text, idx) => (
+            <p className={s.Disclaimer} key={idx}>{text}</p>
+          ))}
         </div>
       </div>
-      <div className={s.CloseBtn} onClick={onClose}>
-        {closeImg}
-      </div>
-    </>
+    </div>
   );
 
   const registerModal = (
-    <>
-      <div className={s.Overlay}>
-        <div className={clsx(s.Content, { [s.Show]: isVisible })}>
-          <h3>Регистрация</h3>
-          <p className={s.Hint}>Нажмите <b>Заполнить</b>, чтобы использовать случайно сгенерированные данные</p>
-          <button className={s.FillBtn} onClick={handleFillData}>Заполнить</button>
-          <form className={s.LoginForm}>
-            <input type="text" placeholder="Имя" value={name} readOnly />
-            <input type="email" placeholder="Email" value={email} readOnly />
-            <input className={password ? s.PasswordInput : undefined} type="password" placeholder="Пароль" value={password} readOnly />
-            {error && <p className={s.Error}>{error}</p>}
-            <button
-              className={s.EnterBtn}
-              onClick={e => {
-                e.preventDefault();
-                void handleRegister(email, password).then(() => {
-                  // Сохраняем данные последнего зарегистрированного пользователя в localStorage
-                  localStorage.setItem('lastRegisteredUser', JSON.stringify({ email, password }));
-                });
-              }}
-            >
-              Зарегистрироваться
-            </button>
-          </form>
-          <div className={s.DisclaimerBlock}>
-            {disclaimerParagraphs.map((text, idx) => (
-              <p className={s.Disclaimer} key={idx}>{text}</p>
-            ))}
-          </div>
+    <div className={s.Overlay}>
+      <div className={clsx(s.Content, { [s.Show]: isVisible })}>
+        <div className={s.CloseBtn} onClick={onClose}>
+          {closeImg}
+        </div>
+        <h3>Регистрация</h3>
+        <p className={s.Hint}>Нажмите <b>Заполнить</b>, чтобы использовать случайно сгенерированные данные</p>
+        <button className={s.FillBtn} onClick={handleFillData}>Заполнить</button>
+        <form className={s.LoginForm}>
+          <input type="text" placeholder="Имя" value={name} readOnly />
+          <input type="email" placeholder="Email" value={email} readOnly />
+          <input className={password ? s.PasswordInput : undefined} type="password" placeholder="Пароль" value={password} readOnly />
+          {error && <p className={s.Error}>{error}</p>}
+          <button
+            className={s.EnterBtn}
+            onClick={e => {
+              e.preventDefault();
+              void handleRegister(email, password).then(() => {
+                // Сохраняем данные последнего зарегистрированного пользователя в localStorage
+                localStorage.setItem('lastRegisteredUser', JSON.stringify({ email, password }));
+              });
+            }}
+          >
+            Зарегистрироваться
+          </button>
+        </form>
+        <div className={s.DisclaimerBlock}>
+          {disclaimerParagraphs.map((text, idx) => (
+            <p className={s.Disclaimer} key={idx}>{text}</p>
+          ))}
         </div>
       </div>
-      <div className={s.CloseBtn} onClick={onClose}>
-        {closeImg}
-      </div>
-    </>
+    </div>
   );
 
   return currentModalType === 'login' ? loginModal : registerModal;

@@ -98,6 +98,12 @@
   }
 }
 
+@mixin login-modal-breakpoint {
+  @media (max-width: vars.$login-modal-breakpoint) {
+    @content;
+  }
+}
+
 // Очень маленькие экраны
 @mixin mobile-small {
   @media (max-width: vars.$mobile-small) {

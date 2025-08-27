@@ -39,7 +39,7 @@ const BurgerMenu: React.FC = () => {
               </Link>
             ) : (
               <button type="button" onClick={() => { handleClose(); openLoginModal(); }}>
-                Login
+                Вход
               </button>
             )}
           </li>
