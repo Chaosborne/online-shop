@@ -1,4 +1,4 @@
-@use '../../../assets/scss/vars' as vars;
+@use '../../../assets/scss/vars.scss' as vars;
 @use '../../../assets/scss/mixins' as mixins;
 
 .Filter {
@@ -15,7 +15,7 @@
   }
 
   // На планшете и ниже — выезжающее меню
-  @media (max-width: vars.$tablet) {
+  @include mixins.tablet {
     position: absolute;
     top: 0;
     left: -500px;
@@ -43,7 +43,7 @@
     background-color: vars.$accent_hover;
   }
 
-  @media (min-width: vars.$tablet) {
+  @include mixins.min-tablet {
     display: none;
   }
 }

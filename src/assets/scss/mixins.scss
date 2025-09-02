@@ -25,6 +25,21 @@
   }
 }
 
+// Минимальные ширины (mobile-first up)
+// В проекте: скрывает кнопку закрытия фильтра в BrandFilter
+@mixin min-tablet {
+  @media (min-width: vars.$tablet) {
+    @content;
+  }
+}
+
+// В проекте: скрывает бургер-меню (BurgerMenu) и включает десктопную навигацию
+@mixin min-laptop {
+  @media (min-width: vars.$laptop) {
+    @content;
+  }
+}
+
 // Специфичные брейкпоинты для компонентов
 @mixin nav-breakpoint {
   @media (max-width: vars.$nav-breakpoint) {

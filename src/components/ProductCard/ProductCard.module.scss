@@ -14,7 +14,7 @@
     }
   }
 
-  @media (max-width: vars.$tablet) {
+  @include mixins.tablet {
     padding: 20px;
   }
 }
@@ -171,7 +171,7 @@
 .CardSum {
   text-align: right;
 
-  @media (max-width: vars.$mobile) {
+  @include mixins.mobile {
     font-size: 18px;
   }
 }

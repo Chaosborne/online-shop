@@ -24,7 +24,7 @@
   display: none;
   margin-right: auto;
 
-  @media (max-width: vars.$tablet) {
+  @include mixins.tablet {
     display: block;
   }
 }
@@ -150,7 +150,7 @@
     align-self: flex-start;
   }
 
-  @media (max-width: vars.$tablet) {
+  @include mixins.tablet {
     position: relative;
     flex-direction: column;
 
@@ -198,7 +198,7 @@
     }
   }
 
-  @media (max-width: vars.$tablet) {
+  @include mixins.tablet {
     margin-top: 25px;
   }
 }
