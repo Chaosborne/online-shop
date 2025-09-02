@@ -10,6 +10,8 @@ const Favorites = () => {
 
   const favoriteProducts = allProducts.filter(product => favorites.includes(Number(product.id)));
 
+  const user = useAppSelector(state => state.auth.user);
+
   // Если есть ошибка, показываем её
   if (favoritesState.error) {
     return (
@@ -29,15 +31,22 @@ const Favorites = () => {
     <main className="main">
       <div className="container">
         <h1>Избранные товары</h1>
-        <div className={s.FavoritesWrapper}>
-          {favoriteProducts.length === 0 ? (
-            <p className={s.noFavorites}>Нет избранных товаров</p>
-          ) : (
-            favoriteProducts.map(product => (
-              <ProductCard key={product.id} product={product} viewType="tiles" />
-            ))
-          )}
-        </div>
+        {user && (
+          <div className={s.FavoritesWrapper}>
+            {favoriteProducts.length === 0 ? (
+              <p className={s.noFavorites}>Нет избранных товаров</p>
+            ) : (
+              favoriteProducts.map(product => (
+                <ProductCard key={product.id} product={product} viewType="tiles" />
+              ))
+            )}
+          </div>
+        )}
+        {!user && (
+          <div className={s.noFavorites}>
+            <p>Авторизуйтесь для просмотра избранных товаров</p>
+          </div>
+        )}
       </div>
     </main>
   );
