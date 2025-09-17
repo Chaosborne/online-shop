@@ -1,12 +1,10 @@
 import s from './BrandFilter.module.scss';
 import clsx from 'clsx';
-import { RootState } from '../../../store/store';
-import { useSelector } from 'react-redux';
 import { IProduct } from '../../../constants/interfaces/IProduct';
 import { useMemo } from 'react';
-import { useFetchBrands } from '../../../hooks/useFetchBrands';
-import { Brand } from '../../../store/slices/brandsSlice';
+import { ISupabaseBrand } from '../../../constants/interfaces/ISupabaseProduct';
 import { useParams } from 'react-router-dom';
+import { useGetProductsQuery, useGetBrandsQuery, useGetCategoriesQuery } from '../../../store/api/supabaseApi';
 
 interface BrandFilterProps {
   selectedBrands: string[];
@@ -22,35 +20,45 @@ interface BrandSummary {
 }
 
 const BrandFilter = ({ selectedBrands, onBrandChange, isFilterShow, toggleFilterShow }: BrandFilterProps) => {
-  // Получаем товары из store
-  const productsState = useSelector((state: RootState) => state.dbProducts);
-  const productsFromStore = productsState.products || [];
+  // Получаем товары из Supabase API
+  const { data: productsFromStore = [] } = useGetProductsQuery();
+
+  // Получаем категории для маппинга ID -> название
+  const { data: categories = [] } = useGetCategoriesQuery();
 
   // Получаем текущую категорию из URL
   const { categoryId } = useParams();
 
   // Получаем товары из текущей категории или все товары
   const productsFromCategory = useMemo(() => {
-    return categoryId ? productsFromStore.filter(product => product.itemCategory === categoryId) : productsFromStore;
-  }, [categoryId, productsFromStore]);
+    if (!categoryId) return productsFromStore;
+    
+    // Находим название категории по ID
+    const currentCategory = categories.find(cat => cat.id === categoryId);
+    const categoryName = currentCategory?.name;
+    
+    return categoryName 
+      ? productsFromStore.filter(product => product.categories.name === categoryName)
+      : productsFromStore;
+  }, [categoryId, productsFromStore, categories]);
 
-  // Получаем бренды из Firestore
-  const { brands: brandsFromDB } = useFetchBrands();
+  // Получаем бренды из Supabase API
+  const { data: brandsFromDB = [] } = useGetBrandsQuery();
 
   // Функция вычисляет количество товаров для бренда
   const getBrandCounts = (products: IProduct[]): Record<string, number> => {
     return products.reduce((accumulator, product) => {
-      const brand = product.itemBrand;
+      const brand = product.brands.brand_name;
       accumulator[brand] = (accumulator[brand] || 0) + 1;
       return accumulator;
     }, {} as Record<string, number>);
   };
 
   // Функция создает саммари бренда
-  const createBrandSummary = (brand: Brand, brandCounts: Record<string, number>): BrandSummary => {
-    const count = brandCounts[brand.brandName] || 0;
+  const createBrandSummary = (brand: ISupabaseBrand, brandCounts: Record<string, number>): BrandSummary => {
+    const count = brandCounts[brand.brand_name] || 0;
     return {
-      name: brand.brandName,
+      name: brand.brand_name,
       count,
       isActive: brand.available && count > 0
     };

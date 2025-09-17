@@ -1,11 +1,10 @@
 import s from './UserProfile.module.scss';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuthState } from '../../hooks/useAuthState';
+import { useAuthActions } from '../../hooks/useAuthActions';
 
 const UserProfile = () => {
-  const user = useSelector((state: RootState) => state.auth.user);
-  const { handleLogout } = useAuth();
+  const { user } = useAuthState();
+  const { handleLogout } = useAuthActions();
 
   return (
     <main className="main">

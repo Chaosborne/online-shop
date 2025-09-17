@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import clsx from 'clsx';
 import s from './LoginModal.module.scss';
-import { useAuth } from '../../../hooks/useAuth';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../store/store';
+import { useAuthActions } from '../../../hooks/useAuthActions';
+import { useAuthState } from '../../../hooks/useAuthState';
 import { CloseBtn } from '../../../assets/img/CloseBtn';
 
 const disclaimerParagraphs = [
@@ -20,8 +19,8 @@ interface ModalPortalProps {
 type ModalType = 'login' | 'register';
 
 const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalType }) => {
-  const { handleLogin, handleRegister, clearError, error } = useAuth();
-  const user = useSelector((state: RootState) => state.auth.user);
+  const { handleLogin, handleRegister, clearError, error } = useAuthActions();
+  const { user } = useAuthState();
   const [isVisible, setIsVisible] = useState(false);
   const [currentModalType, setCurrentModalType] = useState<ModalType>(modalType);
   const [email, setEmail] = useState('');
@@ -47,7 +46,7 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
   const handleFillData = () => {
     const randomNumber = Math.floor(Math.random() * 10000);
     const randomName = `User${randomNumber}`;
-    const randomEmail = `user${randomNumber}@example.com`;
+    const randomEmail = `user${randomNumber}@testmail.com`;
     const randomPassword = Math.random().toString(36).slice(-8);
     setName(randomName);
     setEmail(randomEmail);
@@ -128,7 +127,7 @@ const Modal = ({ onClose, modalType }: { onClose: () => void; modalType: ModalTy
             className={s.EnterBtn}
             onClick={e => {
               e.preventDefault();
-              void handleRegister(email, password).then(() => {
+              void handleRegister(email, password, name).then(() => {
                 // Сохраняем данные последнего зарегистрированного пользователя в localStorage
                 localStorage.setItem('lastRegisteredUser', JSON.stringify({ email, password }));
               });

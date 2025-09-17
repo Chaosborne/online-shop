@@ -12,10 +12,6 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { BinIcon } from '../../assets/img/BinIcon';
 
-// ProductCard — базовый компонент карточки товара для каталога и корзины.
-// Если потребуется больше вариантов карточек, общую часть (изображение, название, цена и т.д.)
-// можно вынести в отдельный компонент (например, ProductInfo)
-
 // Extend IProduct only for this component
 interface Props {
   product: IProduct;
@@ -29,10 +25,10 @@ interface Props {
 }
 
 const ProductCard = ({ product, viewType, isCart = false, onAdd, onRemoveOne, onRemoveAll, quantity, totalPrice }: Props) => {
-  const { id, images, itemName, itemBrand, itemDescription, itemPrice } = product;
+  const { id, item_images, item_name, brands, item_description, item_price } = product;
 
   const { isFavorite, toggle } = useFavorites();
-  const productSlug = generateProductSlug(itemBrand, itemName);
+  const productSlug = generateProductSlug(brands.brand_name, item_name);
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -46,8 +42,8 @@ const ProductCard = ({ product, viewType, isCart = false, onAdd, onRemoveOne, on
     <div className={clsx(s.ProductCard, s[viewType])}>
       <img
         className={s.CardImg}
-        src={`/shop/productsImages/${images[0]}`}
-        alt={itemName}
+        src={`/shop/productsImages/${item_images[0]}`}
+        alt={item_name}
         loading="lazy"
         onLoad={(e) => {
           const img = e.target as HTMLImageElement;
@@ -58,11 +54,11 @@ const ProductCard = ({ product, viewType, isCart = false, onAdd, onRemoveOne, on
 
       <div className={s.CardInfo}>
         <Link to={`/product/${productSlug}`} key={id}>
-          {itemDescription} {itemBrand} {itemName}
+          {item_description} {brands.brand_name} {item_name}
         </Link>
 
         <div className={s.PriceFavorites}>
-          <span className={s.Price}>{itemPrice.toLocaleString('ru-RU')} ₽</span>
+          <span className={s.Price}>{item_price.toLocaleString('ru-RU')} ₽</span>
           {!isCart && (
             <div className={s.ProductcardBtns}>
               <button className={s.FavoriteBtn} onClick={() => void toggle(Number(id))}>

@@ -8,15 +8,23 @@ import BrandFilter from '../../../components/ui/BrandFilter/BrandFilter';
 import { TilesIcon } from '../../../assets/img/TilesIcon';
 import { LinesIcon } from '../../../assets/img/LinesIcon';
 import { PriceSortIcon } from '../../../assets/img/PriceSortIcon';
+import { useGetProductsQuery, useGetCategoriesQuery } from '../../../store/api/supabaseApi';
+import { IProductWithRelations } from '../../../constants/interfaces/ISupabaseProduct';
 
 interface ProductsProps {
   categoryId?: string;
 }
 
 const Products = ({ categoryId }: ProductsProps) => {
-  const productsState = useSelector((state: RootState) => state.dbProducts);
-  const productsFromStore = productsState.products || [];
+  // Используем RTK Query вместо Redux store
+  const { 
+    data: products = [], 
+    isLoading, 
+    error 
+  } = useGetProductsQuery();
   
+  // Загружаем категории для маппинга ID -> название
+  const { data: categories = [] } = useGetCategoriesQuery();
 
   const searchQuery = useSelector((state: RootState) => state.search.searchQuery);
   const searchInput = searchQuery.replace(/[^a-zA-Zа-яА-Я0-9\s]/g, '').trim();
@@ -39,21 +47,51 @@ const Products = ({ categoryId }: ProductsProps) => {
   const [isFilterShow, setIsFilterShow] = useState(false);
   const toggleFilterShow = () => setIsFilterShow(!isFilterShow);
 
+  // Показываем загрузку
+  if (isLoading) {
+    return (
+      <section className={s.ProductsSection}>
+        <div className="container">
+          <div style={{ textAlign: 'center', padding: '40px' }}>
+            Загрузка товаров...
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // Показываем ошибку
+  if (error) {
+    return (
+      <section className={s.ProductsSection}>
+        <div className="container">
+          <div style={{ textAlign: 'center', padding: '40px', color: 'red' }}>
+            Ошибка загрузки товаров: {JSON.stringify(error)}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // Находим название категории по ID
+  const currentCategory = categories.find(cat => cat.id === categoryId);
+  const categoryName = currentCategory?.name;
+  
   // Фильтрация товаров по категории
-  const productsFromCategory = categoryId 
-    ? productsFromStore.filter(product => product.itemCategory === categoryId)
-    : productsFromStore;
+  const productsFromCategory = categoryId && categoryName
+    ? products.filter(product => product.categories.name === categoryName)
+    : products;
 
   // Фильтрация и сортировка товаров
   const filteredProducts = productsFromCategory
     .filter(product => {
       if (searchInput) {
-        return product.itemBrand.toLowerCase().includes(searchInput.toLowerCase()) || product.itemName.toLowerCase().includes(searchInput.toLowerCase());
+        return product.brands.brand_name.toLowerCase().includes(searchInput.toLowerCase()) || product.item_name.toLowerCase().includes(searchInput.toLowerCase());
       }
       return true;
     })
-    .filter(product => (selectedBrands.length > 0 ? selectedBrands.includes(product.itemBrand.toLowerCase()) : true))
-    .sort((a, b) => (isAscending ? a.itemPrice - b.itemPrice : b.itemPrice - a.itemPrice));
+    .filter(product => (selectedBrands.length > 0 ? selectedBrands.includes(product.brands.brand_name.toLowerCase()) : true))
+    .sort((a, b) => (isAscending ? a.item_price - b.item_price : b.item_price - a.item_price));
 
   // Пагинация
   const indexOfLastProduct = currentPage * productsPerPage;
@@ -63,7 +101,7 @@ const Products = ({ categoryId }: ProductsProps) => {
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
-  const productsList = currentProducts.map(item => <ProductCard key={item.id} product={item} viewType={isTilesView ? 'tiles' : 'lines'} />);
+  const productsList = currentProducts.map(item => <ProductCard key={item.id} product={item as IProductWithRelations} viewType={isTilesView ? 'tiles' : 'lines'} />);
 
   const productsListElement = (
     <div className={clsx(s.Products, isTilesView ? s.Tiles : s.Lines)}>

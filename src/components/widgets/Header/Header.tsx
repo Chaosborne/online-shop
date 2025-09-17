@@ -7,14 +7,14 @@ import { setSearchQuery } from '../../../store/slices/searchSlice';
 import { LoginModalPortal } from '../../modals';
 import { IProduct } from '../../../constants/interfaces/IProduct';
 import SearchSuggestions from '../../ui/SearchSuggestions/SearchSuggestions';
+import { useGetProductsQuery } from '../../../store/api/supabaseApi';
 import { CartIcon } from '../../../assets/img/CartIcon';
 import { LensIcon } from '../../../assets/img/LensIcon';
 import { Logo } from '../../../assets/img/Logo';
 import BurgerMenu from '../../ui/BurgerMenu/BurgerMenu';
 
 const Header = () => {
-  const productsState = useSelector((state: RootState) => state.dbProducts);
-  const productsFromStore = productsState.products || [];
+  const { data: productsFromStore = [] } = useGetProductsQuery();
 
   const [matchingItems, setMatchingItems] = useState<IProduct[]>([]);
   const suggestionsListRef = useRef<HTMLUListElement>(null);
@@ -35,7 +35,7 @@ const Header = () => {
       return;
     }
 
-    setMatchingItems(productsFromStore.filter(product => product.itemName.toLowerCase().includes(searchInput.toLowerCase()) || product.itemBrand.toLowerCase().includes(searchInput.toLowerCase())));
+    setMatchingItems(productsFromStore.filter(product => product.item_name.toLowerCase().includes(searchInput.toLowerCase()) || product.brands.brand_name.toLowerCase().includes(searchInput.toLowerCase())));
   };
 
   const hideWhenClick = () => setMatchingItems([]);

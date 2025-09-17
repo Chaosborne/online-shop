@@ -1,11 +1,12 @@
 import { useAppSelector } from '../../store/hooks';
 import { useFavorites } from '../../hooks/useFavorites';
+import { useGetProductsQuery } from '../../store/api/supabaseApi';
 import s from './Favorites.module.scss';
 import ProductCard from '../../components/ProductCard/ProductCard';
 
 const Favorites = () => {
   const { favorites } = useFavorites();
-  const allProducts = useAppSelector(state => state.dbProducts.products);
+  const { data: allProducts = [], isLoading: productsLoading, error: productsError } = useGetProductsQuery();
   const favoritesState = useAppSelector(state => state.favorites);
 
   const favoriteProducts = allProducts.filter(product => favorites.includes(Number(product.id)));
@@ -13,15 +14,27 @@ const Favorites = () => {
   const user = useAppSelector(state => state.auth.user);
 
   // Если есть ошибка, показываем её
-  if (favoritesState.error) {
+  if (favoritesState.error || productsError) {
     return (
       <main className="main">
         <div className="container">
           <h1>Избранные товары</h1>
           <div className={s.errorMessage}>
-            <p>Ошибка загрузки избранного: {favoritesState.error}</p>
+            <p>Ошибка загрузки: {favoritesState.error || 'Ошибка загрузки товаров'}</p>
             <p>Попробуйте перезагрузить страницу или войти в систему заново.</p>
           </div>
+        </div>
+      </main>
+    );
+  }
+
+  // Показываем загрузку
+  if (productsLoading) {
+    return (
+      <main className="main">
+        <div className="container">
+          <h1>Избранные товары</h1>
+          <p>Загрузка...</p>
         </div>
       </main>
     );

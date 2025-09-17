@@ -16,11 +16,11 @@ const SearchSuggestions: FC<SearchSuggestionsProps> = ({ matchingItems, hideWhen
   return (
     <ul className={s.SearchSuggestionsList} ref={suggestionsListRef}>
       {matchingItems.map(item => {
-        const productSlug = generateProductSlug(item.itemBrand, item.itemName);
+        const productSlug = generateProductSlug(item.brands.brand_name, item.item_name);
         return (
           <li key={item.id} id={item.id} onClick={hideWhenClick}>
             <Link className={s.SearchSuggestionsLink} to={`/product/${productSlug}`}>
-              {`${item.itemBrand} ${item.itemName}`}
+              {`${item.brands.brand_name} ${item.item_name}`}
             </Link>
           </li>
         );

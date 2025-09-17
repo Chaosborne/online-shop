@@ -28,7 +28,7 @@ const Footer = () => {
               </div>
               <div className={s.TechCategory}>
                 <span className={s.TechLabel}>Backend:</span>
-                <span className={s.TechItems}>Firebase, Firestore, Authentication</span>
+                <span className={s.TechItems}>Supabase, Firebase Auth, RTK Query</span>
               </div>
               <div className={s.TechCategory}>
                 <span className={s.TechLabel}>Сборка:</span>

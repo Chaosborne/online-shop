@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { loadFavorites } from './favoritesThunk';
 import { clearUser } from './authSlice';
 
 export interface FavoritesState {
@@ -30,6 +29,9 @@ const favoritesSlice = createSlice({
     },
     setFavorites: (state, action: PayloadAction<number[]>) => {
       state.items = action.payload;
+      state.isLoaded = true;
+      state.status = 'succeeded';
+      state.error = null;
     },
     clearFavorites: state => {
       state.items = [];
@@ -41,27 +43,6 @@ const favoritesSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(loadFavorites.pending, state => {
-        state.status = 'loading';
-        state.error = null;
-      })
-      .addCase(loadFavorites.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.items = action.payload;
-        state.isLoaded = true;
-        state.error = null;
-      })
-      .addCase(loadFavorites.rejected, (state, action) => {
-        state.status = 'failed';
-        state.isLoaded = true;
-        state.error = action.payload as string || 'Ошибка загрузки избранного';
-        
-        // Если ошибка связана с правами доступа, очищаем избранное
-        if (action.payload && typeof action.payload === 'string' && 
-            action.payload.includes('Missing or insufficient permissions')) {
-          state.items = [];
-        }
-      })
       .addCase(clearUser, state => {
         state.items = [];
         state.status = 'idle';

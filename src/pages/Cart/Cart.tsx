@@ -24,8 +24,8 @@ const Cart = () => {
           onAdd={() => dispatch(addItemToCart(item))}
           onRemoveOne={() => dispatch(decrementItemInCart(item.id))}
           onRemoveAll={() => dispatch(removeItemFromCart(item.id))}
-          quantity={item.itemQuantity}
-          totalPrice={item.itemTotalPrice}
+          quantity={item.item_quantity}
+          totalPrice={item.item_total_price}
         />
       </div>
     );

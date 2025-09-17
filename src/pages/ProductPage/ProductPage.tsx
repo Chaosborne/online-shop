@@ -6,18 +6,17 @@ import { getItemQuantity } from '../../store/slices/cartSlice';
 import generateProductSlug from '../../helpers/generateProductSlug';
 import { CartIcon } from '../../assets/img/CartIcon';
 import { BinIcon } from '../../assets/img/BinIcon';
+import { useGetProductsQuery } from '../../store/api/supabaseApi';
 
 import s from './ProductPage.module.scss';
 import { useState } from 'react';
 import clsx from 'clsx';
-// import { productsMockData } from '../../../constants/mocks/products'; // Пока оставляю, источник может быть не окончательный
 
 const Product = () => {
   const [mainImage, setMainImage] = useState(0);
   
-  // Get products from store (previously got from Firestore)
-  const productsState = useSelector((state: RootState) => state.dbProducts);
-  const productsFromStore = productsState.products || [];
+  // Get products from Supabase API
+  const { data: productsFromStore = [] } = useGetProductsQuery();
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -26,7 +25,7 @@ const Product = () => {
 
   // const product = productsMockData.find(product => {
   const product = productsFromStore.find(product => {
-    const productSlugFromData = generateProductSlug(product.itemBrand, product.itemName);
+    const productSlugFromData = generateProductSlug(product.brands.brand_name, product.item_name);
     return productSlugFromData === productSlug;
   });
 
@@ -50,24 +49,24 @@ const Product = () => {
   return (
     <main className={s.Card}>
       <div className="container">
-        <h1 className={clsx(s.Title, s.ProductPageTitle)}>{clsx(product.itemBrand, product.itemName)}</h1>
+        <h1 className={clsx(s.Title, s.ProductPageTitle)}>{clsx(product.brands.brand_name, product.item_name)}</h1>
         <div className={s.ProductInfo}>
           <div className={s.GalleryNav}>
-            {product.images.map((image, index) => (
+            {product.item_images?.map((image, index) => (
               <img 
                 className={clsx(s.GalleryNavImg, index === mainImage && s.SelectedImage)} 
                 key={index} 
                 src={`/shop/productsImages/${image}`} 
-                alt={product.itemName} 
+                alt={product.item_name} 
                 onClick={() => setMainImage(index)} 
               />
             ))}
           </div>
-          <img className={s.GalleryMainImg} src={`/shop/productsImages/${product.images[mainImage]}`} alt={product.itemName} />
+          <img className={s.GalleryMainImg} src={`/shop/productsImages/${product.item_images?.[mainImage] || 'placeholder.jpg'}`} alt={product.item_name} />
           <div className={s.ProductDetails}>
-            <h2 className={s.Description}>{product.itemDescription}</h2>
-            <h3 className={s.Title}>{product.itemBrand} {product.itemName}</h3>
-            <p className={s.Price}>Цена: {product.itemPrice.toLocaleString('ru-RU')} ₽</p>
+            <h2 className={s.Description}>{product.item_description}</h2>
+            <h3 className={s.Title}>{product.brands.brand_name} {product.item_name}</h3>
+            <p className={s.Price}>Цена: {product.item_price.toLocaleString('ru-RU')} ₽</p>
             <button className={s.AddToCartBtn} onClick={addToCartHandler}>
               <CartIcon className={s.AddToCartBtnIcon} />
             </button>
