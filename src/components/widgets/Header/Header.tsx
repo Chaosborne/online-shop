@@ -10,8 +10,8 @@ import SearchSuggestions from '../../ui/SearchSuggestions/SearchSuggestions';
 import { useGetProductsQuery } from '../../../store/api/supabaseApi';
 import { CartIcon } from '../../../assets/img/CartIcon';
 import { LensIcon } from '../../../assets/img/LensIcon';
-import { Logo } from '../../../assets/img/Logo';
 import BurgerMenu from '../../ui/BurgerMenu/BurgerMenu';
+import { SiteLogo } from '../../../assets/img/SiteLogo';
 
 const Header = () => {
   const { data: productsFromStore = [] } = useGetProductsQuery();
@@ -56,7 +56,7 @@ const Header = () => {
       <div className="container">
         <div className={s.HeaderInner}>
           <BurgerMenu />
-          <Logo className={s.HeaderLogo} />
+          <SiteLogo className={s.HeaderLogo} />
 
           <nav className={s.Nav}>
             <ul className={s.NavList}>
