@@ -81,9 +81,14 @@ export const supabaseApi = createApi({
       providesTags: ['Brand'],
     }),
 
-    // Категории
+    // Категории (с сортировкой по order_index)
     getCategories: builder.query<ISupabaseCategory[], void>({
-      query: () => 'categories',
+      query: () => ({
+        url: 'categories',
+        params: {
+          order: 'order_index.asc',
+        },
+      }),
       providesTags: ['Category'],
     }),
 

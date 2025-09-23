@@ -5,6 +5,7 @@ import CategoryCard from '../../../components/CategoryCard/CategoryCard';
 const Categories = () => {
   const { data: categoriesFromStore = [], isLoading, error } = useGetCategoriesQuery();
 
+  // Категории сортируются по order_index при запросе к БД в supabaseApi.ts через params: { order: 'order_index.asc' }
   const CategoryCardsElement = categoriesFromStore.map(cat => (
     <CategoryCard key={cat.id} category={cat} />
   ));

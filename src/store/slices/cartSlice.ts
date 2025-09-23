@@ -1,20 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IProductWithRelations } from '../../constants/interfaces/ISupabaseProduct';
 
-export interface CartItem {
-  id: string;
-  categories: { name: string };
-  item_images: string[];
-  brands: { brand_name: string };
-  item_name: string;
-  item_description: string | null;
-  item_price: number;
-  item_quantity: number;
-  item_total_price: number;
-}
-
 export interface CartState {
-  items: CartItem[];
+  items: IProductWithRelations[];
   totalQuantity: number;
   totalPrice: number;
 }
